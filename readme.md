@@ -1,14 +1,14 @@
-## Getting started
+# Getting started
 cd into project folder and run 
 pip install -r requirements.txt
 py main.py
 
-## TODO list
-# Coding
+# TODO list
+## Coding
 - Generate better names for each run (Easy)
 - Convert collect_signals.py to do real signal collection (i.e. search queries) (Hard)
 
-# Testing
+## Testing
 - Create a 'golden runs' folder. In later iteration, we will feed the system these runs as examples of good output
 - Run through ~50 examples
   - Goal is to manually gauge accuracy of this system
