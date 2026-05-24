@@ -1,4 +1,4 @@
-def generate_mitigation_playbook(cards):
+def generate_mitigation_playbook_and_validation_plan(cards):
     # TODO: OpenAI call here
     return [
         "Increase safety stock for critical components",
