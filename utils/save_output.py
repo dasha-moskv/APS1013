@@ -28,11 +28,10 @@ class TerminalLogger:
 
         filtered_lines = []
         keep = False
-        skip_next_separator = False
 
         skip_lines = {
             "Verifying supply base validity...",
-            "[✓] Verified supply base",
+            "[✓] Verified Supply Base",
             "Collecting public disruption signals...",
             "[✓] Signals collected",
             "Analyzing signals...",
@@ -48,23 +47,21 @@ class TerminalLogger:
         for line in lines:
             stripped = line.strip()
 
-            # Skip terminal input prompts
+            # Ignore input prompts
             if stripped.startswith("Please enter an industry supply base:"):
                 continue
 
             if stripped.startswith("Would you like to save the following output"):
                 continue
 
-            # Start saving from Supply Base
-            if stripped.startswith("Supply Base:"):
+            # Start capturing only after RUN INFO
+            if stripped == "RUN INFO":
                 keep = True
-                filtered_lines.append(line)
-                continue
 
             if not keep:
                 continue
 
-            # Skip unwanted status lines
+            # Remove progress/status lines
             if stripped in skip_lines:
                 continue
 
@@ -85,6 +82,11 @@ class TerminalLogger:
             previous_blank = is_blank
 
         cleaned_output = "\n".join(final_lines).strip() + "\n"
+        cleaned_output = (
+            "==================================================\n"
+            + cleaned_output
+            + "\n"
+        )
 
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(cleaned_output)

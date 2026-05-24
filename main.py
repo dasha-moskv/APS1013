@@ -27,18 +27,18 @@ def main():
             user_input = input("Please enter an industry supply base: ")
 
             print("\n==================================================")
-            print("SYSTEM INFO")
+            print("RUN INFO")
             print("==================================================")
             print(f"Supply Base: {user_input}\n")
 
             print("Verifying supply base validity...")
             is_valid = verify_supply_base(user_input)
-
-            if not is_valid:
-                print("[X] Invalid supply base. Please try again.\n")
+            if is_valid:
+                print("[✓] Verified Supply Base")
+            else:
+                print("[X] Invalid Supply Base")
+                print("Please try again.\n")
                 continue
-
-            print("[✓] Verified supply base")
 
             print("\nCollecting public disruption signals...")
             raw_signals = collect_public_signals(user_input)
