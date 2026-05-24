@@ -1,3 +1,5 @@
+import os
+import sys
 from agents import (
     verify_supply_base,
     collect_public_signals,
@@ -9,70 +11,87 @@ from agents import (
 
 from utils import (
     print_disruption_cards,
-    print_mitigation_playbook
+    print_mitigation_playbook,
+    TerminalLogger
 )
 
-
 def main():
-    while True:
-        print("\nWelcome to this Supplier Disruption Radar Agent\n")
-        user_input = input("Please enter an industry supply base: ")
+    logger = TerminalLogger()
+    sys.stdout = logger
 
-        print("\n==================================================")
-        print("SYSTEM INFO")
-        print("==================================================")
-        print(f"Supply Base: {user_input}\n")
+    try:
+        while True:
+            logger.clear()
 
-        print("Verifying supply base validity...")
-        is_valid = verify_supply_base(user_input)
+            print("\nWelcome to this Supplier Disruption Radar Agent\n")
+            user_input = input("Please enter an industry supply base: ")
 
-        if not is_valid:
-            print("[X] Invalid supply base. Please try again.\n")
-            continue
+            print("\n==================================================")
+            print("SYSTEM INFO")
+            print("==================================================")
+            print(f"Supply Base: {user_input}\n")
 
-        print("[✓] Verified supply base")
+            print("Verifying supply base validity...")
+            is_valid = verify_supply_base(user_input)
 
-        print("\nCollecting public disruption signals...")
-        raw_signals = collect_public_signals(user_input)
-        print("[✓] Signals collected")
+            if not is_valid:
+                print("[X] Invalid supply base. Please try again.\n")
+                continue
 
-        print("\nAnalyzing signals...")
-        analyzed_signals = analyze_signals(raw_signals)
-        print("[✓] Signals analyzed")
+            print("[✓] Verified supply base")
 
-        print("\nScoring disruption risks...")
-        scored_signals = score_signals(analyzed_signals)
-        print("[✓] Risk scoring complete")
+            print("\nCollecting public disruption signals...")
+            raw_signals = collect_public_signals(user_input)
+            print("[✓] Signals collected")
 
-        print("\nGenerating disruption cards...")
-        disruption_cards = generate_disruption_cards(scored_signals)
-        print("[✓] Disruption cards generated")
+            print("\nAnalyzing signals...")
+            analyzed_signals = analyze_signals(raw_signals)
+            print("[✓] Signals analyzed")
 
-        print("\nGenerating mitigation playbook...")
-        mitigation_playbook = generate_mitigation_playbook(disruption_cards)
-        print("[✓] Mitigation playbook generated\n")
+            print("\nScoring disruption risks...")
+            scored_signals = score_signals(analyzed_signals)
+            print("[✓] Risk scoring complete")
 
-        print("==================================================")
-        print("DISRUPTION CARDS")
-        print("==================================================")
-        
-        print_disruption_cards(disruption_cards)
-        
-        print("\n==================================================")
-        print("MITIGATION PLAYBOOK")
-        print("==================================================")
+            print("\nGenerating disruption cards...")
+            disruption_cards = generate_disruption_cards(scored_signals)
+            print("[✓] Disruption cards generated")
 
-        print_mitigation_playbook(mitigation_playbook)
+            print("\nGenerating mitigation playbook...")
+            mitigation_playbook = generate_mitigation_playbook(disruption_cards)
+            print("[✓] Mitigation playbook generated\n")
 
-        print("\n==================================================")
-        print("END OF REPORT")
-        print("==================================================")
+            print("==================================================")
+            print("DISRUPTION CARDS")
+            print("==================================================")
 
-        run_again = input("\nWould you like to analyze another supply base? (y/n): ")
+            print_disruption_cards(disruption_cards)
 
-        if run_again.lower() != "y":
-            print("Exiting Supplier Disruption Radar Agent.")
-            break
+            print("\n==================================================")
+            print("MITIGATION PLAYBOOK")
+            print("==================================================")
+
+            print_mitigation_playbook(mitigation_playbook)
+
+            print("\n==================================================")
+            print("END OF REPORT")
+            print("==================================================")
+
+            save_to_file = input("\nWould you like to save the following output to a txt? (y/n): ")
+
+            if save_to_file.lower() == "y":
+                save_file_path = logger.save_to_file()
+                print(f"Output saved to {save_file_path}\n")
+
+            run_again = input("\nWould you like to analyze another supply base? (y/n): ")
+
+            if run_again.lower() != "y":
+                print("Exiting Supplier Disruption Radar Agent.")
+                break
+            else:
+                os.system("cls" if os.name == "nt" else "clear")
+
+    finally:
+        sys.stdout = logger.terminal
 
 
 if __name__ == "__main__":
