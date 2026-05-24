@@ -23,15 +23,15 @@ def main():
             logger.clear()
 
             print("\nWelcome to this Supplier Disruption Radar Agent\n")
-            user_input = input("Please enter an industry supply base: ")
+            supply_base = input("Please enter an industry supply base: ")
 
             print("\n==================================================")
             print("RUN INFO")
             print("==================================================")
-            print(f"Supply Base: {user_input}\n")
+            print(f"Supply Base: {supply_base}\n")
 
             print("Verifying supply base validity...")
-            is_valid = verify_supply_base(user_input)
+            is_valid = verify_supply_base(supply_base)
             if is_valid:
                 print("[✓] Verified Supply Base")
             else:
@@ -40,15 +40,15 @@ def main():
                 continue
 
             print("\nCollecting public disruption signals...")
-            raw_signals = collect_public_signals(user_input)
+            raw_signals = collect_public_signals(supply_base)
             print("[✓] Signals collected")
 
             print("\nAnalyzing signals...")
-            disruption_cards = analyze_signals(raw_signals, user_input)
+            disruption_cards = analyze_signals(raw_signals, supply_base)
             print("[✓] Signals analyzed")
 
             print("\nGenerating mitigation playbook and validation plan...")
-            mitigation_playbook, validation_plan = generate_mitigation_playbook_and_validation_plan(disruption_cards)
+            mitigation_playbook, validation_plan = generate_mitigation_playbook_and_validation_plan(disruption_cards, supply_base)
             print("[✓] Mitigation playbook and validation plan generated\n")
 
             print("==================================================")

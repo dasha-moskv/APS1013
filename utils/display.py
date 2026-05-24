@@ -36,11 +36,22 @@ def print_disruption_cards(cards):
 
 
 def print_mitigation_playbook(playbook):
-    print("TODO")
-    #for i, action in enumerate(playbook, start=1):
-    #    print(f"{i}. {action}")
+    for section_name, actions in playbook.items():
+        formatted_section_name = section_name.replace("_", " ").title()
+
+        print(f"\n{formatted_section_name}")
+        print("-" * len(formatted_section_name))
+
+        for i, action in enumerate(actions, start=1):
+            print(f"{i}. {action}")
+
 
 def print_validation_plan(validation_plan):
-    print("TODO")
-    #for i, action in enumerate(validation_plan, start=1):
-    #    print(f"{i}. {action}")
+    for section_name, steps in validation_plan.items():
+        formatted_section_name = section_name.replace("_", " ").title()
+
+        print(f"\n{formatted_section_name}")
+        print("-" * len(formatted_section_name))
+
+        for i, step in enumerate(steps, start=1):
+            print(f"{i}. {step}")

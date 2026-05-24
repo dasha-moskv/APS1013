@@ -40,8 +40,9 @@ class TerminalLogger:
             "[✓] Risk scoring complete",
             "Generating disruption cards...",
             "[✓] Disruption cards generated",
-            "Generating mitigation playbook...",
-            "[✓] Mitigation playbook generated",
+            "Generating mitigation playbook and validation plan...",
+            "[✓] Mitigation playbook and validation plan generated",
+            "Verifying supply base validity...",
         }
 
         for line in lines:
