@@ -4,14 +4,13 @@ from agents import (
     verify_supply_base,
     collect_public_signals,
     analyze_signals,
-    score_signals,
-    generate_disruption_cards,
-    generate_mitigation_playbook
+    generate_mitigation_playbook_and_validation_plan
 )
 
 from utils import (
     print_disruption_cards,
     print_mitigation_playbook,
+    print_validation_plan,
     TerminalLogger
 )
 
@@ -45,20 +44,12 @@ def main():
             print("[✓] Signals collected")
 
             print("\nAnalyzing signals...")
-            analyzed_signals = analyze_signals(raw_signals)
+            disruption_cards = analyze_signals(raw_signals, user_input)
             print("[✓] Signals analyzed")
 
-            print("\nScoring disruption risks...")
-            scored_signals = score_signals(analyzed_signals)
-            print("[✓] Risk scoring complete")
-
-            print("\nGenerating disruption cards...")
-            disruption_cards = generate_disruption_cards(scored_signals)
-            print("[✓] Disruption cards generated")
-
-            print("\nGenerating mitigation playbook...")
-            mitigation_playbook = generate_mitigation_playbook(disruption_cards)
-            print("[✓] Mitigation playbook generated\n")
+            print("\nGenerating mitigation playbook and validation plan...")
+            mitigation_playbook, validation_plan = generate_mitigation_playbook_and_validation_plan(disruption_cards)
+            print("[✓] Mitigation playbook and validation plan generated\n")
 
             print("==================================================")
             print("DISRUPTION CARDS")
@@ -71,6 +62,12 @@ def main():
             print("==================================================")
 
             print_mitigation_playbook(mitigation_playbook)
+
+            print("\n==================================================")
+            print("VALIDATION PLAN")
+            print("==================================================")
+
+            print_validation_plan(validation_plan)
 
             print("\n==================================================")
             print("END OF REPORT")
