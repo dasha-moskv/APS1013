@@ -1,7 +1,7 @@
 # Getting started
 cd into project folder and run 
-pip install -r requirements.txt
-py main.py
+- pip install -r requirements.txt
+- py main.py
 
 # TODO list
 ## Coding
