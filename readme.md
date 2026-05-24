@@ -1,3 +1,8 @@
+## Getting started
+cd into project folder and run 
+pip install -r requirements.txt
+py main.py
+
 ## TODO list
 # Coding
 - Generate better names for each run (Easy)
