@@ -15,13 +15,7 @@ from utils import (
     TerminalLogger
 )
 
-def main():
-    load_dotenv(override=True)
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("Please reach out to Dasha to obtain the OpenAI API key.")
-        sys.exit(1) 
-    
+def main():  
     logger = TerminalLogger()
     sys.stdout = logger
 
@@ -45,6 +39,7 @@ def main():
                 print("[X] Invalid Supply Base")
                 print("Please try again.\n")
                 continue
+            sys.exit(1)
 
             print("\nCollecting public disruption signals...")
             raw_signals = collect_public_signals(supply_base)
