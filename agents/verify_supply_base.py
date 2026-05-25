@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import sys
 
-load_dotenv()
+load_dotenv(override=True)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def construct_prompt(supply_base):
