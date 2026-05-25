@@ -4,6 +4,10 @@ import os
 import sys
 
 load_dotenv(override=True)
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    print("Please reach out to Dasha to obtain the OpenAI API key.")
+    sys.exit(1) 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def construct_prompt(supply_base):
