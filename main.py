@@ -39,7 +39,6 @@ def main():
                 print("[X] Invalid Supply Base")
                 print("Please try again.\n")
                 continue
-            sys.exit(1)
 
             print("\nCollecting public disruption signals...")
             raw_signals = collect_public_signals(supply_base)
