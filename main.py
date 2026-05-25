@@ -1,5 +1,6 @@
 import os
 import sys
+from dotenv import load_dotenv
 from agents import (
     verify_supply_base,
     collect_public_signals,
@@ -15,6 +16,12 @@ from utils import (
 )
 
 def main():
+    load_dotenv(override=True)
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        print("Please reach out to Dasha to obtain the OpenAI API key.")
+        sys.exit(1) 
+    
     logger = TerminalLogger()
     sys.stdout = logger
 

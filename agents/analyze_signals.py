@@ -4,7 +4,7 @@ import os
 import sys
 import json
 
-load_dotenv()
+load_dotenv(override=True)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def construct_prompt(single_signal, supply_base):
