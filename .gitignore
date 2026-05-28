@@ -1,4 +1,29 @@
-agents/__pycache__/
-utils/__pycache__/
-runs/
-.env
+# Backend Python Ignore Patterns
+backend/agents/__pycache__/
+backend/utils/__pycache__/
+backend/runs/
+backend/.env
+backend/**/__pycache__/
+*.pyc
+
+# Frontend Node/Build Ignore Patterns
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# System & IDE Ignore Patterns
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
