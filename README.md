@@ -2,11 +2,15 @@
 
 Welcome to the **Supplier Disruption Radar & Dashboard** monorepo! This application is designed to identify, analyze, and mitigate supply chain disruptions using advanced agentic AI models paired with a modern, high-fidelity React dashboard.
 
+## 🎥 Application Demo
+
+![Supplier Disruption Radar & Dashboard Demo](docs/demo.gif)
+
 ---
 
 ## 📁 Repository Directory Structure
 
-The repository is structured as a clean monorepo divided into dedicated `backend/` and `frontend/` services:
+The repository is structured as a clean monorepo divided into dedicated `backend/`, `docs/`, and `frontend/` services:
 
 ```text
 / (Repository Root)
@@ -26,6 +30,9 @@ The repository is structured as a clean monorepo divided into dedicated `backend
 │   ├── pseudocode.txt        # Backend ingestion pipeline notes
 │   ├── requirements.txt      # Python dependencies list
 │   └── .env                  # API keys & local backend configurations
+│
+├── docs/                     # Project Documentation & Media Assets
+│   └── demo.gif              # High-fidelity dashboard & agent preview GIF
 │
 ├── frontend/                 # React + Vite Frontend Dashboard
 │   ├── src/
