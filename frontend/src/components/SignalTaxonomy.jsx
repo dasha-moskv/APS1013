@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FolderGit, Activity, ShieldCheck, Truck, Layers, HelpCircle, Terminal } from "lucide-react";
+import { Activity, ShieldCheck, Truck, Layers } from "lucide-react";
 
 export const getTaxonomy = (id) => {
   if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Operations & Capacity";
@@ -15,8 +15,7 @@ const CATEGORIES = [
   { name: "External Infrastructure", color: "bg-[#86BC25]", textColor: "text-[#86BC25]", borderColor: "border-[#86BC25]/20", icon: Activity }
 ];
 
-export default function SignalTaxonomy({ threatRows = [], selectedCategory = null, onSelectCategory }) {
-  // Count matching signals for each category dynamically
+export default function SignalTaxonomy({ threatRows = [], selectedCategories = [], onSelectCategories, isDark }) {
   const total = threatRows.length;
   
   const categoryStats = CATEGORIES.map(cat => {
@@ -25,59 +24,66 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategory = nul
     return { ...cat, count, percentage: parseInt(percentage) };
   });
 
+  const containerBg = isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200";
+  const headerBg = isDark ? "bg-[#0A0D14] border-[#1E293B]" : "bg-slate-50 border-slate-200";
+  const headerText = isDark ? "text-slate-400" : "text-slate-500";
+  const progressTrack = isDark ? "bg-[#1E293B]" : "bg-slate-100";
+
   return (
     <div
       id="signal-taxonomy-panel"
-      className="flex flex-col bg-white border border-slate-200 rounded-none shadow-none mt-3"
+      className={`flex flex-col border rounded-none shadow-none h-full transition-colors duration-300 ${containerBg}`}
     >
       {/* Container Header */}
-      <div className="bg-slate-50 px-4 py-2 border-b border-slate-200 flex items-center justify-between select-none">
-        <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-slate-500">
-          RISK TAXONOMY DISTRIBUTION
+      <div className={`px-3 py-1.5 border-b flex items-center justify-between select-none transition-colors duration-300 ${headerBg}`}>
+        <span className={`font-mono text-[9px] font-bold uppercase tracking-wider ${headerText}`}>
+          RISK TAXONOMY (MULTI-SELECT)
         </span>
-        <span className="text-[8px] font-mono text-slate-400 uppercase">
-          {total} ACTIVE SIGNALS
+        <span className={`text-[8px] font-mono uppercase ${headerText}`}>
+          {total} ACTIVE
         </span>
       </div>
 
       {/* Categories Grid */}
-      <div className="p-4 flex flex-col gap-3">
-        <p className="text-[10px] text-slate-500 font-sans leading-normal">
-          Click any taxonomy category below to focus and filter the Network Threat Matrix.
-        </p>
-
-        <div className="flex flex-col gap-2.5">
+      <div className="p-3 flex flex-col gap-2 flex-1 justify-between">
+        <div className="grid grid-cols-2 gap-2">
           {categoryStats.map((cat) => {
             const Icon = cat.icon;
-            const isSelected = selectedCategory === cat.name;
+            const isSelected = selectedCategories.includes(cat.name);
             return (
               <div
                 key={cat.name}
-                onClick={() => onSelectCategory(isSelected ? null : cat.name)}
-                className={`group p-2.5 border transition-all duration-75 cursor-pointer flex flex-col gap-1.5 select-none rounded-none ${
+                onClick={() => {
+                  if (isSelected) {
+                    onSelectCategories(prev => prev.filter(c => c !== cat.name));
+                  } else {
+                    onSelectCategories(prev => [...prev, cat.name]);
+                  }
+                }}
+                className={`group p-2 border transition-all duration-75 cursor-pointer flex flex-col justify-between select-none rounded-none min-h-[58px] ${
                   isSelected
                     ? "bg-slate-900 border-slate-900 text-white"
-                    : "bg-white border-slate-200 hover:bg-slate-50 text-slate-800"
+                    : isDark
+                      ? "bg-[#0F1520] border-[#1E293B] hover:bg-[#151C2C] text-slate-300"
+                      : "bg-white border-slate-200 hover:bg-slate-50 text-slate-800"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Icon className={`h-4 w-4 ${isSelected ? "text-white" : cat.textColor}`} />
-                    <span className="text-[11px] font-bold font-sans tracking-tight">{cat.name}</span>
+                <div className="flex items-center justify-between gap-1">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <Icon className={`h-3.5 w-3.5 shrink-0 ${isSelected ? "text-white" : cat.textColor}`} />
+                    <span className="text-[9.5px] font-bold font-sans tracking-tight leading-tight truncate">
+                      {cat.name.split(" & ")[0]}
+                    </span>
                   </div>
-                  <div className="flex items-baseline gap-1.5 font-mono text-[10px] font-bold">
-                    <span className={isSelected ? "text-white" : "text-slate-900"}>{cat.count}</span>
-                    <span className="text-[9px] text-slate-400">({cat.percentage}%)</span>
-                  </div>
+                  <span className={`font-mono text-[9px] font-bold shrink-0 ${isSelected ? "text-white" : isDark ? "text-slate-400" : "text-slate-700"}`}>
+                    {cat.count}
+                  </span>
                 </div>
 
-                {/* Progress bar container */}
-                <div className="w-full bg-slate-100 h-1.5 rounded-none overflow-hidden mt-0.5">
+                <div className={`w-full h-1 rounded-none overflow-hidden mt-1.5 ${progressTrack}`}>
                   <div
                     style={{ width: `${cat.percentage}%` }}
-                    className={`h-full transition-all duration-500 rounded-none ${
-                      isSelected ? "bg-[#86BC25]" : cat.color
-                    }`}
+                    className={`h-full transition-all duration-500 rounded-none ${isSelected ? "bg-[#86BC25]" : cat.color}`}
                   />
                 </div>
               </div>
@@ -86,12 +92,16 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategory = nul
         </div>
 
         {/* Clear Filter Control */}
-        {selectedCategory && (
+        {selectedCategories.length > 0 && (
           <button
-            onClick={() => onSelectCategory(null)}
-            className="w-full cursor-pointer text-center font-mono text-[9px] font-bold uppercase py-1 border border-slate-300 hover:border-slate-800 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition-colors duration-75 mt-1"
+            onClick={() => onSelectCategories([])}
+            className={`w-full cursor-pointer text-center font-mono text-[8px] font-bold uppercase py-1 border transition-colors duration-75 mt-1 ${
+              isDark
+                ? "border-slate-700 hover:border-slate-400 bg-transparent text-slate-500 hover:text-slate-200"
+                : "border-slate-300 hover:border-slate-800 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900"
+            }`}
           >
-            ❌ Clear Category Filter
+            Clear Selected Filter ({selectedCategories.length})
           </button>
         )}
       </div>

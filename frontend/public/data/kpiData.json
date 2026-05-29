@@ -25,14 +25,5 @@
     "icon": "CheckCircle",
     "borderColor": "border-l-4 border-l-[#86BC25]",
     "valueColor": "text-[#86BC25]"
-  },
-  {
-    "id": "response-time",
-    "label": "Active AI Playbooks",
-    "value": "4 Active",
-    "subtext": "$12.8M loss avoided",
-    "icon": "Clock",
-    "borderColor": "border-l-4 border-l-[#64748B]",
-    "valueColor": "text-slate-700"
   }
 ]

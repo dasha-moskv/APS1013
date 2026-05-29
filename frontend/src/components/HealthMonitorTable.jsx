@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle, Globe, MapPin, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, Box, AlertCircle } from "lucide-react";
+import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle, Globe, MapPin, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, Box, AlertCircle, ArrowRight } from "lucide-react";
 import { getTaxonomy } from "./SignalTaxonomy";
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
@@ -206,96 +206,217 @@ const nodePipelineData = {
       { type: "Geospatial Logs", icon: "MapPin", detail: "RFID composite cargo containers logged at Wichita central depot." },
       { type: "Industrial IoT", icon: "Activity", detail: "Everett assembly floor throughput sensors (EVT-FAC-904) flag assembly idle cycles." }
     ],
-    agentInsight: "NLP processor parsed factory logs and identified structural composite delays, projecting a 12+ day wider assembly threat corridor."
+    agentInsight: "NLP processor parsed factory logs and identified structural composite delays, projecting a 12+ day wider assembly threat corridor.",
+    timestamp: "2026-05-28T09:12:04Z",
+    confidence: "98.4%",
+    latency: "142ms",
+    dataSize: "45.2 KB",
+    events: [
+      { time: "09:12:04 UTC", label: "Initial Sensor Match", desc: "Everett floor sensor EVT-FAC-904 logs consecutive idle times." },
+      { time: "09:15:20 UTC", label: "Crawler Extraction", desc: "RFID container scanners at Wichita track raw structural composite delay." },
+      { time: "09:18:11 UTC", label: "LLM NLP Synthesis", desc: "Agent correlates floor idle cycles with shipping latency coefficient." },
+      { time: "09:20:00 UTC", label: "Decision Support Active", desc: "Formulated Boeing Everett widebody mitigation playbook proposal." }
+    ]
   },
   "SUP-001A": {
     crawlers: [
       { type: "News Crawler", icon: "Globe", detail: "Scanned 14 local Midwest freight labor blogs and Reuters labor RSS streams." },
       { type: "Geospatial Logs", icon: "MapPin", detail: "BNSF freight GPS logistics tracker coordinates reveal stationary cargo cars." }
     ],
-    agentInsight: "Identified freight rail labor shutdown at key transit bottlenecks, calculating high Renton supply line starvation factor."
+    agentInsight: "Identified freight rail labor shutdown at key transit bottlenecks, calculating high Renton supply line starvation factor.",
+    timestamp: "2026-05-28T14:22:15Z",
+    confidence: "97.8%",
+    latency: "195ms",
+    dataSize: "124.8 KB",
+    events: [
+      { time: "14:22:15 UTC", label: "News Feed Alert", desc: "Local Midwest freight blogs flag impending regional rail union gridlock." },
+      { time: "14:25:10 UTC", label: "GPS Tracking Query", desc: "BNSF GPS trackers report stationary cargo cars near Missouri junction." },
+      { time: "14:28:40 UTC", label: "Starvation Analysis", desc: "AI Agent computes Wichita-to-Renton supply line starvation velocity." },
+      { time: "14:30:00 UTC", label: "Mitigation Initialized", desc: "Formulated oversized road flatbed permits workaround routing options." }
+    ]
   },
   "SUP-701X": {
     crawlers: [
       { type: "SCADA Telemetry", icon: "Activity", detail: "TSMC Fab 12 seismic safety systems log automatic safety triggers at 0.12g." },
       { type: "News Crawler", icon: "Globe", detail: "Crawl Taiwan Weather Bureau feeds and local tech supply bulletins." }
     ],
-    agentInsight: "SCADA webhook pushed direct lithography EUV calibration safety shutdown status; agent pre-allocated packaging redirect to Fab 15."
+    agentInsight: "SCADA webhook pushed direct lithography EUV calibration safety shutdown status; agent pre-allocated packaging redirect to Fab 15.",
+    timestamp: "2026-05-28T02:05:40Z",
+    confidence: "99.6%",
+    latency: "85ms",
+    dataSize: "18.4 KB",
+    events: [
+      { time: "02:05:40 UTC", label: "Seismic Alert Webhook", desc: "TSMC Fab 12 local safety sensor registers minor 0.12g acceleration spike." },
+      { time: "02:06:12 UTC", label: "Weather Bureau Crawl", desc: "Automatic RSS scrap confirms minor earthquake near Hsinchu science park." },
+      { time: "02:08:45 UTC", label: "EUV System Shutdown", desc: "Lithography EUV systems log self-preservation calibration shutdown sequence." },
+      { time: "02:10:00 UTC", label: "Diversion Pre-Allocation", desc: "Agent automatically checks and reserves assembly slots at Taichung Fab 15." }
+    ]
   },
   "SUP-401A": {
     crawlers: [
       { type: "Industrial IoT", icon: "Activity", detail: "SCADA Emerson exhaust valve sensor flags severe chemical bath pressure rupture." },
       { type: "Regulatory Code", icon: "FileText", detail: "Crawl EMA and FDA vaccine sterile products validation regulations loop criteria." }
     ],
-    agentInsight: "NLP extractor compiled EMA sterilization validation time-delay coefficients based on history, drafting redundant line diversion plan."
+    agentInsight: "NLP extractor compiled EMA sterilization validation time-delay coefficients based on history, drafting redundant line diversion plan.",
+    timestamp: "2026-05-28T10:14:55Z",
+    confidence: "96.5%",
+    latency: "220ms",
+    dataSize: "54.1 KB",
+    events: [
+      { time: "10:14:55 UTC", label: "SCADA Valve Rupture", desc: "SCADA valve logs alert of autoclave exhaust valve pressure failure in Puurs." },
+      { time: "10:17:33 UTC", label: "Regulatory Loop Scan", desc: "Agent queries EMA/FDA vaccine sterile validation loop requirements." },
+      { time: "10:19:12 UTC", label: "NLP Validation Modeling", desc: "Agent projects FDA sterilizer re-clearance timeline models at 96 hours." },
+      { time: "10:20:00 UTC", label: "Alternative Routing", desc: "Formulated Antwerp diversion slots and Emerson Belgium priority dispatch." }
+    ]
   },
   "SUP-109B": {
     crawlers: [
       { type: "Logistics Manifest", icon: "Truck", detail: "DHL transatlantic Priority manifest backlog coordinates at Schiphol tarmac." },
       { type: "Financial Feeds", icon: "Coins", detail: "Crawl air-charter cold chain capacity indices and spot price indicators." }
     ],
-    agentInsight: "Recognized Schiphol cargo bottle-neck early; calculated air-charter redirection options to Brussels and courier trucks."
+    agentInsight: "Recognized Schiphol cargo bottle-neck early; calculated air-charter redirection options to Brussels and courier trucks.",
+    timestamp: "2026-05-28T16:45:10Z",
+    confidence: "98.9%",
+    latency: "165ms",
+    dataSize: "72.3 KB",
+    events: [
+      { time: "16:45:10 UTC", label: "Manifest backlog alert", desc: "Transatlantic priority optics cargo coordinates logged as stagnant at Schiphol." },
+      { time: "16:48:22 UTC", label: "Index Rate Feed Sync", desc: "Agent scans European cold-chain air-freight rates and carrier lists." },
+      { time: "16:49:50 UTC", label: "Logistics Synthesis", desc: "Calculated time/cost tradeoffs of ground custom couriers vs Brussels charter." },
+      { time: "16:50:00 UTC", label: "Air Bridge Ready", desc: "Compiled dedicated air-charter options and climate-control truck dispatch." }
+    ]
   },
   "SUP-502A": {
     crawlers: [
       { type: "Regulatory Feeds", icon: "Globe", detail: "Lobby Shaanxi Provincial transit restrictions for chemical feedstocks." },
       { type: "Logistics Manifest", icon: "Truck", detail: "Samsung local Shaanxi chemical feedstock shipping registries." }
     ],
-    agentInsight: "Parsed Shaanxi government transit warnings; estimated chemical gas stock decline rate, prompting Korea air bridge backup option."
+    agentInsight: "Parsed Shaanxi government transit warnings; estimated chemical gas stock decline rate, prompting Korea air bridge backup option.",
+    timestamp: "2026-05-28T05:30:12Z",
+    confidence: "95.2%",
+    latency: "310ms",
+    dataSize: "88.6 KB",
+    events: [
+      { time: "05:30:12 UTC", label: "Local Directives Parsed", desc: "Shaanxi local department of commerce issues hazardous chemical road locks." },
+      { time: "05:32:44 UTC", label: "Logistics Audit", desc: "Samsung local freight shipping logs analyzed to track inbound etch gases." },
+      { time: "05:34:10 UTC", label: "Stock Burn Simulation", desc: "Agent models local Fab buffer depletion curve, forecasting a 12-day limit." },
+      { time: "05:35:00 UTC", label: "Air Bridge Proposed", desc: "Compiled state transit permit filings and Korea-China air cargo schedules." }
+    ]
   },
   "FAC-003": {
     crawlers: [
       { type: "Industrial IoT", icon: "Activity", detail: "Oven #4 thermocouple SCADA sensor records continuous 4.5% temperature drift." },
       { type: "Quality Records", icon: "FileText", detail: "Composite curing cycle quality assurance log registers variance warnings." }
     ],
-    agentInsight: "Calibrated curing metrics against baseline; flagged sensor quality variance, triggering preventive maintenance reset window."
+    agentInsight: "Calibrated curing metrics against baseline; flagged sensor quality variance, triggering preventive maintenance reset window.",
+    timestamp: "2026-05-28T11:04:18Z",
+    confidence: "99.1%",
+    latency: "120ms",
+    dataSize: "32.5 KB",
+    events: [
+      { time: "11:04:18 UTC", label: "Sensor Drift Logged", desc: "South Carolina curing autoclave #4 thermocouple logs drift above 4.2%." },
+      { time: "11:06:50 UTC", label: "QA Record Ingestion", desc: "Curing cycle logs ingested; composite structural density variance warnings flag." },
+      { time: "11:08:15 UTC", label: "Calibration Check", desc: "Agent evaluates automated calibration tolerances and schedules." },
+      { time: "11:10:00 UTC", label: "Maintenance Queue", desc: "Schedules preventative recalibration window and OEM technical crew dispatch." }
+    ]
   },
   "FAC-010": {
     crawlers: [
       { type: "Geospatial Logs", icon: "MapPin", detail: "Panama Canal Authority vessel transit registration and bottleneck logs." },
       { type: "Logistics Manifest", icon: "Truck", detail: "Tesla supply logistics carrier status and 4680 cell deliveries tracker." }
     ],
-    agentInsight: "Analyzed canal transit backlog forecasts; estimated local Austin inventory buffer burn rate, proposing Nevada cell diversion."
+    agentInsight: "Analyzed canal transit backlog forecasts; estimated local Austin inventory buffer burn rate, proposing Nevada cell diversion.",
+    timestamp: "2026-05-28T08:12:33Z",
+    confidence: "98.7%",
+    latency: "180ms",
+    dataSize: "61.2 KB",
+    events: [
+      { time: "08:12:33 UTC", label: "Canal Backlog Update", desc: "Panama Canal Authority registers vessel transit limit down to 18 daily slots." },
+      { time: "08:15:40 UTC", label: "Inbound Manifest Scrapped", desc: "Tesla ocean cargo coordinates reveal delayed battery cell carrier ships." },
+      { time: "08:18:25 UTC", label: "Buffer Depletion Curve", desc: "Agent calculates Austin structural battery assembly local inventory exhaustion." },
+      { time: "08:20:00 UTC", label: "Land Bridge Active", desc: "Generated Dedicated Rail land-bridge schedules from Seattle to Giga Texas." }
+    ]
   },
   "SUP-302B": {
     crawlers: [
       { type: "Customs API", icon: "FileText", detail: "LAX/LGB customs clearance manifest databases for precision titanium." },
       { type: "Industrial News", icon: "Globe", detail: "Crawl West Coast port union strike warnings and customs audit guidelines." }
     ],
-    agentInsight: "Extracted LA customs queue delays; pre-allocated Apex Materials secondary supply options to bypass port bottleneck."
+    agentInsight: "Extracted LA customs queue delays; pre-allocated Apex Materials secondary supply options to bypass port bottleneck.",
+    timestamp: "2026-05-28T13:40:22Z",
+    confidence: "97.4%",
+    latency: "150ms",
+    dataSize: "48.7 KB",
+    events: [
+      { time: "13:40:22 UTC", label: "Customs Manifest Audit", desc: "LAX/LGB import manifests for titanium sponge log custom hold code." },
+      { time: "13:43:10 UTC", label: "Port Strike Warnings", desc: "West Coast port union labor dispute notifications parsed." },
+      { time: "13:44:50 UTC", label: "Supply Chain Risk Math", desc: "Calculated Portland forging mill output drop of 50% if delays hit 14 days." },
+      { time: "13:45:00 UTC", label: "Pre-stage Spot Buy", desc: "Pre-approved titanium spot buy manifest with Apex Materials." }
+    ]
   },
   "SUP-202C": {
     crawlers: [
       { type: "Industrial IoT", icon: "Activity", detail: "Ludwigshafen natural gas pipeline SCADA pressure sensors record 42 bar drop." },
       { type: "SCADA Pipeline", icon: "Truck", detail: "Nord-Flow pipeline supply metrics and chemical synthesis feedstocks." }
     ],
-    agentInsight: "Detected gas inlet pressure threshold drop; activated Antwerp pre-cursor shift and local LNG vaporization array plans."
+    agentInsight: "Detected gas inlet pressure threshold drop; activated Antwerp pre-cursor shift and local LNG vaporization array plans.",
+    timestamp: "2026-05-28T15:20:10Z",
+    confidence: "99.3%",
+    latency: "95ms",
+    dataSize: "22.9 KB",
+    events: [
+      { time: "15:20:10 UTC", label: "Pressure Anomaly Webhook", desc: "Ludwigshafen synthesis grid SCADA logs pressure drop to 42 bar." },
+      { time: "15:21:40 UTC", label: "Nord-Flow Telemetry Sync", desc: "Nord-Flow pipeline telemetry verified, confirming upstream valve shutdown." },
+      { time: "15:23:15 UTC", label: "Chamber Risk Mapping", desc: "Agent models gas pressure effects on chemical catalyst bed lifetime." },
+      { time: "15:25:00 UTC", label: "Mitigation Engaged", desc: "Compiled Antwerp precursor routing options and local LNG vaporizer leases." }
+    ]
   },
   "FAC-008": {
     crawlers: [
       { type: "SCADA Power", icon: "Activity", detail: "PG&E high-voltage industrial grid surge sensors record 12% peak voltage spike." },
       { type: "Industrial IoT", icon: "Cpu", detail: "NVIDIA CA cooling rack system-monitoring telemetry logs automatic trip." }
     ],
-    agentInsight: "Monitored server failover response logs; verified compute thread failover to Oregon cloud cluster with zero training downtime."
+    agentInsight: "Monitored server failover response logs; verified compute thread failover to Oregon cloud cluster with zero training downtime.",
+    timestamp: "2026-05-28T18:02:11Z",
+    confidence: "99.8%",
+    latency: "70ms",
+    dataSize: "14.5 KB",
+    events: [
+      { time: "18:02:11 UTC", label: "Grid Surge Waveform", desc: "Santa Clara high-voltage relays record 12% voltage spike." },
+      { time: "18:03:05 UTC", label: "Substation System Trip", desc: "NVIDIA compute cluster cooling loop power supplies activate emergency trip." },
+      { time: "18:04:30 UTC", label: "Failover Validation", desc: "Cloud orchestrator logs automatic state-saving checkpoint operations." },
+      { time: "18:05:00 UTC", label: "Computing Redirect", desc: "Verified Computing threads diverted to Hillsboro, Oregon cloud nodes." }
+    ]
   },
   "SUP-8472": {
     crawlers: [
       { type: "SCADA Seismic", icon: "Activity", detail: "Japan Meteorological Agency local Ehime seismic vibration sensors record 3 on Shindo." },
       { type: "Industrial IoT", icon: "FileText", detail: "Toray Masaki-cho plant automated cleanroom particulate indicators." }
     ],
-    agentInsight: "Verified automatic shutdown sensor response; parsed local inspection schedules to pre-stage NA Tacoma depot cargo release."
+    agentInsight: "Verified automatic shutdown sensor response; parsed local inspection schedules to pre-stage NA Tacoma depot cargo release.",
+    timestamp: "2026-05-28T03:12:44Z",
+    confidence: "96.2%",
+    latency: "240ms",
+    dataSize: "67.8 KB",
+    events: [
+      { time: "03:12:44 UTC", label: "Seismic Sensor Match", desc: "Japan Met seismic telemetry logs local Shindo 3 tremor in Ehime." },
+      { time: "03:15:30 UTC", label: "Cleanroom Particulates", desc: "Toray Masaki-cho cleanroom air counters log safe, nominal ppm limits." },
+      { time: "03:18:15 UTC", label: "Restart Loop Scan", desc: "Agent queries Japanese aviation authority inspection regulations registry." },
+      { time: "03:20:00 UTC", label: "Buffer Stock Dispatch", desc: "Pre-filed customs pull entries for backup carbon fiber stocks in Tacoma." }
+    ]
   }
 };
 
-export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategory = null, onSelectCategory }) {
+export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
   
-  // Interactive mock playbook states
+  // Playbook generation states
   const [isGenerating, setIsGenerating] = useState(false);
   const [playbookGenerated, setPlaybookGenerated] = useState(false);
   const [loadingLines, setLoadingLines] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  // C-suite boardroom sign-off state
+  const [signOffs, setSignOffs] = useState({});
 
   // Interactive C-suite feedback states
   const [feedbackRating, setFeedbackRating] = useState(0);
@@ -303,9 +424,21 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
   const [feedbackComment, setFeedbackComment] = useState("");
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
+  const handleSignOffToggle = (nodeId, role) => {
+    setSignOffs(prev => {
+      const nodeSignOffs = prev[nodeId] || { cfo: false, coo: false, board: false };
+      return {
+        ...prev,
+        [nodeId]: {
+          ...nodeSignOffs,
+          [role]: !nodeSignOffs[role]
+        }
+      };
+    });
+  };
+
   // Reset states upon inspection target change
   useEffect(() => {
-    setSelectedOptions([]);
     setFeedbackRating(0);
     setFeedbackOption(null);
     setFeedbackComment("");
@@ -361,9 +494,9 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     ? rowData 
     : rowData.filter(row => row.tier === selectedTier);
 
-  // Apply C-Suite category taxonomy filtering if active!
-  const taxonomyFilteredRows = selectedCategory 
-    ? filteredRows.filter(row => getTaxonomy(row.id) === selectedCategory)
+  // Apply C-Suite category taxonomy filtering if active (multi-select)!
+  const taxonomyFilteredRows = selectedCategories && selectedCategories.length > 0 
+    ? filteredRows.filter(row => selectedCategories.includes(getTaxonomy(row.id)))
     : filteredRows;
 
   // Sorting algorithms for dynamic, interactive columns
@@ -416,11 +549,10 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     return sortConfig.direction === "asc" ? <span className="text-[#86BC25] ml-1 select-none font-bold">▲</span> : <span className="text-[#86BC25] ml-1 select-none font-bold">▼</span>;
   };
 
-  // Triggers mock telemetry loading logs in terminal
+  // Playbook generation: staged terminal loading
   const handleGeneratePlaybook = (row) => {
     setIsGenerating(true);
     setLoadingLines([]);
-    
     const logs = [
       "⚡ CONNECTING TO RADAR MITIGATION ENGINE...",
       "🔍 EXTRACTING RELEVANT DATA SCHEMA FOR " + row.id,
@@ -429,7 +561,6 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
       "📈 QUERYING DOMESTIC INVENTORY BUFFER CODES...",
       "✅ MITIGATION PLAYBOOK COMPILED SUCCESSFULLY!"
     ];
-
     logs.forEach((line, index) => {
       setTimeout(() => {
         setLoadingLines(prev => [...prev, line]);
@@ -445,125 +576,185 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
   const cSuiteEnrichment = inspectedRow ? nodeCSuiteData[inspectedRow.id] : null;
 
-  // Simulator calculations
-  let simulatedTimelineDays = cSuiteEnrichment ? cSuiteEnrichment.baseTimelineDays : 0;
-  let simulatedWorkaroundCost = cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0;
+  // Playbook target calculations (all recommended options applied)
+  let mitigatedTimelineDays = cSuiteEnrichment ? cSuiteEnrichment.baseTimelineDays : 0;
+  let mitigatedWorkaroundCost = cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0;
 
   if (cSuiteEnrichment) {
-    selectedOptions.forEach(optId => {
-      const option = cSuiteEnrichment.options.find(o => o.id === optId);
-      if (option) {
-        simulatedTimelineDays = Math.max(0.5, simulatedTimelineDays - option.daysSaved);
-        simulatedWorkaroundCost += option.cost;
-      }
+    cSuiteEnrichment.options.forEach(option => {
+      mitigatedTimelineDays = Math.max(0.5, mitigatedTimelineDays - option.daysSaved);
+      mitigatedWorkaroundCost += option.cost;
     });
   }
 
-  const simulatedTotalExposure = cSuiteEnrichment 
-    ? simulatedTimelineDays * cSuiteEnrichment.baseDailyExposure 
+  const mitigatedTotalExposure = cSuiteEnrichment 
+    ? mitigatedTimelineDays * cSuiteEnrichment.baseDailyExposure 
     : 0;
 
   const totalFinancialAtRisk = cSuiteEnrichment 
     ? (cSuiteEnrichment.baseTimelineDays * cSuiteEnrichment.baseDailyExposure) 
     : 0;
 
-  const financialSaved = Math.max(0, totalFinancialAtRisk - simulatedTotalExposure - (simulatedWorkaroundCost - (cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0)));
+  const financialSaved = Math.max(0, totalFinancialAtRisk - mitigatedTotalExposure - (mitigatedWorkaroundCost - (cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0)));
 
   const renderPipeline = (row) => {
     const pipeline = nodePipelineData[row.id];
     if (!pipeline) return null;
 
     return (
-      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-4">
+      <div className={`border p-4 flex flex-col gap-4 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
-            <Radio className="h-4 w-4 text-[#86BC25] animate-pulse" />
-            📡 Agent Signal Ingestion Pipeline
-          </h4>
-          <p className="text-[9px] text-slate-400 mt-0.5">
-            Real-time crawling and AI Agent extraction pipeline tracking.
+          <div className="flex items-center justify-between">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
+              <Radio className="h-4 w-4 text-[#86BC25] animate-pulse" />
+              📡 Agent Signal Ingestion Pipeline
+            </h4>
+            <span className={`text-[8px] font-mono px-1.5 py-0.5 border select-none ${isDark ? "text-slate-400 bg-slate-950 border-[#1E293B]" : "text-slate-500 bg-white border-slate-200"}`}>
+              ACTIVE CRAWLER NETWORK
+            </span>
+          </div>
+          <p className={`text-[9px] mt-0.5 font-sans leading-normal ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+            Real-time crawler scans and autonomous LLM Agent extraction monitoring.
           </p>
         </div>
 
+        {/* Technical Ingestion Telemetry Metadata Ribbon */}
+        <div className={`grid grid-cols-2 sm:grid-cols-4 gap-3 border p-3 font-mono text-xs select-none ${isDark ? "bg-[#0F1520] border-[#1E293B] text-slate-300" : "bg-white border-slate-200 text-slate-600"}`}>
+          <div>
+            <span className="text-slate-400 block uppercase text-[9px] tracking-wider">Confidence Score</span>
+            <span className="text-[#86BC25] font-bold">{pipeline.confidence}</span>
+          </div>
+          <div>
+            <span className="text-sky-400 block uppercase text-[9px] tracking-wider">Crawl Latency</span>
+            <span className="text-sky-500 font-bold">{pipeline.latency}</span>
+          </div>
+          <div>
+            <span className="text-slate-400 block uppercase text-[9px] tracking-wider">Ingested Size</span>
+            <span className={`font-bold ${isDark ? "text-slate-200" : "text-slate-700"}`}>{pipeline.dataSize}</span>
+          </div>
+          <div>
+            <span className="text-amber-500 block uppercase text-[9px] tracking-wider">Signal Created</span>
+            <span className="text-amber-500 font-bold text-xs">{pipeline.timestamp.replace('T', ' ').replace('Z', ' UTC')}</span>
+          </div>
+        </div>
+
         {/* Visual Pipeline Nodes */}
-        <div className="flex flex-col gap-3 font-sans text-xs">
+        <div className="flex flex-col gap-4 font-sans text-xs">
           {/* Phase 1: Active Crawlers */}
           <div className="relative flex gap-3 pl-1.5">
-            {/* Visual connector line */}
             <div className="absolute left-[9px] top-6 bottom-0 w-[1px] border-l border-dashed border-[#86BC25]/40" />
-            
             <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-none bg-[#86BC25]/10 border border-[#86BC25]/30">
-              <Globe className="h-3 w-3 text-[#86BC25]" />
+              <Globe className="h-3.5 w-3.5 text-[#86BC25]" />
             </div>
-            
             <div className="flex-1 flex flex-col gap-1.5">
-              <span className="font-mono text-[8px] font-bold text-slate-400 uppercase tracking-wider">
-                Phase 1: Active Crawler Ingestion Feeds
+              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Phase 1 &bull; Active Crawler Ingestion Feeds
               </span>
               <div className="flex flex-col gap-2">
-                {pipeline.crawlers.map((c, i) => {
-                  return (
-                    <div key={i} className="bg-[#161C2C] border border-[#1E293B] p-2 flex items-start gap-2">
-                      <span className="h-2 w-2 rounded-full bg-[#86BC25] mt-1.5 shrink-0 animate-ping" />
-                      <div className="text-[10px]">
-                        <span className="font-bold text-slate-200 block font-mono text-[9px] uppercase tracking-wide">{c.type}</span>
-                        <p className="text-slate-400 mt-0.5 font-sans leading-relaxed text-[10px]">{c.detail}</p>
-                      </div>
+                {pipeline.crawlers.map((c, i) => (
+                  <div key={i} className={`border p-2.5 flex items-start gap-2.5 ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                    <span className="h-2 w-2 rounded-full bg-[#86BC25] mt-1 shrink-0 animate-ping" />
+                    <div className="text-xs">
+                      <span className={`font-bold block font-mono uppercase tracking-wide ${isDark ? "text-slate-200" : "text-slate-800"}`}>{c.type}</span>
+                      <p className={`mt-1 font-sans leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>{c.detail}</p>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Phase 2: Agent Parsing & Synthesis */}
-          <div className="flex gap-3 pl-1.5">
-            <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-none bg-sky-500/10 border border-sky-500/30">
-              <Cpu className="h-3 w-3 text-sky-400 animate-spin animate-duration-1000" style={{ animationDuration: '4s' }} />
+          <div className="relative flex gap-3 pl-1.5">
+            <div className="absolute left-[9px] top-6 bottom-0 w-[1px] border-l border-dashed border-sky-400/40" />
+            <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-none border ${isDark ? "bg-sky-950/20 border-sky-800/50" : "bg-sky-50 border-sky-200"}`}>
+              <Cpu className="h-3.5 w-3.5 text-sky-500 animate-spin" style={{ animationDuration: '4s' }} />
             </div>
             <div className="flex-1 flex flex-col gap-1.5">
-              <span className="font-mono text-[8px] font-bold text-slate-400 uppercase tracking-wider">
-                Phase 2: LLM Agent Semantic Synthesis
+              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Phase 2 &bull; LLM Agent Semantic Synthesis
               </span>
-              <div className="bg-[#161C2C] border border-[#1E293B] p-2 text-[10px] leading-relaxed">
-                <span className="font-bold text-sky-400 block font-mono text-[9px] uppercase tracking-wide">NLP Synthesis Core</span>
-                <p className="text-slate-300 mt-0.5 font-sans leading-relaxed text-[10px]">{pipeline.agentInsight}</p>
+              <div className={`border p-2.5 text-xs leading-relaxed ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                <span className="font-bold text-sky-500 block font-mono uppercase tracking-wide">NLP Synthesis Core</span>
+                <p className={`mt-1 font-sans leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>{pipeline.agentInsight}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Chronological Event Timeline */}
+          <div className="flex gap-3 pl-1.5">
+            <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-none border ${isDark ? "bg-amber-950/20 border-amber-800/50" : "bg-amber-50 border-amber-200"}`}>
+              <Clock className="h-3.5 w-3.5 text-amber-500" />
+            </div>
+            <div className="flex-1 flex flex-col gap-1.5">
+              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+                Phase 3 &bull; Signal Incident Evolution
+              </span>
+              <div className={`border p-3 flex flex-col gap-2.5 ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                <span className="font-bold text-amber-500 block font-mono uppercase tracking-wide">CHRONOLOGICAL SIGNAL TIMELINE</span>
+                <div className={`flex flex-col gap-3 font-mono text-xs mt-1 select-none ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                  {pipeline.events.map((evt, idx) => (
+                    <div key={idx} className={`flex gap-2.5 items-start border-l-2 pl-2.5 ml-1 relative ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                      <span className={`absolute -left-[5px] top-1 h-2 w-2 rounded-full border-2 ${isDark ? "bg-slate-950 border-slate-800" : "bg-white border-slate-300"}`} />
+                      <span className="text-amber-500 font-bold shrink-0 text-[10px]">{evt.time.split(' ')[0]}</span>
+                      <div>
+                        <span className={`font-bold block leading-none ${isDark ? "text-slate-100" : "text-slate-900"}`}>{evt.label}</span>
+                        <p className={`mt-1 font-sans leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>{evt.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Expandable Raw Signal Telemetry */}
+        <details className={`group border text-[9px] font-mono cursor-pointer select-none ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "bg-white border-slate-200"}`}>
+          <summary className={`p-2 flex items-center justify-between transition-colors ${isDark ? "hover:bg-slate-800/40" : "hover:bg-slate-50"}`}>
+            <span className="font-bold tracking-wider uppercase flex items-center gap-1.5 text-slate-400">
+              <Terminal className="h-3.5 w-3.5 text-[#86BC25]" />
+              Expand Raw Signal Telemetry Source
+            </span>
+            <ChevronDown className="h-3 w-3 text-slate-400 group-open:rotate-180 transition-transform" />
+          </summary>
+          <div className={`p-2.5 border-t leading-relaxed select-text font-mono break-all max-h-36 overflow-y-auto ${isDark ? "border-[#1E293B] bg-slate-950 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-600"}`}>
+            <span className="text-slate-400 font-sans block mb-1">Raw payload scanned by Agent crawler:</span>
+            {row.sourceData}
+          </div>
+        </details>
       </div>
     );
   };
 
   const renderFeedbackSuite = (row) => {
     return (
-      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
+      <div className={`border p-4 flex flex-col gap-3 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center gap-1.5">
+          <h4 className={`text-[10px] font-bold uppercase tracking-wider font-mono flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
             <Sparkles className="h-4 w-4 text-[#86BC25]" />
             Playbook Governance Feedback
           </h4>
-          <p className="text-[9px] text-slate-400 mt-0.5">
+          <p className={`text-[9px] mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
             Submit assessment feedback to align autonomous agent weights.
           </p>
         </div>
 
         {feedbackSubmitted ? (
-          <div className="bg-[#86BC25]/10 border border-[#86BC25]/20 p-3 text-center flex flex-col items-center justify-center gap-2 animate-fade-in select-none">
+          <div className={`border p-3 text-center flex flex-col items-center justify-center gap-2 animate-fade-in select-none ${isDark ? "bg-[#86BC25]/5 border-[#86BC25]/20" : "bg-[#86BC25]/10 border-[#86BC25]/30"}`}>
             <CheckCircle className="h-6 w-6 text-[#86BC25] animate-bounce" />
             <div className="text-[10px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
               FEEDBACK COMMITTED SUCCESSFULLY
             </div>
-            <p className="text-[9px] text-slate-300 max-w-xs leading-relaxed font-sans mt-0.5">
+            <p className={`text-[9px] max-w-xs leading-relaxed font-sans mt-0.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
               Operational logs and rating model weights successfully routed to AI Agent tuning queue. Thank you.
             </p>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
             {/* Interactive Stars Rating */}
-            <div className="flex items-center gap-1.5 select-none justify-between border-b border-[#1E293B] pb-2">
-              <span className="text-[9px] font-mono text-slate-400 uppercase">Strategic Accuracy:</span>
+            <div className={`flex items-center gap-1.5 select-none justify-between border-b pb-2 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+              <span className="text-[9px] font-mono text-slate-500 uppercase">Strategic Accuracy:</span>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -575,7 +766,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                       className={`h-4.5 w-4.5 ${
                         star <= feedbackRating
                           ? "fill-[#86BC25] text-[#86BC25]"
-                          : "text-slate-600 hover:text-slate-400"
+                          : isDark ? "text-slate-700 hover:text-slate-500" : "text-slate-300 hover:text-slate-400"
                       }`}
                     />
                   </button>
@@ -589,8 +780,10 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                 onClick={() => setFeedbackOption("Accurate")}
                 className={`flex-1 cursor-pointer font-mono text-[9px] font-bold uppercase py-1 border flex items-center justify-center gap-1 transition-all duration-75 select-none ${
                   feedbackOption === "Accurate"
-                    ? "bg-[#86BC25] border-[#86BC25] text-black border-transparent"
-                    : "bg-transparent border-slate-700 hover:border-slate-500 text-slate-300"
+                    ? "bg-[#86BC25] border-[#86BC25] text-black"
+                    : isDark
+                      ? "bg-slate-950 border-[#1E293B] hover:border-slate-700 text-slate-400"
+                      : "bg-white border-slate-200 hover:border-slate-400 text-slate-600"
                 }`}
               >
                 <ThumbsUp className="h-3 w-3" />
@@ -600,8 +793,10 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                 onClick={() => setFeedbackOption("Refinement")}
                 className={`flex-1 cursor-pointer font-mono text-[9px] font-bold uppercase py-1 border flex items-center justify-center gap-1 transition-all duration-75 select-none ${
                   feedbackOption === "Refinement"
-                    ? "bg-amber-500 border-amber-500 text-black border-transparent"
-                    : "bg-transparent border-slate-700 hover:border-slate-500 text-slate-300"
+                    ? "bg-amber-500 border-amber-500 text-black"
+                    : isDark
+                      ? "bg-slate-950 border-[#1E293B] hover:border-slate-700 text-slate-400"
+                      : "bg-white border-slate-200 hover:border-slate-400 text-slate-600"
                 }`}
               >
                 <ThumbsDown className="h-3 w-3" />
@@ -614,7 +809,11 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               value={feedbackComment}
               onChange={(e) => setFeedbackComment(e.target.value)}
               placeholder="Provide operational context (e.g., 'Primary composite rail line strike confirmed resolved')..."
-              className="w-full bg-[#0D111A] border border-slate-800 p-2 text-[10px] text-slate-200 placeholder-slate-600 rounded-none focus:outline-none focus:border-slate-600 font-sans leading-normal resize-none h-14"
+              className={`w-full p-2 text-[10px] placeholder-slate-500 rounded-none focus:outline-none font-sans leading-normal resize-none h-14 ${
+                isDark 
+                  ? "bg-slate-950 border border-[#1E293B] text-slate-200 focus:border-slate-700" 
+                  : "bg-white border border-slate-200 text-slate-700 focus:border-slate-400"
+              }`}
             />
 
             {/* Submit CTA */}
@@ -626,8 +825,12 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               disabled={feedbackRating === 0 && !feedbackOption && !feedbackComment}
               className={`w-full cursor-pointer font-mono text-[9px] font-bold uppercase py-2 border select-none transition-all duration-75 ${
                 feedbackRating === 0 && !feedbackOption && !feedbackComment
-                  ? "bg-slate-800 border-slate-800 text-slate-600 cursor-not-allowed"
-                  : "bg-white border-white text-black hover:bg-[#86BC25] hover:border-[#86BC25] hover:text-black"
+                  ? isDark 
+                    ? "bg-[#0E1726] border-[#1E293B] text-slate-600 cursor-not-allowed"
+                    : "bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed"
+                  : isDark
+                    ? "bg-[#86BC25] border-[#86BC25] text-black hover:bg-[#97cf2b]"
+                    : "bg-slate-900 border-slate-900 text-white hover:bg-[#86BC25] hover:border-[#86BC25] hover:text-black"
               }`}
             >
               🚀 Submit To Agent Tuner
@@ -648,48 +851,65 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
   return (
     <div
       id="slot-table"
-      className="relative rounded-none bg-white p-4 border border-slate-200 shadow-none font-sans"
+      className={`relative rounded-none p-4 border shadow-none font-sans transition-colors duration-300 ${
+        isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"
+      }`}
     >
       {/* ── Title and Table Settings Header ── */}
-      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3">
+      <div className={`mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-3 ${isDark ? "border-[#1E293B]" : "border-slate-100"}`}>
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5 font-sans">
+          <h2 className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 font-sans ${isDark ? "text-slate-200" : "text-slate-800"}`}>
             <span className="h-1.5 w-1.5 bg-[#86BC25]" />
             Network Node Threat Registry
           </h2>
-          <p className="text-[10px] text-slate-500 mt-0.5 font-mono">
+          <p className={`text-[10px] mt-0.5 font-mono ${isDark ? "text-slate-500" : "text-slate-500"}`}>
             OPERATIONAL THREAT MATRIX — SECURE REAL-TIME DATA STREAM
           </p>
         </div>
 
         {/* Dense Filters Bar */}
         <div className="flex flex-wrap items-center gap-2">
-          {selectedCategory && (
-            <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 text-[#86BC25] font-mono text-[9px] px-2.5 py-0.5 select-none font-bold uppercase animate-fade-in">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#86BC25] opacity-75"></span>
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#86BC25]"></span>
-              </span>
-              Focus: {selectedCategory}
+          {selectedCategories && selectedCategories.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 items-center">
+              {selectedCategories.map(cat => (
+                <div key={cat} className={`flex items-center gap-1.5 border font-mono text-[9px] px-2 py-0.5 select-none font-bold uppercase animate-fade-in ${isDark ? "bg-slate-950 border-slate-800 text-[#86BC25]" : "bg-slate-900 border-slate-800 text-[#86BC25]"}`}>
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#86BC25] opacity-75"></span>
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#86BC25]"></span>
+                  </span>
+                  Focus: {cat}
+                  <button 
+                    onClick={() => onSelectCategories(prev => prev.filter(c => c !== cat))}
+                    className={`hover:text-white cursor-pointer ml-1.5 font-bold font-mono text-[9px] ${isDark ? "text-slate-400" : ""}`}
+                  >
+                    [X]
+                  </button>
+                </div>
+              ))}
               <button 
-                onClick={() => onSelectCategory(null)}
-                className="hover:text-white cursor-pointer ml-1 font-bold font-mono text-[9px]"
+                onClick={() => onSelectCategories([])}
+                className={`text-[9px] font-mono font-bold hover:underline uppercase ${isDark ? "text-slate-600 hover:text-slate-400" : "text-slate-500 hover:text-slate-800"}`}
               >
-                [X]
+                Clear All
               </button>
             </div>
           )}
 
           {/* Tier Filter Toggle */}
-          <div className="flex border border-slate-300 font-mono text-[9px] bg-white select-none">
+          <div className={`flex border font-mono text-[9px] select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-300 bg-white"}`}>
             {["ALL", "Tier 0", "Tier 1", "Tier 2"].map((tier) => (
               <button
                 key={tier}
                 onClick={() => setSelectedTier(tier)}
-                className={`px-2.5 py-0.5 border-r border-slate-300 last:border-0 cursor-pointer uppercase transition-colors duration-75
-                           ${selectedTier === tier 
-                             ? "bg-slate-800 text-white font-bold" 
-                             : "bg-white text-slate-600 hover:bg-slate-50"}`}
+                className={`px-2.5 py-0.5 border-r last:border-0 cursor-pointer uppercase transition-colors duration-75 ${
+                  isDark ? "border-[#1E293B]" : "border-slate-300"
+                } ${
+                  selectedTier === tier 
+                    ? (isDark ? "bg-slate-800 text-white font-bold" : "bg-slate-800 text-white font-bold") 
+                    : isDark 
+                      ? "bg-[#0A0D14] text-slate-400 hover:bg-[#151C2C] hover:text-white"
+                      : "bg-white text-slate-600 hover:bg-slate-50"
+                }`}
               >
                 {tier}
               </button>
@@ -698,12 +918,15 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
           <button
             id="table-date-filter"
-            className="flex cursor-pointer items-center gap-1 rounded-none border border-slate-300
-                       bg-white px-2.5 py-0.5 text-[9px] font-mono font-medium text-slate-700 hover:border-slate-500 hover:bg-slate-50 select-none"
+            className={`flex cursor-pointer items-center gap-1 rounded-none border px-2.5 py-0.5 text-[9px] font-mono font-medium select-none transition-colors duration-150 ${
+              isDark 
+                ? "border-[#1E293B] bg-[#0A0D14] text-slate-400 hover:border-slate-600 hover:text-white"
+                : "border-slate-300 bg-white text-slate-700 hover:border-slate-500 hover:bg-slate-50"
+            }`}
           >
-            <Calendar className="h-3 w-3 text-slate-400" />
+            <Calendar className={`h-3 w-3 ${isDark ? "text-slate-600" : "text-slate-400"}`} />
             Q2 2026
-            <ChevronDown className="h-3 w-3 text-slate-400" />
+            <ChevronDown className={`h-3 w-3 ${isDark ? "text-slate-600" : "text-slate-400"}`} />
           </button>
         </div>
       </div>
@@ -712,7 +935,9 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
       <div className="overflow-x-auto">
         <table id="health-monitor-table" className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b-2 border-slate-300 bg-slate-50 font-mono text-[9px] uppercase tracking-wider text-slate-500 select-none">
+            <tr className={`border-b-2 font-mono text-[9px] uppercase tracking-wider select-none ${
+              isDark ? "border-[#1E293B] bg-[#0A0D14] text-slate-500" : "border-slate-300 bg-slate-50 text-slate-500"
+            }`}>
               <th className="py-2 px-3 w-6 text-left">
                 <input
                   type="checkbox"
@@ -721,32 +946,32 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               </th>
               <th 
                 onClick={() => requestSort("id")}
-                className="py-2 px-3 w-20 text-left font-bold cursor-pointer hover:bg-slate-100 hover:text-slate-800 transition-colors duration-75 select-none"
+                className={`py-2 px-3 w-20 text-left font-bold cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 Node ID {renderSortIndicator("id")}
               </th>
               <th 
                 onClick={() => requestSort("facility")}
-                className="py-2 px-3 w-52 text-left font-bold cursor-pointer hover:bg-slate-100 hover:text-slate-800 transition-colors duration-75 select-none"
+                className={`py-2 px-3 w-52 text-left font-bold cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 Facility / Region {renderSortIndicator("facility")}
               </th>
               <th className="py-2 px-3 text-left font-bold">Disruption Signal</th>
               <th 
                 onClick={() => requestSort("severity")}
-                className="py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer hover:bg-slate-100 hover:text-slate-800 transition-colors duration-75 select-none"
+                className={`py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 Risk Severity {renderSortIndicator("severity")}
               </th>
               <th 
                 onClick={() => requestSort("likelihood")}
-                className="py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer hover:bg-slate-100 hover:text-slate-800 transition-colors duration-75 select-none"
+                className={`py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 Likelihood {renderSortIndicator("likelihood")}
               </th>
               <th 
                 onClick={() => requestSort("timeToHit")}
-                className="py-2 px-3 w-28 text-right font-bold font-mono cursor-pointer hover:bg-slate-100 hover:text-slate-800 transition-colors duration-75 select-none"
+                className={`py-2 px-3 w-28 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 Time-to-hit {renderSortIndicator("timeToHit")}
               </th>
@@ -769,10 +994,13 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   <tr
                     key={row.id}
                     onClick={() => setInspectedRow(row)}
-                    className={`group transition-all duration-300 ease-out font-sans text-xs text-slate-800 border-l-2 cursor-pointer
-                               ${isHighlighted 
-                                 ? "bg-[#86BC25]/15 border-l-[#86BC25]" 
-                                 : "border-l-transparent even:bg-[#F8FAFC] hover:bg-slate-100/75"}`}
+                    className={`group transition-all duration-300 ease-out font-sans text-xs border-l-2 cursor-pointer ${
+                      isHighlighted 
+                        ? "bg-[#86BC25]/15 border-l-[#86BC25]" 
+                        : isDark
+                          ? "border-l-transparent text-slate-300 hover:bg-[#151C2C] even:bg-[#0D1119]"
+                          : "border-l-transparent text-slate-800 even:bg-[#F8FAFC] hover:bg-slate-100/75"
+                    }`}
                   >
                   {/* Checkbox */}
                   <td className="py-1.5 px-3 align-middle" onClick={(e) => e.stopPropagation()}>
@@ -784,24 +1012,27 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   </td>
                   
                   {/* Node ID */}
-                  <td className="py-1.5 px-3 align-middle font-mono text-[10px] text-slate-500 font-semibold">
+                  <td className={`py-1.5 px-3 align-middle font-mono text-[10px] font-semibold ${isDark ? "text-slate-500" : "text-slate-500"}`}>
                     {row.id}
                   </td>
 
                   {/* Facility / Location */}
                   <td className="py-1.5 px-3 align-middle">
-                    <div className="font-semibold text-slate-900 leading-tight">{row.facility}</div>
+                    <div className={`font-semibold leading-tight ${isDark ? "text-slate-100" : "text-slate-900"}`}>{row.facility}</div>
                     <div className="text-[9px] text-slate-400 font-mono mt-0.5">{row.location} &bull; {row.tier}</div>
                   </td>
 
                   {/* Disruption Description */}
-                  <td className="py-1.5 px-3 align-middle text-slate-600 max-w-sm overflow-hidden text-ellipsis leading-tight font-sans">
+                  <td className={`py-1.5 px-3 align-middle max-w-sm overflow-hidden text-ellipsis leading-tight font-sans ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     <div className="flex flex-wrap items-center gap-1.5">
                       <span className={`inline-block font-mono text-[8px] px-1.5 py-0.5 border select-none leading-none rounded-none uppercase font-bold tracking-wider ${
-                        getTaxonomy(row.id) === "Logistics & Transit" ? "bg-red-50 text-red-600 border-red-200" :
-                        getTaxonomy(row.id) === "Operations & Capacity" ? "bg-amber-50 text-amber-600 border-amber-200" :
-                        getTaxonomy(row.id) === "Regulatory & Quality" ? "bg-sky-50 text-sky-600 border-sky-200" :
-                        "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/20"
+                        getTaxonomy(row.id) === "Logistics & Transit" 
+                          ? isDark ? "bg-red-950/40 text-red-400 border-red-900/50" : "bg-red-50 text-red-600 border-red-200"
+                          : getTaxonomy(row.id) === "Operations & Capacity" 
+                            ? isDark ? "bg-amber-950/40 text-amber-400 border-amber-900/50" : "bg-amber-50 text-amber-600 border-amber-200"
+                            : getTaxonomy(row.id) === "Regulatory & Quality" 
+                              ? isDark ? "bg-sky-950/40 text-sky-400 border-sky-900/50" : "bg-sky-50 text-sky-600 border-sky-200"
+                              : isDark ? "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/30" : "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/20"
                       }`}>
                         {getTaxonomy(row.id)}
                       </span>
@@ -828,7 +1059,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   </td>
 
                   {/* Time to hit (Right-aligned numeric/text) */}
-                  <td className="py-1.5 px-3 align-middle text-right font-mono text-[10px] font-semibold text-slate-600">
+                  <td className={`py-1.5 px-3 align-middle text-right font-mono text-[10px] font-semibold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     {row.timeToHit}
                   </td>
 
@@ -849,35 +1080,41 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
         </table>
       </div>
 
-      {/* ── 5. Detail Drawer Overlay (Deloitte Dark Aesthetic Panel) ── */}
+      {/* ── Detail Drawer Overlay ── */}
       {inspectedRow && (
         <>
           {/* Backdrop */}
           <div 
             onClick={handleClosePanel}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] transition-opacity duration-150"
+            className="fixed inset-0 z-[9990] bg-black/35 backdrop-blur-[1px] transition-opacity duration-150"
           />
 
-          {/* Drawer Panel - Dynamically expands for playbook view */}
+          {/* Drawer Panel */}
           <div
             id="threat-drawer"
-            className={`fixed top-0 right-0 bottom-0 z-50 bg-[#0D111A] border-l border-[#1E293B] shadow-2xl p-6 overflow-y-auto text-white flex flex-col font-sans transition-all duration-500 ease-in-out ${
+            className={`fixed top-0 right-0 bottom-0 z-[9995] border-l shadow-2xl p-6 overflow-y-auto flex flex-col font-sans transition-all duration-500 ease-in-out ${
               playbookGenerated 
-                ? "w-full md:w-[780px] lg:w-[1000px] xl:w-[1200px]" 
-                : "w-full sm:w-[480px]"
+                ? "w-full md:w-[780px] lg:w-[1000px] xl:w-[1100px]" 
+                : "w-full sm:w-[520px]"
+            } ${
+              isDark ? "bg-[#0A0D14] border-[#1E293B] text-slate-200" : "bg-white border-slate-200 text-slate-800"
             }`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-[#1E293B] pb-4 mb-4 select-none">
+            <div className={`flex items-center justify-between border-b pb-4 mb-4 select-none ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 bg-[#D32F2F]" />
-                <span className="font-mono text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                <span className={`font-mono text-[10px] font-bold tracking-wider uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>
                   THREAT CLASSIFICATION INSPECTOR
                 </span>
               </div>
               <button
                 onClick={handleClosePanel}
-                className="flex items-center gap-1 border border-slate-700 px-2 py-0.5 text-[9px] font-mono text-slate-400 hover:text-white hover:border-slate-500 cursor-pointer"
+                className={`flex items-center gap-1 border px-2 py-0.5 text-[9px] font-mono cursor-pointer transition-colors duration-75 ${
+                  isDark 
+                    ? "border-[#1E293B] bg-[#0F1520] text-slate-500 hover:text-slate-200 hover:border-slate-600"
+                    : "border-slate-200 bg-slate-50 text-slate-500 hover:text-slate-900 hover:border-slate-400"
+                }`}
               >
                 <X className="h-3 w-3" />
                 CLOSE [ESC]
@@ -887,148 +1124,227 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
             {/* Core Info */}
             <div className="flex flex-col gap-1 mb-4 select-none">
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold font-sans tracking-tight text-white">{inspectedRow.id}</span>
-                <span className="text-[10px] font-mono text-[#86BC25] uppercase tracking-wider">{inspectedRow.tier} NODE</span>
+                <div>
+                  <span className={`text-2xl font-bold font-sans tracking-tight ${isDark ? "text-slate-100" : "text-slate-900"}`}>{inspectedRow.id}</span>
+                  <span className="ml-2 text-[10px] font-mono text-[#86BC25] uppercase tracking-wider font-bold border border-[#86BC25]/30 bg-[#86BC25]/5 px-2 py-0.5">{inspectedRow.tier} NODE</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  {playbookGenerated ? (
+                    <>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#86BC25] animate-ping" />
+                      <span className="text-[9px] font-mono text-[#86BC25] uppercase tracking-wider font-bold">PLAYBOOK ACTIVE</span>
+                    </>
+                  ) : (
+                    <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">RISK INSPECTOR</span>
+                  )}
+                </div>
               </div>
-              <p className="text-base font-semibold text-slate-100">{inspectedRow.facility}</p>
-              <p className="text-xs text-slate-400 font-mono">{inspectedRow.location}</p>
+              <p className={`text-base font-semibold mt-1 ${isDark ? "text-slate-100" : "text-slate-800"}`}>{inspectedRow.facility}</p>
+              <p className={`text-xs font-mono ${isDark ? "text-slate-400" : "text-slate-500"}`}>{inspectedRow.location} &bull; {inspectedRow.disruption}</p>
             </div>
 
-            {/* Severity and Likelihood Grid (Only shown when not displaying playbook to reduce noise) */}
-            {!playbookGenerated && (
-              <div className="grid grid-cols-3 gap-2 mb-5 select-none font-mono text-[10px]">
-                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                  <span className="text-slate-500 font-bold uppercase tracking-wider">SEVERITY</span>
-                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.severity.label.split(" ")[0]}</span>
-                </div>
-                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                  <span className="text-slate-500 font-bold uppercase tracking-wider">LIKELIHOOD</span>
-                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.likelihood.label.split(" ")[0]}</span>
-                </div>
-                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                  <span className="text-slate-500 font-bold uppercase tracking-wider">TIME TO HIT</span>
-                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.timeToHit}</span>
-                </div>
+            {/* Quick-Glance Risk KPIs — always visible */}
+            <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+              <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">SEVERITY</span>
+                <span className={`font-bold text-[11px] mt-1 ${inspectedRow.severity.color.split(' ')[0]}`}>{inspectedRow.severity.label.split(" ")[0]}</span>
               </div>
-            )}
-
-            {/* Detailed Description (Only shown when not displaying playbook) */}
-            {!playbookGenerated && (
-              <div className="border-t border-[#1E293B] pt-4 mb-4">
-                <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
-                  <MessageSquare className="h-3.5 w-3.5" />
-                  Full Risk Description
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed font-sans">{inspectedRow.fullDescription}</p>
+              <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">LIKELIHOOD</span>
+                <span className={`font-bold text-[11px] mt-1 ${inspectedRow.likelihood.color.split(' ')[0]}`}>{inspectedRow.likelihood.label.split(" ")[0]}</span>
               </div>
-            )}
-
-            {/* Signal Origin Pipeline (Only shown when not displaying playbook) */}
-            {!playbookGenerated && (
-              <div className="border-t border-[#1E293B] pt-4 mb-4">
-                {renderPipeline(inspectedRow)}
+              <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TIME TO HIT</span>
+                <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{inspectedRow.timeToHit}</span>
               </div>
-            )}
+              <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TAXONOMY</span>
+                <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow.id)}</span>
+              </div>
+            </div>
 
-            {/* ── Mitigation Playbook CTAs ── */}
-            <div className={`flex flex-col gap-3 ${!playbookGenerated ? "mt-auto border-t border-[#1E293B] pt-4" : ""}`}>
-              {!playbookGenerated && !isGenerating && (
-                <button
-                  onClick={() => handleGeneratePlaybook(inspectedRow)}
-                  className="w-full cursor-pointer border border-[#86BC25] bg-[#86BC25] text-black font-bold uppercase tracking-wider text-[10px] py-2.5 rounded-none hover:bg-white hover:border-white transition-colors duration-75"
-                >
-                  Generate Mitigation Playbook
-                </button>
-              )}
-
-              {/* ── LOADING TELEMETRY STATE ── */}
-              {isGenerating && (
-                <div className="w-full bg-[#111520] border border-slate-800 p-4 font-mono text-[9px] text-[#86BC25] flex flex-col gap-1.5">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="h-3 w-3 rounded-none border border-dashed border-[#86BC25] animate-spin" />
-                    <span className="font-bold uppercase tracking-wider">AGENT PROCESSING RISK FEEDS...</span>
+            {/* ── PRE-PLAYBOOK VIEW ── */}
+            {!playbookGenerated && (
+              <div className="flex flex-col gap-5">
+                {/* Full Risk Description & Executive Briefing */}
+                <div className={`border p-4 flex flex-col gap-3.5 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
+                  <div>
+                    <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
+                      <MessageSquare className="h-3.5 w-3.5" />
+                      Executive Governance & Risk Briefing
+                    </h3>
+                    <p className={`text-xs leading-relaxed font-sans ${isDark ? "text-slate-200" : "text-slate-700"}`}>{inspectedRow.fullDescription}</p>
                   </div>
-                  {loadingLines.map((line, i) => (
-                    <div key={i} className="animate-fade-in leading-relaxed">
-                      {line}
-                    </div>
-                  ))}
-                </div>
-              )}
 
-              {/* ── PLAYBOOK VIEW RENDER ── */}
-              {playbookGenerated && (
-                <div className="w-full flex flex-col gap-6 animate-fade-in text-slate-300">
-                  {/* Playbook Header Ribbon */}
-                  <div className="flex flex-col gap-1 border-b border-slate-800 pb-3">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] font-bold text-[#86BC25] uppercase tracking-wider flex items-center gap-1.5">
-                        <CheckCircle className="h-4 w-4" />
-                        ✅ BOARD-LEVEL DECISION SUPPORT ACTIVE
+                  {/* C-Suite Strategic Insights Overlay */}
+                  <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 border-t pt-3.5 font-sans text-[11px] ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-mono text-[9px] font-bold text-amber-500 uppercase tracking-wider">
+                        Downstream Business Impact
                       </span>
-                      <span className="text-[10px] font-mono text-slate-500 bg-[#161C2C] px-2 py-0.5 border border-slate-800">
-                        REF: {inspectedRow.id}-STRATEGIC-PLAYBOOK-v5.0
-                      </span>
+                      <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+                        Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#86BC25] animate-ping" />
-                      <p className="text-[10px] font-sans text-slate-400">
-                        Authorized Executive Escalation Level: <span className="text-white font-semibold">Tier-1 (CEO & CFO Sign-Off Recommended)</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-mono text-[9px] font-bold text-sky-500 uppercase tracking-wider">
+                        Mitigation Objective
+                      </span>
+                      <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+                        Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.
                       </p>
                     </div>
                   </div>
+                </div>
+
+                {/* Signal Pipeline */}
+                {renderPipeline(inspectedRow)}
+
+                {/* Generate CTA */}
+                <div className={`mt-auto border-t pt-4 flex flex-col gap-3 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                  {!isGenerating && (
+                    <button
+                      onClick={() => handleGeneratePlaybook(inspectedRow)}
+                      className="w-full cursor-pointer border border-[#86BC25] bg-[#86BC25] text-black font-bold uppercase tracking-wider text-[10px] py-2.5 rounded-none hover:bg-slate-950 hover:text-white hover:border-[#86BC25] transition-colors duration-75"
+                    >
+                      ⚡ Generate Mitigation Playbook
+                    </button>
+                  )}
+
+                  {/* Loading Progress State */}
+                  {isGenerating && (
+                    <div className={`w-full border p-4 font-mono text-[9px] flex flex-col gap-1.5 ${isDark ? "bg-slate-950 border-[#1E293B] text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"}`}>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="h-3 w-3 rounded-none border-2 border-dashed border-[#86BC25] animate-spin" />
+                        <span className={`font-bold uppercase tracking-wider ${isDark ? "text-slate-100" : "text-slate-800"}`}>AGENT COMPILING RISK SOLUTIONS...</span>
+                      </div>
+                      {loadingLines.map((line, i) => (
+                        <div key={i} className="animate-fade-in leading-relaxed text-[#86BC25] font-semibold">{line}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ── PLAYBOOK VIEW ── */}
+            {playbookGenerated && (
+              <div className={`w-full flex flex-col gap-6 animate-fade-in ${isDark ? "text-slate-200" : "text-slate-700"}`}>
 
                   {/* C-Suite Executive Telemetry Dashboard */}
                   {cSuiteEnrichment && (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       {/* KPI Card 1: Revenue at Risk */}
-                      <div className="border border-slate-800 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
-                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-red-500">
-                          <DollarSign className="h-20 w-20" />
+                      <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
+                            Revenue Exposure
+                          </span>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-red-400 bg-red-950/40 border-red-900/30" : "text-red-600 bg-red-50 border-red-100"}`}>
+                            -{(((totalFinancialAtRisk - mitigatedTotalExposure) / Math.max(1, totalFinancialAtRisk)) * 100).toFixed(0)}% Risk
+                          </span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
-                          <AlertTriangle className="h-3 w-3 text-red-500" />
-                          Mitigated Revenue Risk
+                        
+                        <div className="flex items-center justify-between mt-2 gap-2">
+                          <div className="flex-1">
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Unmitigated</span>
+                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                              ${(totalFinancialAtRisk / 1000000).toFixed(1)}M
+                            </span>
+                          </div>
+                          
+                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          
+                          <div className="text-right flex-1">
+                            <span className="text-xs font-mono text-[#86BC25] block uppercase font-bold">Mitigated Target</span>
+                            <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                              ${(mitigatedTotalExposure / 1000000).toFixed(1)}M
+                            </span>
+                          </div>
                         </div>
-                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-white">
-                          ${(simulatedTotalExposure / 1000000).toFixed(1)}M
-                        </div>
-                        <div className="text-[9px] text-slate-400 font-sans mt-1">
-                          Base Exposure: <span className="text-red-400 font-semibold font-mono">${(totalFinancialAtRisk / 1000000).toFixed(1)}M</span>
+
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                          <span>EXPOSURE AVOIDED:</span>
+                          <span className="text-[#86BC25] font-bold">
+                            -${((totalFinancialAtRisk - mitigatedTotalExposure) / 1000000).toFixed(1)}M
+                          </span>
                         </div>
                       </div>
 
                       {/* KPI Card 2: Total Mitigation CapEx */}
-                      <div className="border border-[#86BC25]/20 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
-                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-[#86BC25]">
-                          <Activity className="h-20 w-20" />
+                      <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            <DollarSign className="h-3.5 w-3.5 text-[#86BC25]" />
+                            Mitigation CapEx
+                          </span>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-sky-400 bg-sky-950/20 border-sky-900/30" : "text-sky-600 bg-sky-50 border-sky-100"}`}>
+                            Clearance Checked
+                          </span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
-                          <DollarSign className="h-3 w-3 text-[#86BC25]" />
-                          Mitigation CapEx
+                        
+                        <div className="flex items-center justify-between mt-2 gap-2">
+                          <div className="flex-1">
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Base Cost</span>
+                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                              ${(cSuiteEnrichment.baseWorkaroundCost / 1000).toFixed(0)}K
+                            </span>
+                          </div>
+                          
+                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          
+                          <div className="text-right flex-1">
+                            <span className="text-xs font-mono text-sky-400 block uppercase font-bold">Final Cost</span>
+                            <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                              ${(mitigatedWorkaroundCost / 1000).toFixed(0)}K
+                            </span>
+                          </div>
                         </div>
-                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-[#86BC25]">
-                          ${(simulatedWorkaroundCost / 1000).toFixed(0)}K
-                        </div>
-                        <div className="text-[9px] text-slate-400 font-sans mt-1">
-                          Base Cost: <span className="text-slate-300 font-semibold font-mono">${(cSuiteEnrichment.baseWorkaroundCost / 1000).toFixed(0)}K</span>
+
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                          <span>CAPEX PREMIUM:</span>
+                          <span className="text-sky-400 font-bold">
+                            +${((mitigatedWorkaroundCost - cSuiteEnrichment.baseWorkaroundCost) / 1000).toFixed(0)}K
+                          </span>
                         </div>
                       </div>
 
                       {/* KPI Card 3: Est. Recovery Timeline */}
-                      <div className="border border-slate-800 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
-                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-slate-500">
-                          <Clock className="h-20 w-20" />
+                      <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            <Clock className="h-3.5 w-3.5 text-sky-400" />
+                            Recovery Timeline
+                          </span>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-[#86BC25] bg-[#86BC25]/10 border-[#86BC25]/20" : "text-[#86BC25] bg-[#86BC25]/10 border-[#86BC25]/20"}`}>
+                            Time Saved
+                          </span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
-                          <Clock className="h-3 w-3 text-sky-400" />
-                          Est. Recovery Cycle
+                        
+                        <div className="flex items-center justify-between mt-2 gap-2">
+                          <div className="flex-1">
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Base Cycle</span>
+                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-300"}`}>
+                              {cSuiteEnrichment.baseTimelineDays} Days
+                            </span>
+                          </div>
+                          
+                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          
+                          <div className="text-right flex-1">
+                            <span className="text-xs font-mono text-sky-400 block uppercase font-bold">Optimal Run</span>
+                            <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                              {mitigatedTimelineDays.toFixed(1)} Days
+                            </span>
+                          </div>
                         </div>
-                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-white">
-                          {simulatedTimelineDays.toFixed(1)} Days
-                        </div>
-                        <div className="text-[9px] text-slate-400 font-sans mt-1">
-                          Base Cycle: <span className="text-slate-300 font-semibold font-mono">{cSuiteEnrichment.baseTimelineDays} Days</span>
+
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                          <span>SPEED IMPROVEMENT:</span>
+                          <span className="text-[#86BC25] font-bold">
+                            -{(cSuiteEnrichment.baseTimelineDays - mitigatedTimelineDays).toFixed(1)} Days
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1036,14 +1352,14 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                   {/* Net Financial Risk Avoided Alert Banner */}
                   {cSuiteEnrichment && financialSaved > 0 && (
-                    <div className="border border-[#86BC25]/30 bg-[#86BC25]/10 p-3 flex items-center justify-between rounded-none animate-pulse">
+                    <div className="border border-[#86BC25]/20 bg-[#86BC25]/5 p-3 flex items-center justify-between rounded-none select-none">
                       <div className="flex items-center gap-2">
                         <Award className="h-5 w-5 text-[#86BC25]" />
                         <div>
                           <div className="text-[10px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
-                            NET FINANCIAL RISK AVOIDANCE (SIMULATED ROI)
+                            NET FINANCIAL RISK AVOIDANCE (PLAYBOOK DEPLOYED ROI)
                           </div>
-                          <div className="text-[9px] text-slate-300 mt-0.5">
+                          <div className="text-[9px] text-slate-500 mt-0.5 font-sans leading-normal">
                             Decisive deployment of response options avoids major supply chain interruption losses.
                           </div>
                         </div>
@@ -1052,80 +1368,45 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         <span className="text-lg font-bold font-mono text-[#86BC25] block">
                           +${(financialSaved / 1000000).toFixed(2)}M
                         </span>
-                        <span className="text-[8px] font-mono text-slate-400 uppercase">CAPITAL PROTECTED</span>
+                        <span className="text-[8px] font-mono text-slate-500 uppercase">CAPITAL PROTECTED</span>
                       </div>
                     </div>
                   )}
 
-                  {/* Main Grid: Options Simulator on Left, Narrative & Governance on Right */}
+                  {/* Main Grid: Action Plan on Left, Narrative & Governance on Right */}
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* LEFT COLUMN: SIMULATOR & TIMELINE (lg:col-span-7) */}
+                    {/* LEFT COLUMN: ACTION PLAN & PIPELINE (lg:col-span-7) */}
                     <div className="lg:col-span-7 flex flex-col gap-6">
                       
-                      {/* Playbook Scenario Simulator */}
-                      {cSuiteEnrichment && (
-                        <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
-                          <div>
-                            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
-                              <PlayCircle className="h-4 w-4" />
-                              Boardroom Response Scenario Simulator
-                            </h4>
-                            <p className="text-[9px] text-slate-400 mt-0.5">
-                              Check mitigation tactics to model operational cost-benefit trade-offs in real-time.
-                            </p>
-                          </div>
-
-                          <div className="flex flex-col gap-2 mt-1">
-                            {cSuiteEnrichment.options.map(opt => {
-                              const isSelected = selectedOptions.includes(opt.id);
-                              return (
-                                <div
-                                  key={opt.id}
-                                  onClick={() => {
-                                    if (isSelected) {
-                                      setSelectedOptions(prev => prev.filter(id => id !== opt.id));
-                                    } else {
-                                      setSelectedOptions(prev => [...prev, opt.id]);
-                                    }
-                                  }}
-                                  className={`border p-3 flex items-start gap-3 cursor-pointer select-none transition-all duration-100 ${
-                                    isSelected
-                                      ? "bg-[#86BC25]/5 border-[#86BC25] text-white"
-                                      : "bg-[#161C2C]/50 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-[#161C2C]"
-                                  }`}
-                                >
-                                  <input
-                                    type="checkbox"
-                                    checked={isSelected}
-                                    onChange={() => {}} // Controlled in parent onClick
-                                    className="mt-0.5 h-3.5 w-3.5 rounded-none border-slate-700 accent-[#86BC25] cursor-pointer"
-                                  />
-                                  <div className="flex-1 flex flex-col gap-0.5">
-                                    <div className="flex items-center justify-between">
-                                      <span className="font-semibold text-xs text-white leading-none">{opt.label}</span>
-                                      <div className="flex gap-2 font-mono text-[9px] font-bold">
-                                        <span className="text-[#86BC25]">-${opt.daysSaved} Days</span>
-                                        <span className="text-slate-400">|</span>
-                                        <span className="text-slate-300">+${(opt.cost / 1000).toFixed(0)}K CapEx</span>
-                                      </div>
-                                    </div>
-                                    <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">{opt.desc}</p>
-                                  </div>
-                                </div>
-                              );
-                            })}
+                      {/* Active Supply Chain Risk Statement */}
+                      <div className={`border p-4 flex flex-col gap-3 ${isDark ? "border-red-900/40 bg-red-950/15" : "border-red-200 bg-red-50/50"}`}>
+                        <div className="flex items-center gap-2 select-none">
+                          <AlertCircle className="h-4.5 w-4.5 text-red-500" />
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-red-500 font-mono">
+                            Active Supply Chain Risk Restatement
+                          </h4>
+                        </div>
+                        <div className="text-xs flex flex-col gap-1.5 font-sans leading-relaxed">
+                          <p className={`font-semibold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                            Disruption Incident: <span className="underline decoration-red-500">{inspectedRow.disruption}</span>
+                          </p>
+                          <p className={isDark ? "text-slate-300" : "text-slate-600"}>
+                            <strong>Downstream Operation Impact:</strong> {inspectedRow.fullDescription}
+                          </p>
+                          <div className={`p-2.5 border font-mono text-xs select-none ${isDark ? "bg-slate-950/40 border-red-900/30 text-red-400" : "bg-white border-red-100 text-red-700"}`}>
+                            <strong>CRITICAL CORRIDOR THREAT:</strong> This node represents a vital supply bottleneck. Failure to enact the playbook within the target buffer window escalates the risk parameter directly to severe contract penalties.
                           </div>
                         </div>
-                      )}
+                      </div>
 
                       {/* Strategic Action Plan (Immediate, Tactical, Policy) */}
-                      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-4">
+                      <div className={`border p-4 flex flex-col gap-4 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
                         <div>
-                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
                             <FileText className="h-4 w-4" />
                             Prioritized Strategic Action Plan
                           </h4>
-                          <p className="text-[9px] text-slate-400 mt-0.5">
+                          <p className={`text-xs mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
                             Standard Operating Procedures (SOP) mapped across time horizons to secure the node.
                           </p>
                         </div>
@@ -1133,38 +1414,62 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         {cSuiteEnrichment && (
                           <div className="flex flex-col gap-4 font-sans text-xs">
                             {/* Phase 1 */}
-                            <div className="flex gap-3 border-l-2 border-[#86BC25] pl-3 py-0.5">
-                              <div className="flex-1 flex flex-col gap-1">
-                                <span className="font-mono text-[9px] font-bold text-[#86BC25] uppercase tracking-wider">
+                            <div className="flex gap-3 border-l-2 border-[#86BC25] pl-3 py-1">
+                              <div className="flex-1 flex flex-col gap-2">
+                                <span className="font-mono text-xs font-bold text-[#86BC25] uppercase tracking-wider">
                                   PHASE 1 &bull; IMMEDIATE CONTAINMENT (0 - 48 HOURS)
                                 </span>
-                                <p className="text-slate-200 leading-relaxed font-sans text-[11px]">
+                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                                   {cSuiteEnrichment.strategicPhases.immediate}
                                 </p>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
+                                  <span className="font-bold text-amber-500 uppercase">Immediate Tasks & Protocols:</span>
+                                  <ul className="list-disc pl-4 flex flex-col gap-1">
+                                    <li>Flag internal quality inspectors to trace affected batch footprints.</li>
+                                    <li>Assess safety stock levels held in regional storage warehouses.</li>
+                                    <li>Notify on-call engineering supervisors to start physical line checks.</li>
+                                  </ul>
+                                </div>
                               </div>
                             </div>
 
                             {/* Phase 2 */}
-                            <div className="flex gap-3 border-l-2 border-sky-500 pl-3 py-0.5">
-                              <div className="flex-1 flex flex-col gap-1">
-                                <span className="font-mono text-[9px] font-bold text-sky-400 uppercase tracking-wider">
+                            <div className="flex gap-3 border-l-2 border-sky-500 pl-3 py-1">
+                              <div className="flex-1 flex flex-col gap-2">
+                                <span className="font-mono text-xs font-bold text-sky-500 uppercase tracking-wider">
                                   PHASE 2 &bull; ALTERNATE ROUTING & RE-SOURCING (48H - 2 WEEKS)
                                 </span>
-                                <p className="text-slate-200 leading-relaxed font-sans text-[11px]">
+                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                                   {cSuiteEnrichment.strategicPhases.tactical}
                                 </p>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
+                                  <span className="font-bold text-sky-500 uppercase">Alternate Logistics Protocols:</span>
+                                  <ul className="list-disc pl-4 flex flex-col gap-1">
+                                    <li>Deploy dedicated flatbed courier fleets under pre-file DOT permits.</li>
+                                    <li>Re-allocate inbound shipments to pre-approved secondary sea-port bays.</li>
+                                    <li>Coordinate receiving crane and storage bay schedules with regional leads.</li>
+                                  </ul>
+                                </div>
                               </div>
                             </div>
 
                             {/* Phase 3 */}
-                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-0.5">
-                              <div className="flex-1 flex flex-col gap-1">
-                                <span className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-wider">
+                            <div className="flex gap-3 border-l-2 border-slate-400 pl-3 py-1">
+                              <div className="flex-1 flex flex-col gap-2">
+                                <span className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider">
                                   PHASE 3 &bull; CAPITAL POLICY & RESILIENCY ADJUSTMENT
                                 </span>
-                                <p className="text-slate-300 leading-relaxed font-sans text-[11px]">
+                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                                   {cSuiteEnrichment.strategicPhases.structural}
                                 </p>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
+                                  <span className="font-bold text-slate-400 uppercase">Resiliency Policy Adjustments:</span>
+                                  <ul className="list-disc pl-4 flex flex-col gap-1">
+                                    <li>Re-balance process workloads to alternate autoclaves or lines.</li>
+                                    <li>Postpone secondary general maintenance runs to maximize capacity limits.</li>
+                                    <li>Update inventory buffer safety stock rules in ERP tracking databases.</li>
+                                  </ul>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -1178,89 +1483,231 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                     {/* RIGHT COLUMN: GOVERNANCE & CONTACTS (lg:col-span-5) */}
                     <div className="lg:col-span-5 flex flex-col gap-6">
                       
-                      {/* Executive Governance & SLA risk briefing */}
-                      {cSuiteEnrichment && (
-                        <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
-                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                            Executive Governance & Risk Briefing
-                          </h4>
-                          
-                          <div className="flex flex-col gap-3 text-xs">
-                            <div className="flex flex-col gap-1 border-b border-slate-800 pb-2">
-                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">SLA & Contractual Exposure</span>
-                              <p className="text-slate-300 leading-snug font-sans text-[10px]">
-                                {cSuiteEnrichment.slaRisk}
-                              </p>
-                            </div>
-
-                            <div className="flex flex-col gap-1 border-b border-slate-800 pb-2">
-                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">Evidence-Based Risk Foundation</span>
-                              <p className="text-slate-300 leading-snug font-sans text-[10px]">
-                                {cSuiteEnrichment.evidenceBase}
-                              </p>
-                            </div>
-
-                            <div className="flex flex-col gap-1.5 pt-1">
-                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">Compliance & Capital Threshold Check</span>
-                              <div className="flex items-center justify-between bg-[#161C2C] border border-slate-800 p-2 font-mono text-[9px]">
-                                <span className="text-slate-400">Expedited CapEx Limits:</span>
-                                <span className="text-white font-bold">$1,000,000</span>
-                              </div>
-                              <div className="flex items-center justify-between bg-[#161C2C] border border-slate-800 p-2 font-mono text-[9px]">
-                                <span className="text-slate-400">Projected Run Cost:</span>
-                                <span className={`font-bold ${simulatedWorkaroundCost > 1000000 ? "text-red-400" : "text-[#86BC25]"}`}>
-                                  ${simulatedWorkaroundCost.toLocaleString()}
+                      {/* Executive Governance & SLA Compliance tracker */}
+                      {cSuiteEnrichment && (() => {
+                        const nodeSignOffs = signOffs[inspectedRow.id] || { cfo: false, coo: false, board: false };
+                        const isFullyAuthorized = nodeSignOffs.cfo && nodeSignOffs.coo && nodeSignOffs.board;
+                        
+                        return (
+                          <div className={`border transition-all duration-300 p-4 flex flex-col gap-4 ${
+                            isFullyAuthorized 
+                              ? isDark
+                                ? "border-[#86BC25] bg-[#86BC25]/5 shadow-[0_0_15px_rgba(134,188,37,0.15)]"
+                                : "border-[#86BC25] bg-[#86BC25]/5 shadow-[0_0_15px_rgba(134,188,37,0.08)]" 
+                              : isDark
+                                ? "border-[#1E293B] bg-[#0A0D14]"
+                                : "border-slate-200 bg-slate-50"
+                          }`}>
+                            <div>
+                              <div className="flex items-center justify-between">
+                                <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono">
+                                  Executive Governance & SLA Compliance
+                                </h4>
+                                <span className={`text-[8px] font-mono px-1.5 py-0.5 border ${
+                                  isFullyAuthorized
+                                    ? "bg-[#86BC25]/15 text-[#86BC25] border-[#86BC25]/30 animate-pulse font-bold"
+                                    : isDark
+                                      ? "bg-slate-950 text-slate-400 border-[#1E293B]"
+                                      : "bg-slate-100 text-slate-500 border-slate-200"
+                                }`}>
+                                  {isFullyAuthorized ? "FULL BOARD CLEARANCE" : "PENDING CLEARANCE"}
                                 </span>
                               </div>
-                              <div className="flex items-center gap-1.5 mt-1 border border-slate-800 p-2 bg-[#161C2C]/50 font-mono text-[9px]">
-                                <span className={`h-2 w-2 rounded-full ${simulatedWorkaroundCost > 1000000 ? "bg-amber-500 animate-pulse" : "bg-[#86BC25]"}`} />
-                                <span className="text-slate-300 leading-snug">
-                                  {simulatedWorkaroundCost > 1000000 
-                                    ? "⚠️ ALERT: Board CapEx Threshold Exceeded. Financial Committee notification sent." 
-                                    : "✅ COMPLIANT: Under Board CapEx threshold."}
+                              <p className={`text-[9px] mt-0.5 font-sans leading-normal ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                                Board-level compliance tracking and C-suite deployment sign-off clearance.
+                              </p>
+                            </div>
+                            
+                            <div className="flex flex-col gap-3.5 text-xs">
+                              {/* SLA & Contractual Exposure */}
+                              <div className={`flex flex-col gap-1 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">SLA & Contractual Exposure</span>
+                                <p className={`leading-snug font-sans text-[10px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                                  {cSuiteEnrichment.slaRisk}
+                                </p>
+                              </div>
+
+                              {/* Evidence-Based Risk Foundation */}
+                              <div className={`flex flex-col gap-1 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Evidence-Based Risk Foundation</span>
+                                <p className={`leading-snug font-sans text-[10px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                                  {cSuiteEnrichment.evidenceBase}
+                                </p>
+                              </div>
+
+                              {/* Compliance & Capital Threshold Check */}
+                              <div className={`flex flex-col gap-2 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
+                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Compliance & Capital Threshold Check</span>
+                                <div className={`grid grid-cols-2 gap-2 border p-2 font-mono text-[9px] select-none ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                                  <div>
+                                    <span className="text-slate-400 block text-[8px] uppercase">Expedited CapEx Limit</span>
+                                    <span className={`font-bold ${isDark ? "text-slate-200" : "text-slate-800"}`}>$1,000,000</span>
+                                  </div>
+                                  <div className="text-right">
+                                    <span className="text-slate-400 block text-[8px] uppercase">Projected Run Cost</span>
+                                    <span className={`font-bold ${mitigatedWorkaroundCost > 1000000 ? "text-red-500 animate-pulse" : "text-[#86BC25]"}`}>
+                                      ${mitigatedWorkaroundCost.toLocaleString()}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className={`flex items-center gap-2 border p-2 font-mono text-[9px] ${isDark ? "border-[#1E293B] bg-slate-950/40" : "border-slate-200 bg-slate-100/50"}`}>
+                                  <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${
+                                    mitigatedWorkaroundCost > 1000000 ? "bg-red-500 animate-ping" : "bg-[#86BC25]"
+                                  }`} />
+                                  <span className={`leading-normal font-sans ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                                    {mitigatedWorkaroundCost > 1000000 
+                                      ? "⚠️ EXCEEDED: Board CapEx Threshold Exceeded. Financial Committee clearance required." 
+                                      : "✅ COMPLIANT: Under Board expedited CapEx threshold."}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* C-Suite Sign-Off Tracker */}
+                              <div className="flex flex-col gap-2.5 pt-1">
+                                <span className="text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                                  Boardroom Sign-Off Flow
                                 </span>
+                                <p className={`text-[9px] leading-normal font-sans ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                                  C-suite members must sign off on this playbook to authorize containment deployment.
+                                </p>
+                                
+                                <div className="flex flex-col gap-2">
+                                  {/* CFO Sign-Off */}
+                                  <div 
+                                    onClick={() => handleSignOffToggle(inspectedRow.id, "cfo")}
+                                    className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
+                                      nodeSignOffs.cfo 
+                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        : isDark 
+                                          ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
+                                          : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-2">
+                                      <input 
+                                        type="checkbox" 
+                                        checked={nodeSignOffs.cfo} 
+                                        onChange={() => {}} // controlled in parent onClick
+                                        className="h-3.5 w-3.5 rounded-none accent-[#86BC25] cursor-pointer"
+                                      />
+                                      <div className="text-[10px]">
+                                        <span className={`font-bold block ${isDark ? "text-slate-200" : "text-slate-800"}`}>1. CFO Financial CapEx Clearance</span>
+                                        <span className={`text-[9px] font-sans ${isDark ? "text-slate-400" : "text-slate-500"}`}>Authorizes workaround budgets and premium charges.</span>
+                                      </div>
+                                    </div>
+                                    <span className={`text-[8px] font-mono uppercase font-bold tracking-wider ${
+                                      nodeSignOffs.cfo ? "text-[#86BC25]" : "text-slate-400"
+                                    }`}>
+                                      {nodeSignOffs.cfo ? "APPROVED" : "PENDING"}
+                                    </span>
+                                  </div>
+
+                                  {/* COO Sign-Off */}
+                                  <div 
+                                    onClick={() => handleSignOffToggle(inspectedRow.id, "coo")}
+                                    className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
+                                      nodeSignOffs.coo 
+                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        : isDark
+                                          ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
+                                          : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-2">
+                                      <input 
+                                        type="checkbox" 
+                                        checked={nodeSignOffs.coo} 
+                                        onChange={() => {}} 
+                                        className="h-3.5 w-3.5 rounded-none accent-[#86BC25] cursor-pointer"
+                                      />
+                                      <div className="text-[10px]">
+                                        <span className={`font-bold block ${isDark ? "text-slate-200" : "text-slate-800"}`}>2. COO Operational Divert Clearance</span>
+                                        <span className={`text-[9px] font-sans ${isDark ? "text-slate-400" : "text-slate-500"}`}>Approves shipping diversions and line schedule shifts.</span>
+                                      </div>
+                                    </div>
+                                    <span className={`text-[8px] font-mono uppercase font-bold tracking-wider ${
+                                      nodeSignOffs.coo ? "text-[#86BC25]" : "text-slate-400"
+                                    }`}>
+                                      {nodeSignOffs.coo ? "APPROVED" : "PENDING"}
+                                    </span>
+                                  </div>
+
+                                  {/* CRO / Board Sign-Off */}
+                                  <div 
+                                    onClick={() => handleSignOffToggle(inspectedRow.id, "board")}
+                                    className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
+                                      nodeSignOffs.board 
+                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        : isDark
+                                          ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
+                                          : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-2">
+                                      <input 
+                                        type="checkbox" 
+                                        checked={nodeSignOffs.board} 
+                                        onChange={() => {}} 
+                                        className="h-3.5 w-3.5 rounded-none accent-[#86BC25] cursor-pointer"
+                                      />
+                                      <div className="text-[10px]">
+                                        <span className={`font-bold block ${isDark ? "text-slate-200" : "text-slate-800"}`}>3. Board Final Deployment Clearance</span>
+                                        <span className={`text-[9px] font-sans ${isDark ? "text-slate-400" : "text-slate-500"}`}>Gives ultimate authorization to execute tactical options.</span>
+                                      </div>
+                                    </div>
+                                    <span className={`text-[8px] font-mono uppercase font-bold tracking-wider ${
+                                      nodeSignOffs.board ? "text-[#86BC25]" : "text-slate-400"
+                                    }`}>
+                                      {nodeSignOffs.board ? "APPROVED" : "PENDING"}
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      )}
+                        );
+                      })()}
 
                       {/* Crisis Task Force stakeholder escalation */}
-                      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
-                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center gap-1.5">
+                      <div className={`border p-4 flex flex-col gap-3 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono flex items-center gap-1.5 select-none">
                           <Users className="h-4 w-4 text-[#86BC25]" />
                           Crisis Task Force Escalation
                         </h4>
                         
                         <div className="flex flex-col gap-2">
                           {inspectedRow.playbook.contacts.map((contact, idx) => (
-                            <div key={idx} className="border border-slate-800 bg-[#161C2C] p-3 text-[10px] leading-tight flex flex-col gap-2">
+                            <div key={idx} className={`border p-3 text-[10px] leading-tight flex flex-col gap-2 ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
                               <div className="flex items-start justify-between">
                                 <div>
-                                  <div className="font-bold text-white font-sans text-xs">{contact.name}</div>
-                                  <div className="text-slate-400 text-[9px] font-sans mt-0.5">{contact.role}</div>
+                                  <div className={`font-bold font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-800"}`}>{contact.name}</div>
+                                  <div className="text-slate-500 text-[9px] font-sans mt-0.5">{contact.role}</div>
                                 </div>
-                                <span className="text-[8px] font-mono text-[#86BC25] border border-[#86BC25]/20 bg-[#86BC25]/5 px-1.5 py-0.5 tracking-wider uppercase font-semibold">
+                                <span className="text-[8px] font-mono text-[#86BC25] border border-[#86BC25]/20 bg-[#86BC25]/5 px-1.5 py-0.5 tracking-wider uppercase font-semibold select-none">
                                   ACTIVE RESPONDER
                                 </span>
                               </div>
                               
-                              <div className="border-t border-slate-800 pt-2 flex items-center justify-between font-mono text-[9px] text-[#86BC25]">
+                              <div className={`border-t pt-2 flex items-center justify-between font-mono text-[9px] text-[#86BC25] ${isDark ? "border-slate-900" : "border-slate-100"}`}>
                                 <span>{contact.email}</span>
-                                <span className="text-slate-500">&bull;</span>
+                                <span className="text-slate-300 select-none">&bull;</span>
                                 <span>{contact.phone}</span>
                               </div>
 
-                              <div className="flex gap-1.5 mt-1">
+                              <div className="flex gap-1.5 mt-1 select-none">
                                 <a 
                                   href={`mailto:${contact.email}?subject=ESCALATION - Urgent Decision Support Required for ${inspectedRow.id}`}
-                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white transition-colors duration-75"
+                                  className={`flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border transition-colors duration-75 ${
+                                    isDark 
+                                      ? "border-slate-800 bg-transparent text-slate-400 hover:bg-slate-900 hover:text-slate-200" 
+                                      : "border-slate-300 bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                                  }`}
                                 >
                                   📧 Email Alert
                                 </a>
                                 <button
                                   onClick={() => alert(`Direct MS Teams ping dispatched to ${contact.name} regarding urgent crisis resolution.`)}
-                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-[#86BC25] bg-[#86BC25] text-black hover:bg-white hover:border-white transition-colors duration-75"
+                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-[#86BC25] bg-[#86BC25] text-black hover:bg-slate-900 hover:text-white hover:border-[#86BC25] transition-colors duration-75 cursor-pointer"
                                 >
                                   💬 Teams Escalation
                                 </button>
@@ -1274,21 +1721,20 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                       {renderFeedbackSuite(inspectedRow)}
 
                       {/* Source Telemetry Reference */}
-                      <div className="border border-slate-800 bg-[#121724] p-3 flex flex-col gap-1.5 select-none font-mono text-[8px]">
+                      <div className={`border p-3 flex flex-col gap-1.5 select-none font-mono text-[8px] ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
                         <span className="text-slate-500 font-bold uppercase tracking-wider flex items-center gap-1">
-                          <Terminal className="h-3.5 w-3.5" />
+                          <Terminal className="h-3.5 w-3.5 text-slate-500" />
                           Raw Telemetry Source Ingestion
                         </span>
-                        <div className="bg-[#0B0D14] border border-slate-900 p-2 text-[#86BC25] break-all leading-normal">
+                        <div className={`border p-2 break-all leading-normal select-text ${isDark ? "bg-[#0F1520] border-[#1E293B] text-slate-300" : "bg-white border-slate-200 text-slate-600"}`}>
                           {inspectedRow.sourceData}
                         </div>
                       </div>
 
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </>
       )}
