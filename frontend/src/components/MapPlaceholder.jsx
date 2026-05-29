@@ -172,7 +172,7 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
   return (
     <div
       id="slot-map"
-      className="relative flex h-full min-h-[380px] flex-col overflow-hidden rounded-none
+      className="relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-none
                  bg-[#090D16] border border-slate-800 font-sans text-white"
     >
       {/* ── Terminal Header Overlay ── */}

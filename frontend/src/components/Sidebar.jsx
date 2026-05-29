@@ -18,9 +18,8 @@ const navItems = [
   { icon: Settings, label: "Settings", id: "settings" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isDark, toggleDark }) {
   const [activeNav, setActiveNav] = useState("home");
-  const [darkMode, setDarkMode] = useState(false);
 
   return (
     <aside
@@ -41,13 +40,13 @@ export default function Sidebar() {
       {/* ── Sleek Dark Mode Toggle ── */}
       <button
         id="dark-mode-toggle"
-        onClick={() => setDarkMode(!darkMode)}
+        onClick={toggleDark}
         className="mb-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-none
                    border border-[#1E293B] bg-[#161B26] text-slate-400 hover:text-white 
                    hover:border-slate-500 transition-all duration-150"
         aria-label="Toggle theme"
       >
-        {darkMode ? (
+        {isDark ? (
           <Sun className="h-3.5 w-3.5" />
         ) : (
           <Moon className="h-3.5 w-3.5" />

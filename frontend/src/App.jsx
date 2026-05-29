@@ -134,10 +134,13 @@ export default function App() {
   const [threatRows, setThreatRows] = useState([]);
   const [kpiData, setKpiData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  
+  const toggleDark = () => setIsDark(prev => !prev);
   
   const [demoIndex, setDemoIndex] = useState(0);
   const [toast, setToast] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   // Parallel Ingestion of threatRegistry and kpiData JSON structures
   useEffect(() => {
@@ -205,15 +208,6 @@ export default function App() {
             subtext: `SLA warning threshold: 90.0%`
           };
         }
-        if (kpi.id === "response-time") {
-          const current = parseInt(kpi.value);
-          const savings = 12.8 + ((current + 1) * 4.2);
-          return { 
-            ...kpi, 
-            value: `${current + 1} Active`,
-            subtext: `$${savings.toFixed(1)}M potential loss avoided`
-          };
-        }
         return kpi;
       })
     );
@@ -231,7 +225,9 @@ export default function App() {
   };
 
   return (
-    <div id="app-shell" className="relative flex min-h-screen bg-[#F3F4F6] font-sans antialiased text-[#0F172A] select-none">
+    <div id="app-shell" className={`relative flex min-h-screen font-sans antialiased select-none transition-colors duration-300 ${
+      isDark ? "bg-[#0A0D14] text-slate-200" : "bg-[#F3F4F6] text-[#0F172A]"
+    }`}>
       
       {/* ── Dynamic Live Alert Ingestion Toast Banner ── */}
       {toast && (
@@ -252,33 +248,39 @@ export default function App() {
       )}
 
       {/* ── Sleek Vertical Navigation Rail ── */}
-      <Sidebar />
+      <Sidebar isDark={isDark} toggleDark={toggleDark} />
 
       {/* ── Main content area (Strictly attached to navigation rail) ── */}
       <div className="ml-16 flex flex-1 flex-col min-w-0">
         {/* ── Integrated Dark Corporate Header ── */}
         <Topbar 
           onTriggerDemoSignal={handleTriggerDemoSignal} 
-          mockSignalsLeft={MOCK_SIGNALS.length - demoIndex} 
+          mockSignalsLeft={MOCK_SIGNALS.length - demoIndex}
+          isDark={isDark}
         />
 
         {/* ── High-density Dashboard content ── */}
         <main id="dashboard-content" className="flex-1 p-3 flex flex-col gap-3">
           {/*
-            Grid layout: Compact 12-Column System
-            - Map Spans: 8 Columns (~66%)
-            - Consolidated KPI Panel Spans: 4 Columns (~33%)
+            Grid layout: Balanced 12-Column System (50/50)
+            - Map Spans: 6 Columns (~50%)
+            - Consolidated KPI & Taxonomy Panel Spans: 6 Columns (~50%)
           */}
           <div className="grid grid-cols-12 gap-3">
-            {/* ── 8-Column Map Command Center ── */}
-            <div className="col-span-12 lg:col-span-8">
+            {/* ── 6-Column Map Command Center ── */}
+            <div className="col-span-12 lg:col-span-6">
               <MapPlaceholder threatRows={threatRows} loading={loading} />
             </div>
 
-            {/* ── 4-Column Consolidated KPI Info Panel ── */}
-            <div className="col-span-12 lg:col-span-4 flex flex-col gap-3">
-              <KpiCards kpiData={kpiData} loading={loading} />
-              <SignalTaxonomy threatRows={threatRows} selectedCategory={selectedCategory} onSelectCategory={setSelectedCategory} />
+            {/* ── 6-Column Consolidated KPI & Taxonomy Info Panel (Side-by-Side Grid) ── */}
+            <div className="col-span-12 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <KpiCards kpiData={kpiData} loading={loading} isDark={isDark} />
+              <SignalTaxonomy 
+                threatRows={threatRows} 
+                selectedCategories={selectedCategories} 
+                onSelectCategories={setSelectedCategories}
+                isDark={isDark}
+              />
             </div>
           </div>
 
@@ -287,8 +289,9 @@ export default function App() {
             <HealthMonitorTable 
               rowData={threatRows} 
               loading={loading} 
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
+              selectedCategories={selectedCategories}
+              onSelectCategories={setSelectedCategories}
+              isDark={isDark}
             />
           </div>
         </main>
