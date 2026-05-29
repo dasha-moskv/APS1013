@@ -6,6 +6,7 @@ const iconMap = {
   ShieldAlert: Icons.ShieldAlert,
   CheckCircle: Icons.CheckCircle,
   Clock: Icons.Clock,
+  DollarSign: Icons.DollarSign,
 };
 
 export default function KpiCards({ kpiData = [], loading = true }) {

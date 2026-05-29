@@ -4,6 +4,7 @@ import Topbar from "./components/Topbar";
 import MapPlaceholder from "./components/MapPlaceholder";
 import KpiCards from "./components/KpiCards";
 import HealthMonitorTable from "./components/HealthMonitorTable";
+import SignalTaxonomy from "./components/SignalTaxonomy";
 
 // High-fidelity mock signals representing live incoming risk events
 const MOCK_SIGNALS = [
@@ -136,6 +137,7 @@ export default function App() {
   
   const [demoIndex, setDemoIndex] = useState(0);
   const [toast, setToast] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Parallel Ingestion of threatRegistry and kpiData JSON structures
   useEffect(() => {
@@ -171,24 +173,46 @@ export default function App() {
     // 1. Append new signal to the front of threat registry
     setThreatRows(prev => [signal, ...prev]);
 
-    // 2. Parse and recalculate KPI scorecards reactively
+    // 2. Parse and recalculate KPI scorecards reactively (boardroom math updates)
     setKpiData(prevKpi =>
       prevKpi.map(kpi => {
         if (kpi.id === "monitored-nodes") {
-          const current = parseInt(kpi.value);
-          return { ...kpi, value: `${current + 1} Facilities` };
+          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
+          const exposures = { "SUP-404R": 34.5, "SUP-512S": 22.4, "SUP-771A": 12.8, "SUP-212H": 18.2 };
+          const addition = exposures[signal.id] || 15.0;
+          return { 
+            ...kpi, 
+            value: `$${(current + addition).toFixed(1)}M`,
+            subtext: `+$${addition.toFixed(1)}M added from new disruption`
+          };
         }
         if (kpi.id === "active-risks") {
           const current = parseInt(kpi.value);
-          return { ...kpi, value: `${current + 1} Signals`, subtext: `${current + 1} ACTIVE WARNINGS IN REGISTER` };
+          const criticals = threatRows.filter(r => r.severity.label.includes("CRITICAL") || (r.id === signal.id && signal.severity.label.includes("CRITICAL"))).length + 1;
+          const elevateds = (threatRows.length + 1) - criticals;
+          return { 
+            ...kpi, 
+            value: `${current + 1} Sites`,
+            subtext: `${criticals} Critical | ${elevateds} Elevated`
+          };
         }
         if (kpi.id === "network-health") {
-          const current = parseInt(kpi.value);
-          return { ...kpi, value: `${Math.max(50, current - 3)}% Stability`, subtext: "CRITICAL LOAD DETECTED" };
+          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
+          const nextVal = Math.max(45, current - 1.8).toFixed(1);
+          return { 
+            ...kpi, 
+            value: `${nextVal}%`,
+            subtext: `SLA warning threshold: 90.0%`
+          };
         }
         if (kpi.id === "response-time") {
-          const current = parseFloat(kpi.value);
-          return { ...kpi, value: `${(current + 0.1).toFixed(1)} Hours`, subtext: "SIMULATION INGESTION DELAY" };
+          const current = parseInt(kpi.value);
+          const savings = 12.8 + ((current + 1) * 4.2);
+          return { 
+            ...kpi, 
+            value: `${current + 1} Active`,
+            subtext: `$${savings.toFixed(1)}M potential loss avoided`
+          };
         }
         return kpi;
       })
@@ -252,14 +276,20 @@ export default function App() {
             </div>
 
             {/* ── 4-Column Consolidated KPI Info Panel ── */}
-            <div className="col-span-12 lg:col-span-4">
+            <div className="col-span-12 lg:col-span-4 flex flex-col gap-3">
               <KpiCards kpiData={kpiData} loading={loading} />
+              <SignalTaxonomy threatRows={threatRows} selectedCategory={selectedCategory} onSelectCategory={setSelectedCategory} />
             </div>
           </div>
 
           {/* ── Bottom: High-density threat registry table ── */}
           <div className="w-full">
-            <HealthMonitorTable rowData={threatRows} loading={loading} />
+            <HealthMonitorTable 
+              rowData={threatRows} 
+              loading={loading} 
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
           </div>
         </main>
       </div>
