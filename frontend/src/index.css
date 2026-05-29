@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-sidebar: #e8e0f0;
-  --color-sidebar-icon: #6c5ce7;
-  --color-sidebar-icon-active: #5a4bd1;
-  --color-main-bg: #f4f5f7;
-  --color-card-bg: #ffffff;
-  --color-topbar-bg: #ffffff;
-  --color-text-primary: #1a1a2e;
-  --color-text-secondary: #6b7280;
-  --color-accent: #6c5ce7;
-  --color-accent-light: #a29bfe;
-  --color-severity-high: #ff6b6b;
-  --color-severity-medium: #feca57;
-  --color-severity-low: #48dbfb;
-  --color-success: #00d2d3;
+  --font-sans: "IBM Plex Sans", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --color-sidebar: #0B0F19;
+  --color-sidebar-icon: #64748B;
+  --color-sidebar-icon-active: #86BC25;
+  --color-main-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-topbar-bg: #0B0F19;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-accent: #86BC25;
+  --color-accent-light: #A3E635;
+  --color-severity-high: #B91C1C;
+  --color-severity-medium: #C2410C;
+  --color-severity-low: #1E3A8A;
+  --color-success: #16A34A;
 }
 
 @layer base {

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "FAC-001",
+    "facility": "Boeing Everett Factory",
+    "location": "WA, US",
+    "disruption": "Capacity bottlenecks on widebody assembly lines",
+    "severity": { "label": "9.2/10 CRITICAL", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
+    "likelihood": { "label": "94% HIGH", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
+    "timeToHit": "Immediate",
+    "tier": "Tier 0",
+    "fullDescription": "Operational bottlenecks on widebody (777, 767) assembly lines are expanding due to raw structural composite shipping delays from Tier-1 suppliers. Heavy backlogs are accumulating at Everett, threatening delivery schedules by 12+ operational days.",
+    "sourceData": "Telemetry Ingestion Stream: EVT-FAC-904-MONITOR (Real-time Factory Floor Throughput)",
+    "mapPosition": {
+      "coordinates": [-122.2731, 47.9218],
+      "color": "#86BC25",
+      "role": "Internal / Assembly",
+      "status": "Nominal"
+    },
+    "playbook": {
+      "steps": [
+        "Reallocate titanium structural spars from reserve logistics stocks at the Wichita depot.",
+        "Deploy a secondary material-handling shift to expedite composite unboxing and pre-assembly inspections.",
+        "Shift 777 fuselage wiring and insulation tracks to parallel assembly bays to absorb line idle time."
+      ],
+      "contacts": [
+        { "name": "Alex Chen", "role": "VP of Assembly Operations", "email": "a.chen@everett.boeing.com", "phone": "+1 (425) 555-0192" },
+        { "name": "Everett Logistics Desk", "role": "Material Flow Control", "email": "material.dispatch@boeing.com", "phone": "+1 (425) 555-0110" }
+      ],
+      "timeline": "7 to 10 operational days (Recovery Phase 1)"
+    }
+  },
+  {
+    "id": "SUP-001A",
+    "facility": "Spirit AeroSystems, Inc.",
+    "location": "KS, US",
+    "disruption": "Fuselage assemblies transport logistics delay",
+    "severity": { "label": "8.5/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "85% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "timeToHit": "1-2 weeks",
+    "tier": "Tier 1",
+    "fullDescription": "Wichita fuselage assembly rail shipments are temporarily halted due to localized freight rail transport strikes within the central midwest logistics corridor. Delivery of critical B737 MAX fuselage shells is currently suspended.",
+    "sourceData": "GPS Logistical Tracker Stream: SUP-001A-MIDWEST-RAIL & Reuters Labor News Feed",
+    "mapPosition": {
+      "coordinates": [-97.2798, 37.6436],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselage",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "steps": [
+        "Initiate oversize flatbed road transport workarounds under Priority-A emergency aerospace clearance.",
+        "Contact the Kansas Department of Transportation (KDOT) to fast-track oversized road freight permits.",
+        "Coordinate split-arrival scheduling with Renton receiving bays to stay within local storage space constraints."
+      ],
+      "contacts": [
+        { "name": "Sarah Jenkins", "role": "Director of Global Supply Chain", "email": "s.jenkins@spiritaero.com", "phone": "+1 (316) 555-0145" },
+        { "name": "Midwest Freight Agency Office", "role": "Logistics Coordinator", "email": "midwest-liaison@freight-ops.org", "phone": "+1 (800) 555-0120" }
+      ],
+      "timeline": "12 to 15 business days (Road permit dependent)"
+    }
+  },
+  {
+    "id": "SUP-701X",
+    "facility": "TSMC Gigafab 12",
+    "location": "Hsinchu, TW",
+    "disruption": "Seismic sensor trigger automatic shutdown",
+    "severity": { "label": "9.4/10 CRITICAL", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
+    "likelihood": { "label": "90% HIGH", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
+    "timeToHit": "Immediate",
+    "tier": "Tier 1",
+    "fullDescription": "An automatic seismic safety trip activated at TSMC Gigafab 12 following a localized minor earthquake. Cleanroom systems have suspended lithography lines for calibration inspection, temporarily halting inbound supply lines of 3nm wafers.",
+    "sourceData": "Taiwan Central Weather Bureau feeds & Fab-12 IoT Automated Shutdown API",
+    "mapPosition": {
+      "coordinates": [121.0116, 24.773],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Foundry",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "steps": [
+        "Initiate safety recalibration protocols on extreme ultraviolet (EUV) lithography systems.",
+        "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand.",
+        "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems."
+      ],
+      "contacts": [
+        { "name": "Dr. Wei Chang", "role": "Director of Fab 12 Engineering", "email": "w_chang@tsmc.com.tw", "phone": "+886 3-563-7011" },
+        { "name": "Global Logistics Coordinator", "role": "Semiconductor Lead Dispatcher", "email": "semi-ops@tsmc.com.tw", "phone": "+886 3-563-7090" }
+      ],
+      "timeline": "36 to 48 hours for cleanroom validation and EUV safety resets"
+    }
+  },
+  {
+    "id": "SUP-401A",
+    "facility": "Pfizer Puurs Plant",
+    "location": "Puurs, BE",
+    "disruption": "Autoclave sterilizer mechanical valve failure",
+    "severity": { "label": "8.0/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "80% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "timeToHit": "Immediate",
+    "tier": "Tier 1",
+    "fullDescription": "Autoclave sterilizer system in building 14 experienced a mechanical exhaust valve rupture during a vaccine formulation run. Production has been halted pending sterilization validation and regulatory safety loops.",
+    "sourceData": "Pfizer Puurs Facility SCADA System Alert & Emerson Valve IoT Stream",
+    "mapPosition": {
+      "coordinates": [4.2774, 51.0772],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Formulation",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "steps": [
+        "Divert liquid bulk formulation queues to parallel autoclave lines #5 and #6.",
+        "Dispatch critical service team from OEM partner (Emerson Controls) with custom replacement valves.",
+        "Perform double sterility check loops to comply with European Medicines Agency regulations."
+      ],
+      "contacts": [
+        { "name": "Luc Devos", "role": "Puurs Formulation Lead Support", "email": "luc.devos@pfizer.com", "phone": "+32 3-890-9211" },
+        { "name": "Emerson Controls Service Hotline", "role": "Valve Maintenance Desk", "email": "service@emersoncontrols.eu", "phone": "+32 2-743-0000" }
+      ],
+      "timeline": "72 to 96 hours for part replacement and sterility validation"
+    }
+  },
+  {
+    "id": "SUP-109B",
+    "facility": "ASML EUV Cleanrooms",
+    "location": "Veldhoven, NL",
+    "disruption": "Custom optics shipment air freight congestion",
+    "severity": { "label": "7.8/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "75% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "timeToHit": "1-2 weeks",
+    "tier": "Tier 2",
+    "fullDescription": "Inbound high-precision optics and customized reflector lenses for extreme ultraviolet (EUV) systems delayed at Amsterdam Schiphol Airport due to a severe bottleneck in transatlantic temperature-controlled air freight capacity.",
+    "sourceData": "Schiphol Airport Air Cargo Manifest Feeds & DHL Priority Tracking API (ASML-SCHIP-109B)",
+    "mapPosition": {
+      "coordinates": [5.3700, 51.4200],
+      "color": "#FFB300",
+      "role": "Tier-2 / Lithography EUV",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "steps": [
+        "Reroute subsequent optics shipments through Brussels Airport (BRU) using dedicated air-charter services.",
+        "Deploy temperature-controlled custom courier trucks from ASML Veldhoven to expedite Schiphol collections.",
+        "Revise cleanroom system-integration schedules, postponing EUV laser-chamber alignments."
+      ],
+      "contacts": [
+        { "name": "Dieter de Jong", "role": "Lead Precision Procurement", "email": "dieter.de.jong@asml.com", "phone": "+31 40-268-3000" },
+        { "name": "Priority Airfreight Hotline", "role": "Logistics Desk Partner", "email": "schiphol-ops@dhl.com", "phone": "+31 20-500-7300" }
+      ],
+      "timeline": "5 to 7 business days for airfreight release and truck transport"
+    }
+  },
+  {
+    "id": "SUP-502A",
+    "facility": "Samsung Xi'an Plant",
+    "location": "Xi'an, CN",
+    "disruption": "Etch gas supply lines chemical logistics lockdown",
+    "severity": { "label": "7.2/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "65% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "timeToHit": "2-4 weeks",
+    "tier": "Tier 1",
+    "fullDescription": "Inbound regional logistics controls in Shaanxi province slowing down the chemical feedstock shipping lines of high-purity etching gases for NAND Flash manufacturing lines.",
+    "sourceData": "Samsung China Local Supply Logistics Ingest Feeds & Shaanxi Transit Registry",
+    "mapPosition": {
+      "coordinates": [108.9402, 34.3416],
+      "color": "#FFB300",
+      "role": "Tier-1 / NAND Flash",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "steps": [
+        "Activate high-purity chemical buffer reserves held at the Xi'an bonded warehouse zone.",
+        "Obtain priority transport transit permits from regional Chinese regulatory bureaus.",
+        "Prepare air-charter alternatives to deliver raw etching gases from Samsung Pyeongtaek, Korea."
+      ],
+      "contacts": [
+        { "name": "Min-Jun Kim", "role": "Xi'an Operations Supply Coordinator", "email": "mj.kim@samsung.com", "phone": "+86 29-8888-0000" },
+        { "name": "Shaanxi Freight Liaison Desk", "role": "Regulatory Clearance Coordinator", "email": "shaanxi-logistics@governement.cn", "phone": "+86 29-8888-9911" }
+      ],
+      "timeline": "14 to 18 operational days for permit release and Korea air bridge setup"
+    }
+  },
+  {
+    "id": "FAC-003",
+    "facility": "Boeing South Carolina",
+    "location": "SC, US",
+    "disruption": "Autoclave curing oven maintenance downtime",
+    "severity": { "label": "6.8/10 ELEVATED", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "62% MODERATE", "color": "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]" },
+    "timeToHit": "2-4 weeks",
+    "tier": "Tier 0",
+    "fullDescription": "Composite autoclave curing oven #4 returned critical temperature sensor discrepancy during a quality test run. The oven is offline for preventive calibration, reducing overall widebody fuselage curing volume by 33%.",
+    "sourceData": "SC Plant IoT Stream: SC-FAC-03-AUTOCLAVE-04 (Autoclave Chamber Heat Telemetry)",
+    "mapPosition": {
+      "coordinates": [-80.0403, 32.8943],
+      "color": "#FFB300",
+      "role": "Internal / Assembly",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "steps": [
+        "Redistribute curing loads to active autoclaves #1 and #2 under 24/7 accelerated shifts.",
+        "Dispatch specialized thermal calibration crew from OEM supplier (Thermal Dynamics Corp).",
+        "Adjust South Carolina final delivery buffers to balance Slowed Curing volumes."
+      ],
+      "contacts": [
+        { "name": "Marcus Vance", "role": "Autoclave Maintenance Lead", "email": "m.vance@sc-boeing.com", "phone": "+1 (843) 555-0177" },
+        { "name": "Thermal Dynamics Corp Support Desk", "role": "Calibration Partner Desk", "email": "support@thermaldynamics.com", "phone": "+1 (800) 555-9831" }
+      ],
+      "timeline": "72 hours for calibration and recalibration validation"
+    }
+  },
+  {
+    "id": "FAC-010",
+    "facility": "Tesla Giga Texas",
+    "location": "Austin, TX, US",
+    "disruption": "Lithium battery cell import transport delays",
+    "severity": { "label": "6.5/10 ELEVATED", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "likelihood": { "label": "70% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+    "timeToHit": "1-2 weeks",
+    "tier": "Tier 0",
+    "fullDescription": "Delays in inbound shipments of structural dry-electrode 4680 lithium-ion battery cells from Asian suppliers due to shipping lane adjustments in the Panama Canal. Battery assembly lines running low on buffer stocks.",
+    "sourceData": "Panama Canal Transit Booking Registry & Tesla Supply Chain API",
+    "mapPosition": {
+      "coordinates": [-97.7431, 30.2672],
+      "color": "#FFB300",
+      "role": "Internal / Battery Pack",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "steps": [
+        "Initiate emergency land-bridge rail transport from Port of Seattle to Austin.",
+        "Reroute backup 2170 cell production queues from Giga Nevada to maintain vehicle assembly run rates.",
+        "Deploy dry-electrode engineering crew to optimize Austin local cell pilot-line output."
+      ],
+      "contacts": [
+        { "name": "James Vance", "role": "Director of Battery Operations", "email": "jvance@tesla.com", "phone": "+1 (512) 555-0921" },
+        { "name": "Union Pacific Freight Coordination", "role": "Rail Logistics Partner Desk", "email": "rail-ops@up.com", "phone": "+1 (800) 555-0210" }
+      ],
+      "timeline": "8 to 12 business days (Seattle rail transport dependent)"
+    }
+  },
+  {
+    "id": "SUP-302B",
+    "facility": "Precision Castparts Corp.",
+    "location": "OR, US",
+    "disruption": "Forged titanium components supplier shortage",
+    "severity": { "label": "5.5/10 ELEVATED", "color": "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]" },
+    "likelihood": { "label": "60% MODERATE", "color": "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]" },
+    "timeToHit": "2-4 weeks",
+    "tier": "Tier 1",
+    "fullDescription": "Inbound raw titanium sponge feedstock supplies are delayed at West Coast receiving ports due to customs inspection backlogs. Forging operations at Portland are running at 50% capacity.",
+    "sourceData": "Customs Clearance Port Manifest Ingestion Ingest API (LAX/LGB Port Inbound manifests)",
+    "mapPosition": {
+      "coordinates": [-122.5694, 45.4243],
+      "color": "#86BC25",
+      "role": "Tier-1 / Forged Metal",
+      "status": "Nominal"
+    },
+    "playbook": {
+      "steps": [
+        "Procure emergency backup chemical feedstock supplies from qualified secondary domestic distributor (Apex Materials).",
+        "Expedite customs clearance through specialized custom brokers under critical aerospace priority.",
+        "Prioritize high-criticality structural forgings over general fuselage brackets in current production runs."
+      ],
+      "contacts": [
+        { "name": "Elena Rostova", "role": "Lead Import Broker", "email": "e.rostova@apexmaterials.com", "phone": "+1 (503) 555-0164" },
+        { "name": "LA Port Customs Brokerage Office", "role": "Aerospace Logistics Desk", "email": "brokerage-desk@customs.gov", "phone": "+1 (310) 555-0902" }
+      ],
+      "timeline": "14 to 18 operational days for port release and domestic delivery"
+    }
+  },
+  {
+    "id": "SUP-202C",
+    "facility": "BASF Chemical Park",
+    "location": "Ludwigshafen, DE",
+    "disruption": "Pipeline pressure feedstock fluctuations",
+    "severity": { "label": "5.2/10 ELEVATED", "color": "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]" },
+    "likelihood": { "label": "50% MODERATE", "color": "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]" },
+    "timeToHit": "2-4 weeks",
+    "tier": "Tier 2",
+    "fullDescription": "Inbound natural gas feedstock supply pipelines to Ludwigshafen chemical park experiencing pressure fluctuations. Automatic reduction in high-heat chemical synthesis units activated to preserve catalyst beds.",
+    "sourceData": "Ludwigshafen Chemical Park IoT SCADA Feed & Nord-Flow pipeline telemetry API",
+    "mapPosition": {
+      "coordinates": [8.4451, 49.4875],
+      "color": "#86BC25",
+      "role": "Tier-2 / Special Chemicals",
+      "status": "Nominal"
+    },
+    "playbook": {
+      "steps": [
+        "Engage local liquefied natural gas (LNG) backup vaporization arrays to steady synthesis chamber pressure.",
+        "Divert non-critical precursor synthesis lines to BASF Antwerp chemical hub to balance pipeline drops.",
+        "Optimize catalyst bed temperatures to maintain minimum synthetic precursor quality outputs."
+      ],
+      "contacts": [
+        { "name": "Dr. Hans Mueller", "role": "Ludwigshafen Synthesis Operations Director", "email": "hans.mueller@basf.com", "phone": "+49 621 60-0" },
+        { "name": "Pipeline Grid Dispatcher", "role": "Chemical Feedstock Control", "email": "grid-control@basf.com", "phone": "+49 621 60-9921" }
+      ],
+      "timeline": "10 to 14 days for pipeline pressure re-stabilization"
+    }
+  },
+  {
+    "id": "FAC-008",
+    "facility": "NVIDIA Compute Cluster",
+    "location": "CA, US",
+    "disruption": "AI model training rack power grids surge",
+    "severity": { "label": "4.2/10 MODERATE", "color": "text-[#334155] bg-[#F8FAFC] border-[#E2E8F0]" },
+    "likelihood": { "label": "30% LOW", "color": "text-[#334155] bg-[#F8FAFC] border-[#E2E8F0]" },
+    "timeToHit": "Immediate",
+    "tier": "Tier 0",
+    "fullDescription": "Brief local power surge tripped three high-performance computing hardware cooling racks at the central AI model training cluster in Santa Clara. Failover servers absorbed computation seamlessly with zero data loss.",
+    "sourceData": "NVIDIA Cluster Infrastructure Telemetry Monitor (NV-GRID-08) & PG&E Grid Feeds",
+    "mapPosition": {
+      "coordinates": [-121.9552, 37.3541],
+      "color": "#86BC25",
+      "role": "Internal / AI Infrastructure",
+      "status": "Nominal"
+    },
+    "playbook": {
+      "steps": [
+        "Execute heat calibration loops on the affected server chassis arrays.",
+        "Coordinate grid diagnostics with local power utility (PG&E) to review automatic regulator relays.",
+        "Adjust AI network priority nodes to route computing threads through the Oregon cloud data cluster."
+      ],
+      "contacts": [
+        { "name": "Amish Patel", "role": "Cloud Infrastructure Architect", "email": "apatel@nvidia.com", "phone": "+1 (408) 555-0143" },
+        { "name": "PG&E Industrial Accounts", "role": "Grid Safety Liaison Desk", "email": "industrial-desk@pge.com", "phone": "+1 (800) 555-8291" }
+      ],
+      "timeline": "24 hours for system coolant re-stabilization and diagnostic checks"
+    }
+  },
+  {
+    "id": "SUP-8472",
+    "facility": "Toray Industries, Inc.",
+    "location": "Ehime, JP",
+    "disruption": "Raw carbon fiber chemical pre-cursor shortage",
+    "severity": { "label": "4.2/10 MODERATE", "color": "text-[#334155] bg-[#F8FAFC] border-[#E2E8F0]" },
+    "likelihood": { "label": "30% LOW", "color": "text-[#334155] bg-[#F8FAFC] border-[#E2E8F0]" },
+    "timeToHit": "1-2 months",
+    "tier": "Tier 2",
+    "fullDescription": "Acrylonitrile precursor chemical synthesis plant in Masaki-cho, Ehime experienced a brief downtime sequence following an automatic seismic safety shutdown. Plant structural components remain healthy, awaiting standard inspections before restart.",
+    "sourceData": "Japan Meteorological Agency Seismic Trigger Feeds & Plant Automated Control API",
+    "mapPosition": {
+      "coordinates": [133.0906, 33.8569],
+      "color": "#86BC25",
+      "role": "Tier-2 / Carbon Fiber",
+      "status": "Nominal"
+    },
+    "playbook": {
+      "steps": [
+        "Conduct immediate structural integrity checks on storage tanks and precursor pipelines.",
+        "Validate safety sensor resets under Japanese aviation authority regulatory checks.",
+        "Activate inventory buffer stocks in North American warehouses to bypass Ehime shipping delays."
+      ],
+      "contacts": [
+        { "name": "Kenji Sato", "role": "Plant Operations Manager", "email": "k.sato@toray.co.jp", "phone": "+81 89-947-2111" },
+        { "name": "Aviation Regulatory Liaison", "role": "Safety Inspector Coordinator", "email": "liaison@mlit.go.jp", "phone": "+81 3-5253-8111" }
+      ],
+      "timeline": "48 to 72 hours for safety verification and restart permission"
+    }
+  }
+]

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Flame,
   Moon,
   Sun,
   Home,
@@ -26,38 +25,37 @@ export default function Sidebar() {
   return (
     <aside
       id="sidebar"
-      className="fixed left-0 top-0 bottom-0 z-50 flex w-[72px] flex-col items-center
-                 bg-gradient-to-b from-[#ede7f6] to-[#e0d6f0] py-5"
-      style={{
-        boxShadow: "2px 0 20px rgba(108, 92, 231, 0.08)",
-      }}
+      className="fixed left-0 top-0 bottom-0 z-50 flex w-16 flex-col items-center
+                 bg-[#0D111A] border-r border-[#1E293B] py-4"
     >
-      {/* ── Logo ── */}
+      {/* ── Corporate Brand Logo (D. Style) ── */}
       <div
         id="sidebar-logo"
-        className="mb-6 flex h-10 w-10 items-center justify-center"
+        className="mb-6 flex h-10 w-10 items-center justify-center font-sans"
       >
-        <Flame className="h-7 w-7 text-[#6c5ce7]" strokeWidth={2.2} />
+        <span className="text-2xl font-bold text-white tracking-tighter">
+          D<span className="text-[#86BC25]">.</span>
+        </span>
       </div>
 
-      {/* ── Dark-mode toggle ── */}
+      {/* ── Sleek Dark Mode Toggle ── */}
       <button
         id="dark-mode-toggle"
         onClick={() => setDarkMode(!darkMode)}
-        className="mb-6 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full
-                   bg-[#1a1a2e]/90 text-amber-300 shadow-md transition-all duration-300
-                   hover:scale-110 hover:bg-[#1a1a2e]"
-        aria-label="Toggle dark mode"
+        className="mb-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-none
+                   border border-[#1E293B] bg-[#161B26] text-slate-400 hover:text-white 
+                   hover:border-slate-500 transition-all duration-150"
+        aria-label="Toggle theme"
       >
         {darkMode ? (
-          <Sun className="h-4 w-4" />
+          <Sun className="h-3.5 w-3.5" />
         ) : (
-          <Moon className="h-4 w-4" />
+          <Moon className="h-3.5 w-3.5" />
         )}
       </button>
 
       {/* ── Navigation Icons ── */}
-      <nav id="sidebar-nav" className="flex flex-1 flex-col items-center gap-2">
+      <nav id="sidebar-nav" className="flex w-full flex-1 flex-col items-center gap-1">
         {navItems.map(({ icon: Icon, label, id }) => {
           const isActive = activeNav === id;
           return (
@@ -65,22 +63,23 @@ export default function Sidebar() {
               key={id}
               id={`nav-${id}`}
               onClick={() => setActiveNav(id)}
-              className={`group relative flex h-11 w-11 cursor-pointer items-center justify-center
-                         rounded-full transition-all duration-300
+              className={`group relative flex h-12 w-full cursor-pointer items-center justify-center
+                         rounded-none transition-all duration-150 border-y border-transparent
                          ${
                            isActive
-                             ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/30"
-                             : "bg-white/60 text-[#6b7280] hover:bg-white hover:text-[#6c5ce7] hover:shadow-md"
+                             ? "bg-[#161B26] text-white border-l-4 border-l-[#86BC25]"
+                             : "text-slate-400 hover:bg-[#111520] hover:text-white"
                          }`}
               aria-label={label}
               title={label}
             >
-              <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
-              {/* Tooltip */}
+              <Icon className={`h-4 w-4 ${isActive ? "text-[#86BC25]" : ""}`} strokeWidth={2} />
+              
+              {/* Telemetry Tooltip */}
               <span
-                className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-lg
-                           bg-[#1a1a2e] px-2.5 py-1 text-xs font-medium text-white opacity-0
-                           shadow-lg transition-all duration-200 group-hover:opacity-100"
+                className="pointer-events-none absolute left-16 z-50 whitespace-nowrap rounded-none
+                           border border-slate-700 bg-black px-2 py-1 text-[10px] font-mono 
+                           text-white opacity-0 transition-opacity duration-100 group-hover:opacity-100 uppercase tracking-wider"
               >
                 {label}
               </span>
@@ -93,13 +92,12 @@ export default function Sidebar() {
       <button
         id="sidebar-logout"
         onClick={() => {}}
-        className="mt-auto flex h-11 w-11 cursor-pointer items-center justify-center rounded-full
-                   text-[#ff6b6b]/70 transition-all duration-300
-                   hover:bg-[#ff6b6b]/10 hover:text-[#ff6b6b]"
+        className="mt-auto flex h-12 w-full cursor-pointer items-center justify-center rounded-none
+                   text-slate-500 hover:bg-[#2D1616] hover:text-red-400 transition-all duration-150"
         aria-label="Log out"
         title="Log out"
       >
-        <LogOut className="h-[18px] w-[18px]" strokeWidth={2} />
+        <LogOut className="h-4 w-4" strokeWidth={2} />
       </button>
     </aside>
   );
