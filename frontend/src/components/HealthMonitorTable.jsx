@@ -1,7 +1,203 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw } from "lucide-react";
+import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle } from "lucide-react";
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
+const nodeCSuiteData = {
+  "FAC-001": {
+    baseDailyExposure: 14500000,
+    baseTimelineDays: 10,
+    baseWorkaroundCost: 450000,
+    slaRisk: "CRITICAL: Contractual liquidated damages trigger at Day 12 ($1.5M per aircraft daily penalty).",
+    evidenceBase: "Everett structural logs indicate a tight 4-day buffer on titanium structural spars before line shutdown.",
+    options: [
+      { id: "air", label: "Air Charter Expedite", cost: 650000, daysSaved: 4, desc: "Bypass standard freight rails; charter 3x Antonov An-124 flights." },
+      { id: "permit", label: "Fast-Track DOT Permits", cost: 75000, daysSaved: 2, desc: "Engage Washington DOT for expedited heavy-haul corridor permissions." },
+      { id: "shifts", label: "Double Shift Assembly Bays", cost: 280000, daysSaved: 2, desc: "Authorize overtime shifts in structural integration section." }
+    ],
+    strategicPhases: {
+      immediate: "Reallocate titanium structural spars from reserve logistics stocks at the Wichita depot (Wichita reserves are currently at 84% capacity).",
+      tactical: "Deploy a secondary material-handling shift to expedite composite unboxing and pre-assembly inspections, verifying micro-fracture thresholds.",
+      structural: "Shift 777 fuselage wiring and insulation tracks to parallel assembly bays to absorb line idle time and maintain assembly cadence."
+    }
+  },
+  "SUP-001A": {
+    baseDailyExposure: 8800000,
+    baseTimelineDays: 15,
+    baseWorkaroundCost: 320000,
+    slaRisk: "HIGH: Renton assembly line halts on Day 10. Direct delivery delay penalties of $850K per day active.",
+    evidenceBase: "Midwest rail union negotiations are locked; cooling-off period expires in 72 hours with no resolution in sight.",
+    options: [
+      { id: "road", label: "Over-the-road Flatbeds", cost: 420000, daysSaved: 6, desc: "Initiate oversized flatbed road transport with police escorts." },
+      { id: "permits", label: "KDOT Fast-Track Permits", cost: 50000, daysSaved: 3, desc: "Pre-file permits in Kansas, Missouri, Illinois, and Washington." },
+      { id: "depot", label: "Pre-Stage at Renton Depot", cost: 120000, daysSaved: 2, desc: "Lease temporary logistics space near Renton receiving bays." }
+    ],
+    strategicPhases: {
+      immediate: "Initiate oversize flatbed road transport workarounds under Priority-A emergency aerospace clearance (utilizing contract carriers).",
+      tactical: "Contact the Kansas Department of Transportation (KDOT) to fast-track oversized road freight permits for structural components.",
+      structural: "Coordinate split-arrival scheduling with Renton receiving bays to stay within local storage space and gantry crane constraints."
+    }
+  },
+  "SUP-701X": {
+    baseDailyExposure: 32000000,
+    baseTimelineDays: 3,
+    baseWorkaroundCost: 1500000,
+    slaRisk: "EXTREME: SLA breaches across 14 global OEMs. Direct delivery delays could trigger $5M/day contract penalties.",
+    evidenceBase: "Lithography EUV sensors recorded a peak seismic acceleration of 0.12g. Automatic shutdown calibrated correctly; structural integrity verified.",
+    options: [
+      { id: "calib", label: "EUV Auto-Calibration", cost: 250000, daysSaved: 1, desc: "Deploy digital twins and automated calibration scripts developed with ASML." },
+      { id: "divert", label: "Divert Packaging to Fab 15", cost: 800000, daysSaved: 1, desc: "Pre-allocate packaging and testing slots at Taichung (Fab 15) to save transit queue time." }
+    ],
+    strategicPhases: {
+      immediate: "Initiate safety recalibration protocols on extreme ultraviolet (EUV) lithography systems utilizing internal engineering squads.",
+      tactical: "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand and wafer backlogs.",
+      structural: "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems to prevent wafer contamination."
+    }
+  },
+  "SUP-401A": {
+    baseDailyExposure: 11000000,
+    baseTimelineDays: 4,
+    baseWorkaroundCost: 220000,
+    slaRisk: "HIGH: Vaccine distribution commitments in 3 EU nations are at risk. Potential regulatory warning letter exposure if validation fails.",
+    evidenceBase: "Emerson valve SCADA logs showed a pressure spike of 4.2 bar leading to the mechanical fatigue rupture.",
+    options: [
+      { id: "oem", label: "OEM Premium Support SLA", cost: 180000, daysSaved: 2, desc: "Activate emergency 4-hour on-site OEM response contract with Emerson Belgium." },
+      { id: "audit", label: "Pre-Audit Sterility Loops", cost: 60000, daysSaved: 1, desc: "Pre-run sterilization wash cycles and continuous air particulate audits." }
+    ],
+    strategicPhases: {
+      immediate: "Divert liquid bulk formulation queues to parallel autoclave lines #5 and #6 inside the Puurs facility.",
+      tactical: "Dispatch critical service team from OEM partner (Emerson Controls) with custom replacement valves from their Brussels warehouse.",
+      structural: "Perform double sterility check loops to comply with European Medicines Agency (EMA) and FDA sterile product regulations."
+    }
+  },
+  "SUP-109B": {
+    baseDailyExposure: 18500000,
+    baseTimelineDays: 7,
+    baseWorkaroundCost: 600000,
+    slaRisk: "SEVERE: Delay ripples down to next-gen fab tools. $2.2M per module per day in delayed delivery penalties.",
+    evidenceBase: "Schiphol cargo backlog has reached 840 metric tons of temperature-controlled pharmaceutical and precision cargo.",
+    options: [
+      { id: "charter", label: "Dedicated Air Charter (BRU)", cost: 450000, daysSaved: 3, desc: "Divert all subsequent precision optics to Brussels Airport using chartered cargo carriers." },
+      { id: "trucks", label: "Climate Control Couriers", cost: 110000, daysSaved: 2, desc: "Deploy active-cooling temperature-controlled custom courier trucks directly to Schiphol tarmac." }
+    ],
+    strategicPhases: {
+      immediate: "Reroute subsequent optics shipments through Brussels Airport (BRU) using dedicated air-charter services to bypass Schiphol.",
+      tactical: "Deploy temperature-controlled custom courier trucks from ASML Veldhoven to expedite Schiphol tarmac cargo collections.",
+      structural: "Revise cleanroom system-integration schedules, postponing EUV laser-chamber alignments to prioritize other sub-assemblies."
+    }
+  },
+  "SUP-502A": {
+    baseDailyExposure: 15500000,
+    baseTimelineDays: 18,
+    baseWorkaroundCost: 550000,
+    slaRisk: "SEVERE: Global smartphone memory supply at risk. 4% world NAND output bottlenecked at Xi'an.",
+    evidenceBase: "Shaanxi transport control directives have restricted hazardous chemical shipping across 3 major highway nodes.",
+    options: [
+      { id: "airbridge", label: "Korea-China Air Bridge", cost: 950000, daysSaved: 8, desc: "Establish direct air bridge from Samsung Pyeongtaek to Xi'an airport, bypassing highway nodes." },
+      { id: "permits", label: "State-Level Priority Permits", cost: 150000, daysSaved: 4, desc: "Lobby Shaanxi Provincial Department of Commerce for hazardous material emergency transit passes." }
+    ],
+    strategicPhases: {
+      immediate: "Activate high-purity chemical buffer reserves held at the Xi'an bonded warehouse zone (currently holding 12 days of reserve stock).",
+      tactical: "Obtain priority transport transit permits from regional Chinese regulatory bureaus for emergency raw material transport.",
+      structural: "Prepare air-charter alternatives to deliver raw etching gases from Samsung Pyeongtaek, Korea to maintain fab operations."
+    }
+  },
+  "FAC-003": {
+    baseDailyExposure: 6500000,
+    baseTimelineDays: 3,
+    baseWorkaroundCost: 120000,
+    slaRisk: "MODERATE: Delays final assembly deliveries. Force majeure not applicable. SLA penalties capped at $300K/day.",
+    evidenceBase: "Thermo-couple telemetry in Oven #4 recorded a 4.5% temperature drift during standard cure phase.",
+    options: [
+      { id: "supp", label: "OEM Calibration Priority", cost: 95000, daysSaved: 1.5, desc: "Pay priority dispatch fee to Thermal Dynamics Corp for immediate engineer fly-in." },
+      { id: "shifts", label: "Triple Curing Shifts", cost: 45000, daysSaved: 1, desc: "Authorize continuous 24/7 assembly crew shifts on active ovens #1 and #2." }
+    ],
+    strategicPhases: {
+      immediate: "Redistribute curing loads to active autoclaves #1 and #2 under 24/7 accelerated shifts and load balancing.",
+      tactical: "Dispatch specialized thermal calibration crew from OEM supplier (Thermal Dynamics Corp) with calibrated reference meters.",
+      structural: "Adjust South Carolina final delivery buffers and reschedule paint shop queues to balance Slowed Curing volumes."
+    }
+  },
+  "FAC-010": {
+    baseDailyExposure: 14000000,
+    baseTimelineDays: 12,
+    baseWorkaroundCost: 400000,
+    slaRisk: "HIGH: Cybertruck and Model Y run rates drop by 22% in Austin. Vehicle delivery timelines slip, leading to high consumer backlash.",
+    evidenceBase: "Panama Canal daily transit slots are restricted to 18 vessels, compared to the normal historical average of 36 vessels.",
+    options: [
+      { id: "rail", label: "Union Pacific Dedicated Rail", cost: 350000, daysSaved: 5, desc: "Secure a dedicated unit train from Seattle to Austin, bypassing cargo hubs." },
+      { id: "nevada", label: "Nevada 2170 Cell Diversion", cost: 180000, daysSaved: 3, desc: "Reroute cells from Giga Nevada, adapting module assembly lines." }
+    ],
+    strategicPhases: {
+      immediate: "Initiate emergency land-bridge rail transport from Port of Seattle to Austin (WIP inventory diverted to rail cargo).",
+      tactical: "Reroute backup 2170 cell production queues from Giga Nevada to maintain vehicle assembly run rates on lines #1 and #2.",
+      structural: "Deploy dry-electrode engineering crew to optimize Austin local cell pilot-line output and expedite manufacturing ramp-up."
+    }
+  },
+  "SUP-302B": {
+    baseDailyExposure: 5200000,
+    baseTimelineDays: 18,
+    baseWorkaroundCost: 280000,
+    slaRisk: "MODERATE: Structural forging shortage. Direct impact to wing box fabrication timelines at Renton.",
+    evidenceBase: "LAX/LGB port customs clearance queue time has increased from 2.1 days to 9.8 days for non-preferred importers.",
+    options: [
+      { id: "broker", label: "Customs Broker Expediting", cost: 65000, daysSaved: 7, desc: "Hire specialized customs attorneys and brokers to audit and expedite shipping manifests." },
+      { id: "secondary", label: "Apex Materials Secondary Buy", cost: 150000, daysSaved: 5, desc: "Procure spot-market titanium feedstock from secondary domestic distributors." }
+    ],
+    strategicPhases: {
+      immediate: "Procure emergency backup chemical feedstock supplies from qualified secondary domestic distributor (Apex Materials).",
+      tactical: "Expedite customs clearance through specialized custom brokers under critical aerospace priority and manifest audit.",
+      structural: "Prioritize high-criticality structural forgings over general fuselage brackets in current Portland production runs."
+    }
+  },
+  "SUP-202C": {
+    baseDailyExposure: 4500000,
+    baseTimelineDays: 14,
+    baseWorkaroundCost: 190000,
+    slaRisk: "LOW: Buffer inventories at European customers cover 21 days of operations. SLA penalties deferred.",
+    evidenceBase: "Pipeline SCADA telemetry indicates inlet pressure has stabilized at 42 bar (nominal is 50 bar, minimum threshold is 38 bar).",
+    options: [
+      { id: "lng", label: "LNG Vaporization Array", cost: 140000, daysSaved: 5, desc: "Deploy temporary LNG truck-mounted vaporization arrays to inject gas into the synthesis grid." },
+      { id: "antwerp", label: "Antwerp Precursor Diversion", cost: 95000, daysSaved: 4, desc: "Shift non-critical precursor synthesis lines to BASF Antwerp chemical hub." }
+    ],
+    strategicPhases: {
+      immediate: "Engage local liquefied natural gas (LNG) backup vaporization arrays to steady synthesis chamber pressure and protect catalyst beds.",
+      tactical: "Divert non-critical precursor synthesis lines to BASF Antwerp chemical hub to balance pipeline drops.",
+      structural: "Optimize catalyst bed temperatures and flow rates to maintain minimum synthetic precursor quality outputs and prevent degradation."
+    }
+  },
+  "FAC-008": {
+    baseDailyExposure: 9500000,
+    baseTimelineDays: 1,
+    baseWorkaroundCost: 80000,
+    slaRisk: "VERY LOW: Cluster training state is backed up in real-time. Minimal risk to client-facing cloud service SLAs.",
+    evidenceBase: "Santa Clara power grid surge was recorded as a 12% peak voltage spike. Cooling systems successfully tripped into self-preservation mode.",
+    options: [
+      { id: "utility", label: "PG&E Grid Analysis", cost: 35000, daysSaved: 0.5, desc: "Deploy joint engineering crew with PG&E to inspect and isolate local substation relays." },
+      { id: "oregon", label: "Divert to Oregon Cloud", cost: 120000, daysSaved: 0.5, desc: "Seamlessly shift high-intensity model training checkpoints to the Hillsboro, Oregon cluster." }
+    ],
+    strategicPhases: {
+      immediate: "Execute heat calibration loops on the affected server chassis arrays and verify sub-component metrics.",
+      tactical: "Coordinate grid diagnostics with local power utility (PG&E) to review automatic regulator relays and surge protection margins.",
+      structural: "Adjust AI network priority nodes to route computing threads through the Oregon cloud data cluster with zero training downtime."
+    }
+  },
+  "SUP-8472": {
+    baseDailyExposure: 3800000,
+    baseTimelineDays: 3,
+    baseWorkaroundCost: 150000,
+    slaRisk: "LOW: Raw carbon fiber buffer inventory in NA stands at 45 days. Production at composite plants unaffected.",
+    evidenceBase: "Masaki-cho plant seismic sensor registered 3 on the Shindo scale. No structural damage detected in primary storage tanks.",
+    options: [
+      { id: "struct", label: "Rapid Structural Audit", cost: 75000, daysSaved: 1, desc: "Utilize drone-based photogrammetry and ultrasonic scanners to audit pipeline welds." },
+      { id: "customs", label: "Expedite NA Bonded Release", cost: 40000, daysSaved: 1, desc: "Pre-file customs withdrawal entries for Toray's Tacoma and Decatur warehouses." }
+    ],
+    strategicPhases: {
+      immediate: "Conduct immediate structural integrity checks on storage tanks and precursor pipelines in Ehime using ultrasonic sensors.",
+      tactical: "Validate safety sensor resets under Japanese aviation authority regulatory checks and obtain restart certificates.",
+      structural: "Activate inventory buffer stocks in North American warehouses to bypass Ehime shipping delays and maintain customer delivery rates."
+    }
+  }
+};
 
 export default function HealthMonitorTable({ rowData = [], loading = true }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
@@ -11,6 +207,11 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [playbookGenerated, setPlaybookGenerated] = useState(false);
   const [loadingLines, setLoadingLines] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(() => {
+    setSelectedOptions([]);
+  }, [inspectedRow]);
 
   // Sorting and live ingestion countdown ticks states
   const [sortConfig, setSortConfig] = useState({ key: "newest", direction: "desc" });
@@ -125,6 +326,32 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
       }, (index + 1) * 350);
     });
   };
+
+  const cSuiteEnrichment = inspectedRow ? nodeCSuiteData[inspectedRow.id] : null;
+
+  // Simulator calculations
+  let simulatedTimelineDays = cSuiteEnrichment ? cSuiteEnrichment.baseTimelineDays : 0;
+  let simulatedWorkaroundCost = cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0;
+
+  if (cSuiteEnrichment) {
+    selectedOptions.forEach(optId => {
+      const option = cSuiteEnrichment.options.find(o => o.id === optId);
+      if (option) {
+        simulatedTimelineDays = Math.max(0.5, simulatedTimelineDays - option.daysSaved);
+        simulatedWorkaroundCost += option.cost;
+      }
+    });
+  }
+
+  const simulatedTotalExposure = cSuiteEnrichment 
+    ? simulatedTimelineDays * cSuiteEnrichment.baseDailyExposure 
+    : 0;
+
+  const totalFinancialAtRisk = cSuiteEnrichment 
+    ? (cSuiteEnrichment.baseTimelineDays * cSuiteEnrichment.baseDailyExposure) 
+    : 0;
+
+  const financialSaved = Math.max(0, totalFinancialAtRisk - simulatedTotalExposure - (simulatedWorkaroundCost - (cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0)));
 
   const handleClosePanel = () => {
     setInspectedRow(null);
@@ -319,10 +546,14 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
             className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] transition-opacity duration-150"
           />
 
-          {/* Drawer Panel */}
+          {/* Drawer Panel - Dynamically expands for playbook view */}
           <div
             id="threat-drawer"
-            className="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[480px] bg-[#0D111A] border-l border-[#1E293B] shadow-2xl p-6 overflow-y-auto text-white flex flex-col font-sans"
+            className={`fixed top-0 right-0 bottom-0 z-50 bg-[#0D111A] border-l border-[#1E293B] shadow-2xl p-6 overflow-y-auto text-white flex flex-col font-sans transition-all duration-500 ease-in-out ${
+              playbookGenerated 
+                ? "w-full md:w-[780px] lg:w-[1000px] xl:w-[1200px]" 
+                : "w-full sm:w-[480px]"
+            }`}
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[#1E293B] pb-4 mb-4 select-none">
@@ -351,44 +582,50 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
               <p className="text-xs text-slate-400 font-mono">{inspectedRow.location}</p>
             </div>
 
-            {/* Severity and Likelihood Grid */}
-            <div className="grid grid-cols-3 gap-2 mb-5 select-none font-mono text-[10px]">
-              <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                <span className="text-slate-500 font-bold uppercase tracking-wider">SEVERITY</span>
-                <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.severity.label.split(" ")[0]}</span>
+            {/* Severity and Likelihood Grid (Only shown when not displaying playbook to reduce noise) */}
+            {!playbookGenerated && (
+              <div className="grid grid-cols-3 gap-2 mb-5 select-none font-mono text-[10px]">
+                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider">SEVERITY</span>
+                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.severity.label.split(" ")[0]}</span>
+                </div>
+                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider">LIKELIHOOD</span>
+                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.likelihood.label.split(" ")[0]}</span>
+                </div>
+                <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider">TIME TO HIT</span>
+                  <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.timeToHit}</span>
+                </div>
               </div>
-              <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                <span className="text-slate-500 font-bold uppercase tracking-wider">LIKELIHOOD</span>
-                <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.likelihood.label.split(" ")[0]}</span>
-              </div>
-              <div className="border border-slate-800 bg-[#111520] p-2.5 flex flex-col justify-between">
-                <span className="text-slate-500 font-bold uppercase tracking-wider">TIME TO HIT</span>
-                <span className="text-white font-bold text-[11px] mt-1">{inspectedRow.timeToHit}</span>
-              </div>
-            </div>
+            )}
 
-            {/* Detailed Description */}
-            <div className="border-t border-[#1E293B] pt-4 mb-4">
-              <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
-                <MessageSquare className="h-3.5 w-3.5" />
-                Full Risk Description
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans">{inspectedRow.fullDescription}</p>
-            </div>
-
-            {/* Source Data telemetry details */}
-            <div className="border-t border-[#1E293B] pt-4 mb-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono mb-1.5 flex items-center gap-1.5">
-                <Terminal className="h-3.5 w-3.5" />
-                Telemetry Source Data
-              </h3>
-              <div className="bg-[#111520] border border-slate-800 p-2.5 font-mono text-[9px] text-[#86BC25] break-all leading-normal">
-                {inspectedRow.sourceData}
+            {/* Detailed Description (Only shown when not displaying playbook) */}
+            {!playbookGenerated && (
+              <div className="border-t border-[#1E293B] pt-4 mb-4">
+                <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
+                  <MessageSquare className="h-3.5 w-3.5" />
+                  Full Risk Description
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed font-sans">{inspectedRow.fullDescription}</p>
               </div>
-            </div>
+            )}
+
+            {/* Source Data telemetry details (Only shown when not displaying playbook) */}
+            {!playbookGenerated && (
+              <div className="border-t border-[#1E293B] pt-4 mb-6">
+                <h3 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono mb-1.5 flex items-center gap-1.5">
+                  <Terminal className="h-3.5 w-3.5" />
+                  Telemetry Source Data
+                </h3>
+                <div className="bg-[#111520] border border-slate-800 p-2.5 font-mono text-[9px] text-[#86BC25] break-all leading-normal">
+                  {inspectedRow.sourceData}
+                </div>
+              </div>
+            )}
 
             {/* ── Mitigation Playbook CTAs ── */}
-            <div className="mt-auto border-t border-[#1E293B] pt-4 flex flex-col gap-3">
+            <div className={`flex flex-col gap-3 ${!playbookGenerated ? "mt-auto border-t border-[#1E293B] pt-4" : ""}`}>
               {!playbookGenerated && !isGenerating && (
                 <button
                   onClick={() => handleGeneratePlaybook(inspectedRow)}
@@ -415,54 +652,327 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
 
               {/* ── PLAYBOOK VIEW RENDER ── */}
               {playbookGenerated && (
-                <div className="w-full bg-[#111520] border border-slate-800 p-4 flex flex-col gap-3 animate-fade-in text-slate-300">
-                  {/* Playbook Header */}
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-1.5">
-                    <span className="font-mono text-[9px] font-bold text-[#86BC25] uppercase tracking-wider flex items-center gap-1.5">
-                      <CheckCircle className="h-3.5 w-3.5" />
-                      Mitigation Playbook Active
-                    </span>
-                    <span className="text-[9px] font-mono text-slate-500">REF: {inspectedRow.id}-PLAYBOOK</span>
-                  </div>
-
-                  {/* Prioritized Steps */}
-                  <div>
-                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                      Prioritized Response Steps
-                    </span>
-                    <ol className="list-decimal pl-4 flex flex-col gap-1.5 text-[11px] font-sans text-slate-200">
-                      {inspectedRow.playbook.steps.map((step, idx) => (
-                        <li key={idx} className="leading-tight pl-0.5 font-sans">
-                          {step}
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-
-                  {/* Contacts */}
-                  <div>
-                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                      Critical Stakeholders Contacts
-                    </span>
-                    <div className="flex flex-col gap-2">
-                      {inspectedRow.playbook.contacts.map((contact, idx) => (
-                        <div key={idx} className="border border-slate-800 bg-[#0C111D] p-2 text-[10px] leading-tight">
-                          <div className="font-bold text-white font-sans">{contact.name}</div>
-                          <div className="text-slate-400 text-[9px] font-sans">{contact.role}</div>
-                          <div className="font-mono text-[9px] text-[#86BC25] mt-1">{contact.email} &bull; {contact.phone}</div>
-                        </div>
-                      ))}
+                <div className="w-full flex flex-col gap-6 animate-fade-in text-slate-300">
+                  {/* Playbook Header Ribbon */}
+                  <div className="flex flex-col gap-1 border-b border-slate-800 pb-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] font-bold text-[#86BC25] uppercase tracking-wider flex items-center gap-1.5">
+                        <CheckCircle className="h-4 w-4" />
+                        ✅ BOARD-LEVEL DECISION SUPPORT ACTIVE
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-500 bg-[#161C2C] px-2 py-0.5 border border-slate-800">
+                        REF: {inspectedRow.id}-STRATEGIC-PLAYBOOK-v5.0
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#86BC25] animate-ping" />
+                      <p className="text-[10px] font-sans text-slate-400">
+                        Authorized Executive Escalation Level: <span className="text-white font-semibold">Tier-1 (CEO & CFO Sign-Off Recommended)</span>
+                      </p>
                     </div>
                   </div>
 
-                  {/* Estimated Recovery Timeline */}
-                  <div className="border-l-4 border-l-[#86BC25] bg-[#86BC25]/10 p-2.5 flex flex-col justify-between">
-                    <span className="text-[9px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
-                      ESTIMATED RECOVERY TIMELINE
-                    </span>
-                    <span className="text-white font-sans text-[11px] font-bold mt-1">
-                      {inspectedRow.playbook.timeline}
-                    </span>
+                  {/* C-Suite Executive Telemetry Dashboard */}
+                  {cSuiteEnrichment && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {/* KPI Card 1: Revenue at Risk */}
+                      <div className="border border-slate-800 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
+                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-red-500">
+                          <DollarSign className="h-20 w-20" />
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
+                          <AlertTriangle className="h-3 w-3 text-red-500" />
+                          Mitigated Revenue Risk
+                        </div>
+                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-white">
+                          ${(simulatedTotalExposure / 1000000).toFixed(1)}M
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-sans mt-1">
+                          Base Exposure: <span className="text-red-400 font-semibold font-mono">${(totalFinancialAtRisk / 1000000).toFixed(1)}M</span>
+                        </div>
+                      </div>
+
+                      {/* KPI Card 2: Total Mitigation CapEx */}
+                      <div className="border border-[#86BC25]/20 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
+                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-[#86BC25]">
+                          <Activity className="h-20 w-20" />
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
+                          <DollarSign className="h-3 w-3 text-[#86BC25]" />
+                          Mitigation CapEx
+                        </div>
+                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-[#86BC25]">
+                          ${(simulatedWorkaroundCost / 1000).toFixed(0)}K
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-sans mt-1">
+                          Base Cost: <span className="text-slate-300 font-semibold font-mono">${(cSuiteEnrichment.baseWorkaroundCost / 1000).toFixed(0)}K</span>
+                        </div>
+                      </div>
+
+                      {/* KPI Card 3: Est. Recovery Timeline */}
+                      <div className="border border-slate-800 bg-[#111520] p-4 flex flex-col justify-between rounded-none relative overflow-hidden group">
+                        <div className="absolute right-0 top-0 translate-x-2 -translate-y-2 opacity-5 select-none text-slate-500">
+                          <Clock className="h-20 w-20" />
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-500 font-mono text-[9px] font-bold uppercase tracking-wider">
+                          <Clock className="h-3 w-3 text-sky-400" />
+                          Est. Recovery Cycle
+                        </div>
+                        <div className="mt-2 text-2xl font-bold font-sans tracking-tight text-white">
+                          {simulatedTimelineDays.toFixed(1)} Days
+                        </div>
+                        <div className="text-[9px] text-slate-400 font-sans mt-1">
+                          Base Cycle: <span className="text-slate-300 font-semibold font-mono">{cSuiteEnrichment.baseTimelineDays} Days</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Net Financial Risk Avoided Alert Banner */}
+                  {cSuiteEnrichment && financialSaved > 0 && (
+                    <div className="border border-[#86BC25]/30 bg-[#86BC25]/10 p-3 flex items-center justify-between rounded-none animate-pulse">
+                      <div className="flex items-center gap-2">
+                        <Award className="h-5 w-5 text-[#86BC25]" />
+                        <div>
+                          <div className="text-[10px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
+                            NET FINANCIAL RISK AVOIDANCE (SIMULATED ROI)
+                          </div>
+                          <div className="text-[9px] text-slate-300 mt-0.5">
+                            Decisive deployment of response options avoids major supply chain interruption losses.
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-lg font-bold font-mono text-[#86BC25] block">
+                          +${(financialSaved / 1000000).toFixed(2)}M
+                        </span>
+                        <span className="text-[8px] font-mono text-slate-400 uppercase">CAPITAL PROTECTED</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Main Grid: Options Simulator on Left, Narrative & Governance on Right */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* LEFT COLUMN: SIMULATOR & TIMELINE (lg:col-span-7) */}
+                    <div className="lg:col-span-7 flex flex-col gap-6">
+                      
+                      {/* Playbook Scenario Simulator */}
+                      {cSuiteEnrichment && (
+                        <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
+                          <div>
+                            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
+                              <PlayCircle className="h-4 w-4" />
+                              Boardroom Response Scenario Simulator
+                            </h4>
+                            <p className="text-[9px] text-slate-400 mt-0.5">
+                              Check mitigation tactics to model operational cost-benefit trade-offs in real-time.
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col gap-2 mt-1">
+                            {cSuiteEnrichment.options.map(opt => {
+                              const isSelected = selectedOptions.includes(opt.id);
+                              return (
+                                <div
+                                  key={opt.id}
+                                  onClick={() => {
+                                    if (isSelected) {
+                                      setSelectedOptions(prev => prev.filter(id => id !== opt.id));
+                                    } else {
+                                      setSelectedOptions(prev => [...prev, opt.id]);
+                                    }
+                                  }}
+                                  className={`border p-3 flex items-start gap-3 cursor-pointer select-none transition-all duration-100 ${
+                                    isSelected
+                                      ? "bg-[#86BC25]/5 border-[#86BC25] text-white"
+                                      : "bg-[#161C2C]/50 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-[#161C2C]"
+                                  }`}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={isSelected}
+                                    onChange={() => {}} // Controlled in parent onClick
+                                    className="mt-0.5 h-3.5 w-3.5 rounded-none border-slate-700 accent-[#86BC25] cursor-pointer"
+                                  />
+                                  <div className="flex-1 flex flex-col gap-0.5">
+                                    <div className="flex items-center justify-between">
+                                      <span className="font-semibold text-xs text-white leading-none">{opt.label}</span>
+                                      <div className="flex gap-2 font-mono text-[9px] font-bold">
+                                        <span className="text-[#86BC25]">-${opt.daysSaved} Days</span>
+                                        <span className="text-slate-400">|</span>
+                                        <span className="text-slate-300">+${(opt.cost / 1000).toFixed(0)}K CapEx</span>
+                                      </div>
+                                    </div>
+                                    <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">{opt.desc}</p>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Strategic Action Plan (Immediate, Tactical, Policy) */}
+                      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-4">
+                        <div>
+                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
+                            <FileText className="h-4 w-4" />
+                            Prioritized Strategic Action Plan
+                          </h4>
+                          <p className="text-[9px] text-slate-400 mt-0.5">
+                            Standard Operating Procedures (SOP) mapped across time horizons to secure the node.
+                          </p>
+                        </div>
+
+                        {cSuiteEnrichment && (
+                          <div className="flex flex-col gap-4 font-sans text-xs">
+                            {/* Phase 1 */}
+                            <div className="flex gap-3 border-l-2 border-[#86BC25] pl-3 py-0.5">
+                              <div className="flex-1 flex flex-col gap-1">
+                                <span className="font-mono text-[9px] font-bold text-[#86BC25] uppercase tracking-wider">
+                                  PHASE 1 &bull; IMMEDIATE CONTAINMENT (0 - 48 HOURS)
+                                </span>
+                                <p className="text-slate-200 leading-relaxed font-sans text-[11px]">
+                                  {cSuiteEnrichment.strategicPhases.immediate}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Phase 2 */}
+                            <div className="flex gap-3 border-l-2 border-sky-500 pl-3 py-0.5">
+                              <div className="flex-1 flex flex-col gap-1">
+                                <span className="font-mono text-[9px] font-bold text-sky-400 uppercase tracking-wider">
+                                  PHASE 2 &bull; ALTERNATE ROUTING & RE-SOURCING (48H - 2 WEEKS)
+                                </span>
+                                <p className="text-slate-200 leading-relaxed font-sans text-[11px]">
+                                  {cSuiteEnrichment.strategicPhases.tactical}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Phase 3 */}
+                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-0.5">
+                              <div className="flex-1 flex flex-col gap-1">
+                                <span className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-wider">
+                                  PHASE 3 &bull; CAPITAL POLICY & RESILIENCY ADJUSTMENT
+                                </span>
+                                <p className="text-slate-300 leading-relaxed font-sans text-[11px]">
+                                  {cSuiteEnrichment.strategicPhases.structural}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: GOVERNANCE & CONTACTS (lg:col-span-5) */}
+                    <div className="lg:col-span-5 flex flex-col gap-6">
+                      
+                      {/* Executive Governance & SLA risk briefing */}
+                      {cSuiteEnrichment && (
+                        <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
+                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                            Executive Governance & Risk Briefing
+                          </h4>
+                          
+                          <div className="flex flex-col gap-3 text-xs">
+                            <div className="flex flex-col gap-1 border-b border-slate-800 pb-2">
+                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">SLA & Contractual Exposure</span>
+                              <p className="text-slate-300 leading-snug font-sans text-[10px]">
+                                {cSuiteEnrichment.slaRisk}
+                              </p>
+                            </div>
+
+                            <div className="flex flex-col gap-1 border-b border-slate-800 pb-2">
+                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">Evidence-Based Risk Foundation</span>
+                              <p className="text-slate-300 leading-snug font-sans text-[10px]">
+                                {cSuiteEnrichment.evidenceBase}
+                              </p>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5 pt-1">
+                              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">Compliance & Capital Threshold Check</span>
+                              <div className="flex items-center justify-between bg-[#161C2C] border border-slate-800 p-2 font-mono text-[9px]">
+                                <span className="text-slate-400">Expedited CapEx Limits:</span>
+                                <span className="text-white font-bold">$1,000,000</span>
+                              </div>
+                              <div className="flex items-center justify-between bg-[#161C2C] border border-slate-800 p-2 font-mono text-[9px]">
+                                <span className="text-slate-400">Projected Run Cost:</span>
+                                <span className={`font-bold ${simulatedWorkaroundCost > 1000000 ? "text-red-400" : "text-[#86BC25]"}`}>
+                                  ${simulatedWorkaroundCost.toLocaleString()}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-1.5 mt-1 border border-slate-800 p-2 bg-[#161C2C]/50 font-mono text-[9px]">
+                                <span className={`h-2 w-2 rounded-full ${simulatedWorkaroundCost > 1000000 ? "bg-amber-500 animate-pulse" : "bg-[#86BC25]"}`} />
+                                <span className="text-slate-300 leading-snug">
+                                  {simulatedWorkaroundCost > 1000000 
+                                    ? "⚠️ ALERT: Board CapEx Threshold Exceeded. Financial Committee notification sent." 
+                                    : "✅ COMPLIANT: Under Board CapEx threshold."}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Crisis Task Force stakeholder escalation */}
+                      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center gap-1.5">
+                          <Users className="h-4 w-4 text-[#86BC25]" />
+                          Crisis Task Force Escalation
+                        </h4>
+                        
+                        <div className="flex flex-col gap-2">
+                          {inspectedRow.playbook.contacts.map((contact, idx) => (
+                            <div key={idx} className="border border-slate-800 bg-[#161C2C] p-3 text-[10px] leading-tight flex flex-col gap-2">
+                              <div className="flex items-start justify-between">
+                                <div>
+                                  <div className="font-bold text-white font-sans text-xs">{contact.name}</div>
+                                  <div className="text-slate-400 text-[9px] font-sans mt-0.5">{contact.role}</div>
+                                </div>
+                                <span className="text-[8px] font-mono text-[#86BC25] border border-[#86BC25]/20 bg-[#86BC25]/5 px-1.5 py-0.5 tracking-wider uppercase font-semibold">
+                                  ACTIVE RESPONDER
+                                </span>
+                              </div>
+                              
+                              <div className="border-t border-slate-800 pt-2 flex items-center justify-between font-mono text-[9px] text-[#86BC25]">
+                                <span>{contact.email}</span>
+                                <span className="text-slate-500">&bull;</span>
+                                <span>{contact.phone}</span>
+                              </div>
+
+                              <div className="flex gap-1.5 mt-1">
+                                <a 
+                                  href={`mailto:${contact.email}?subject=ESCALATION - Urgent Decision Support Required for ${inspectedRow.id}`}
+                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white transition-colors duration-75"
+                                >
+                                  📧 Email Alert
+                                </a>
+                                <button
+                                  onClick={() => alert(`Direct MS Teams ping dispatched to ${contact.name} regarding urgent crisis resolution.`)}
+                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-[#86BC25] bg-[#86BC25] text-black hover:bg-white hover:border-white transition-colors duration-75"
+                                >
+                                  💬 Teams Escalation
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Source Telemetry Reference */}
+                      <div className="border border-slate-800 bg-[#121724] p-3 flex flex-col gap-1.5 select-none font-mono text-[8px]">
+                        <span className="text-slate-500 font-bold uppercase tracking-wider flex items-center gap-1">
+                          <Terminal className="h-3 w-3" />
+                          Ingestion Logs [Reference ID: {inspectedRow.id}]
+                        </span>
+                        <div className="bg-[#0B0D14] border border-slate-900 p-2 text-[#86BC25] break-all leading-normal">
+                          {inspectedRow.sourceData}
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               )}
