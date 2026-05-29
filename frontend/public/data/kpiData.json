@@ -1,36 +1,36 @@
 [
   {
-    "id": "kpi-monitored",
-    "label": "Monitored Facilities",
-    "value": "42",
-    "subtext": "6 Internal | 36 Suppliers",
+    "id": "monitored-nodes",
+    "label": "Total Revenue Exposure",
+    "value": "$238.4M",
+    "subtext": "Direct financial impact at risk",
+    "icon": "DollarSign",
+    "borderColor": "border-l-4 border-l-[#B91C1C]",
+    "valueColor": "text-[#B91C1C]"
+  },
+  {
+    "id": "active-risks",
+    "label": "Disrupted Nodes",
+    "value": "12 Sites",
+    "subtext": "3 Critical | 9 Elevated",
     "icon": "Building",
     "borderColor": "border-l-4 border-l-slate-800",
     "valueColor": "text-slate-800"
   },
   {
-    "id": "kpi-signals",
-    "label": "Active Risks Detected",
-    "value": "12",
-    "subtext": "3 Critical | 9 Elevated",
-    "icon": "ShieldAlert",
-    "borderColor": "border-l-4 border-l-[#B91C1C]",
-    "valueColor": "text-[#B91C1C]"
-  },
-  {
-    "id": "kpi-health",
-    "label": "Overall Network Health",
+    "id": "network-health",
+    "label": "Network SLA Stability",
     "value": "82.4%",
-    "subtext": "+1.2% Gain vs last week",
+    "subtext": "-2.1% drop vs last week",
     "icon": "CheckCircle",
     "borderColor": "border-l-4 border-l-[#86BC25]",
     "valueColor": "text-[#86BC25]"
   },
   {
-    "id": "kpi-response",
-    "label": "Avg Response Time",
-    "value": "4.2h",
-    "subtext": "Mitigation deployment",
+    "id": "response-time",
+    "label": "Active AI Playbooks",
+    "value": "4 Active",
+    "subtext": "$12.8M loss avoided",
     "icon": "Clock",
     "borderColor": "border-l-4 border-l-[#64748B]",
     "valueColor": "text-slate-700"

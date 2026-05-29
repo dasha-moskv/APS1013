@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle } from "lucide-react";
+import { getTaxonomy } from "./SignalTaxonomy";
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
 const nodeCSuiteData = {
@@ -199,7 +200,7 @@ const nodeCSuiteData = {
   }
 };
 
-export default function HealthMonitorTable({ rowData = [], loading = true }) {
+export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategory = null, onSelectCategory }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
   
@@ -250,8 +251,13 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
     ? rowData 
     : rowData.filter(row => row.tier === selectedTier);
 
+  // Apply C-Suite category taxonomy filtering if active!
+  const taxonomyFilteredRows = selectedCategory 
+    ? filteredRows.filter(row => getTaxonomy(row.id) === selectedCategory)
+    : filteredRows;
+
   // Sorting algorithms for dynamic, interactive columns
-  const sortedRows = [...filteredRows].sort((a, b) => {
+  const sortedRows = [...taxonomyFilteredRows].sort((a, b) => {
     if (sortConfig.key === "newest") {
       const aVal = a.ingestedAt || 0;
       const bVal = b.ingestedAt || 0;
@@ -379,6 +385,22 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
 
         {/* Dense Filters Bar */}
         <div className="flex flex-wrap items-center gap-2">
+          {selectedCategory && (
+            <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 text-[#86BC25] font-mono text-[9px] px-2.5 py-0.5 select-none font-bold uppercase animate-fade-in">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#86BC25] opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#86BC25]"></span>
+              </span>
+              Focus: {selectedCategory}
+              <button 
+                onClick={() => onSelectCategory(null)}
+                className="hover:text-white cursor-pointer ml-1 font-bold font-mono text-[9px]"
+              >
+                [X]
+              </button>
+            </div>
+          )}
+
           {/* Tier Filter Toggle */}
           <div className="flex border border-slate-300 font-mono text-[9px] bg-white select-none">
             {["ALL", "Tier 0", "Tier 1", "Tier 2"].map((tier) => (
@@ -467,13 +489,14 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
                 return (
                   <tr
                     key={row.id}
-                    className={`group transition-all duration-1000 ease-out font-sans text-xs text-slate-800 h-10 border-l-2
+                    onClick={() => setInspectedRow(row)}
+                    className={`group transition-all duration-300 ease-out font-sans text-xs text-slate-800 border-l-2 cursor-pointer
                                ${isHighlighted 
                                  ? "bg-[#86BC25]/15 border-l-[#86BC25]" 
                                  : "border-l-transparent even:bg-[#F8FAFC] hover:bg-slate-100/75"}`}
                   >
                   {/* Checkbox */}
-                  <td className="py-1.5 px-3 align-middle">
+                  <td className="py-1.5 px-3 align-middle" onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
                       id={`row-checkbox-${row.id}`}
@@ -494,7 +517,17 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
 
                   {/* Disruption Description */}
                   <td className="py-1.5 px-3 align-middle text-slate-600 max-w-sm overflow-hidden text-ellipsis leading-tight font-sans">
-                    {row.disruption}
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className={`inline-block font-mono text-[8px] px-1.5 py-0.5 border select-none leading-none rounded-none uppercase font-bold tracking-wider ${
+                        getTaxonomy(row.id) === "Logistics & Transit" ? "bg-red-50 text-red-600 border-red-200" :
+                        getTaxonomy(row.id) === "Operations & Capacity" ? "bg-amber-50 text-amber-600 border-amber-200" :
+                        getTaxonomy(row.id) === "Regulatory & Quality" ? "bg-sky-50 text-sky-600 border-sky-200" :
+                        "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/20"
+                      }`}>
+                        {getTaxonomy(row.id)}
+                      </span>
+                      <span>{row.disruption}</span>
+                    </div>
                   </td>
 
                   {/* Risk Severity Badge (Right-aligned numeric) */}
@@ -521,13 +554,13 @@ export default function HealthMonitorTable({ rowData = [], loading = true }) {
                   </td>
 
                   {/* Action inspect button with tactile hit fill state */}
-                  <td className="py-1.5 px-3 align-middle text-right">
+                  <td className="py-1.5 px-3 align-middle text-right" onClick={(e) => e.stopPropagation()}>
                     <button
                       onClick={() => setInspectedRow(row)}
                       className="cursor-pointer border border-[#86BC25] bg-transparent text-[#86BC25] px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded-none hover:bg-[#86BC25] hover:text-black transition-colors duration-75"
                     >
                       INSPECT
-                  </button>
+                    </button>
                   </td>
                 </tr>
                 );
