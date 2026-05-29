@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle } from "lucide-react";
+import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle, Globe, MapPin, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, Box, AlertCircle } from "lucide-react";
 import { getTaxonomy } from "./SignalTaxonomy";
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
@@ -200,6 +200,93 @@ const nodeCSuiteData = {
   }
 };
 
+const nodePipelineData = {
+  "FAC-001": {
+    crawlers: [
+      { type: "Geospatial Logs", icon: "MapPin", detail: "RFID composite cargo containers logged at Wichita central depot." },
+      { type: "Industrial IoT", icon: "Activity", detail: "Everett assembly floor throughput sensors (EVT-FAC-904) flag assembly idle cycles." }
+    ],
+    agentInsight: "NLP processor parsed factory logs and identified structural composite delays, projecting a 12+ day wider assembly threat corridor."
+  },
+  "SUP-001A": {
+    crawlers: [
+      { type: "News Crawler", icon: "Globe", detail: "Scanned 14 local Midwest freight labor blogs and Reuters labor RSS streams." },
+      { type: "Geospatial Logs", icon: "MapPin", detail: "BNSF freight GPS logistics tracker coordinates reveal stationary cargo cars." }
+    ],
+    agentInsight: "Identified freight rail labor shutdown at key transit bottlenecks, calculating high Renton supply line starvation factor."
+  },
+  "SUP-701X": {
+    crawlers: [
+      { type: "SCADA Telemetry", icon: "Activity", detail: "TSMC Fab 12 seismic safety systems log automatic safety triggers at 0.12g." },
+      { type: "News Crawler", icon: "Globe", detail: "Crawl Taiwan Weather Bureau feeds and local tech supply bulletins." }
+    ],
+    agentInsight: "SCADA webhook pushed direct lithography EUV calibration safety shutdown status; agent pre-allocated packaging redirect to Fab 15."
+  },
+  "SUP-401A": {
+    crawlers: [
+      { type: "Industrial IoT", icon: "Activity", detail: "SCADA Emerson exhaust valve sensor flags severe chemical bath pressure rupture." },
+      { type: "Regulatory Code", icon: "FileText", detail: "Crawl EMA and FDA vaccine sterile products validation regulations loop criteria." }
+    ],
+    agentInsight: "NLP extractor compiled EMA sterilization validation time-delay coefficients based on history, drafting redundant line diversion plan."
+  },
+  "SUP-109B": {
+    crawlers: [
+      { type: "Logistics Manifest", icon: "Truck", detail: "DHL transatlantic Priority manifest backlog coordinates at Schiphol tarmac." },
+      { type: "Financial Feeds", icon: "Coins", detail: "Crawl air-charter cold chain capacity indices and spot price indicators." }
+    ],
+    agentInsight: "Recognized Schiphol cargo bottle-neck early; calculated air-charter redirection options to Brussels and courier trucks."
+  },
+  "SUP-502A": {
+    crawlers: [
+      { type: "Regulatory Feeds", icon: "Globe", detail: "Lobby Shaanxi Provincial transit restrictions for chemical feedstocks." },
+      { type: "Logistics Manifest", icon: "Truck", detail: "Samsung local Shaanxi chemical feedstock shipping registries." }
+    ],
+    agentInsight: "Parsed Shaanxi government transit warnings; estimated chemical gas stock decline rate, prompting Korea air bridge backup option."
+  },
+  "FAC-003": {
+    crawlers: [
+      { type: "Industrial IoT", icon: "Activity", detail: "Oven #4 thermocouple SCADA sensor records continuous 4.5% temperature drift." },
+      { type: "Quality Records", icon: "FileText", detail: "Composite curing cycle quality assurance log registers variance warnings." }
+    ],
+    agentInsight: "Calibrated curing metrics against baseline; flagged sensor quality variance, triggering preventive maintenance reset window."
+  },
+  "FAC-010": {
+    crawlers: [
+      { type: "Geospatial Logs", icon: "MapPin", detail: "Panama Canal Authority vessel transit registration and bottleneck logs." },
+      { type: "Logistics Manifest", icon: "Truck", detail: "Tesla supply logistics carrier status and 4680 cell deliveries tracker." }
+    ],
+    agentInsight: "Analyzed canal transit backlog forecasts; estimated local Austin inventory buffer burn rate, proposing Nevada cell diversion."
+  },
+  "SUP-302B": {
+    crawlers: [
+      { type: "Customs API", icon: "FileText", detail: "LAX/LGB customs clearance manifest databases for precision titanium." },
+      { type: "Industrial News", icon: "Globe", detail: "Crawl West Coast port union strike warnings and customs audit guidelines." }
+    ],
+    agentInsight: "Extracted LA customs queue delays; pre-allocated Apex Materials secondary supply options to bypass port bottleneck."
+  },
+  "SUP-202C": {
+    crawlers: [
+      { type: "Industrial IoT", icon: "Activity", detail: "Ludwigshafen natural gas pipeline SCADA pressure sensors record 42 bar drop." },
+      { type: "SCADA Pipeline", icon: "Truck", detail: "Nord-Flow pipeline supply metrics and chemical synthesis feedstocks." }
+    ],
+    agentInsight: "Detected gas inlet pressure threshold drop; activated Antwerp pre-cursor shift and local LNG vaporization array plans."
+  },
+  "FAC-008": {
+    crawlers: [
+      { type: "SCADA Power", icon: "Activity", detail: "PG&E high-voltage industrial grid surge sensors record 12% peak voltage spike." },
+      { type: "Industrial IoT", icon: "Cpu", detail: "NVIDIA CA cooling rack system-monitoring telemetry logs automatic trip." }
+    ],
+    agentInsight: "Monitored server failover response logs; verified compute thread failover to Oregon cloud cluster with zero training downtime."
+  },
+  "SUP-8472": {
+    crawlers: [
+      { type: "SCADA Seismic", icon: "Activity", detail: "Japan Meteorological Agency local Ehime seismic vibration sensors record 3 on Shindo." },
+      { type: "Industrial IoT", icon: "FileText", detail: "Toray Masaki-cho plant automated cleanroom particulate indicators." }
+    ],
+    agentInsight: "Verified automatic shutdown sensor response; parsed local inspection schedules to pre-stage NA Tacoma depot cargo release."
+  }
+};
+
 export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategory = null, onSelectCategory }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
@@ -210,8 +297,31 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
   const [loadingLines, setLoadingLines] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
+  // Interactive C-suite feedback states
+  const [feedbackRating, setFeedbackRating] = useState(0);
+  const [feedbackOption, setFeedbackOption] = useState(null);
+  const [feedbackComment, setFeedbackComment] = useState("");
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  // Reset states upon inspection target change
   useEffect(() => {
     setSelectedOptions([]);
+    setFeedbackRating(0);
+    setFeedbackOption(null);
+    setFeedbackComment("");
+    setFeedbackSubmitted(false);
+  }, [inspectedRow]);
+
+  // Lock vertical scrolling when the inspect panel is open
+  useEffect(() => {
+    if (inspectedRow) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [inspectedRow]);
 
   // Sorting and live ingestion countdown ticks states
@@ -358,6 +468,175 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     : 0;
 
   const financialSaved = Math.max(0, totalFinancialAtRisk - simulatedTotalExposure - (simulatedWorkaroundCost - (cSuiteEnrichment ? cSuiteEnrichment.baseWorkaroundCost : 0)));
+
+  const renderPipeline = (row) => {
+    const pipeline = nodePipelineData[row.id];
+    if (!pipeline) return null;
+
+    return (
+      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-4">
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
+            <Radio className="h-4 w-4 text-[#86BC25] animate-pulse" />
+            📡 Agent Signal Ingestion Pipeline
+          </h4>
+          <p className="text-[9px] text-slate-400 mt-0.5">
+            Real-time crawling and AI Agent extraction pipeline tracking.
+          </p>
+        </div>
+
+        {/* Visual Pipeline Nodes */}
+        <div className="flex flex-col gap-3 font-sans text-xs">
+          {/* Phase 1: Active Crawlers */}
+          <div className="relative flex gap-3 pl-1.5">
+            {/* Visual connector line */}
+            <div className="absolute left-[9px] top-6 bottom-0 w-[1px] border-l border-dashed border-[#86BC25]/40" />
+            
+            <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-none bg-[#86BC25]/10 border border-[#86BC25]/30">
+              <Globe className="h-3 w-3 text-[#86BC25]" />
+            </div>
+            
+            <div className="flex-1 flex flex-col gap-1.5">
+              <span className="font-mono text-[8px] font-bold text-slate-400 uppercase tracking-wider">
+                Phase 1: Active Crawler Ingestion Feeds
+              </span>
+              <div className="flex flex-col gap-2">
+                {pipeline.crawlers.map((c, i) => {
+                  return (
+                    <div key={i} className="bg-[#161C2C] border border-[#1E293B] p-2 flex items-start gap-2">
+                      <span className="h-2 w-2 rounded-full bg-[#86BC25] mt-1.5 shrink-0 animate-ping" />
+                      <div className="text-[10px]">
+                        <span className="font-bold text-slate-200 block font-mono text-[9px] uppercase tracking-wide">{c.type}</span>
+                        <p className="text-slate-400 mt-0.5 font-sans leading-relaxed text-[10px]">{c.detail}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Phase 2: Agent Parsing & Synthesis */}
+          <div className="flex gap-3 pl-1.5">
+            <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-none bg-sky-500/10 border border-sky-500/30">
+              <Cpu className="h-3 w-3 text-sky-400 animate-spin animate-duration-1000" style={{ animationDuration: '4s' }} />
+            </div>
+            <div className="flex-1 flex flex-col gap-1.5">
+              <span className="font-mono text-[8px] font-bold text-slate-400 uppercase tracking-wider">
+                Phase 2: LLM Agent Semantic Synthesis
+              </span>
+              <div className="bg-[#161C2C] border border-[#1E293B] p-2 text-[10px] leading-relaxed">
+                <span className="font-bold text-sky-400 block font-mono text-[9px] uppercase tracking-wide">NLP Synthesis Core</span>
+                <p className="text-slate-300 mt-0.5 font-sans leading-relaxed text-[10px]">{pipeline.agentInsight}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderFeedbackSuite = (row) => {
+    return (
+      <div className="border border-slate-800 bg-[#121724] p-4 flex flex-col gap-3">
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center gap-1.5">
+            <Sparkles className="h-4 w-4 text-[#86BC25]" />
+            Playbook Governance Feedback
+          </h4>
+          <p className="text-[9px] text-slate-400 mt-0.5">
+            Submit assessment feedback to align autonomous agent weights.
+          </p>
+        </div>
+
+        {feedbackSubmitted ? (
+          <div className="bg-[#86BC25]/10 border border-[#86BC25]/20 p-3 text-center flex flex-col items-center justify-center gap-2 animate-fade-in select-none">
+            <CheckCircle className="h-6 w-6 text-[#86BC25] animate-bounce" />
+            <div className="text-[10px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
+              FEEDBACK COMMITTED SUCCESSFULLY
+            </div>
+            <p className="text-[9px] text-slate-300 max-w-xs leading-relaxed font-sans mt-0.5">
+              Operational logs and rating model weights successfully routed to AI Agent tuning queue. Thank you.
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {/* Interactive Stars Rating */}
+            <div className="flex items-center gap-1.5 select-none justify-between border-b border-[#1E293B] pb-2">
+              <span className="text-[9px] font-mono text-slate-400 uppercase">Strategic Accuracy:</span>
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => setFeedbackRating(star)}
+                    className="cursor-pointer transition-transform duration-75 hover:scale-110"
+                  >
+                    <Star
+                      className={`h-4.5 w-4.5 ${
+                        star <= feedbackRating
+                          ? "fill-[#86BC25] text-[#86BC25]"
+                          : "text-slate-600 hover:text-slate-400"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tactical Feasibility Options */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setFeedbackOption("Accurate")}
+                className={`flex-1 cursor-pointer font-mono text-[9px] font-bold uppercase py-1 border flex items-center justify-center gap-1 transition-all duration-75 select-none ${
+                  feedbackOption === "Accurate"
+                    ? "bg-[#86BC25] border-[#86BC25] text-black border-transparent"
+                    : "bg-transparent border-slate-700 hover:border-slate-500 text-slate-300"
+                }`}
+              >
+                <ThumbsUp className="h-3 w-3" />
+                Accurate
+              </button>
+              <button
+                onClick={() => setFeedbackOption("Refinement")}
+                className={`flex-1 cursor-pointer font-mono text-[9px] font-bold uppercase py-1 border flex items-center justify-center gap-1 transition-all duration-75 select-none ${
+                  feedbackOption === "Refinement"
+                    ? "bg-amber-500 border-amber-500 text-black border-transparent"
+                    : "bg-transparent border-slate-700 hover:border-slate-500 text-slate-300"
+                }`}
+              >
+                <ThumbsDown className="h-3 w-3" />
+                Needs Audit
+              </button>
+            </div>
+
+            {/* Commentary Input */}
+            <textarea
+              value={feedbackComment}
+              onChange={(e) => setFeedbackComment(e.target.value)}
+              placeholder="Provide operational context (e.g., 'Primary composite rail line strike confirmed resolved')..."
+              className="w-full bg-[#0D111A] border border-slate-800 p-2 text-[10px] text-slate-200 placeholder-slate-600 rounded-none focus:outline-none focus:border-slate-600 font-sans leading-normal resize-none h-14"
+            />
+
+            {/* Submit CTA */}
+            <button
+              onClick={() => {
+                if (feedbackRating === 0 && !feedbackOption && !feedbackComment) return;
+                setFeedbackSubmitted(true);
+              }}
+              disabled={feedbackRating === 0 && !feedbackOption && !feedbackComment}
+              className={`w-full cursor-pointer font-mono text-[9px] font-bold uppercase py-2 border select-none transition-all duration-75 ${
+                feedbackRating === 0 && !feedbackOption && !feedbackComment
+                  ? "bg-slate-800 border-slate-800 text-slate-600 cursor-not-allowed"
+                  : "bg-white border-white text-black hover:bg-[#86BC25] hover:border-[#86BC25] hover:text-black"
+              }`}
+            >
+              🚀 Submit To Agent Tuner
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const handleClosePanel = () => {
     setInspectedRow(null);
@@ -644,16 +923,10 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               </div>
             )}
 
-            {/* Source Data telemetry details (Only shown when not displaying playbook) */}
+            {/* Signal Origin Pipeline (Only shown when not displaying playbook) */}
             {!playbookGenerated && (
-              <div className="border-t border-[#1E293B] pt-4 mb-6">
-                <h3 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono mb-1.5 flex items-center gap-1.5">
-                  <Terminal className="h-3.5 w-3.5" />
-                  Telemetry Source Data
-                </h3>
-                <div className="bg-[#111520] border border-slate-800 p-2.5 font-mono text-[9px] text-[#86BC25] break-all leading-normal">
-                  {inspectedRow.sourceData}
-                </div>
+              <div className="border-t border-[#1E293B] pt-4 mb-4">
+                {renderPipeline(inspectedRow)}
               </div>
             )}
 
@@ -897,6 +1170,9 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                           </div>
                         )}
                       </div>
+                      
+                      {/* Signal Origin & Ingestion Pipeline Flow */}
+                      {renderPipeline(inspectedRow)}
                     </div>
 
                     {/* RIGHT COLUMN: GOVERNANCE & CONTACTS (lg:col-span-5) */}
@@ -994,11 +1270,14 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         </div>
                       </div>
 
+                      {/* Playbook Feedback Suite */}
+                      {renderFeedbackSuite(inspectedRow)}
+
                       {/* Source Telemetry Reference */}
                       <div className="border border-slate-800 bg-[#121724] p-3 flex flex-col gap-1.5 select-none font-mono text-[8px]">
                         <span className="text-slate-500 font-bold uppercase tracking-wider flex items-center gap-1">
-                          <Terminal className="h-3 w-3" />
-                          Ingestion Logs [Reference ID: {inspectedRow.id}]
+                          <Terminal className="h-3.5 w-3.5" />
+                          Raw Telemetry Source Ingestion
                         </span>
                         <div className="bg-[#0B0D14] border border-slate-900 p-2 text-[#86BC25] break-all leading-normal">
                           {inspectedRow.sourceData}
