@@ -6,6 +6,11 @@ Welcome to the **Supplier Disruption Radar & Dashboard** monorepo! This applicat
 
 ![Supplier Disruption Radar & Dashboard Demo](docs/demo.gif)
 
+## UML Diagrams
+
+![UML Process Diagram](docs/uml-process.png)
+![UML Use Case Diagram](docs/uml-use-case.png)
+
 ---
 
 ## 📁 Repository Directory Structure
