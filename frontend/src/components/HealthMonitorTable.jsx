@@ -407,7 +407,7 @@ const nodePipelineData = {
   }
 };
 
-export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark }) {
+export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark, onHumanFeedback }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
   
@@ -821,6 +821,16 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               onClick={() => {
                 if (feedbackRating === 0 && !feedbackOption && !feedbackComment) return;
                 setFeedbackSubmitted(true);
+                if (onHumanFeedback) {
+                  onHumanFeedback({
+                    threatId: row.id,
+                    facility: row.facility,
+                    rating: feedbackRating,
+                    option: feedbackOption,
+                    comment: feedbackComment,
+                    timestamp: new Date().toISOString()
+                  });
+                }
               }}
               disabled={feedbackRating === 0 && !feedbackOption && !feedbackComment}
               className={`w-full cursor-pointer font-mono text-[9px] font-bold uppercase py-2 border select-none transition-all duration-75 ${

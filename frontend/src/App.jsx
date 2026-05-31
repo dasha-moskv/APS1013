@@ -6,6 +6,12 @@ import KpiCards from "./components/KpiCards";
 import HealthMonitorTable from "./components/HealthMonitorTable";
 import SignalTaxonomy from "./components/SignalTaxonomy";
 
+// New Phase Components
+import BaseIngest from "./components/BaseIngest";
+import MitigationPlaybooks from "./components/MitigationPlaybooks";
+import ActionOrchestration from "./components/ActionOrchestration";
+import AIJudgeGovernance from "./components/AIJudgeGovernance";
+
 // High-fidelity mock signals representing live incoming risk events
 const MOCK_SIGNALS = [
   {
@@ -131,18 +137,28 @@ const MOCK_SIGNALS = [
 ];
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState("radar");
   const [threatRows, setThreatRows] = useState([]);
   const [kpiData, setKpiData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isDark, setIsDark] = useState(false);
   
+  // Decoupled Decoded API States
+  const [knowledgeGraph, setKnowledgeGraph] = useState(null);
+  const [historicalPrecedents, setHistoricalPrecedents] = useState(null);
+  const [erpSystems, setErpSystems] = useState(null);
+
+  // Phase 2/3 States
+  const [approvedPlaybooks, setApprovedPlaybooks] = useState({});
+  const [feedbackHistory, setFeedbackHistory] = useState([]);
+
   const toggleDark = () => setIsDark(prev => !prev);
   
   const [demoIndex, setDemoIndex] = useState(0);
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Parallel Ingestion of threatRegistry and kpiData JSON structures
+  // Parallel Ingestion of threatRegistry, kpiData, and our three new decoupled core DBs
   useEffect(() => {
     Promise.all([
       fetch("/data/threatRegistry.json").then((res) => {
@@ -152,12 +168,27 @@ export default function App() {
       fetch("/data/kpiData.json").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch KPI telemetry");
         return res.json();
+      }),
+      fetch("/data/knowledgeGraph.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch knowledge graph");
+        return res.json();
+      }),
+      fetch("/data/historicalPrecedents.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch precedents");
+        return res.json();
+      }),
+      fetch("/data/erpSystems.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch ERP tables");
+        return res.json();
       })
     ])
-      .then(([threats, kpis]) => {
+      .then(([threats, kpis, graph, precedents, erp]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
+        setKnowledgeGraph(graph);
+        setHistoricalPrecedents(precedents);
+        setErpSystems(erp);
         setLoading(false);
       })
       .catch((err) => {
@@ -165,6 +196,162 @@ export default function App() {
         setLoading(false);
       });
   }, []);
+
+  // Callback from Phase 1 GeoJSON Ingest to populate new sub-tier threat logs
+  const handleSupplyBaseInitialized = (programName, nodeCount) => {
+    // Append a specialized Tier-2 shock matching the loaded program
+    if (programName.includes("Renton")) {
+      const parsedSignal = {
+        id: "SUP-001A",
+        facility: "Spirit AeroSystems, Inc.",
+        location: "KS, US",
+        disruption: "Renton fuselage transport logistics rail strike",
+        severity: { "label": "8.5/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+        likelihood: { "label": "85% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+        timeToHit: "1-2 weeks",
+        tier: "Tier 1",
+        fullDescription: "Fuselage assemblies rail transport is stalled within the Midwest corridor due to rail union strikes. Primary Renton assembly operations risk fuselage starvation in 10 operational days.",
+        sourceData: "SCADA logistics webhook BNSF-KS-301 & Local labor RSS blogs",
+        mapPosition: {
+          coordinates: [-97.2798, 37.6436],
+          color: "#D32F2F",
+          role: "Tier-1 / Fuselage",
+          status: "Critical threat"
+        },
+        playbook: {
+          steps: [
+            "Initiate emergency road oversize flatbed logistics carriers.",
+            "Lobby KDOT and state governors for rapid oversized load highway corridor permits.",
+            "Coordinate divided Renton assembly buffer allocations to preserve assembly cadence."
+          ],
+          contacts: [
+            { "name": "Sarah Jenkins", "role": "Spirit Global Supply Lead", "email": "s.jenkins@spiritaero.com", "phone": "+1 (316) 555-0145" }
+          ],
+          timeline: "12 operational days for heavy haul permits and flatbed mobilization"
+        },
+        ingestedAt: Date.now()
+      };
+
+      setThreatRows(prev => {
+        // Only append if it doesn't already exist in the frontend rows
+        if (prev.some(t => t.id === parsedSignal.id)) return prev;
+        return [parsedSignal, ...prev];
+      });
+
+      setToast({
+        id: parsedSignal.id,
+        msg: `BASE INITIALIZED: Ingested B737 MAX Renton Supply Grid. New sub-tier risk registered: ${parsedSignal.facility}`
+      });
+
+      setTimeout(() => setToast(null), 6000);
+    }
+  };
+
+  // Callback from Phase 2 Workbench to register playbook approvals
+  const handleApprovePlaybook = (threatId) => {
+    setApprovedPlaybooks(prev => ({
+      ...prev,
+      [threatId]: true
+    }));
+    
+    // Jump to the Action Orchestration screen immediately to execute!
+    setTimeout(() => {
+      setActiveTab("orchestration");
+    }, 800);
+  };
+
+  // Callback from Home Threat Table feedback forms to dynamically log human reviews
+  const handleHumanFeedback = (feedback) => {
+    setFeedbackHistory(prev => [feedback, ...prev]);
+
+    setToast({
+      id: "GOVERNANCE",
+      msg: `GOVERNANCE ACTION REGISTERED: Analyst feedback received for ${feedback.facility}. Real-aligning AI Judge scoring heuristics.`
+    });
+
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  // Callback from Phase 3 Supplier Portal Simulator to trigger closed-loop score updates
+  const handleSupplierResponse = (threatId, supplierStatus) => {
+    setThreatRows(prevRows => 
+      prevRows.map(row => {
+        if (row.id === threatId) {
+          if (supplierStatus === "mitigated") {
+            return {
+              ...row,
+              disruption: `[RESOLVED BY WAREHOUSE BUFFER OVERRIDE] ${row.disruption}`,
+              severity: { "label": "1.2/10 RESOLVED", "color": "text-[#16A34A] bg-[#F0FDF4] border-[#DCFCE7]" },
+              likelihood: { "label": "0% NOMINAL", "color": "text-[#16A34A] bg-[#F0FDF4] border-[#DCFCE7]" },
+              timeToHit: "Bypassed (0 Days)",
+              mapPosition: {
+                ...row.mapPosition,
+                color: "#86BC25",
+                status: "Nominal"
+              }
+            };
+          } else if (supplierStatus === "partial") {
+            return {
+              ...row,
+              disruption: `[PARTIALLY MITIGATED VIA HIGHWAY FLATS] ${row.disruption}`,
+              severity: { "label": "4.5/10 ELEVATED", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+              timeToHit: "3 Days Delay",
+              mapPosition: {
+                ...row.mapPosition,
+                color: "#FFB300",
+                status: "Elevated Risk"
+              }
+            };
+          } else if (supplierStatus === "confirmed") {
+            return {
+              ...row,
+              severity: { "label": "9.5/10 CRITICAL", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
+              mapPosition: {
+                ...row.mapPosition,
+                color: "#D32F2F",
+                status: "Critical threat"
+              }
+            };
+          }
+        }
+        return row;
+      })
+    );
+
+    // Boardroom Math reactive update: Reduce at-risk metrics dynamically!
+    setKpiData(prevKpi => 
+      prevKpi.map(kpi => {
+        if (kpi.id === "monitored-nodes") {
+          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
+          const reduction = supplierStatus === "mitigated" ? 18.5 : supplierStatus === "partial" ? 12.0 : 0.0;
+          return {
+            ...kpi,
+            value: `$${Math.max(4.5, current - reduction).toFixed(1)}M`,
+            subtext: `-$${reduction.toFixed(1)}M liability offset from resolved supplier shock`
+          };
+        }
+        if (kpi.id === "active-risks") {
+          const current = parseInt(kpi.value);
+          const reduction = supplierStatus === "mitigated" ? 1 : 0;
+          return {
+            ...kpi,
+            value: `${Math.max(0, current - reduction)} Sites`,
+            subtext: `Supplier portal confirmations matched and closed`
+          };
+        }
+        if (kpi.id === "network-health") {
+          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
+          const increment = supplierStatus === "mitigated" ? 4.8 : supplierStatus === "partial" ? 2.1 : -1.2;
+          return {
+            ...kpi,
+            value: `${Math.min(99.8, current + increment).toFixed(1)}%`,
+            subtext: `Realigned from closed-loop supplier portal response`
+          };
+        }
+        return kpi;
+      })
+    );
+  };
 
   // Simulates live satellite threat signals coming in and updates central state
   const handleTriggerDemoSignal = () => {
@@ -248,7 +435,12 @@ export default function App() {
       )}
 
       {/* ── Sleek Vertical Navigation Rail ── */}
-      <Sidebar isDark={isDark} toggleDark={toggleDark} />
+      <Sidebar 
+        isDark={isDark} 
+        toggleDark={toggleDark} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
 
       {/* ── Main content area (Strictly attached to navigation rail) ── */}
       <div className="ml-16 flex flex-1 flex-col min-w-0">
@@ -261,39 +453,78 @@ export default function App() {
 
         {/* ── High-density Dashboard content ── */}
         <main id="dashboard-content" className="flex-1 p-3 flex flex-col gap-3">
-          {/*
-            Grid layout: Balanced 12-Column System (50/50)
-            - Map Spans: 6 Columns (~50%)
-            - Consolidated KPI & Taxonomy Panel Spans: 6 Columns (~50%)
-          */}
-          <div className="grid grid-cols-12 gap-3">
-            {/* ── 6-Column Map Command Center ── */}
-            <div className="col-span-12 lg:col-span-6">
-              <MapPlaceholder threatRows={threatRows} loading={loading} />
-            </div>
+          
+          {/* TAB Conditionally Rendered Content Views */}
+          {activeTab === "radar" && (
+            <div className="flex flex-col gap-3">
+              {/* Grid layout: Balanced 12-Column System (50/50) */}
+              <div className="grid grid-cols-12 gap-3">
+                {/* ── 6-Column Map Command Center ── */}
+                <div className="col-span-12 lg:col-span-6">
+                  <MapPlaceholder threatRows={threatRows} loading={loading} />
+                </div>
 
-            {/* ── 6-Column Consolidated KPI & Taxonomy Info Panel (Side-by-Side Grid) ── */}
-            <div className="col-span-12 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <KpiCards kpiData={kpiData} loading={loading} isDark={isDark} />
-              <SignalTaxonomy 
-                threatRows={threatRows} 
-                selectedCategories={selectedCategories} 
-                onSelectCategories={setSelectedCategories}
-                isDark={isDark}
-              />
-            </div>
-          </div>
+                {/* ── 6-Column Consolidated KPI & Taxonomy Info Panel (Side-by-Side Grid) ── */}
+                <div className="col-span-12 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <KpiCards kpiData={kpiData} loading={loading} isDark={isDark} />
+                  <SignalTaxonomy 
+                    threatRows={threatRows} 
+                    selectedCategories={selectedCategories} 
+                    onSelectCategories={setSelectedCategories}
+                    isDark={isDark}
+                  />
+                </div>
+              </div>
 
-          {/* ── Bottom: High-density threat registry table ── */}
-          <div className="w-full">
-            <HealthMonitorTable 
-              rowData={threatRows} 
-              loading={loading} 
-              selectedCategories={selectedCategories}
-              onSelectCategories={setSelectedCategories}
-              isDark={isDark}
+              {/* ── Bottom: High-density threat registry table ── */}
+              <div className="w-full">
+                <HealthMonitorTable 
+                  rowData={threatRows} 
+                  loading={loading} 
+                  selectedCategories={selectedCategories}
+                  onSelectCategories={setSelectedCategories}
+                  isDark={isDark}
+                  onHumanFeedback={handleHumanFeedback}
+                />
+              </div>
+            </div>
+          )}
+
+          {activeTab === "ingest" && (
+            <BaseIngest 
+              isDark={isDark} 
+              onSupplyBaseInitialized={handleSupplyBaseInitialized} 
             />
-          </div>
+          )}
+
+          {activeTab === "playbooks" && (
+            <MitigationPlaybooks 
+              isDark={isDark} 
+              threatRows={threatRows} 
+              onApprovePlaybook={handleApprovePlaybook}
+              knowledgeGraph={knowledgeGraph}
+              historicalPrecedents={historicalPrecedents}
+              erpSystems={erpSystems}
+            />
+          )}
+
+          {activeTab === "orchestration" && (
+            <ActionOrchestration 
+              isDark={isDark} 
+              threatRows={threatRows} 
+              approvedPlaybooks={approvedPlaybooks} 
+              onSupplierResponse={handleSupplierResponse}
+              erpSystems={erpSystems}
+            />
+          )}
+
+          {activeTab === "governance" && (
+            <AIJudgeGovernance 
+              isDark={isDark} 
+              feedbackHistory={feedbackHistory}
+            />
+          )}
+
         </main>
       </div>
     </div>

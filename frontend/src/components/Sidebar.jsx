@@ -1,39 +1,36 @@
-import { useState } from "react";
 import {
   Moon,
   Sun,
-  Home,
-  User,
-  Users,
-  FolderOpen,
-  Settings,
+  Radio,
+  FileText,
+  Activity,
+  PlayCircle,
+  ShieldAlert,
   LogOut,
 } from "lucide-react";
 
 const navItems = [
-  { icon: Home, label: "Home", id: "home" },
-  { icon: User, label: "Profile", id: "profile" },
-  { icon: Users, label: "Team", id: "team" },
-  { icon: FolderOpen, label: "Folders", id: "folders" },
-  { icon: Settings, label: "Settings", id: "settings" },
+  { icon: Radio, label: "Risk Radar", id: "radar" },
+  { icon: FileText, label: "Base Ingest", id: "ingest" },
+  { icon: Activity, label: "Mitigation Playbooks", id: "playbooks" },
+  { icon: PlayCircle, label: "Action Orchestration", id: "orchestration" },
+  { icon: ShieldAlert, label: "AI Judge & Governance", id: "governance" },
 ];
 
-export default function Sidebar({ isDark, toggleDark }) {
-  const [activeNav, setActiveNav] = useState("home");
-
+export default function Sidebar({ isDark, toggleDark, activeTab, setActiveTab }) {
   return (
     <aside
       id="sidebar"
       className="fixed left-0 top-0 bottom-0 z-50 flex w-16 flex-col items-center
-                 bg-[#0D111A] border-r border-[#1E293B] py-4"
+                 bg-[#0D111A] border-r border-[#1E293B] py-4 animate-fade-in"
     >
       {/* ── Corporate Brand Logo (D. Style) ── */}
       <div
         id="sidebar-logo"
-        className="mb-6 flex h-10 w-10 items-center justify-center font-sans"
+        className="mb-6 flex h-10 w-10 items-center justify-center font-sans select-none"
       >
         <span className="text-2xl font-bold text-white tracking-tighter">
-          D<span className="text-[#86BC25]">.</span>
+          R<span className="text-[#86BC25]">.</span>
         </span>
       </div>
 
@@ -56,12 +53,12 @@ export default function Sidebar({ isDark, toggleDark }) {
       {/* ── Navigation Icons ── */}
       <nav id="sidebar-nav" className="flex w-full flex-1 flex-col items-center gap-1">
         {navItems.map(({ icon: Icon, label, id }) => {
-          const isActive = activeNav === id;
+          const isActive = activeTab === id;
           return (
             <button
               key={id}
               id={`nav-${id}`}
-              onClick={() => setActiveNav(id)}
+              onClick={() => setActiveTab(id)}
               className={`group relative flex h-12 w-full cursor-pointer items-center justify-center
                          rounded-none transition-all duration-150 border-y border-transparent
                          ${
@@ -87,7 +84,7 @@ export default function Sidebar({ isDark, toggleDark }) {
         })}
       </nav>
 
-      {/* ── Logout ── */}
+      {/* ── Footer / Logout (Visual Placeholder) ── */}
       <button
         id="sidebar-logout"
         onClick={() => {}}
