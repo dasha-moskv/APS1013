@@ -1,149 +1,178 @@
-# 🛰️ Supplier Disruption Radar & Dashboard
+# 🛰️ Project Radar: Intelligent Supplier Disruption Radar & Decision Support Console
 
-Welcome to the **Supplier Disruption Radar & Dashboard** monorepo! This application is designed to identify, analyze, and mitigate supply chain disruptions using advanced agentic AI models paired with a modern, high-fidelity React dashboard.
+Project Radar is an enterprise-grade decision-support system designed to identify, analyze, and mitigate supply chain threats in real-time. Built specifically for **Boeing Commercial Airplanes** (supporting Rate 47 narrowbody/widebody assembly targets at Renton and Charleston), the platform bridges the gap between raw intelligence and closed-loop actions.
 
-## 🎥 Application Demo
-
-![Supplier Disruption Radar & Dashboard Demo](docs/demo.gif)
-
-## UML Diagrams
-
-![UML Process Diagram](docs/uml-process.png)
-![UML Use Case Diagram](docs/uml-use-case.png)
+By combining advanced agentic AI pipelines with an interactive, highly responsive React cockpit, Project Radar enables procurement analysts and supply chain officers to ingest geo-coordinate records, query GraphRAG-enabled precedent databases, map complex N-tier supply ontologies, automate supplier outreach, and govern AI-generated assessments with custom human feedback loops.
 
 ---
 
-## 📁 Repository Directory Structure
+## 🎥 Application Visuals
 
-The repository is structured as a clean monorepo divided into dedicated `backend/`, `docs/`, and `frontend/` services:
+- **System-Wide Process Flow**: Documented in [docs/uml-process.png](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/uml-process.png)
+- **High-Fidelity Interface Preview**: Showcased in [docs/demo.gif](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/demo.gif)
+
+---
+
+## 📁 Monorepo Architecture & Directory Structure
+
+Project Radar is managed as a unified monorepo divided into isolated services for the Python AI Agent Backend, system documentation, and the React + Vite frontend dashboard:
 
 ```text
 / (Repository Root)
-├── backend/                  # Python Agent Backend Service
-│   ├── agents/               # AI Agent Logic Core
-│   │   ├── verify_supply_base.py                # Supply base validation
-│   │   ├── collect_signals.py                  # Public signal collection
-│   │   ├── analyze_signals.py                  # OpenAI signal analysis & card extraction
-│   │   └── generate_mitigation_and_validation.py # Mitigation & validation plans
-│   ├── utils/                # CLI Utilities & Custom Terminal Loggers
-│   │   ├── display.py                          # Report terminal formatting
-│   │   └── save_output.py                      # Persistent session outputs
-│   ├── runs/                 # Persistent history of execution logs
-│   ├── main.py               # Backend interactive CLI entry point
-│   ├── newsapi.py            # Signal gathering API client
-│   ├── data-schema.json      # Supplier/Signal standard JSON schemas
-│   ├── pseudocode.txt        # Backend ingestion pipeline notes
-│   ├── requirements.txt      # Python dependencies list
-│   └── .env                  # API keys & local backend configurations
+├── backend/                    # Python AI Agent Core Service
+│   ├── agents/                 # Agentic AI Processing Pipeline
+│   │   ├── verify_supply_base.py                # Step 1: Supply base scope validation
+│   │   ├── collect_signals.py                  # Step 2: Live news API feed collector
+│   │   ├── analyze_signals.py                  # Step 3: LLM Disruption Card extractor
+│   │   └── generate_mitigation_and_validation.py # Step 4: Playbook & response planner
+│   ├── utils/                  # Command-Line Utility Pack
+│   │   ├── display.py                          # Colorized console print helpers
+│   │   └── save_output.py                      # Execution log storage handlers
+│   ├── runs/                   # Directory containing archived backend session logs
+│   ├── main.py                 # Core CLI entry point for the interactive agent
+│   ├── newsapi.py              # Public intelligence gathering connector
+│   ├── data-schema.json        # Data-contract JSON validation schemas
+│   ├── pseudocode.txt          # Internal pseudocode for agent loops
+│   ├── requirements.txt        # Python dependency manifest
+│   └── .env                    # System-level API keys (OpenAI)
 │
-├── docs/                     # Project Documentation & Media Assets
-│   └── demo.gif              # High-fidelity dashboard & agent preview GIF
+├── docs/                       # Process diagrams, study guides, and visual assets
+│   ├── case-study.md           # Boeing supply chain business case analysis
+│   ├── essential-performance.md # Critical system design metrics
+│   ├── slide-outline.md        # Technical presentation deck storyboard
+│   ├── uml-process.md          # UML sequence diagram description
+│   └── uml-use-case.md         # UML actor/system use case map
 │
-├── frontend/                 # React + Vite Frontend Dashboard
+├── frontend/                   # React + Vite Production-Ready UI
 │   ├── src/
-│   │   ├── components/       # Premium React Components
-│   │   │   ├── Sidebar.jsx           # Fixed-side circular navigation & dark toggle
-│   │   │   ├── Topbar.jsx            # User profile, notification bells, & search pills
-│   │   │   ├── KpiCards.jsx          # Live supply chain KPIs & risk stats
-│   │   │   ├── MapPlaceholder.jsx    # Visual geography tracker
-│   │   │   └── HealthMonitorTable.jsx # Clean data table with row statuses
-│   │   ├── assets/           # Dashboard static assets
-│   │   ├── App.jsx           # Main CSS Grid dashboard assembly
-│   │   ├── index.css         # Modern styling & Tailwind CSS imports
-│   │   └── main.jsx          # React app DOM mount point
-│   ├── public/               # Public assets
-│   ├── package.json          # Node dependencies & Vite scripts
-│   ├── vite.config.js        # Vite bundling and dev config
-│   └── eslint.config.js      # JS code style lint rules
+│   │   ├── components/         # Highly decoupled modular components
+│   │   │   ├── Sidebar.jsx           # Fixed-side tab navigation rail
+│   │   │   ├── Topbar.jsx            # User credentials & global active status bar
+│   │   │   ├── KpiCards.jsx          # Live financial & threat scoreboard KPIs
+│   │   │   ├── MapPlaceholder.jsx    # Interactive SVG geographic node mapper
+│   │   │   ├── HealthMonitorTable.jsx # Threat Registry data grid with manual override
+│   │   │   ├── BaseIngest.jsx        # Phase 1: GeoJSON validation & parser console
+│   │   │   ├── MitigationPlaybooks.jsx # Phase 2: BOM, ASL finder, & SVG N-Tier ontology graph
+│   │   │   ├── ActionOrchestration.jsx # Phase 3: Portal outreach simulator & SAP audit logger
+│   │   │   ├── AIJudgeGovernance.jsx # Governance: TPR/FPR charts & dynamic weight sliders
+│   │   │   └── SignalTaxonomy.jsx    # Taxonomic distribution and risk profile matrix
+│   │   ├── App.jsx             # Shell framework, global states, & async DB loaders
+│   │   ├── index.css           # Vanilla CSS variables & styling definitions
+│   │   └── main.jsx            # Application mount point
+│   ├── public/                 # Static files & local databases
+│   │   └── data/               # Decoupled mock database sets (JSON format)
+│   │       ├── threatRegistry.json      # Central active threats database
+│   │       ├── knowledgeGraph.json      # N-tier structural node dependencies
+│   │       ├── historicalPrecedents.json # Vector-style cosine similarity records
+│   │       ├── erpSystems.json          # SAP-aligned Material Masters, BOMs & pre-qualified ASLs
+│   │       └── kpiData.json             # Corporate scoreboard metric configurations
+│   ├── package.json            # Node package configurations & developer scripts
+│   ├── vite.config.js          # Vite build pack bundler configurations
+│   └── eslint.config.js        # Linter code quality boundaries
 │
-├── .gitignore                # Consolidated monorepo git rules
-├── README.md                 # Project root documentation
-└── dashboard-plan.md         # Original dashboard layout planning document
+├── .gitignore                  # Git tracking exclusion list
+├── README.md                   # Corporate root documentation (this file)
+└── dashboard-plan.md           # Visual design planning document
 ```
 
 ---
 
-## ⚙️ Backend Setup & Execution
+## 🎨 Professional Interface & Design Language
 
-The backend contains a command-line interface that runs the AI Supplier Disruption Radar Agent pipeline, executing sequential verification, signal extraction, OpenAI analysis, and mitigation planning.
-
-### 1. Prerequisites
-- Python 3.10+ installed
-- OpenAI API Key
-
-### 2. Installation
-Navigate to the `backend/` directory and install the requirements:
-```bash
-cd backend
-pip install -r requirements.txt
-```
-
-### 3. Environment Configuration
-Create or edit your `.env` file inside the `backend/` folder and include your OpenAI API key:
-```env
-OPENAI_API_KEY=your-openai-api-key-here
-```
-
-### 4. Running the Agent
-Run the main script to start the interactive CLI:
-```bash
-python main.py
-```
-Upon entering a supply base (e.g., `"Aerospace Components"`), the agent will:
-1. **Verify Supply Base**: Validate that the target matches industry scope.
-2. **Collect Public Signals**: Gather recent disruption news and alerts.
-3. **Analyze Signals**: Parse raw texts using OpenAI to construct comprehensive Disruption Cards.
-4. **Generate Playbooks**: Formulate clear mitigation plans and validation strategies.
-5. **Persist Reports**: Prompt to save complete report runs inside `backend/runs/`.
+Project Radar strictly adheres to a premium, color-disciplined corporate aesthetic inspired by global management consulting standards:
+- **Base Canvas**: Quiet, minimalist, slate-gray foundations (`#0F172A` / `#1E293B`) with frosted glass boundaries.
+- **Accents**: Deloitte-green (`#86BC25`) is applied strategically for active tab indicators, primary submit buttons, and confirmation signals to draw user attention.
+- **Warnings**: Red (`#EF4444`) is strictly reserved for the single selected active critical threat dot in the SVG Ontology Graph and critical status badges to prevent visual clutter.
+- **Typography**: Modern typeface selection using Google Fonts (`Inter`, `System-UI`) for maximum scannability and clean layout structures.
 
 ---
 
-## 🎨 Frontend Setup & Execution
+## 💻 Tab-by-Tab Feature Breakdown
 
-The frontend is a gorgeous, responsive, glassmorphic layout displaying key metrics, disruption statuses, and health monitors.
+### 📊 1. Risk Radar (Overview Dashboard)
+*   ** Boardroom Scorecard**: Tracking live, reactive stats including critical facility statuses, total unresolved threats, and mean time to resolution.
+*   **Geospatial Tracker**: Visual SVG tracking map marking active supply nodes, shipping ports, and dynamic threat radius boundaries.
+*   **Active Threat Registry**: A comprehensive data grid detailing active disruptions, category tags (e.g., Force Majeure, Logistics, Geopolitical), and severity tiers. Supports direct analyst override callbacks.
 
-### 1. Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+### 📥 2. Ingestion Pipeline (Phase 1)
+*   **GeoJSON validator**: Drag-and-drop or select mock supply-base geo coordinate files.
+*   **Strict Schema Validation**: Automatically parses geographic structures (validating FeatureCollection properties, coordinates arrays, and supplier metadata).
+*   **Log Console**: A scrolling command line mock simulator outputting individual ingestion steps, parsing coordinate sets, and logging warnings or successful storage indexes.
 
-### 2. Installation
-Navigate to the `frontend/` directory and install dependencies:
-```bash
-cd frontend
-npm install
-```
+### 🛠️ 3. Mitigation Workbench (Phase 2)
+*   **Cosine Precedents Search**: Query the GraphRAG vector database to discover historical disruption similarities (retrieving precedent summaries, resolution costs, and confidence metrics).
+*   **SAP/ERP BOM Mapping**: Matches disrupted components with their corresponding Boeing internal Material Masters (BOMs).
+*   **ASL alternate matching**: Identifies alternate certified suppliers from the Approved Supplier List (ASL), calculating alternate unit costs and transition timelines.
+*   **N-Tier Ontology Graph**: Interactive SVG rendering node relationships (e.g., 737 MAX fuselage assembly dependencies spanning *Tier-1 Suppliers* down to *Sub-Tier Raw Material Refineries*). Selecting a node highlights its dependencies and filters the workbench.
+*   **FAA Regulatory Checklist**: Pre-configured verification steps to ensure replacement parts adhere strictly to FAA regulatory requirements.
 
-### 3. Running the Dashboard (Development Mode)
-Launch the development server with Hot Module Replacement (HMR):
-```bash
-npm run dev
-```
-Open your browser and navigate to the local address provided (typically `http://localhost:5173`).
+### ⚡ 4. Action Orchestration (Phase 3)
+*   **Supplier Portal Simulator**: Launches automated queries directly to suppliers to confirm material availability, shipping delays, and lead times.
+*   **Supplier Closed Loop**: Supplier replies (e.g., confirmed alternative deliveries) automatically adjust the central threat registry's risk levels and corporate Boardroom KPI scores.
+*   **SAP transactional logs**: Generates pre-formatted audit trails of automated alternate procurement orders ready for integration with client ERP services (e.g., SAP GUI transactions like `ME21N` PO Creation).
+
+### ⚖️ 5. Governance Console (AI Judge)
+*   **Model Validation Scorecard**: Visualizes live model telemetry parameters (True Positive Rate and False Positive Rate).
+*   **Dropped Signal Feed**: Tracks low-risk signals filtered out by the AI Judge to prevent alert fatigue.
+*   **Dynamic Weight Sliders**: Lets users adjust decision weights (e.g., Financial Risk weight, Delivery Impact weight) to tune the AI model's threat assessments.
+*   **Human Closed Loop**: Human reviews and feedback directly affect validation scores, demonstrating model adjustment.
 
 ---
 
-## 🤖 Architecture Overview
+## ⚙️ Decoupled Database Engineering
 
-```mermaid
-graph TD
-    A[User Inputs Supply Base] --> B[verify_supply_base.py]
-    B -->|Verified| C[collect_signals.py]
-    C -->|Gathers RSS/News| D[analyze_signals.py]
-    D -->|Executes OpenAI Prompt| E[disruption_cards]
-    E --> F[generate_mitigation_and_validation.py]
-    F -->|Outputs Playbook & Plan| G[Terminal Display / Log Output]
-    G --> H[Saved Run Logs .txt in backend/runs/]
-```
+To ensure the system is completely ready for enterprise backend API integrations, the frontend has been fully decoupled from static mock data. On app boot, parallel `fetch()` routines load data from `/public/data/`:
+1.  **`threatRegistry.json`**: Central threat records with status metrics.
+2.  **`knowledgeGraph.json`**: Dependency linkages, coordinates, and ontological categories.
+3.  **`historicalPrecedents.json`**: Dense semantic records of historic supply interventions.
+4.  **`erpSystems.json`**: Mock SAP databases aligning BOMs with certified replacement options.
+5.  **`kpiData.json`**: Configuration boundaries for corporate boardroom scores.
 
-### Backend Agent Components
-- **`verify_supply_base`**: Validates whether the given input matches standard industry definitions.
-- **`collect_signals`**: Aggregates raw disruption alerts, news, and indicators relevant to the target supply base.
-- **`analyze_signals`**: Leverages OpenAI to structure raw text feeds into highly actionable "Disruption Cards" detailing risk levels, categories, and potential impact.
-- **`generate_mitigation_and_validation`**: Brainstorms mitigation workarounds, alternate supplier routing, and validation steps to verify the stability of response routes.
+---
 
-### Frontend Dashboard Components
-- **`Sidebar`**: Left-anchored icon strip featuring smooth tooltips, premium hover states, and a visual dark-mode toggle module.
-- **`Topbar`**: Houses custom pill searches, system alerts, and current user identity cards.
-- **`KpiCards`**: Dynamic cards tracking critical performance parameters including facility status, active alerts, and mean resolution timelines.
-- **`HealthMonitorTable`**: An interactive spreadsheet showing active supply chains, criticality layers, and real-time operational risk indicators.
-- **`MapPlaceholder`**: A high-impact slot ready for geospatial maps tracking real-time logistics networks.
+## 🚀 Execution & Setup Guidelines
+
+### 🎨 Frontend Setup
+1.  Navigate into the `frontend` folder:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Launch the local dev server:
+    ```bash
+    npm run dev
+    ```
+4.  Open the web console in your browser at `http://localhost:5173`.
+
+### 🐍 Backend Setup
+1.  Navigate into the `backend` folder:
+    ```bash
+    cd backend
+    ```
+2.  Create and configure a virtual environment:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
+3.  Install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  Setup environment variables (create a `.env` file):
+    ```env
+    OPENAI_API_KEY=your_openai_api_key_here
+    ```
+5.  Run the command-line agent:
+    ```bash
+    python main.py
+    ```
+
+---
+
+## 🔒 Verification & Compliance
+*   **Aesthetics**: Minimal color usage. No vibrant color gradients or random background decorations. Perfect for corporate presentation.
+*   **Build Integrity**: The frontend code passes standard ES6 compilation steps cleanly and runs on a local dev environment using Vite.
+*   **Data decopling**: The system contains absolutely no hardcoded business objects inside rendering files, making it completely API-ready.

@@ -1,0 +1,137 @@
+{
+  "graphName": "Boeing Commercial Airplanes Deep-Tier Knowledge Graph",
+  "program": "B737 MAX & Widebody Platforms",
+  "nodes": [
+    {
+      "id": "FAC-001",
+      "label": "Boeing Everett Factory",
+      "type": "Assembly",
+      "tier": 0,
+      "location": "Everett, WA, US",
+      "coordinates": [-122.2731, 47.9218],
+      "dailyExposure": 14500000,
+      "slaThresholdDays": 12,
+      "bufferInventoryLevel": "4 days"
+    },
+    {
+      "id": "FAC-003",
+      "label": "Boeing South Carolina",
+      "type": "Assembly",
+      "tier": 0,
+      "location": "Charleston, SC, US",
+      "coordinates": [-80.0403, 32.8943],
+      "dailyExposure": 6500000,
+      "slaThresholdDays": 15,
+      "bufferInventoryLevel": "72 hours"
+    },
+    {
+      "id": "SUP-001A",
+      "label": "Spirit AeroSystems",
+      "type": "Structures",
+      "tier": 1,
+      "location": "Wichita, KS, US",
+      "coordinates": [-97.2798, 37.6436],
+      "dailyExposure": 8800000,
+      "slaThresholdDays": 10,
+      "bufferInventoryLevel": "14 days"
+    },
+    {
+      "id": "SUP-404R",
+      "label": "Rolls-Royce plc",
+      "type": "Propulsion",
+      "tier": 1,
+      "location": "Derby, GB",
+      "coordinates": [-1.4552, 52.8931],
+      "dailyExposure": 12000000,
+      "slaThresholdDays": 14,
+      "bufferInventoryLevel": "8 days"
+    },
+    {
+      "id": "SUP-512S",
+      "label": "Safran Landing Systems",
+      "type": "Hydraulics",
+      "tier": 1,
+      "location": "Bidos, FR",
+      "coordinates": [-0.605, 43.181],
+      "dailyExposure": 5400000,
+      "slaThresholdDays": 21,
+      "bufferInventoryLevel": "6 days"
+    },
+    {
+      "id": "SUP-212H",
+      "label": "Honeywell Aerospace",
+      "type": "Avionics",
+      "tier": 1,
+      "location": "Phoenix, AZ, US",
+      "coordinates": [-112.0, 33.435],
+      "dailyExposure": 4500000,
+      "slaThresholdDays": 7,
+      "bufferInventoryLevel": "12 days"
+    },
+    {
+      "id": "SUP-109B",
+      "label": "ASML Veldhoven",
+      "type": "Optics",
+      "tier": 2,
+      "location": "Veldhoven, NL",
+      "coordinates": [5.3700, 51.4200],
+      "dailyExposure": 18500000,
+      "slaThresholdDays": 5,
+      "bufferInventoryLevel": "12 days"
+    },
+    {
+      "id": "SUP-502A",
+      "label": "Samsung Xi'an",
+      "type": "Microchips",
+      "tier": 1,
+      "location": "Xi'an, CN",
+      "coordinates": [108.9402, 34.3416],
+      "dailyExposure": 15500000,
+      "slaThresholdDays": 18,
+      "bufferInventoryLevel": "12 days"
+    },
+    {
+      "id": "SUP-302B",
+      "label": "Precision Castparts Corp.",
+      "type": "Forgings",
+      "tier": 1,
+      "location": "Portland, OR, US",
+      "coordinates": [-122.5694, 45.4243],
+      "dailyExposure": 5200000,
+      "slaThresholdDays": 18,
+      "bufferInventoryLevel": "15 days"
+    },
+    {
+      "id": "SUP-771A",
+      "label": "Alcoa Pinjarra Refinery",
+      "type": "Raw Material",
+      "tier": 3,
+      "location": "Pinjarra, AU",
+      "coordinates": [115.875, -32.628],
+      "dailyExposure": 3800000,
+      "slaThresholdDays": 30,
+      "bufferInventoryLevel": "45 days"
+    },
+    {
+      "id": "SUP-8472",
+      "label": "Toray Industries, Inc.",
+      "type": "Composites",
+      "tier": 2,
+      "location": "Ehime, JP",
+      "coordinates": [133.0906, 33.8569],
+      "dailyExposure": 3800000,
+      "slaThresholdDays": 45,
+      "bufferInventoryLevel": "45 days"
+    }
+  ],
+  "links": [
+    { "source": "SUP-001A", "target": "FAC-001", "dependency": "Primary Fuselage Structure", "leadTimeNominalDays": 15 },
+    { "source": "SUP-404R", "target": "FAC-001", "dependency": "Turbofan Engine Assemblies", "leadTimeNominalDays": 18 },
+    { "source": "SUP-212H", "target": "FAC-001", "dependency": "Auxiliary Power Units (APU)", "leadTimeNominalDays": 10 },
+    { "source": "SUP-302B", "target": "SUP-001A", "dependency": "Titanium Forged Billets", "leadTimeNominalDays": 12 },
+    { "source": "SUP-771A", "target": "SUP-302B", "dependency": "Raw Aluminium Sponge", "leadTimeNominalDays": 25 },
+    { "source": "SUP-8472", "target": "SUP-001A", "dependency": "Raw Carbon Fiber Precursors", "leadTimeNominalDays": 20 },
+    { "source": "SUP-512S", "target": "FAC-003", "dependency": "Landing Gear Actuators", "leadTimeNominalDays": 14 },
+    { "source": "SUP-109B", "target": "SUP-502A", "dependency": "Extreme Ultraviolet Lithography Reflector Lenses", "leadTimeNominalDays": 8 }
+  ]
+}
