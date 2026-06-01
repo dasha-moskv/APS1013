@@ -43,12 +43,10 @@ flowchart TD
     end
 
     subgraph Playbook["Mitigation & Decision Support Engine (AI)"]
-        G1[Retrieve Business Context:<br>Contracts, SLAs, Financial Tolerances]:::phase2
-        G2[Impact Assessment:<br>Map Affected Parts, BOM & Inventory Levels]:::phase2
-        G3[Stakeholder Mapping:<br>Identify Procurement & Supplier Contacts]:::phase2
-        G4[Generate Mitigation Scenarios:<br>e.g., Expedite, Dual-Source, Reallocate]:::phase2
-        G5[Decision Matrix:<br>Evaluate Cost, Time & Risk Trade-offs]:::phase2
-        G6[Draft Tailored Mitigation Playbook]:::phase2
+        G1[Retrieve Public Supplier Profiles:<br>Company Registries, Operating Status]:::phase2
+        G2[Analyze Logistics & Transit Corridors:<br>Port Delays, Regional Weather, Strikes]:::phase2
+        G3[Assess General Industrial Alternatives:<br>Open Carrier Routes, Secondary Source Options]:::phase2
+        G4[Generate Alternative Routing Playbook:<br>Dual-Sourcing & Logistics Workarounds]:::phase2
     end
 
     %% Base Initialization Flow
@@ -83,9 +81,7 @@ flowchart TD
     G1 --> G2
     G2 --> G3
     G3 --> G4
-    G4 --> G5
-    G5 --> G6
-    G6 --> U5
+    G4 --> U5
 
     %% Styling Classes
     classDef phase1 fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#000;
