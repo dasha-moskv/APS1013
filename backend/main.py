@@ -2,95 +2,42 @@ import os
 import sys
 from dotenv import load_dotenv
 from agents import (
-    verify_supply_base,
+    supply_base_prompt,
     collect_public_signals,
-    analyze_signals,
-    generate_mitigation_playbook_and_validation_plan
+    analyze_signals
 )
 
 from utils import (
-    print_disruption_cards,
-    print_mitigation_playbook,
-    print_validation_plan,
-    TerminalLogger
+    read_from_json,
+    send_to_json
 )
 
 def main():  
-    logger = TerminalLogger()
-    sys.stdout = logger
+ 
+    print("==================================================")
+    print("RUN INFO")
+    print("==================================================")
+    
+    supply_base = supply_base_prompt()
+    print(f"Hard coded to Aircraft Propulsion Systems Supply Base for Boeing\n")
+    print(f"We generate exactly 1 new entry\n")
 
-    try:
-        while True:
-            logger.clear()
+    print("Reading current data...")
+    current_json_data = read_from_json()
 
-            print("\nWelcome to this Supplier Disruption Radar Agent\n")
-            supply_base = input("Please enter an industry supply base: ")
+    print("Collecting public disruption signals...")
+    #TODO: Convert from Fake signal to real signals
+    raw_signal = collect_public_signals(supply_base, current_json_data) 
+    print("[✓] Signals collected")
 
-            print("\n==================================================")
-            print("RUN INFO")
-            print("==================================================")
-            print(f"Supply Base: {supply_base}\n")
-
-            print("Verifying supply base validity...")
-            is_valid = verify_supply_base(supply_base)
-            if is_valid:
-                print("[✓] Verified Supply Base")
-            else:
-                print("[X] Invalid Supply Base")
-                print("Please try again.\n")
-                continue
-
-            print("\nCollecting public disruption signals...")
-            raw_signals = collect_public_signals(supply_base)
-            print("[✓] Signals collected")
-
-            print("\nAnalyzing signals...")
-            disruption_cards = analyze_signals(raw_signals, supply_base)
-            print("[✓] Signals analyzed")
-
-            print("\nGenerating mitigation playbook and validation plan...")
-            mitigation_playbook, validation_plan = generate_mitigation_playbook_and_validation_plan(disruption_cards, supply_base)
-            print("[✓] Mitigation playbook and validation plan generated\n")
-
-            print("==================================================")
-            print("DISRUPTION CARDS")
-            print("==================================================")
-
-            print_disruption_cards(disruption_cards)
-
-            print("\n==================================================")
-            print("MITIGATION PLAYBOOK")
-            print("==================================================")
-
-            print_mitigation_playbook(mitigation_playbook)
-
-            print("\n==================================================")
-            print("VALIDATION PLAN")
-            print("==================================================")
-
-            print_validation_plan(validation_plan)
-
-            print("\n==================================================")
-            print("END OF REPORT")
-            print("==================================================")
-
-            save_to_file = input("\nWould you like to save the following output to a txt? (y/n): ")
-
-            if save_to_file.lower() == "y":
-                save_file_path = logger.save_to_file()
-                print(f"Output saved to {save_file_path}\n")
-
-            run_again = input("\nWould you like to analyze another supply base? (y/n): ")
-
-            if run_again.lower() != "y":
-                print("Exiting Supplier Disruption Radar Agent.")
-                break
-            else:
-                os.system("cls" if os.name == "nt" else "clear")
-
-    finally:
-        sys.stdout = logger.terminal
-
+    print("\nAnalyzing signals...")
+    #TODO: Time permitting, split card and playbook generation again. Make playbook generation more advanced
+    new_data_to_display = analyze_signals(supply_base, current_json_data, raw_signal)
+    print("[✓] Signals analyzed")
+    
+    send_to_json(new_data_to_display)
+    print("[✓] New signal written to signals.json")
+    
 
 if __name__ == "__main__":
     main()

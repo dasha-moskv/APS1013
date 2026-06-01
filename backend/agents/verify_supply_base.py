@@ -1,149 +1,134 @@
-from openai import OpenAI
-from dotenv import load_dotenv
 import os
 import sys
 
-load_dotenv(override=True)
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    print("Please reach out to Dasha to obtain the OpenAI API key.")
-    sys.exit(1) 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+def supply_base_prompt():
 
-def construct_prompt(supply_base):
-    prompt = f"""
-Determine whether the following input is a valid industry supply base, industrial sector,
-supplier ecosystem, manufacturing domain, logistics network, or procurement category.
+    return """
+COMPANY CONTEXT
 
-A valid supply base refers to a real-world industry, supply chain sector,
-manufacturing ecosystem, service infrastructure, or category of suppliers
-that organizations may depend on operationally.
+You are monitoring the supply chain of Boeing, one of the world's largest aerospace and defense manufacturers. Boeing produces commercial aircraft including the 737, 767, 777, and 787 families, as well as military and space systems.
 
-Examples of VALID supply bases:
+Boeing operates within a highly regulated, safety-critical environment where disruptions can have significant impacts on aircraft production schedules, delivery commitments, operational costs, regulatory compliance, and customer satisfaction.
 
-Technology & Electronics
-- semiconductors
-- printed circuit board manufacturing
-- consumer electronics
-- GPU manufacturing
-- cloud computing infrastructure
-- telecommunications equipment
-- data center infrastructure
-- battery manufacturing
+Aircraft manufacturing depends on a complex multi-tier supplier network. Disruptions often originate deep within Tier-2 and Tier-3 suppliers before propagating to final assembly operations.
 
-Manufacturing & Industrial
-- automotive manufacturing
-- aerospace suppliers
-- industrial machinery
-- steel production
-- chemical manufacturing
-- plastics manufacturing
-- robotics manufacturing
-- heavy equipment suppliers
 
-Healthcare & Life Sciences
-- pharmaceuticals
-- medical device manufacturing
-- biotechnology suppliers
-- hospital equipment suppliers
-- laboratory supply chains
-- healthcare logistics
+TARGET SUPPLY BASE
 
-Energy & Utilities
-- oil and gas
-- renewable energy suppliers
-- solar panel manufacturing
-- nuclear energy infrastructure
-- electrical grid infrastructure
-- lithium mining
+Aircraft Propulsion Systems Supply Base
 
-Transportation & Logistics
-- food distribution
-- shipping and freight logistics
-- rail transportation
-- airline suppliers
-- warehouse logistics
-- port operations
-- cold chain logistics
+This supply base includes organizations involved in the design, manufacture, transportation, and maintenance of aircraft propulsion systems and their supporting components.
 
-Consumer & Retail
-- grocery supply chains
-- textile manufacturing
-- apparel suppliers
-- retail distribution
-- beverage manufacturing
-- packaging suppliers
+Examples include:
 
-Construction & Materials
-- construction materials
-- cement suppliers
-- lumber suppliers
-- mining operations
-- glass manufacturing
+- Aircraft engine manufacturers
+    - GE Aerospace
+    - Rolls-Royce
+    - Pratt & Whitney
+    - Safran
 
-Agriculture & Food
-- agriculture supply chains
-- fertilizer suppliers
-- dairy production
-- seafood distribution
-- grain suppliers
-- food processing
+- Engine subsystem suppliers
+    - Turbine blade manufacturers
+    - Compressor manufacturers
+    - Combustion system suppliers
+    - Engine control electronics suppliers
 
-Examples of INVALID inputs:
-- hello
-- banana123
-- random nonsense
-- what is the weather
-- tell me a joke
-- i like turtles
-- 123456
-- open the pod bay doors
-- how are you
-- purple monkey dishwasher
+- Raw material suppliers
+    - Titanium producers
+    - Nickel superalloy producers
+    - Specialty metal suppliers
+    - Aerospace-grade aluminum suppliers
 
-Input:
-"{supply_base}"
+- Supporting logistics providers
+    - Freight carriers
+    - Port operators
+    - Transportation providers
+    - Warehousing providers
 
-Respond ONLY with:
-VALID
-or
-INVALID
+Potential disruption categories include:
+
+- Supplier shutdowns
+- Factory fires
+- Labor strikes
+- Export restrictions
+- Trade sanctions
+- Natural disasters
+- Geopolitical instability
+- Transportation bottlenecks
+- Material shortages
+- Energy shortages
+- Cybersecurity incidents
+- Financial distress
+- Regulatory actions
+- Quality failures
+- Production delays
+
+
+TARGET PERSONAS
+
+Persona 1: Operations & Production Director
+
+Primary responsibilities:
+- Manufacturing output
+- Production schedules
+- Inventory flow
+- Bottleneck resolution
+- Supplier coordination
+- Supply chain health
+
+Primary concerns:
+- Late supplier deliveries
+- Production bottlenecks
+- Schedule slips
+- Inventory shortages
+- Delivery commitments
+
+Questions this persona asks:
+- Will production be impacted?
+- How severe is the disruption?
+- How quickly will it affect Boeing operations?
+- What suppliers are at risk?
+- What mitigation actions should be taken?
+
+
+Persona 2: Technical Manager / Engineering Manager
+
+Primary responsibilities:
+- Technical governance
+- Risk management
+- Supplier visibility
+- Digital transformation
+- Multi-tier supply chain monitoring
+
+Primary concerns:
+- Lack of visibility into Tier-2 and Tier-3 suppliers
+- Emerging supply chain risks
+- Critical material shortages
+- Long-term supplier instability
+- Predictive risk detection
+
+Questions this persona asks:
+- What early warning signs exist?
+- Which suppliers are vulnerable?
+- What downstream impacts are likely?
+- How confident are we in the signal?
+- What additional validation is required?
+
+
+MISSION
+
+Identify external disruption signals that may impact Boeing's Aircraft Propulsion Systems Supply Base.
+
+Prioritize signals that could affect:
+- Aircraft engine availability
+- Engine component availability
+- Critical material supply
+- Supplier production capacity
+- Transportation and logistics
+- Manufacturing schedules
+- Aircraft delivery timelines
+
+Focus on actionable intelligence rather than general news.
+
+The goal is to provide early warning of disruptions before they materially impact Boeing operations.
 """
-    return prompt
-
-
-def verify_supply_base(supply_base):
-    prompt_string = construct_prompt(supply_base)
-
-    try:
-        response = client.responses.create(
-            model="gpt-5.5",
-            input=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a strict supply chain validation assistant. "
-                        "You must ONLY respond with VALID or INVALID."
-                    )
-                },
-                {
-                    "role": "user",
-                    "content": prompt_string
-                }
-            ],
-        )
-
-        result = response.output_text.strip().upper()
-
-        #print("===DEBUG===")
-        #print(result)
-        #print("===DEBUG===")
-
-        if result == "VALID":
-            return True
-        else:
-            return False
-        
-    except Exception as e:
-        print(f"[ERROR] OpenAI API call failed at verify_supply_base: {e}")
-        sys.exit(1) # Kill the program if an API call fails.

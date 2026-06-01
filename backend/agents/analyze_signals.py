@@ -7,174 +7,173 @@ import json
 load_dotenv(override=True)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def construct_prompt(single_signal, supply_base):
+def construct_prompt(supply_base, current_json_data, raw_signal):
     prompt = f"""
-You are an expert supply chain risk analyst working for a Supplier Disruption Radar Agent.
+You are an expert aerospace supply chain risk analyst.
 
-Your task is to analyze a disruption signal and determine how it may impact the specified supply base.
+Your task is to generate ONE new JSON entry that can be appended to the existing signals.json file.
 
-==================================================
-SUPPLY BASE
-==================================================
+SUPPLY BASE CONTEXT:
 {supply_base}
 
-==================================================
-RAW DISRUPTION SIGNAL
-==================================================
-{single_signal}
+RAW DISRUPTION SIGNAL:
+{raw_signal}
 
-==================================================
-ANALYSIS OBJECTIVE
-==================================================
+EXISTING JSON DATA:
+{current_json_data}
 
-Analyze the disruption signal specifically in the context of the provided supply base.
+INSTRUCTIONS:
+Generate a new disruption card based on the raw disruption signal.
 
-Your analysis should determine:
-- what the disruption is
-- how severe it is
-- how likely it is to affect the supply base
-- which suppliers/components/regions may be impacted
-- how quickly the disruption may affect operations
+The new card must:
+- Match the exact structure, field names, nesting, and style of the existing JSON data
+- Be relevant to Boeing's Aircraft Propulsion Systems Supply Base
+- Be realistic for aerospace manufacturing and supply chain monitoring
+- Use a new unique id that does not already appear in the existing JSON
+- Include realistic severity, likelihood, timeToHit, tier, location, coordinates, role, and status
+- Include a mitigationPlan with exactly 3 steps and 1 timeline
+- Include a validationPlan with exactly 3 steps and 1 timeline
+- Keep the sources section exactly as TODO placeholders
 
-Use realistic supply chain reasoning.
+SCORING GUIDANCE:
+- severity: number from 1.0 to 10.0
+- likelihood: integer from 0 to 100
+- timeToHit: integer number of days until Boeing may feel the impact
+- tier:
+  - 0 = Boeing internal facility
+  - 1 = direct supplier
+  - 2 = supplier to supplier
+  - 3 = upstream raw material or logistics dependency
 
-Consider:
-- logistics exposure
-- supplier dependencies
-- manufacturing bottlenecks
-- geopolitical implications
-- operational impact
-- semiconductor/material/component shortages
-- transportation disruptions
-- urgency and timing
+THREAT CLASSIFICATION GUIDANCE
+Critical threat
+- color: "#D32F2F"
+- status: "Critical threat"
+- Use when the disruption is currently occurring or highly likely to occur.
+- Expected impact to Boeing within 0-14 days.
+- Likely to cause production delays, supplier shutdowns, delivery disruptions, material shortages, or operational interruptions.
+- Typical severity: 8.0 - 10.0
 
-==================================================
-TAXONOMY CATEGORIES
-==================================================
+Elevated Risk
+- color: "#FFB300"
+- status: "Elevated Risk"
+- Use when the disruption is emerging but impacts are not yet fully realized.
+- Expected impact to Boeing within 14-45 days.
+- May affect supplier capacity, logistics, inventory, or material availability if conditions worsen.
+- Typical severity: 5.0 - 7.9
 
-The category field MUST be EXACTLY one of:
+Nominal
+- color: "#86BC25"
+- status: "Nominal"
+- Use when the disruption signal represents a low-confidence risk, minor incident, or early warning indicator.
+- No significant near-term impact expected.
+- Typical severity: 0.0 - 4.9
 
-- Natural Disaster
-- Logistics / Transportation
-- Geopolitical
-- Financial
-- Manufacturing / Operations
-- Supplier Capacity
-- Cybersecurity
-- Regulatory / Compliance
-- Quality / Recall
-- Workforce / Labor
-- Environmental / Sustainability
-- Market Demand Shock
-- Other
+OUTPUT REQUIREMENTS:
+- Return ONLY valid JSON
+- Return exactly ONE JSON object
+- Do NOT return a list
+- Do NOT include markdown
+- Do NOT include explanations
+- Do NOT wrap the JSON in backticks
 
-==================================================
-RISK SCORING RULES
-==================================================
-
-The risk_score field must:
-- be a float between 1.0 and 10.0
-- represent overall supply chain risk
-- consider:
-    - likelihood
-    - operational impact
-    - urgency
-    - relevance to the supply base
-    - confidence in the disruption
-
-Higher scores should represent:
-- severe operational impact
-- high likelihood
-- short time-to-hit
-- strong relevance to the supply base
-
-Low relevance signals should receive lower scores even if globally significant.
-
-==================================================
-OUTPUT REQUIREMENTS
-==================================================
-
-Return ONLY valid JSON.
-
-Do NOT include:
-- markdown
-- code fences
-- explanations
-- bullet points
-- extra text
-
-The JSON MUST match EXACTLY this structure:
+The output must follow this general shape:
 
 {{
-  "title": "short professional disruption title",
-  "category": "taxonomy category",
-  "risk_score": 8.4,
-  "likelihood": "Low | Medium | High",
-  "impact": "Low | Medium | High",
-  "affected_region": [
-    "region 1",
-    "region 2"
-  ],
-  "affected_suppliers": [
-    "supplier 1",
-    "supplier 2"
-  ],
-  "impacted_components": [
-    "component 1",
-    "component 2"
-  ],
-  "time_to_hit": "Immediate | 1-2 weeks | 2-4 weeks | 1-2 months | 3+ months",
-  "summary": "2-3 sentence explanation describing why this disruption matters for the specified supply base"
+  "id": "SUP-XXXX",
+  "facility": "Supplier or facility name",
+  "location": "City/Region, Country",
+  "disruption": "Short disruption title",
+  "severity": 0.0,
+  "likelihood": 0,
+  "timeToHit": 0,
+  "tier": 1,
+  "fullDescription": "Detailed explanation of the disruption and why it matters to Boeing.",
+  "sourceData": "Public or simulated source data description",
+  "mapPosition": {{
+    "coordinates": [0.0, 0.0],
+    "color": "#FFB300",
+    "role": "Tier-X / Role",
+    "status": "Elevated Risk"
+  }},
+  "playbook": {{
+    "mitigationPlan": {{
+      "steps": [
+        "Step 1.",
+        "Step 2.",
+        "Step 3."
+      ],
+      "timeline": "Realistic mitigation timeline"
+    }},
+    "validationPlan": {{
+      "steps": [
+        "Step 1.",
+        "Step 2.",
+        "Step 3."
+      ],
+      "timeline": "Realistic validation timeline"
+    }}
+  }},
+  "sources": [
+    {{
+      "title": "TODO",
+      "url": "TODO",
+      "summary": "TODO"
+    }},
+    {{
+      "title": "TODO",
+      "url": "TODO",
+      "summary": "TODO"
+    }},
+    {{
+      "title": "TODO",
+      "url": "TODO",
+      "summary": "TODO"
+    }}
+  ]
 }}
-
-Ensure:
-- the JSON is syntactically valid
-- all fields are populated
-- arrays are always arrays
-- risk_score is numeric
-- the summary is concise but informative
 """
     return prompt
 
 
-def analyze_signals(signals, supply_base):
-    analyzed_signals = []
+def analyze_signals(supply_base, current_json_data, raw_signal):
 
-    for signal in signals:
-        prompt_string = construct_prompt(signal, supply_base)
+    prompt_string = construct_prompt(
+        supply_base,
+        current_json_data,
+        raw_signal
+    )
+
+    try:
+        response = client.responses.create(
+            model="gpt-5.5",
+            input=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a supply chain risk analyst. "
+                        "You classify disruption signals using a clear taxonomy and explain their relevance "
+                        "to a specific supply base. Always return only valid JSON."
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": prompt_string
+                }
+            ],
+        )
+
+        result = response.output_text.strip()
 
         try:
-            response = client.responses.create(
-                model="gpt-5.5",
-                input=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are a supply chain risk analyst. "
-                            "You classify disruption signals using a clear taxonomy and explain their relevance "
-                            "to a specific supply base. Always return only valid JSON."
-                        )
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt_string
-                    }
-                ],
-            )
-
-            result = response.output_text.strip()
-
-            try:
-                parsed_result = json.loads(result)
-            except json.JSONDecodeError:
-                print("[ERROR] Model returned invalid JSON:")
-                print(result)
-                sys.exit(1)
-
-            analyzed_signals.append(parsed_result)
-
-        except Exception as e:
-            print(f"[ERROR] OpenAI API call failed at analyze_signals: {e}")
+            parsed_result = json.loads(result)
+        except json.JSONDecodeError:
+            print("[ERROR] Model returned invalid JSON:")
+            print(result)
             sys.exit(1)
 
-    return analyzed_signals
+        return parsed_result
+
+    except Exception as e:
+        print(f"[ERROR] OpenAI API call failed at analyze_signals: {e}")
+        sys.exit(1)

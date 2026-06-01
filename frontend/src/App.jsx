@@ -22,7 +22,7 @@ export default function App() {
   
   // Decoupled Decoded API States
   const [knowledgeGraph, setKnowledgeGraph] = useState(null);
-  const [mockSignals, setMockSignals] = useState([]);
+  const [signals, setsignals] = useState([]);
   const [droppedSignals, setDroppedSignals] = useState([]);
   const [playbookData, setPlaybookData] = useState(null);
 
@@ -51,8 +51,8 @@ export default function App() {
         if (!res.ok) throw new Error("Failed to fetch knowledge graph");
         return res.json();
       }),
-      fetch("/data/mockSignals.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch mock signals");
+      fetch("/data/signals.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch signals");
         return res.json();
       }),
       fetch("/data/droppedSignals.json").then((res) => {
@@ -64,12 +64,12 @@ export default function App() {
         return res.json();
       })
     ])
-      .then(([threats, kpis, graph, mockSig, droppedSig, playbooks]) => {
+      .then(([threats, kpis, graph, signal, droppedSig, playbooks]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
         setKnowledgeGraph(graph);
-        setMockSignals(mockSig);
+        setsignals(signal);
         setDroppedSignals(droppedSig);
         setPlaybookData(playbooks);
         setLoading(false);
@@ -159,9 +159,9 @@ export default function App() {
 
   // Simulates live satellite threat signals coming in and updates central state
   const handleTriggerDemoSignal = () => {
-    if (demoIndex >= mockSignals.length) return;
+    if (demoIndex >= signals.length) return;
 
-    const signal = { ...mockSignals[demoIndex], ingestedAt: Date.now() };
+    const signal = { ...signals[demoIndex], ingestedAt: Date.now() };
     setDemoIndex(prev => prev + 1);
 
     // 1. Append new signal to the front of threat registry
@@ -250,7 +250,7 @@ export default function App() {
         {/* ── Integrated Dark Corporate Header ── */}
         <Topbar 
           onTriggerDemoSignal={handleTriggerDemoSignal} 
-          mockSignalsLeft={mockSignals.length - demoIndex}
+          signalsLeft={signals.length - demoIndex}
           isDark={isDark}
         />
 
