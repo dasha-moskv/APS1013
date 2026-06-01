@@ -106,6 +106,6 @@ def collect_public_signals(supply_base):
         return signals
         
     except Exception as e:
-        print(f"[ERROR] OpenAI API call failed at verify_supply_base: {e}")
+        print(f"[ERROR] OpenAI API call failed at supply_base_prompt: {e}")
         sys.exit(1) # Kill the program if an API call fails.
 

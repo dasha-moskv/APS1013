@@ -5,3 +5,8 @@ from .display import (
 )
 
 from .save_output import TerminalLogger
+
+from edit_json import (
+    read_from_json,
+    send_to_json
+)

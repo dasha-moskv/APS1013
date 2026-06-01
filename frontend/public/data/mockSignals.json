@@ -17,17 +17,40 @@
       "status": "Critical threat"
     },
     "playbook": {
-      "steps": [
-        "Quarantine affected turbine casing batch #RR-CT-8890.",
-        "Reroute turbofan casing castings from secondary casting yard at Munich depot.",
-        "Calibrate micro-CT imaging arrays with standard titanium benchmark controls."
-      ],
-      "contacts": [
-        { "name": "Sir Robert Vance", "role": "Chief Materials Officer", "email": "robert.vance@rolls-royce.com", "phone": "+44 1332-242424" },
-        { "name": "Derby Quality Assurance Desk", "role": "Inspection Lead", "email": "qa.derby@rolls-royce.com", "phone": "+44 1332-240112" }
-      ],
-      "timeline": "5 to 7 operational days for metallurgical recertification"
-    }
+      "mitigationPlan": {
+        "steps": [
+          "Quarantine affected turbine casing batch #RR-CT-8890.",
+          "Reroute turbofan casing castings from secondary casting yard at Munich depot.",
+          "Calibrate micro-CT imaging arrays with standard titanium benchmark controls."
+        ],
+        "timeline": "5 to 7 operational days for metallurgical recertification"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform micro-CT scans on representative samples from batch #RR-CT-8890 to verify defect detection accuracy.",
+          "Conduct metallurgical composition and grain structure analysis against aerospace certification standards.",
+          "Review calibration records and recertify all imaging arrays before resuming full production inspection workflows."
+        ],
+        "timeline": "2 to 3 operational days for imaging validation, laboratory testing, and quality sign-off"
+      }
+    },
+    "sources": [
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      }
+    ]
   },
   {
     "id": "SUP-512S",
@@ -47,17 +70,40 @@
       "status": "Critical threat"
     },
     "playbook": {
-      "steps": [
-        "Deploy hazardous material cleanup shift to contain hydraulic spillage in building 4.",
-        "Procure emergency shock absorber seal packs from storage backup stocks in Bordeaux.",
-        "Authorize landing gear structural stress tests in parallel assembly building 6."
-      ],
-      "contacts": [
-        { "name": "Jean-Pierre Blanc", "role": "Bidos Safety Coordinator", "email": "jp.blanc@safrangroup.com", "phone": "+33 5-59-39-00-11" },
-        { "name": "Hazmat Containment Desk", "role": "First Responder Desk", "email": "response@secourisme.fr", "phone": "+33 5-59-99-1122" }
-      ],
-      "timeline": "48 to 72 hours for cleanroom validation and pressure test reset"
-    }
+      "mitigationPlan": {
+        "steps": [
+          "Deploy hazardous material cleanup shift to contain hydraulic spillage in building 4.",
+          "Procure emergency shock absorber seal packs from storage backup stocks in Bordeaux.",
+          "Authorize landing gear structural stress tests in parallel assembly building 6."
+        ],
+        "timeline": "48 to 72 hours for cleanroom validation and pressure test reset"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform contamination sampling throughout building 4 to verify complete hydraulic fluid removal.",
+          "Conduct hydraulic pressure and leak testing on all repaired shock absorber assemblies using replacement seal packs.",
+          "Review landing gear stress test results and certify assemblies meet structural and safety requirements before release."
+        ],
+        "timeline": "24 to 48 hours for contamination clearance, pressure testing, and engineering sign-off"
+      }
+    },
+    "sources": [
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      }
+    ]
   },
   {
     "id": "SUP-771A",
@@ -77,17 +123,40 @@
       "status": "Elevated Risk"
     },
     "playbook": {
-      "steps": [
-        "Initiate emergency conveyor belt splicing contract with Fenner Dunlop Australia.",
-        "Divert crude bauxite stocks to reserve stockpile yard B using heavy dumper fleets.",
-        "Increase calcination heating runs on parallel kiln lines to mitigate process temperature drops."
-      ],
-      "contacts": [
-        { "name": "Garry Thorne", "role": "Pinjarra Refinery Maintenance Lead", "email": "g.thorne@alcoa.com.au", "phone": "+61 8-9531-2000" },
-        { "name": "Fenner Dunlop Emergency Crew", "role": "Splicing Service Desk", "email": "emergency@fennerdunlop.com.au", "phone": "+61 1300-855-900" }
-      ],
-      "timeline": "36 to 48 hours for vulcanized splicing and test runs"
-    }
+      "mitigationPlan": {
+        "steps": [
+          "Initiate emergency conveyor belt splicing contract with Fenner Dunlop Australia.",
+          "Divert crude bauxite stocks to reserve stockpile yard B using heavy dumper fleets.",
+          "Increase calcination heating runs on parallel kiln lines to mitigate process temperature drops."
+        ],
+        "timeline": "36 to 48 hours for vulcanized splicing and test runs"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect completed splice joints for alignment and tension compliance.",
+          "Run conveyor system at reduced throughput and monitor vibration and belt tracking metrics.",
+          "Verify restored material flow rates meet minimum production requirements for 24 consecutive hours."
+        ],
+        "timeline": "24 hours of operational monitoring following repair completion"
+      }
+    },
+    "sources": [
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      }
+    ]
   },
   {
     "id": "SUP-212H",
@@ -107,16 +176,39 @@
       "status": "Elevated Risk"
     },
     "playbook": {
-      "steps": [
-        "Drain and flush chemical coating bath #2. Replace gasket seals on all chemical fluid lines.",
-        "Divert APU turbine blade coating runs to reserve chemical array #4.",
-        "Quarantine all turbine blades treated during the gasket leak timeline for ultrasound structural checks."
-      ],
-      "contacts": [
-        { "name": "Donna Vance", "role": "Phoenix Plant Integration Manager", "email": "donna.vance@honeywell.com", "phone": "+1 (602) 555-0988" },
-        { "name": "Chemical Supply Hotline", "role": "Maintenance Partner Desk", "email": "facility-ops@honeywell.com", "phone": "+1 (602) 555-0900" }
-      ],
-      "timeline": "48 hours for bath cleaning, seal replacement, and chemical validation"
-    }
+      "mitigationPlan": {
+        "steps": [
+          "Drain and flush chemical coating bath #2. Replace gasket seals on all chemical fluid lines.",
+          "Divert APU turbine blade coating runs to reserve chemical array #4.",
+          "Quarantine all turbine blades treated during the gasket leak timeline for ultrasound structural checks."
+        ],
+        "timeline": "48 hours for bath cleaning, seal replacement, and chemical validation"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform chemical composition testing on the replenished coating bath to verify specification compliance.",
+          "Inspect replacement gasket seals for pressure retention and leak-free operation during production runs.",
+          "Conduct ultrasound and coating integrity checks on quarantined turbine blades before release to manufacturing."
+        ],
+        "timeline": "24 to 48 hours for chemical certification, leak testing, and blade inspection sign-off"
+      }
+    },
+    "sources": [
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      },
+      {
+        "title": "TODO",
+        "url": "TODO",
+        "summary": "TODO"
+      }
+    ]
   }
 ]
