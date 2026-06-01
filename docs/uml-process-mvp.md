@@ -5,7 +5,6 @@ flowchart TD
         direction LR
         L1[Phase 1: MVP - Core Detection]:::phase1
         L2[Phase 2: Playbook & Scenarios]:::phase2
-        L3[Phase 3: Orchestration & History]:::phase3
     end
 
     subgraph Frontend["Frontend / User Interface"]
@@ -16,8 +15,6 @@ flowchart TD
         
         U3{Generate Full Playbook?}:::phase2
         U5([Review Mitigation Playbook]):::phase2
-        
-        U7([Approve & Execute Action Plan]):::phase3
     end
 
     subgraph BaseIngestion["Supply Base Ingestion & Validation"]
@@ -57,15 +54,6 @@ flowchart TD
         G4[Generate Mitigation Scenarios:<br>e.g., Expedite, Dual-Source, Reallocate]:::phase2
         G5[Decision Matrix:<br>Evaluate Cost, Time & Risk Trade-offs]:::phase2
         G6[Draft Tailored Mitigation Playbook]:::phase2
-        
-        G_Hist[(Historical Precedent DB:<br>Retrieve Past Mitigation Successes)]:::phase3
-    end
-
-    subgraph Execution["Orchestration & Collaboration Engine"]
-        E1[Trigger Automated Supplier Query via Portal/Email]:::phase3
-        E2([Supplier Submits Impact Confirmation / Denial]):::phase3
-        E3[ERP / API Integration Layer]:::phase3
-        E4[(Enterprise ERP / MRP:<br>Auto-PO, Routing, Lead Time Update)]:::phase3
     end
 
     %% Base Initialization Flow
@@ -107,31 +95,18 @@ flowchart TD
     U3 -- Request Playbook --> G1
     G1 --> G2
     G2 --> G3
-    G3 --> G_Hist
-    G_Hist --> G4
+    G3 --> G4
     G4 --> G5
     G5 --> G6
     G6 --> U5
-    
-    %% Execution, Orchestration & Collaboration Flow (NEW)
-    U5 -- Approve Playbook --> U7
-    U7 -->|Initiate Comms| E1
-    U7 -->|Trigger System Actions| E3
-    
-    E3 -->|Execute Approved Mitigations| E4
-    E1 -->|Supplier Provides Real Ground-Truth| E2
-    
-    %% The Critical Closed Loop
-    E2 -.->|Auto-Adjust Threat Score / Resolve Flag| P3
 
     %% Human Feedback Loop
     U2 -- Review Card --> U6
     U5 -- Reject/Modify Playbook --> U6
     U3 -- Ignore Signal --> U6
-    U6 -.->|Model Tuning| P3
+    U6 -.->|AI Judge Governance / Recalibration| P3
 
     %% Styling Classes
     classDef phase1 fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#000;
     classDef phase2 fill:#fff3cd,stroke:#ffc107,stroke-width:2px,color:#000;
-    classDef phase3 fill:#cce5ff,stroke:#007bff,stroke-width:2px,color:#000;
 ```
