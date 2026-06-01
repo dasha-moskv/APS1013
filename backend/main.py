@@ -23,10 +23,13 @@ def main():
 
     print("Collecting public disruption signals...")
     current_json_data = read_from_json()
-    raw_signals = collect_public_signals() #TODO: Convert from Fake signal to real signals
+    
+    #TODO: Convert from Fake signal to real signals
+    raw_signals = collect_public_signals() 
     print("[✓] Signals collected")
 
     print("\nAnalyzing signals...")
+    #TODO: Time permitting, split card and playbook generation again. Make playbook generation more advanced
     new_data_to_display = analyze_signals(supply_base, current_json_data, raw_signals)
     print("[✓] Signals analyzed")
     
