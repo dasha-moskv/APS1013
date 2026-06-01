@@ -16,12 +16,11 @@ export default function ActionOrchestration({
   isDark, 
   threatRows = [], 
   approvedPlaybooks = {}, 
-  onSupplierResponse,
-  erpSystems
+  onSupplierResponse
 }) {
   const [activeOrchId, setActiveOrchId] = useState("");
   const [supplierStatus, setSupplierStatus] = useState("pending"); // pending, confirmed, mitigated, partial
-  const [erpLogs, setErpLogs] = useState([]);
+  const [portalLogs, setPortalLogs] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successBanner, setSuccessBanner] = useState(false);
 
@@ -32,73 +31,45 @@ export default function ActionOrchestration({
     setActiveOrchId(id);
     setSupplierStatus("pending");
     setSuccessBanner(false);
-    setErpLogs([]);
+    setPortalLogs([]);
   };
 
   const handleSimulateSupplierPortal = (status) => {
     setSupplierStatus(status);
   };
 
-  // Dynamic SAP material master lookup
-  let matchingPart = null;
-  let transitRoute = null;
-  if (activeOrchId && erpSystems) {
-    const threat = threatRows.find(t => t.id === activeOrchId);
-    if (threat) {
-      // Find matching SAP part based on approved vendor match
-      const vendorName = threat.facility.split(" ")[0].toLowerCase();
-      matchingPart = erpSystems.sapMaterialMaster.find(m => 
-        m.approvedASLVendor.toLowerCase().includes(vendorName)
-      ) || erpSystems.sapMaterialMaster[0];
-
-      // Find matching transit route lead-time mapping
-      transitRoute = erpSystems.transitLeadTimes.find(r => 
-        r.origin.toLowerCase().includes(vendorName) || r.origin.toLowerCase().includes("wichita")
-      ) || erpSystems.transitLeadTimes[0];
-    }
-  }
-
   const executeClosedLoopIntegration = () => {
     if (!activeOrchId) return;
     setIsSubmitting(true);
-    setErpLogs([]);
+    setPortalLogs([]);
 
     const threat = threatRows.find(t => t.id === activeOrchId);
     const targetFacility = threat ? threat.facility : "Supplier Facility";
-    const partCode = matchingPart ? matchingPart.partNumber : "SAP-GEN-902";
-    const partDesc = matchingPart ? matchingPart.description : "Standard Component";
-    const unitPrice = matchingPart ? matchingPart.unitPrice : 1500;
-    const mode = transitRoute ? transitRoute.mode : "Express Freight";
-
     const logs = [
       `📡 INGESTING GROUND-TRUTH CALLBACK FROM ${targetFacility.toUpperCase()} PORTAL...`,
       `🔍 STATUS CODE RECEIVED: [${supplierStatus.toUpperCase()}]`,
       `💾 REGISTERING INTERPOLATED RESPONSE INTO COGNITIVE GRAPH...`,
-      `🔗 CONNECTING ERP API INTERFACE (SAP S/4HANA CLIENT 100)...`,
-      `📦 INGESTING SAP MATERIAL MASTER RECORD [Part: ${partCode}]`,
-      `   -> Description: ${partDesc}`,
-      `   -> Standard Unit Valuation: $${unitPrice.toLocaleString()}`
+      `🔗 CONNECTING SUPPLIER PORTAL API INTEGRATION INTERFACE...`,
+      `📦 RETRIEVING COMPONENT DISRUPTION FLOW DATA...`
     ];
 
     if (supplierStatus === "mitigated") {
       logs.push(
-        `➡️ ACTION: TRIGGER EXPEDITED AUTO-PURCHASE ORDER INITIATION...`,
-        `⚙️ SAP S/4 TRANSACTION: CREATE APPROVED Auto-PO [PO #779201]`,
-        `⏱️ ROUTING REVISION: Adjust standard transit mode to: ${mode}`,
-        `⏱️ LEAD TIME UPDATE: Regional procurement lead time revised to 0 days`,
+        `➡️ ACTION: INITIATING WAREHOUSE REALLOCATION PLAYBOOK...`,
+        `⏱️ LEAD TIME UPDATE: Alternate routing secured successfully.`,
+        `⏱️ BUFFER REVISION: Drawing from pre-certified safety stock reserves.`,
         `✅ CLOSED-LOOP THREAT RESOLUTION: Recalculating threat score down to 1.2/10 Nominal.`
       );
     } else if (supplierStatus === "confirmed") {
       logs.push(
         `❌ WARNING: SUPPLIER INABILITY TO WORKAROUND. CRITICAL DELAY CONFIRMED.`,
         `➡️ ACTION: DISPATCH LOGISTICS EXPEDITE ESCALATION TICKETS...`,
-        `⚙️ SAP ROUTING: Standard transit lead times revised from ${transitRoute?.transitNominalDays || 15} to ${transitRoute ? transitRoute.transitNominalDays + 7 : 22} days.`,
+        `⏱️ LEAD TIME UPDATE: Logistics buffer exhausted. Assembly delays anticipated.`,
         `⚠️ CLOSED-LOOP THREAT UPDATED: Confirming Critical Threat at 9.5/10 Severity.`
       );
     } else if (supplierStatus === "partial") {
       logs.push(
         `➡️ ACTION: COMMITTING SECTOR RE-ALLOCATION WITH BUFFERS...`,
-        `⚙️ SAP S/4 TRANSACTION: DRAW DOWN WAREHOUSE SAFETY BUFFER`,
         `⏱️ LEAD TIME UPDATE: Logistics buffer drawn down. Delivery delay revised to 3 days.`,
         `✅ CLOSED-LOOP THREAT RE-RATED: Recalculating threat score down to 4.5/10 Elevated.`
       );
@@ -106,7 +77,7 @@ export default function ActionOrchestration({
 
     logs.forEach((line, index) => {
       setTimeout(() => {
-        setErpLogs(prev => [...prev, `[${new Date().toISOString().split("T")[1].slice(0, 8)}] ${line}`]);
+        setPortalLogs(prev => [...prev, `[${new Date().toISOString().split("T")[1].slice(0, 8)}] ${line}`]);
         if (index === logs.length - 1) {
           setTimeout(() => {
             setIsSubmitting(false);
@@ -128,10 +99,10 @@ export default function ActionOrchestration({
       <div className="flex flex-col gap-1 border-b pb-2 select-none border-slate-700/50">
         <h1 className="text-base font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
           <PlayCircle className="h-4 w-4 text-[#86BC25]" />
-          Phase 3: Action Orchestration & Collaboration (API INTEGRATED)
+          Phase 3: Action Orchestration & Collaboration
         </h1>
         <p className={`text-[10px] leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-          Approve and execute playbooks, trigger automated supplier portals, simulate real ground-truth verification responses, and execute bidirectional SAP/Oracle ERP system actions.
+          Approve and execute playbooks, trigger automated supplier portals, simulate real ground-truth verification responses, and coordinate closed-loop actions.
         </p>
       </div>
 
@@ -318,23 +289,23 @@ export default function ActionOrchestration({
                 </div>
               </div>
 
-              {/* ERP / API Integration Logs */}
+              {/* Automated Portal Transaction Logs */}
               <div className="border border-slate-800 bg-[#070A11] p-3 font-mono text-[9px] text-sky-400 select-text flex flex-col gap-2 min-h-[200px]">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 select-none">
                   <span className="font-bold tracking-wider uppercase text-slate-500 flex items-center gap-1.5">
                     <Terminal className="h-3.5 w-3.5 text-sky-400" />
-                    ERP SAP CLIENT 100 TRANSACTION LOGS
+                    AUTOMATED PORTAL TRANSACTION LOGS
                   </span>
-                  <span className="text-slate-600 font-bold">API PORT: 443</span>
+                  <span className="text-slate-600 font-bold">PORT: 443</span>
                 </div>
                 
-                {erpLogs.length === 0 ? (
+                {portalLogs.length === 0 ? (
                   <div className="flex flex-1 items-center justify-center text-slate-600 select-none py-12">
                     [STANDBY - SUBMIT SUPPLIER PORTAL DATA TO CONNECT GATEWAY]
                   </div>
                 ) : (
                   <div className="flex flex-col gap-1 max-h-[220px] overflow-y-auto pr-1">
-                    {erpLogs.map((log, index) => (
+                    {portalLogs.map((log, index) => (
                       <div key={index} className="leading-relaxed break-words font-mono">
                         {log}
                       </div>

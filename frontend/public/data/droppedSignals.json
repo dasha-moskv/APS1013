@@ -1,0 +1,6 @@
+[
+  { "id": "RAW-0987", "source": "Social Media / Twitter RSS", "detail": "Rumors of labor union disputes at Derby factory. Correlated with Derby QA desk: NEGATIVE. No operational dispute active.", "rule": "FILTERED: Unverified social chatter (Noise Score: 94%)" },
+  { "id": "RAW-1102", "source": "Local News (Pinjarra Gazette)", "detail": "Minor power outage reported near residential Alcoa mining camps. Operations unaffected.", "rule": "FILTERED: External residential impact (Noise Score: 88%)" },
+  { "id": "RAW-1456", "source": "Financial Stream (Yahoo Biz)", "detail": "Toray Parent Company stock experiences 1.4% downward fluctuation.", "rule": "FILTERED: Standard equity variance (Noise Score: 99%)" },
+  { "id": "RAW-1901", "source": "SCADA Environmental Stream", "detail": "Everett ventilation fan #12 thermal sensor flags minor temporary overheat of 1.2% above baseline.", "rule": "FILTERED: Localized facility noise (Noise Score: 92%)" }
+]

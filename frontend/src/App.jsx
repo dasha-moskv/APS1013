@@ -12,129 +12,7 @@ import MitigationPlaybooks from "./components/MitigationPlaybooks";
 import ActionOrchestration from "./components/ActionOrchestration";
 import AIJudgeGovernance from "./components/AIJudgeGovernance";
 
-// High-fidelity mock signals representing live incoming risk events
-const MOCK_SIGNALS = [
-  {
-    id: "SUP-404R",
-    facility: "Rolls-Royce plc",
-    location: "Derby, GB",
-    disruption: "Turbofan casing alloy defect identified in micro-CT scan",
-    severity: { "label": "8.8/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    likelihood: { "label": "95% HIGH", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
-    timeToHit: "Immediate",
-    tier: "Tier 1",
-    fullDescription: "A micro-computed tomography (CT) scan at the Derby assembly plant detected a core density fluctuation in a batch of composite turbofan casing forgings. Assembly line operations for widebody engine components have been suspended to prevent structural casing fracture risk.",
-    sourceData: "Nondestructive Inspection Feed: RR-DERBY-CT-901 & Quality Systems IoT Stream",
-    mapPosition: {
-      coordinates: [-1.4552, 52.8931],
-      color: "#D32F2F",
-      role: "Tier-1 / Turbofans",
-      status: "Critical threat"
-    },
-    playbook: {
-      steps: [
-        "Quarantine affected turbine casing batch #RR-CT-8890.",
-        "Reroute turbofan casing castings from secondary casting yard at Munich depot.",
-        "Calibrate micro-CT imaging arrays with standard titanium benchmark controls."
-      ],
-      contacts: [
-        { "name": "Sir Robert Vance", "role": "Chief Materials Officer", "email": "robert.vance@rolls-royce.com", "phone": "+44 1332-242424" },
-        { "name": "Derby Quality Assurance Desk", "role": "Inspection Lead", "email": "qa.derby@rolls-royce.com", "phone": "+44 1332-240112" }
-      ],
-      timeline: "5 to 7 operational days for metallurgical recertification"
-    }
-  },
-  {
-    id: "SUP-512S",
-    facility: "Safran Landing Systems",
-    location: "Bidos, FR",
-    disruption: "Hydraulic pressure testing valve seal failure in building 4",
-    severity: { "label": "8.2/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    likelihood: { "label": "88% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    timeToHit: "1-2 weeks",
-    tier: "Tier 1",
-    fullDescription: "High-pressure testing of main landing gear shock absorbers experienced a catastrophic valve seal failure, causing localized toxic hydraulic fluid spillage. Clean-up procedures are active, temporarily halting system testing runs in building 4.",
-    sourceData: "SCADA Environmental Monitor Feed: SAFRAN-BIDOS-B4 & OEM Emerson Alerts",
-    mapPosition: {
-      coordinates: [-0.605, 43.181],
-      color: "#D32F2F",
-      role: "Tier-1 / Landing Gear",
-      status: "Critical threat"
-    },
-    playbook: {
-      steps: [
-        "Deploy hazardous material cleanup shift to contain hydraulic spillage in building 4.",
-        "Procure emergency shock absorber seal packs from storage backup stocks in Bordeaux.",
-        "Authorize landing gear structural stress tests in parallel assembly building 6."
-      ],
-      contacts: [
-        { "name": "Jean-Pierre Blanc", "role": "Bidos Safety Coordinator", "email": "jp.blanc@safrangroup.com", "phone": "+33 5-59-39-00-11" },
-        { "name": "Hazmat Containment Desk", "role": "First Responder Desk", "email": "response@secourisme.fr", "phone": "+33 5-59-99-1122" }
-      ],
-      timeline: "48 to 72 hours for cleanroom validation and pressure test reset"
-    }
-  },
-  {
-    id: "SUP-771A",
-    facility: "Alcoa of Australia Ltd",
-    location: "Pinjarra, AU",
-    disruption: "Bauxite conveyor belt structural snap, loading halted",
-    severity: { "label": "6.0/10 ELEVATED", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    likelihood: { "label": "75% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    timeToHit: "2-4 weeks",
-    tier: "Tier 3",
-    fullDescription: "Bauxite transport operations at the Pinjarra refinery have been suspended following a structural conveyor belt snap on the primary loading line. Raw aluminum refining output is throttled by 40% until belt splicing is complete.",
-    sourceData: "Pinjarra IoT Mechanical Stress Feed: ALCOA-PINJ-CVY-08 & Local Maintenance Registry",
-    mapPosition: {
-      coordinates: [115.875, -32.628],
-      color: "#FFB300",
-      role: "Tier-3 / Raw Aluminum",
-      status: "Elevated Risk"
-    },
-    playbook: {
-      steps: [
-        "Initiate emergency conveyor belt splicing contract with Fenner Dunlop Australia.",
-        "Divert crude bauxite stocks to reserve stockpile yard B using heavy dumper fleets.",
-        "Increase calcination heating runs on parallel kiln lines to mitigate process temperature drops."
-      ],
-      contacts: [
-        { "name": "Garry Thorne", "role": "Pinjarra Refinery Maintenance Lead", "email": "g.thorne@alcoa.com.au", "phone": "+61 8-9531-2000" },
-        { "name": "Fenner Dunlop Emergency Crew", "role": "Splicing Service Desk", "email": "emergency@fennerdunlop.com.au", "phone": "+61 1300-855-900" }
-      ],
-      timeline: "36 to 48 hours for vulcanized splicing and test runs"
-    }
-  },
-  {
-    id: "SUP-212H",
-    facility: "Honeywell Aerospace",
-    location: "Phoenix, AZ, US",
-    disruption: "APU integration lines chemical bath contamination",
-    severity: { "label": "7.9/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    likelihood: { "label": "70% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-    timeToHit: "Immediate",
-    tier: "Tier 1",
-    fullDescription: "A chemical bath used for coating auxiliary power unit (APU) turbine blades was flagged with an elevated contamination rating due to a leaking gasket. Turbine blade coating operations have been suspended to prevent structural delamination.",
-    sourceData: "Honeywell Chemical Control System: PHX-CHEM-BATH-02 & Gasket Leak IoT Alert",
-    mapPosition: {
-      coordinates: [-112.0, 33.435],
-      color: "#FFB300",
-      role: "Tier-1 / APU Assemblies",
-      status: "Elevated Risk"
-    },
-    playbook: {
-      steps: [
-        "Drain and flush chemical coating bath #2. Replace gasket seals on all chemical fluid lines.",
-        "Divert APU turbine blade coating runs to reserve chemical array #4.",
-        "Quarantine all turbine blades treated during the gasket leak timeline for ultrasound structural checks."
-      ],
-      contacts: [
-        { "name": "Donna Vance", "role": "Phoenix Plant Integration Manager", "email": "donna.vance@honeywell.com", "phone": "+1 (602) 555-0988" },
-        { "name": "Chemical Supply Hotline", "role": "Maintenance Partner Desk", "email": "facility-ops@honeywell.com", "phone": "+1 (602) 555-0900" }
-      ],
-      timeline: "48 hours for bath cleaning, seal replacement, and chemical validation"
-    }
-  }
-];
+
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("radar");
@@ -145,8 +23,10 @@ export default function App() {
   
   // Decoupled Decoded API States
   const [knowledgeGraph, setKnowledgeGraph] = useState(null);
-  const [historicalPrecedents, setHistoricalPrecedents] = useState(null);
-  const [erpSystems, setErpSystems] = useState(null);
+  const [mockSignals, setMockSignals] = useState([]);
+  const [droppedSignals, setDroppedSignals] = useState([]);
+  const [playbookData, setPlaybookData] = useState(null);
+  const [ingestionPresets, setIngestionPresets] = useState(null);
 
   // Phase 2/3 States
   const [approvedPlaybooks, setApprovedPlaybooks] = useState({});
@@ -158,7 +38,7 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Parallel Ingestion of threatRegistry, kpiData, and our three new decoupled core DBs
+  // Parallel Ingestion of all 7 decoupled JSON databases
   useEffect(() => {
     Promise.all([
       fetch("/data/threatRegistry.json").then((res) => {
@@ -173,22 +53,32 @@ export default function App() {
         if (!res.ok) throw new Error("Failed to fetch knowledge graph");
         return res.json();
       }),
-      fetch("/data/historicalPrecedents.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch precedents");
+      fetch("/data/mockSignals.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch mock signals");
         return res.json();
       }),
-      fetch("/data/erpSystems.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch ERP tables");
+      fetch("/data/droppedSignals.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch dropped signals");
+        return res.json();
+      }),
+      fetch("/data/playbookRecommendations.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch playbook recommendations");
+        return res.json();
+      }),
+      fetch("/data/ingestionPresets.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch ingestion presets");
         return res.json();
       })
     ])
-      .then(([threats, kpis, graph, precedents, erp]) => {
+      .then(([threats, kpis, graph, mockSig, droppedSig, playbooks, presets]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
         setKnowledgeGraph(graph);
-        setHistoricalPrecedents(precedents);
-        setErpSystems(erp);
+        setMockSignals(mockSig);
+        setDroppedSignals(droppedSig);
+        setPlaybookData(playbooks);
+        setIngestionPresets(presets);
         setLoading(false);
       })
       .catch((err) => {
@@ -206,10 +96,10 @@ export default function App() {
         facility: "Spirit AeroSystems, Inc.",
         location: "KS, US",
         disruption: "Renton fuselage transport logistics rail strike",
-        severity: { "label": "8.5/10 SEVERE", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-        likelihood: { "label": "85% HIGH", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
+        severity: 8.5,
+        likelihood: 85,
         timeToHit: "1-2 weeks",
-        tier: "Tier 1",
+        tier: 1,
         fullDescription: "Fuselage assemblies rail transport is stalled within the Midwest corridor due to rail union strikes. Primary Renton assembly operations risk fuselage starvation in 10 operational days.",
         sourceData: "SCADA logistics webhook BNSF-KS-301 & Local labor RSS blogs",
         mapPosition: {
@@ -276,45 +166,45 @@ export default function App() {
   const handleSupplierResponse = (threatId, supplierStatus) => {
     setThreatRows(prevRows => 
       prevRows.map(row => {
-        if (row.id === threatId) {
-          if (supplierStatus === "mitigated") {
-            return {
-              ...row,
-              disruption: `[RESOLVED BY WAREHOUSE BUFFER OVERRIDE] ${row.disruption}`,
-              severity: { "label": "1.2/10 RESOLVED", "color": "text-[#16A34A] bg-[#F0FDF4] border-[#DCFCE7]" },
-              likelihood: { "label": "0% NOMINAL", "color": "text-[#16A34A] bg-[#F0FDF4] border-[#DCFCE7]" },
-              timeToHit: "Bypassed (0 Days)",
-              mapPosition: {
-                ...row.mapPosition,
-                color: "#86BC25",
-                status: "Nominal"
-              }
-            };
-          } else if (supplierStatus === "partial") {
-            return {
-              ...row,
-              disruption: `[PARTIALLY MITIGATED VIA HIGHWAY FLATS] ${row.disruption}`,
-              severity: { "label": "4.5/10 ELEVATED", "color": "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]" },
-              timeToHit: "3 Days Delay",
-              mapPosition: {
-                ...row.mapPosition,
-                color: "#FFB300",
-                status: "Elevated Risk"
-              }
-            };
-          } else if (supplierStatus === "confirmed") {
-            return {
-              ...row,
-              severity: { "label": "9.5/10 CRITICAL", "color": "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]" },
-              mapPosition: {
-                ...row.mapPosition,
-                color: "#D32F2F",
-                status: "Critical threat"
-              }
-            };
+          if (row.id === threatId) {
+            if (supplierStatus === "mitigated") {
+              return {
+                ...row,
+                disruption: `[RESOLVED BY WAREHOUSE BUFFER OVERRIDE] ${row.disruption}`,
+                severity: 1.2,
+                likelihood: 0,
+                timeToHit: -1,
+                mapPosition: {
+                  ...row.mapPosition,
+                  color: "#86BC25",
+                  status: "Nominal"
+                }
+              };
+            } else if (supplierStatus === "partial") {
+              return {
+                ...row,
+                disruption: `[PARTIALLY MITIGATED VIA HIGHWAY FLATS] ${row.disruption}`,
+                severity: 4.5,
+                timeToHit: 3,
+                mapPosition: {
+                  ...row.mapPosition,
+                  color: "#FFB300",
+                  status: "Elevated Risk"
+                }
+              };
+            } else if (supplierStatus === "confirmed") {
+              return {
+                ...row,
+                severity: 9.5,
+                mapPosition: {
+                  ...row.mapPosition,
+                  color: "#D32F2F",
+                  status: "Critical threat"
+                }
+              };
+            }
           }
-        }
-        return row;
+          return row;
       })
     );
 
@@ -355,9 +245,9 @@ export default function App() {
 
   // Simulates live satellite threat signals coming in and updates central state
   const handleTriggerDemoSignal = () => {
-    if (demoIndex >= MOCK_SIGNALS.length) return;
+    if (demoIndex >= mockSignals.length) return;
 
-    const signal = { ...MOCK_SIGNALS[demoIndex], ingestedAt: Date.now() };
+    const signal = { ...mockSignals[demoIndex], ingestedAt: Date.now() };
     setDemoIndex(prev => prev + 1);
 
     // 1. Append new signal to the front of threat registry
@@ -378,7 +268,7 @@ export default function App() {
         }
         if (kpi.id === "active-risks") {
           const current = parseInt(kpi.value);
-          const criticals = threatRows.filter(r => r.severity.label.includes("CRITICAL") || (r.id === signal.id && signal.severity.label.includes("CRITICAL"))).length + 1;
+          const criticals = threatRows.filter(r => r.severity >= 9.0 || (r.id === signal.id && signal.severity >= 9.0)).length + 1;
           const elevateds = (threatRows.length + 1) - criticals;
           return { 
             ...kpi, 
@@ -447,7 +337,7 @@ export default function App() {
         {/* ── Integrated Dark Corporate Header ── */}
         <Topbar 
           onTriggerDemoSignal={handleTriggerDemoSignal} 
-          mockSignalsLeft={MOCK_SIGNALS.length - demoIndex}
+          mockSignalsLeft={mockSignals.length - demoIndex}
           isDark={isDark}
         />
 
@@ -493,7 +383,8 @@ export default function App() {
           {activeTab === "ingest" && (
             <BaseIngest 
               isDark={isDark} 
-              onSupplyBaseInitialized={handleSupplyBaseInitialized} 
+              onSupplyBaseInitialized={handleSupplyBaseInitialized}
+              presets={ingestionPresets}
             />
           )}
 
@@ -503,8 +394,7 @@ export default function App() {
               threatRows={threatRows} 
               onApprovePlaybook={handleApprovePlaybook}
               knowledgeGraph={knowledgeGraph}
-              historicalPrecedents={historicalPrecedents}
-              erpSystems={erpSystems}
+              playbookData={playbookData}
             />
           )}
 
@@ -514,7 +404,6 @@ export default function App() {
               threatRows={threatRows} 
               approvedPlaybooks={approvedPlaybooks} 
               onSupplierResponse={handleSupplierResponse}
-              erpSystems={erpSystems}
             />
           )}
 
@@ -522,6 +411,7 @@ export default function App() {
             <AIJudgeGovernance 
               isDark={isDark} 
               feedbackHistory={feedbackHistory}
+              droppedSignals={droppedSignals}
             />
           )}
 

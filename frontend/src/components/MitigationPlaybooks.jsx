@@ -12,47 +12,16 @@ import {
   CheckSquare
 } from "lucide-react";
 
-// Standard fallback values if databases are still loading
-const FALLBACK_BOM = [
-  { tier: "Tier 0", part: "B777/B767 Fuselage Airframe Assembly", status: "STARVED" },
-  { tier: "Tier 1", part: "Titanium Structural Spars", status: "DELAYED" },
-  { tier: "Tier 2", part: "Casting Ingots #Ti-8890", status: "NOMINAL" },
-  { tier: "Tier 3", part: "Raw Titanium Sponge (Wichita)", status: "BUFFER" }
-];
-
-const FALLBACK_PRECEDENT = {
-  caseId: "CASE-2024-TITANIUM",
-  program: "B777 Structural Starvation",
-  description: "Met CT composite forging density fluctuations Derby plant bypassed using certified castings in Munich reserves. Restored line velocity in 6 operational days.",
-  successScore: "96% SUCCESS",
-  ttrSaved: "4 Days Saved",
-  resolutionCode: "RE-RUN-WICHITA-LOG"
-};
-
-const PLAYBOOK_RECOMMENDATIONS = {
-  "FAC-001": [
-    { id: "air", label: "Antonov Air Charter", cost: "$650,000", ttr: "4 Days Saved", risk: "Low", desc: "Bypass freight hubs; charter 3x Antonov flights." },
-    { id: "shifts", label: "Double Shift Assembly Bays", cost: "$280,000", ttr: "2 Days Saved", risk: "Medium", desc: "Authorize overtime shifts in structural integration." }
-  ],
-  "SUP-001A": [
-    { id: "road", label: "Oversized Highway Convoy", cost: "$420,000", ttr: "6 Days Saved", risk: "Low", desc: "Initiate Priority-A road transport with police escorts." },
-    { id: "permits", label: "Fast-Track KDOT Permits", cost: "$50,000", ttr: "3 Days Saved", risk: "Medium", desc: "Pre-approve oversized road permits in 24 hours." }
-  ]
-};
-
-const DEFAULT_RECOMMENDATIONS = [
-  { id: "buffer", label: "Strategic Buffer Stock Release", cost: "$120,000", ttr: "3 Days Saved", risk: "Low", desc: "Draw down certified inventory allocations in regional depots." },
-  { id: "secondary", label: "Approved Secondary ASL Spot Buy", cost: "$250,000", ttr: "5 Days Saved", risk: "Low", desc: "Procure capacity from certified secondary vendors." }
-];
-
 export default function MitigationPlaybooks({ 
   isDark, 
   threatRows = [], 
   onApprovePlaybook,
   knowledgeGraph,
-  historicalPrecedents,
-  erpSystems
+  playbookData
 }) {
+  const activeFallbackBom = playbookData?.fallbackBom || [];
+  const activeRecommendationsMap = playbookData?.playbookRecommendations || {};
+  const activeDefaultRecommendations = playbookData?.defaultRecommendations || [];
   const [selectedThreatId, setSelectedThreatId] = useState("");
   const [selectedThreat, setSelectedThreat] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
@@ -68,7 +37,7 @@ export default function MitigationPlaybooks({
 
   useEffect(() => {
     if (threatRows && threatRows.length > 0) {
-      const defaultThreat = threatRows.find(t => t.severity.label.includes("CRITICAL") || t.severity.label.includes("SEVERE")) || threatRows[0];
+      const defaultThreat = threatRows.find(t => t.severity >= 7.0) || threatRows[0];
       setSelectedThreatId(defaultThreat.id);
     }
   }, [threatRows]);
@@ -115,7 +84,7 @@ export default function MitigationPlaybooks({
   const isApproved = selectedThreat ? approvedList[selectedThreat.id] || false : false;
 
   // Dynamic Graph BOM Mapping: Traversing Decoupled Knowledge Graph
-  let bom = FALLBACK_BOM;
+  let bom = activeFallbackBom;
   if (selectedThreat && knowledgeGraph) {
     const currentNode = knowledgeGraph.nodes.find(n => n.id === selectedThreat.id);
     if (currentNode) {
@@ -145,27 +114,9 @@ export default function MitigationPlaybooks({
     }
   }
 
-  // Dynamic Historical Precedent Queries: Scanning Precedents DB
-  let precedent = FALLBACK_PRECEDENT;
-  if (selectedThreat && historicalPrecedents) {
-    const matchingPrecedent = historicalPrecedents.precedents.find(p => p.associatedNode === selectedThreat.id);
-    if (matchingPrecedent) {
-      precedent = matchingPrecedent;
-    }
-  }
 
-  // Dynamic Alternate Sourcing ERP lookup: Querying Approved Supplier List (ASL)
-  let aslSuppliers = [];
-  if (selectedThreat && erpSystems) {
-    let categoryKey = "Titanium Alloys";
-    if (selectedThreat.id === "FAC-001") categoryKey = "Composites";
-    else if (selectedThreat.id === "SUP-512S") categoryKey = "Landing Gear";
-    else if (selectedThreat.id === "SUP-701X") categoryKey = "Microchips";
 
-    aslSuppliers = erpSystems.approvedSupplierLists[categoryKey] || [];
-  }
-
-  const recommendations = selectedThreat ? (PLAYBOOK_RECOMMENDATIONS[selectedThreat.id] || DEFAULT_RECOMMENDATIONS) : DEFAULT_RECOMMENDATIONS;
+  const recommendations = selectedThreat ? (activeRecommendationsMap[selectedThreat.id] || activeDefaultRecommendations) : activeDefaultRecommendations;
 
   // SVG Coordinates Mapping for clean tree column distribution
   const tierXMapping = { 3: 50, 2: 210, 1: 370, 0: 530 };
@@ -198,7 +149,7 @@ export default function MitigationPlaybooks({
   const isCriticalThreat = (nodeId) => {
     const matchedThreat = threatRows.find(r => r.id === nodeId);
     if (!matchedThreat) return false;
-    return matchedThreat.severity.label.toUpperCase().includes("CRITICAL");
+    return matchedThreat.severity >= 9.0;
   };
 
   return (
@@ -525,67 +476,32 @@ export default function MitigationPlaybooks({
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {/* Deep-tier Bill of Materials (BOM) */}
-            <div className={`border p-4 rounded-none transition-colors duration-300 ${
-              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+          {/* Deep-tier Bill of Materials (BOM) */}
+          <div className={`border p-4 rounded-none transition-colors duration-300 ${
+            isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+          }`}>
+            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
+              isDark ? "text-slate-300" : "text-slate-700"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <Layers className="h-4 w-4 text-[#86BC25]" />
-                Deep-Tier BOM Hierarchy
-              </h2>
-              <div className="flex flex-col gap-1.5 font-mono text-[10px] select-none">
-                {bom.map((b, i) => (
-                  <div key={i} className={`border p-2 flex items-center justify-between ${
-                    isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
-                  }`}>
-                    <div className="flex flex-col">
-                      <span className="text-slate-500 font-bold uppercase text-[8px] tracking-wide">{b.tier}</span>
-                      <span className={`font-sans font-bold text-xs mt-0.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                        {b.part}
-                      </span>
-                    </div>
-                    <span className="px-1.5 py-0.5 text-[8px] font-bold border uppercase border-slate-800 bg-slate-900/10">
-                      {b.status}
+              <Layers className="h-4 w-4 text-[#86BC25]" />
+              Deep-Tier BOM Hierarchy
+            </h2>
+            <div className="flex flex-col gap-1.5 font-mono text-[10px] select-none">
+              {bom.map((b, i) => (
+                <div key={i} className={`border p-2 flex items-center justify-between ${
+                  isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
+                }`}>
+                  <div className="flex flex-col">
+                    <span className="text-slate-500 font-bold uppercase text-[8px] tracking-wide">{b.tier}</span>
+                    <span className={`font-sans font-bold text-xs mt-0.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                      {b.part}
                     </span>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Historical Precedent DB Lookup (GraphRAG) */}
-            <div className={`border p-4 rounded-none transition-colors duration-300 ${
-              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-            }`}>
-              <div className="flex items-center justify-between mb-3 select-none">
-                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                  isDark ? "text-slate-300" : "text-slate-700"
-                }`}>
-                  <BookOpen className="h-4 w-4 text-[#86BC25]" />
-                  GraphRAG Historical Precedents
-                </h2>
-                <span className="text-[8px] border border-slate-700/60 px-1.5 py-0.5 text-slate-400 font-mono font-bold">
-                  {precedent.caseId}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className={`text-[10px] font-mono font-bold text-slate-400 uppercase`}>
-                  Program: {precedent.program}
-                </span>
-                <p className={`text-[10px] leading-relaxed font-sans ${isDark ? "text-slate-300" : "text-slate-500"}`}>
-                  {precedent.description}
-                </p>
-                <div className="flex gap-2 text-[9px] font-mono select-none border-t border-slate-700/30 pt-2 mt-1">
-                  <div className="border border-slate-800 bg-slate-900/10 px-2 py-0.5 text-slate-400 font-bold">
-                    {precedent.successScore}
-                  </div>
-                  <div className="border border-slate-800 bg-slate-900/10 px-2 py-0.5 text-slate-400 font-bold">
-                    {precedent.ttrSaved}
-                  </div>
+                  <span className="px-1.5 py-0.5 text-[8px] font-bold border uppercase border-slate-800 bg-slate-900/10">
+                    {b.status}
+                  </span>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -644,32 +560,6 @@ export default function MitigationPlaybooks({
             </div>
           </div>
 
-          {/* Dynamic ERP Alternative ASL Sourcing Panel */}
-          {aslSuppliers.length > 0 && (
-            <div className={`border p-4 rounded-none transition-colors duration-300 ${
-              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-            }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <ShieldAlert className="h-4 w-4 text-slate-400" />
-                SAP ERP Mapped Approved Suppliers (ASL Capacities)
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono text-[9px]">
-                {aslSuppliers.map((sup, idx) => (
-                  <div key={idx} className={`border p-2 flex flex-col gap-1 ${
-                    isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
-                  }`}>
-                    <span className={`font-bold font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                      {sup.name}
-                    </span>
-                    <span className="text-slate-500 font-bold leading-none">ASL ID: {sup.supplierId}</span>
-                    <span className="text-slate-400 mt-1 text-[8px]">{sup.certifiedStatus}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Regulatory Compliance & Action Approval Panel */}
           {selectedThreat && (
