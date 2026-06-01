@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import * as Icons from "lucide-react";
 
-const iconMap = {
-  Building: Icons.Building,
-  ShieldAlert: Icons.ShieldAlert,
-  CheckCircle: Icons.CheckCircle,
-  Clock: Icons.Clock,
-  DollarSign: Icons.DollarSign,
-};
+
 
 export default function KpiCards({ kpiData = [], loading = true, isDark }) {
   const bg = isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200";
@@ -42,13 +36,35 @@ export default function KpiCards({ kpiData = [], loading = true, isDark }) {
 
       {/* KPI Items */}
       {kpiData.map((kpi) => {
-        const IconComponent = iconMap[kpi.icon] || Icons.HelpCircle;
+        let IconComponent = Icons.HelpCircle;
+        let borderColor = "";
+        let valueText = "";
+        let valueColor = "";
+        let subtextText = kpi.subtext || "";
+
+        if (kpi.id === "monitored-nodes") {
+          IconComponent = Icons.DollarSign;
+          borderColor = "border-l-4 border-l-[#B91C1C]";
+          valueText = `$${kpi.value.toFixed(1)}M`;
+          valueColor = "text-[#B91C1C]";
+        } else if (kpi.id === "active-risks") {
+          IconComponent = Icons.Building;
+          borderColor = isDark ? "border-l-4 border-l-slate-600" : "border-l-4 border-l-slate-800";
+          valueText = `${kpi.value} Sites`;
+          valueColor = isDark ? "text-slate-200" : "text-slate-800";
+          subtextText = `${kpi.criticalCount || 0} Critical | ${kpi.elevatedCount || 0} Elevated`;
+        } else if (kpi.id === "network-health") {
+          IconComponent = Icons.CheckCircle;
+          borderColor = "border-l-4 border-l-[#86BC25]";
+          valueText = `${kpi.value.toFixed(1)}%`;
+          valueColor = "text-[#86BC25]";
+        }
 
         return (
           <div
             key={kpi.id}
             id={kpi.id}
-            className={`flex flex-col justify-between p-4 rounded-none shadow-none ${kpi.borderColor} transition-colors duration-300 ${cardBg}`}
+            className={`flex flex-col justify-between p-4 rounded-none shadow-none ${borderColor} transition-colors duration-300 ${cardBg}`}
           >
             <div className="flex items-center justify-between">
               <span className={`text-[9px] font-bold uppercase tracking-wider font-sans ${labelText}`}>
@@ -58,13 +74,13 @@ export default function KpiCards({ kpiData = [], loading = true, isDark }) {
             </div>
 
             <div className="mt-1 flex items-baseline gap-2">
-              <span className={`text-2xl font-bold font-mono tracking-tight ${kpi.valueColor}`}>
-                {kpi.value}
+              <span className={`text-2xl font-bold font-mono tracking-tight ${valueColor}`}>
+                {valueText}
               </span>
             </div>
 
             <div className={`mt-0.5 flex items-center justify-between text-[10px] font-mono ${subText}`}>
-              <span>{kpi.subtext}</span>
+              <span>{subtextText}</span>
             </div>
           </div>
         );

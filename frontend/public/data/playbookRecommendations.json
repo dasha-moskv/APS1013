@@ -1,22 +1,22 @@
 {
   "fallbackBom": [
-    { "tier": "Tier 0", "part": "B777/B767 Fuselage Airframe Assembly", "status": "STARVED" },
-    { "tier": "Tier 1", "part": "Titanium Structural Spars", "status": "DELAYED" },
-    { "tier": "Tier 2", "part": "Casting Ingots #Ti-8890", "status": "NOMINAL" },
-    { "tier": "Tier 3", "part": "Raw Titanium Sponge (Wichita)", "status": "BUFFER" }
+    { "tier": 0, "part": "B777/B767 Fuselage Airframe Assembly", "status": "STARVED" },
+    { "tier": 1, "part": "Titanium Structural Spars", "status": "DELAYED" },
+    { "tier": 2, "part": "Casting Ingots #Ti-8890", "status": "NOMINAL" },
+    { "tier": 3, "part": "Raw Titanium Sponge (Wichita)", "status": "BUFFER" }
   ],
   "playbookRecommendations": {
     "FAC-001": [
-      { "id": "air", "label": "Antonov Air Charter", "cost": "$650,000", "ttr": "4 Days Saved", "risk": "Low", "desc": "Bypass freight hubs; charter 3x Antonov flights." },
-      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": "$280,000", "ttr": "2 Days Saved", "risk": "Medium", "desc": "Authorize overtime shifts in structural integration." }
+      { "id": "air", "label": "Antonov Air Charter", "cost": 650000, "ttrDays": 4, "risk": "Low", "desc": "Bypass freight hubs; charter 3x Antonov flights." },
+      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": 280000, "ttrDays": 2, "risk": "Medium", "desc": "Authorize overtime shifts in structural integration." }
     ],
     "SUP-001A": [
-      { "id": "road", "label": "Oversized Highway Convoy", "cost": "$420,000", "ttr": "6 Days Saved", "risk": "Low", "desc": "Initiate Priority-A road transport with police escorts." },
-      { "id": "permits", "label": "Fast-Track KDOT Permits", "cost": "$50,000", "ttr": "3 Days Saved", "risk": "Medium", "desc": "Pre-approve oversized road permits in 24 hours." }
+      { "id": "road", "label": "Oversized Highway Convoy", "cost": 420000, "ttrDays": 6, "risk": "Low", "desc": "Initiate Priority-A road transport with police escorts." },
+      { "id": "permits", "label": "Fast-Track KDOT Permits", "cost": 50000, "ttrDays": 3, "risk": "Medium", "desc": "Pre-approve oversized road permits in 24 hours." }
     ]
   },
   "defaultRecommendations": [
-    { "id": "buffer", "label": "Strategic Buffer Stock Release", "cost": "$120,000", "ttr": "3 Days Saved", "risk": "Low", "desc": "Draw down certified inventory allocations in regional depots." },
-    { "id": "secondary", "label": "Approved Secondary ASL Spot Buy", "cost": "$250,000", "ttr": "5 Days Saved", "risk": "Low", "desc": "Procure capacity from certified secondary vendors." }
+    { "id": "buffer", "label": "Strategic Buffer Stock Release", "cost": 120000, "ttrDays": 3, "risk": "Low", "desc": "Draw down certified inventory allocations in regional depots." },
+    { "id": "secondary", "label": "Approved Secondary ASL Spot Buy", "cost": 250000, "ttrDays": 5, "risk": "Low", "desc": "Procure capacity from certified secondary vendors." }
   ]
 }

@@ -2,28 +2,20 @@
   {
     "id": "monitored-nodes",
     "label": "Total Revenue Exposure",
-    "value": "$238.4M",
-    "subtext": "Direct financial impact at risk",
-    "icon": "DollarSign",
-    "borderColor": "border-l-4 border-l-[#B91C1C]",
-    "valueColor": "text-[#B91C1C]"
+    "value": 238.4,
+    "subtext": "Direct financial impact at risk"
   },
   {
     "id": "active-risks",
     "label": "Disrupted Nodes",
-    "value": "12 Sites",
-    "subtext": "3 Critical | 9 Elevated",
-    "icon": "Building",
-    "borderColor": "border-l-4 border-l-slate-800",
-    "valueColor": "text-slate-800"
+    "value": 12,
+    "criticalCount": 3,
+    "elevatedCount": 9
   },
   {
     "id": "network-health",
     "label": "Network SLA Stability",
-    "value": "82.4%",
-    "subtext": "-2.1% drop vs last week",
-    "icon": "CheckCircle",
-    "borderColor": "border-l-4 border-l-[#86BC25]",
-    "valueColor": "text-[#86BC25]"
+    "value": 82.4,
+    "subtext": "-2.1% drop vs last week"
   }
 ]
