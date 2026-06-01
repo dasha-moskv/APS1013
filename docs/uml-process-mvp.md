@@ -8,19 +8,15 @@ flowchart TD
     end
 
     subgraph Frontend["Frontend / User Interface"]
-        U1([User Submits Geographies / GeoJSONs]):::phase1
         U2[View Disruption Cards<br>Risk Score, Impacted Parts]:::phase1
         U4[View Aggregated Analytics]:::phase1
-        U6([Submit Human Feedback / Tuning]):::phase1
         
         U3{Generate Full Playbook?}:::phase2
         U5([Review Mitigation Playbook]):::phase2
     end
 
-    subgraph BaseIngestion["Supply Base Ingestion & Validation"]
-        I1[Parse & Validate GeoJSONs]:::phase1
-        I2{Are Files Valid?}:::phase1
-        I3[Initialize Target Supply Base]:::phase1
+    subgraph BaseIngestion["Supply Base Ingestion"]
+        I3([Initialize Target Supply Base<br>from Validated GeoJSONs]):::phase1
     end
 
     subgraph Collectors["Public Signal Collectors"]
@@ -38,7 +34,6 @@ flowchart TD
     subgraph Processing["Processing & Validation Engine"]
         P1[Filter Noise & Identify Impacted Parts]:::phase1
         P2[Scoring Model: Likelihood, Impact, Time-to-Hit]:::phase1
-        P3{AI Judge:<br>Validate Threat & Score}:::phase1
         P_Fork{" "}:::phase1
     end
 
@@ -57,10 +52,6 @@ flowchart TD
     end
 
     %% Base Initialization Flow
-    U1 --> I1
-    I1 --> I2
-    I2 -- Invalid --> U1
-    I2 -- Valid --> I3
     I3 --> C_Fork
 
     %% Collection Flow (Concurrent)
@@ -76,11 +67,7 @@ flowchart TD
 
     %% Processing Flow
     P1 --> P2
-    P2 --> P3
-    
-    %% AI Judge Validation Step & Closed Feedback Loop
-    P3 -- Rejected / False Positive --> Drop((Drop Signal)):::phase1
-    P3 -- Validated --> P_Fork
+    P2 --> P_Fork
 
     %% The Split: Real-Time Stream vs Background Analytics
     P_Fork -->|Publish Disruption Cards| U2
@@ -99,12 +86,6 @@ flowchart TD
     G4 --> G5
     G5 --> G6
     G6 --> U5
-
-    %% Human Feedback Loop
-    U2 -- Review Card --> U6
-    U5 -- Reject/Modify Playbook --> U6
-    U3 -- Ignore Signal --> U6
-    U6 -.->|AI Judge Governance / Recalibration| P3
 
     %% Styling Classes
     classDef phase1 fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#000;
