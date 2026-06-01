@@ -64,12 +64,12 @@ export default function App() {
         return res.json();
       })
     ])
-      .then(([threats, kpis, graph, mockSig, droppedSig, playbooks]) => {
+      .then(([threats, kpis, graph, signal, droppedSig, playbooks]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
         setKnowledgeGraph(graph);
-        setsignals(mockSig);
+        setsignals(signal);
         setDroppedSignals(droppedSig);
         setPlaybookData(playbooks);
         setLoading(false);
