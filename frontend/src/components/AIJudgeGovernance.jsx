@@ -16,14 +16,8 @@ import {
   UserCheck
 } from "lucide-react";
 
-const DROPPED_SIGNALS = [
-  { id: "RAW-0987", source: "Social Media / Twitter RSS", detail: "Rumors of labor union disputes at Derby factory. Correlated with Derby QA desk: NEGATIVE. No operational dispute active.", rule: "FILTERED: Unverified social chatter (Noise Score: 94%)" },
-  { id: "RAW-1102", source: "Local News (Pinjarra Gazette)", detail: "Minor power outage reported near residential Alcoa mining camps. Operations unaffected.", rule: "FILTERED: External residential impact (Noise Score: 88%)" },
-  { id: "RAW-1456", source: "Financial Stream (Yahoo Biz)", detail: "Toray Parent Company stock experiences 1.4% downward fluctuation.", rule: "FILTERED: Standard equity variance (Noise Score: 99%)" },
-  { id: "RAW-1901", source: "SCADA Environmental Stream", detail: "Everett ventilation fan #12 thermal sensor flags minor temporary overheat of 1.2% above baseline.", rule: "FILTERED: Localized facility noise (Noise Score: 92%)" }
-];
-
-export default function AIJudgeGovernance({ isDark, feedbackHistory = [] }) {
+export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppedSignals }) {
+  const activeDroppedSignals = droppedSignals || [];
   const [likelihoodWeight, setLikelihoodWeight] = useState(40);
   const [impactWeight, setImpactWeight] = useState(40);
   const [tthWeight, setTthWeight] = useState(20);
@@ -217,7 +211,7 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [] }) {
             </h2>
 
             <div className="flex flex-col gap-2 font-mono text-[9px] select-none">
-              {DROPPED_SIGNALS.map(s => (
+              {activeDroppedSignals.map(s => (
                 <div key={s.id} className={`border p-2.5 flex flex-col gap-1 relative ${
                   isDark ? "bg-[#111520] border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
                 }`}>

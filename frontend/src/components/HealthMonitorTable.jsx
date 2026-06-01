@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle, Globe, MapPin, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, Box, AlertCircle, ArrowRight } from "lucide-react";
 import { getTaxonomy } from "./SignalTaxonomy";
+import { getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
 const nodeCSuiteData = {
@@ -492,7 +493,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
   const filteredRows = selectedTier === "ALL" 
     ? rowData 
-    : rowData.filter(row => row.tier === selectedTier);
+    : rowData.filter(row => `Tier ${row.tier}` === selectedTier);
 
   // Apply C-Suite category taxonomy filtering if active (multi-select)!
   const taxonomyFilteredRows = selectedCategories && selectedCategories.length > 0 
@@ -523,21 +524,20 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     }
 
     if (sortConfig.key === "severity") {
-      const aVal = parseFloat(a.severity.label) || 0;
-      const bVal = parseFloat(b.severity.label) || 0;
+      const aVal = a.severity || 0;
+      const bVal = b.severity || 0;
       return sortConfig.direction === "asc" ? aVal - bVal : bVal - aVal;
     }
 
     if (sortConfig.key === "likelihood") {
-      const aVal = parseInt(a.likelihood.label) || 0;
-      const bVal = parseInt(b.likelihood.label) || 0;
+      const aVal = a.likelihood || 0;
+      const bVal = b.likelihood || 0;
       return sortConfig.direction === "asc" ? aVal - bVal : bVal - aVal;
     }
 
     if (sortConfig.key === "timeToHit") {
-      const weights = { "Immediate": 4, "1-2 weeks": 3, "2-4 weeks": 2, "1-2 months": 1 };
-      const aVal = weights[a.timeToHit] || 0;
-      const bVal = weights[b.timeToHit] || 0;
+      const aVal = a.timeToHit || 0;
+      const bVal = b.timeToHit || 0;
       return sortConfig.direction === "asc" ? aVal - bVal : bVal - aVal;
     }
 
@@ -1029,7 +1029,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   {/* Facility / Location */}
                   <td className="py-1.5 px-3 align-middle">
                     <div className={`font-semibold leading-tight ${isDark ? "text-slate-100" : "text-slate-900"}`}>{row.facility}</div>
-                    <div className="text-[9px] text-slate-400 font-mono mt-0.5">{row.location} &bull; {row.tier}</div>
+                    <div className="text-[9px] text-slate-400 font-mono mt-0.5">{row.location} &bull; Tier {row.tier}</div>
                   </td>
 
                   {/* Disruption Description */}
@@ -1053,24 +1053,24 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   {/* Risk Severity Badge (Right-aligned numeric) */}
                   <td className="py-1.5 px-3 align-middle text-right">
                     <span
-                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${row.severity.color}`}
+                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getSeverityColor(row.severity)}`}
                     >
-                      {row.severity.label}
+                      {getSeverityLabel(row.severity)}
                     </span>
                   </td>
 
                   {/* Likelihood Badge (Right-aligned numeric) */}
                   <td className="py-1.5 px-3 align-middle text-right">
                     <span
-                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${row.likelihood.color}`}
+                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getLikelihoodColor(row.likelihood)}`}
                     >
-                      {row.likelihood.label}
+                      {getLikelihoodLabel(row.likelihood)}
                     </span>
                   </td>
 
                   {/* Time to hit (Right-aligned numeric/text) */}
                   <td className={`py-1.5 px-3 align-middle text-right font-mono text-[10px] font-semibold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    {row.timeToHit}
+                    {formatTimeToHit(row.timeToHit)}
                   </td>
 
                   {/* Action inspect button with tactile hit fill state */}
@@ -1136,7 +1136,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               <div className="flex items-center justify-between">
                 <div>
                   <span className={`text-2xl font-bold font-sans tracking-tight ${isDark ? "text-slate-100" : "text-slate-900"}`}>{inspectedRow.id}</span>
-                  <span className="ml-2 text-[10px] font-mono text-[#86BC25] uppercase tracking-wider font-bold border border-[#86BC25]/30 bg-[#86BC25]/5 px-2 py-0.5">{inspectedRow.tier} NODE</span>
+                  <span className="ml-2 text-[10px] font-mono text-[#86BC25] uppercase tracking-wider font-bold border border-[#86BC25]/30 bg-[#86BC25]/5 px-2 py-0.5">TIER {inspectedRow.tier} NODE</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   {playbookGenerated ? (
@@ -1157,15 +1157,15 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
             <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">SEVERITY</span>
-                <span className={`font-bold text-[11px] mt-1 ${inspectedRow.severity.color.split(' ')[0]}`}>{inspectedRow.severity.label.split(" ")[0]}</span>
+                <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">LIKELIHOOD</span>
-                <span className={`font-bold text-[11px] mt-1 ${inspectedRow.likelihood.color.split(' ')[0]}`}>{inspectedRow.likelihood.label.split(" ")[0]}</span>
+                <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TIME TO HIT</span>
-                <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{inspectedRow.timeToHit}</span>
+                <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{formatTimeToHit(inspectedRow.timeToHit)}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TAXONOMY</span>

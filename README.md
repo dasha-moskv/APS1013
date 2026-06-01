@@ -6,10 +6,16 @@ By combining advanced agentic AI pipelines with an interactive, highly responsiv
 
 ---
 
-## 🎥 Application Visuals
+## 🎥 Application Visuals & Architecture
 
-- **System-Wide Process Flow**: Documented in [docs/uml-process.png](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/uml-process.png)
-- **High-Fidelity Interface Preview**: Showcased in [docs/demo.gif](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/demo.gif)
+### 📊 System-Wide Process Flow (Phases 1–3)
+![System-Wide Process Flow](docs/uml-process.png)
+
+### 🗺️ System Use Case Map
+![Use Case Map](docs/uml-use-case.png)
+
+### 💻 High-Fidelity Interface Preview
+![High-Fidelity Interface Preview](docs/demo.gif)
 
 ---
 

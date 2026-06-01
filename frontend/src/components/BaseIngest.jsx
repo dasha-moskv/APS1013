@@ -11,76 +11,8 @@ import {
   PlayCircle
 } from "lucide-react";
 
-const PRESETS = {
-  renton: {
-    name: "B737 MAX Renton Program Network",
-    file: "b737_max_renton_base.geojson",
-    nodesCount: 42,
-    coordinates: [-122.2172, 47.4797],
-    desc: "N-Tier structural sub-network for Renton assembly floor. Maps Wichita fuselage assembly channels, aluminum smelting nodes, and cabin integration corridors.",
-    logOutput: [
-      "⚡ INGESTION COMMAND RECEIVED: LOAD PRESET [B737 MAX Renton Network]",
-      "🔍 READING FILE: b737_max_renton_base.geojson (1.42 MB)",
-      "📊 PARSING GEOJSON SCHEMA FORMAT...",
-      "📍 EXTRACTED 42 NODES WITH GEOMETRY DETAILS:",
-      "   -> Wichita, KS [Tier 1]: Spirit AeroSystems Fuselage Forgings (-97.2798, 37.6436)",
-      "   -> Pinjarra, AU [Tier 3]: Alcoa Raw Bauxite Refining (115.875, -32.628)",
-      "   -> Portland, OR [Tier 2]: Precision Forging Mills (-122.5694, 45.4243)",
-      "✅ SYNTACTIC INTEGRITY: 100% VALID (FeatureCollection matches RFC 7946)",
-      "🛡️ RUNNING REGULATORY COMPLIANCE VERIFICATION...",
-      "   -> FAA Approved Supplier List (ASL) status: VERIFIED",
-      "🌐 INITIALIZING TARGET SUPPLY BASE FOR RENTON ASSEMBLY FLOOR...",
-      "📡 CONNECTING PUBLIC SIGNAL COLLECTORS (C1 News Ingestion, C2 SCADA Streams)...",
-      "🎉 SUPPLY BASE BASELINE LOADED SUCCESSFULLY! MONITORING IS ACTIVE."
-    ]
-  },
-  everett: {
-    name: "B777/B767 Everett Widebody Network",
-    file: "everett_widebody_base.geojson",
-    nodesCount: 58,
-    coordinates: [-122.2731, 47.9218],
-    desc: "Advanced avionics and structural composites network for Everett assembly line. Integrates composite autoclaves, titanium casting mills, and primary turbine suppliers.",
-    logOutput: [
-      "⚡ INGESTION COMMAND RECEIVED: LOAD PRESET [Everett Widebody Network]",
-      "🔍 READING FILE: everett_widebody_base.geojson (2.89 MB)",
-      "📊 PARSING GEOJSON SCHEMA FORMAT...",
-      "📍 EXTRACTED 58 NODES WITH GEOMETRY DETAILS:",
-      "   -> Derby, GB [Tier 1]: Rolls-Royce Turbofan Castings (-1.4552, 52.8931)",
-      "   -> Phoenix, AZ [Tier 1]: Honeywell APU Integration Assemblies (-112.000, 33.435)",
-      "   -> Ehime, JP [Tier 2]: Toray Carbon Fiber Synthetics (133.0906, 33.8569)",
-      "✅ SYNTACTIC INTEGRITY: 100% VALID (FeatureCollection matches RFC 7946)",
-      "🛡️ RUNNING REGULATORY COMPLIANCE VERIFICATION...",
-      "   -> FAA Approved Supplier List (ASL) status: VERIFIED",
-      "🌐 INITIALIZING TARGET SUPPLY BASE FOR EVERETT ASSEMBLY FLOOR...",
-      "📡 CONNECTING PUBLIC SIGNAL COLLECTORS (C1 News Ingestion, C2 SCADA Streams)...",
-      "🎉 SUPPLY BASE BASELINE LOADED SUCCESSFULLY! MONITORING IS ACTIVE."
-    ]
-  },
-  charleston: {
-    name: "B787 Charleston Integration Network",
-    file: "b787_charleston_base.geojson",
-    nodesCount: 31,
-    coordinates: [-80.0403, 32.8943],
-    desc: "Global system supplier network for Giga Charleston. Maps landing gear systems, hydraulic valve matrices, and cabin climate modules.",
-    logOutput: [
-      "⚡ INGESTION COMMAND RECEIVED: LOAD PRESET [B787 Charleston Network]",
-      "🔍 READING FILE: b787_charleston_base.geojson (942 KB)",
-      "📊 PARSING GEOJSON SCHEMA FORMAT...",
-      "📍 EXTRACTED 31 NODES WITH GEOMETRY DETAILS:",
-      "   -> Bidos, FR [Tier 1]: Safran Landing Gear Assemblies (-0.605, 43.181)",
-      "   -> Veldhoven, NL [Tier 2]: ASML High-Precision Optics (5.3700, 51.4200)",
-      "   -> Puurs, BE [Tier 1]: Pfizer Autoclave Formulations (4.2774, 51.0772)",
-      "✅ SYNTACTIC INTEGRITY: 100% VALID (FeatureCollection matches RFC 7946)",
-      "🛡️ RUNNING REGULATORY COMPLIANCE VERIFICATION...",
-      "   -> FAA Approved Supplier List (ASL) status: VERIFIED",
-      "🌐 INITIALIZING TARGET SUPPLY BASE FOR CHARLESTON ASSEMBLY FLOOR...",
-      "📡 CONNECTING PUBLIC SIGNAL COLLECTORS (C1 News Ingestion, C2 SCADA Streams)...",
-      "🎉 SUPPLY BASE BASELINE LOADED SUCCESSFULLY! MONITORING IS ACTIVE."
-    ]
-  }
-};
-
-export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
+export default function BaseIngest({ isDark, onSupplyBaseInitialized, presets }) {
+  const activePresets = presets || {};
   const [dragActive, setDragActive] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState(null);
   
@@ -91,7 +23,7 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
   const fileInputRef = useRef(null);
 
   const simulateIngestion = (presetKey, displayName) => {
-    const config = PRESETS[presetKey] || {
+    const config = activePresets[presetKey] || {
       name: displayName,
       file: displayName,
       nodesCount: 15,
@@ -209,7 +141,7 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
               Select Boeing Program Baseline Preset
             </h2>
             <div className="flex flex-col gap-2.5">
-              {Object.entries(PRESETS).map(([key, p]) => (
+              {Object.entries(activePresets).map(([key, p]) => (
                 <div 
                   key={key}
                   onClick={() => {
