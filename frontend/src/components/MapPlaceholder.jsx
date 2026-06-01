@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Crosshair, Shield, Activity, MapPin, RefreshCw } from "lucide-react";
-import { getTaxonomy } from "./SignalTaxonomy";
+import { Crosshair, RefreshCw } from "lucide-react";
+import { getTaxonomy } from "../utils/riskHeuristics";
 
 export default function MapPlaceholder({ threatRows = [], loading = true }) {
   const [selectedPin, setSelectedPin] = useState(null);

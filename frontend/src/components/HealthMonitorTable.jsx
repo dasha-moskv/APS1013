@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { ChevronDown, Calendar, X, ShieldAlert, CheckCircle, Clock, Building, MessageSquare, Terminal, RefreshCw, DollarSign, Activity, FileText, AlertTriangle, Users, Award, PlayCircle, Globe, MapPin, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, Box, AlertCircle, ArrowRight } from "lucide-react";
-import { getTaxonomy } from "./SignalTaxonomy";
-import { getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
+import { useState, useEffect, useMemo } from "react";
+import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, RefreshCw, DollarSign, FileText, AlertTriangle, Users, Award, Globe, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, AlertCircle, ArrowRight } from "lucide-react";
+import { getTaxonomy, getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
+
 
 // Integrated boardroom-grade telemetry receiver for JSON streams
 const nodeCSuiteData = {
@@ -437,13 +437,17 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     });
   };
 
-  // Reset states upon inspection target change
+  // Reset feedback states when the inspected row changes.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     setFeedbackRating(0);
     setFeedbackOption(null);
     setFeedbackComment("");
     setFeedbackSubmitted(false);
+    setPlaybookGenerated(false);
+    setIsGenerating(false);
   }, [inspectedRow]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Lock vertical scrolling when the inspect panel is open
   useEffect(() => {
@@ -459,7 +463,12 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
   // Sorting and live ingestion countdown ticks states
   const [sortConfig, setSortConfig] = useState({ key: "newest", direction: "desc" });
-  const [, setTick] = useState(0);
+  const [tick, setTick] = useState(0);
+
+  // Capture a stable 'now' timestamp that updates every tick (250ms) to avoid calling
+  // Date.now() directly inside JSX (react-hooks/purity violation).
+  // eslint-disable-next-line react-hooks/purity
+  const now = useMemo(() => Date.now(), [tick]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     // Check if any row has an active highlight countdown in progress
@@ -604,19 +613,19 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
         {/* Technical Ingestion Telemetry Metadata Ribbon */}
         <div className={`grid grid-cols-2 sm:grid-cols-4 gap-3 border p-3 font-mono text-xs select-none ${isDark ? "bg-[#0F1520] border-[#1E293B] text-slate-300" : "bg-white border-slate-200 text-slate-600"}`}>
           <div>
-            <span className="text-slate-400 block uppercase text-[9px] tracking-wider">Confidence Score</span>
+            <span className={`block uppercase text-[9px] tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>Confidence Score</span>
             <span className="text-[#86BC25] font-bold">{pipeline.confidence}</span>
           </div>
           <div>
-            <span className="text-sky-400 block uppercase text-[9px] tracking-wider">Crawl Latency</span>
+            <span className="text-sky-400 block uppercase text-[9px] tracking-wider font-semibold">Crawl Latency</span>
             <span className="text-sky-500 font-bold">{pipeline.latency}</span>
           </div>
           <div>
-            <span className="text-slate-400 block uppercase text-[9px] tracking-wider">Ingested Size</span>
+            <span className={`block uppercase text-[9px] tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>Ingested Size</span>
             <span className={`font-bold ${isDark ? "text-slate-200" : "text-slate-700"}`}>{pipeline.dataSize}</span>
           </div>
           <div>
-            <span className="text-amber-500 block uppercase text-[9px] tracking-wider">Signal Created</span>
+            <span className="text-amber-500 block uppercase text-[9px] tracking-wider font-semibold">Signal Created</span>
             <span className="text-amber-500 font-bold text-xs">{pipeline.timestamp.replace('T', ' ').replace('Z', ' UTC')}</span>
           </div>
         </div>
@@ -630,7 +639,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               <Globe className="h-3.5 w-3.5 text-[#86BC25]" />
             </div>
             <div className="flex-1 flex flex-col gap-1.5">
-              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>
                 Phase 1 &bull; Active Crawler Ingestion Feeds
               </span>
               <div className="flex flex-col gap-2">
@@ -654,7 +663,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               <Cpu className="h-3.5 w-3.5 text-sky-500 animate-spin" style={{ animationDuration: '4s' }} />
             </div>
             <div className="flex-1 flex flex-col gap-1.5">
-              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>
                 Phase 2 &bull; LLM Agent Semantic Synthesis
               </span>
               <div className={`border p-2.5 text-xs leading-relaxed ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
@@ -670,7 +679,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               <Clock className="h-3.5 w-3.5 text-amber-500" />
             </div>
             <div className="flex-1 flex flex-col gap-1.5">
-              <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>
                 Phase 3 &bull; Signal Incident Evolution
               </span>
               <div className={`border p-3 flex flex-col gap-2.5 ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
@@ -737,7 +746,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
           <div className="flex flex-col gap-3">
             {/* Interactive Stars Rating */}
             <div className={`flex items-center gap-1.5 select-none justify-between border-b pb-2 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-              <span className="text-[9px] font-mono text-slate-500 uppercase">Strategic Accuracy:</span>
+              <span className={`text-[9px] font-mono uppercase ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>Strategic Accuracy:</span>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -838,7 +847,6 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     setInspectedRow(null);
     setPlaybookGenerated(false);
     setIsGenerating(false);
-    setLoadingLines([]);
   };
 
   return (
@@ -982,7 +990,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               </tr>
             ) : (
               sortedRows.map((row) => {
-                const isHighlighted = row.ingestedAt && (Date.now() - row.ingestedAt) < 4000;
+                  const isHighlighted = row.ingestedAt && (now - row.ingestedAt) < 4000;
                 return (
                   <tr
                     key={row.id}
@@ -1097,7 +1105,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
             <div className={`flex items-center justify-between border-b pb-4 mb-4 select-none ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 bg-[#D32F2F]" />
-                <span className={`font-mono text-[10px] font-bold tracking-wider uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+                <span className={`font-mono text-[10px] font-bold tracking-wider uppercase ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                   THREAT CLASSIFICATION INSPECTOR
                 </span>
               </div>
@@ -1139,19 +1147,19 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
             {/* Quick-Glance Risk KPIs — always visible */}
             <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">SEVERITY</span>
+                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
                 <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">LIKELIHOOD</span>
+                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
                 <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TIME TO HIT</span>
+                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
                 <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{formatTimeToHit(inspectedRow.timeToHit)}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">TAXONOMY</span>
+                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
                 <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow.id)}</span>
               </div>
             </div>
@@ -1233,7 +1241,6 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
               </div>
             )}
 
-            {/* ── PLAYBOOK VIEW ── */}
             {playbookGenerated && (
               <div className={`w-full flex flex-col gap-6 animate-fade-in ${isDark ? "text-slate-200" : "text-slate-700"}`}>
 
@@ -1242,35 +1249,35 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       {/* KPI Card 1: Revenue at Risk */}
                       <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
-                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                            <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-700"}`}>
+                            <AlertTriangle className={`h-3.5 w-3.5 ${isDark ? "text-slate-500" : "text-slate-600"}`} />
                             Revenue Exposure
                           </span>
-                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-red-400 bg-red-950/40 border-red-900/30" : "text-red-600 bg-red-50 border-red-100"}`}>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-red-400 bg-red-950/20 border-red-900/30" : "text-red-600 bg-red-50 border-red-100"}`}>
                             -{(((totalFinancialAtRisk - mitigatedTotalExposure) / Math.max(1, totalFinancialAtRisk)) * 100).toFixed(0)}% Risk
                           </span>
                         </div>
                         
                         <div className="flex items-center justify-between mt-2 gap-2">
                           <div className="flex-1">
-                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Unmitigated</span>
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-500" : "text-slate-600"}`}>Unmitigated</span>
                             <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                               ${(totalFinancialAtRisk / 1000000).toFixed(1)}M
                             </span>
                           </div>
                           
-                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          <ArrowRight className="h-4 w-4 text-slate-500 shrink-0 self-center" />
                           
                           <div className="text-right flex-1">
-                            <span className="text-xs font-mono text-[#86BC25] block uppercase font-bold">Mitigated Target</span>
+                            <span className={`text-xs font-mono block uppercase font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>Mitigated Target</span>
                             <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                               ${(mitigatedTotalExposure / 1000000).toFixed(1)}M
                             </span>
                           </div>
                         </div>
 
-                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-slate-800/80 text-slate-500" : "border-slate-200/80 text-slate-500"}`}>
                           <span>EXPOSURE AVOIDED:</span>
                           <span className="text-[#86BC25] font-bold">
                             -${((totalFinancialAtRisk - mitigatedTotalExposure) / 1000000).toFixed(1)}M
@@ -1280,37 +1287,37 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                       {/* KPI Card 2: Total Mitigation CapEx */}
                       <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
-                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                            <DollarSign className="h-3.5 w-3.5 text-[#86BC25]" />
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-700"}`}>
+                            <DollarSign className={`h-3.5 w-3.5 ${isDark ? "text-slate-500" : "text-slate-600"}`} />
                             Mitigation CapEx
                           </span>
-                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-sky-400 bg-sky-950/20 border-sky-900/30" : "text-sky-600 bg-sky-50 border-sky-100"}`}>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-slate-400 border-slate-850 bg-slate-900" : "text-slate-500 border-slate-200 bg-slate-100/50"}`}>
                             Clearance Checked
                           </span>
                         </div>
                         
                         <div className="flex items-center justify-between mt-2 gap-2">
                           <div className="flex-1">
-                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Base Cost</span>
-                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-500" : "text-slate-600"}`}>Base Cost</span>
+                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-650"}`}>
                               ${(cSuiteEnrichment.baseWorkaroundCost / 1000).toFixed(0)}K
                             </span>
                           </div>
                           
-                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          <ArrowRight className="h-4 w-4 text-slate-500 shrink-0 self-center" />
                           
                           <div className="text-right flex-1">
-                            <span className="text-xs font-mono text-sky-400 block uppercase font-bold">Final Cost</span>
+                            <span className={`text-xs font-mono block uppercase font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>Final Cost</span>
                             <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                               ${(mitigatedWorkaroundCost / 1000).toFixed(0)}K
                             </span>
                           </div>
                         </div>
 
-                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-slate-800/80 text-slate-500" : "border-slate-200/80 text-slate-500"}`}>
                           <span>CAPEX PREMIUM:</span>
-                          <span className="text-sky-400 font-bold">
+                          <span className="font-bold text-slate-400">
                             +${((mitigatedWorkaroundCost - cSuiteEnrichment.baseWorkaroundCost) / 1000).toFixed(0)}K
                           </span>
                         </div>
@@ -1318,35 +1325,35 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                       {/* KPI Card 3: Est. Recovery Timeline */}
                       <div className={`border p-4 flex flex-col justify-between rounded-none relative overflow-hidden group select-none ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
-                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                            <Clock className="h-3.5 w-3.5 text-sky-400" />
+                        <div className={`flex items-center justify-between border-b pb-1.5 mb-1.5 ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+                          <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-700"}`}>
+                            <Clock className={`h-3.5 w-3.5 ${isDark ? "text-slate-500" : "text-slate-600"}`} />
                             Recovery Timeline
                           </span>
-                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-[#86BC25] bg-[#86BC25]/10 border-[#86BC25]/20" : "text-[#86BC25] bg-[#86BC25]/10 border-[#86BC25]/20"}`}>
+                          <span className={`text-xs font-mono border px-1.5 py-0.5 ${isDark ? "text-slate-400 border-slate-850 bg-slate-900" : "text-slate-500 border-slate-200 bg-slate-100/50"}`}>
                             Time Saved
                           </span>
                         </div>
                         
                         <div className="flex items-center justify-between mt-2 gap-2">
                           <div className="flex-1">
-                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-400" : "text-slate-500"}`}>Base Cycle</span>
-                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-300"}`}>
+                            <span className={`text-[10px] font-mono block uppercase ${isDark ? "text-slate-500" : "text-slate-600"}`}>Base Cycle</span>
+                            <span className={`text-sm font-bold font-mono ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                               {cSuiteEnrichment.baseTimelineDays} Days
                             </span>
                           </div>
                           
-                          <ArrowRight className="h-4 w-4 text-slate-400 shrink-0 self-center" />
+                          <ArrowRight className="h-4 w-4 text-slate-500 shrink-0 self-center" />
                           
                           <div className="text-right flex-1">
-                            <span className="text-xs font-mono text-sky-400 block uppercase font-bold">Optimal Run</span>
+                            <span className={`text-xs font-mono block uppercase font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>Optimal Run</span>
                             <span className={`text-lg font-black font-mono ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                               {mitigatedTimelineDays.toFixed(1)} Days
                             </span>
                           </div>
                         </div>
 
-                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-[#1E293B]/80 text-slate-400" : "border-slate-200/80 text-slate-500"}`}>
+                        <div className={`mt-3 border-t pt-2 flex justify-between items-center text-xs font-mono ${isDark ? "border-slate-800/80 text-slate-500" : "border-slate-200/80 text-slate-500"}`}>
                           <span>SPEED IMPROVEMENT:</span>
                           <span className="text-[#86BC25] font-bold">
                             -{(cSuiteEnrichment.baseTimelineDays - mitigatedTimelineDays).toFixed(1)} Days
@@ -1358,11 +1365,13 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                   {/* Net Financial Risk Avoided Alert Banner */}
                   {cSuiteEnrichment && financialSaved > 0 && (
-                    <div className="border border-[#86BC25]/20 bg-[#86BC25]/5 p-3 flex items-center justify-between rounded-none select-none">
+                    <div className={`border p-3 flex items-center justify-between rounded-none select-none ${
+                      isDark ? "border-slate-800 bg-[#0E131F]" : "border-slate-200 bg-slate-50"
+                    }`}>
                       <div className="flex items-center gap-2">
-                        <Award className="h-5 w-5 text-[#86BC25]" />
+                        <Award className="h-5 w-5 text-slate-400" />
                         <div>
-                          <div className="text-[10px] font-mono font-bold text-[#86BC25] uppercase tracking-wider">
+                          <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
                             NET FINANCIAL RISK AVOIDANCE (PLAYBOOK DEPLOYED ROI)
                           </div>
                           <div className="text-[9px] text-slate-500 mt-0.5 font-sans leading-normal">
@@ -1384,8 +1393,10 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                     {/* LEFT COLUMN: ACTION PLAN & PIPELINE (lg:col-span-7) */}
                     <div className="lg:col-span-7 flex flex-col gap-6">
                       
-                      {/* Active Supply Chain Risk Statement */}
-                      <div className={`border p-4 flex flex-col gap-3 ${isDark ? "border-red-900/40 bg-red-950/15" : "border-red-200 bg-red-50/50"}`}>
+                      {/* Active Supply Chain Risk Restatement */}
+                      <div className={`border p-4 flex flex-col gap-3 border-l-4 border-l-red-500 ${
+                        isDark ? "border-y-slate-800 border-r-slate-800 bg-[#160B0B]" : "border-y-slate-200 border-r-slate-200 bg-red-50/20"
+                      }`}>
                         <div className="flex items-center gap-2 select-none">
                           <AlertCircle className="h-4.5 w-4.5 text-red-500" />
                           <h4 className="text-xs font-bold uppercase tracking-wider text-red-500 font-mono">
@@ -1394,12 +1405,12 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         </div>
                         <div className="text-xs flex flex-col gap-1.5 font-sans leading-relaxed">
                           <p className={`font-semibold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                            Disruption Incident: <span className="underline decoration-red-500">{inspectedRow.disruption}</span>
+                            Disruption Incident: <span className="underline decoration-red-500/40">{inspectedRow.disruption}</span>
                           </p>
                           <p className={isDark ? "text-slate-300" : "text-slate-600"}>
                             <strong>Downstream Operation Impact:</strong> {inspectedRow.fullDescription}
                           </p>
-                          <div className={`p-2.5 border font-mono text-xs select-none ${isDark ? "bg-slate-950/40 border-red-900/30 text-red-400" : "bg-white border-red-100 text-red-700"}`}>
+                          <div className={`p-2.5 border font-mono text-xs select-none ${isDark ? "bg-[#070A11] border-slate-800 text-red-400" : "bg-white border-slate-200 text-red-700"}`}>
                             <strong>CRITICAL CORRIDOR THREAT:</strong> This node represents a vital supply bottleneck. Failure to enact the playbook within the target buffer window escalates the risk parameter directly to severe contract penalties.
                           </div>
                         </div>
@@ -1408,8 +1419,8 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                       {/* Strategic Action Plan (Immediate, Tactical, Policy) */}
                       <div className={`border p-4 flex flex-col gap-4 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
                         <div>
-                          <h4 className="text-xs font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
-                            <FileText className="h-4 w-4" />
+                          <h4 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-800"}`}>
+                            <FileText className={`h-4 w-4 ${isDark ? "text-slate-500" : "text-slate-650"}`} />
                             Prioritized Strategic Action Plan
                           </h4>
                           <p className={`text-xs mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
@@ -1420,16 +1431,16 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         {cSuiteEnrichment && (
                           <div className="flex flex-col gap-4 font-sans text-xs">
                             {/* Phase 1 */}
-                            <div className="flex gap-3 border-l-2 border-[#86BC25] pl-3 py-1">
+                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
                               <div className="flex-1 flex flex-col gap-2">
-                                <span className="font-mono text-xs font-bold text-[#86BC25] uppercase tracking-wider">
+                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                                   PHASE 1 &bull; IMMEDIATE CONTAINMENT (0 - 48 HOURS)
                                 </span>
                                 <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                                   {cSuiteEnrichment.strategicPhases.immediate}
                                 </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
-                                  <span className="font-bold text-amber-500 uppercase">Immediate Tasks & Protocols:</span>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
+                                  <span className="font-bold uppercase text-slate-500">Immediate Tasks & Protocols:</span>
                                   <ul className="list-disc pl-4 flex flex-col gap-1">
                                     <li>Flag internal quality inspectors to trace affected batch footprints.</li>
                                     <li>Assess safety stock levels held in regional storage warehouses.</li>
@@ -1440,16 +1451,16 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                             </div>
 
                             {/* Phase 2 */}
-                            <div className="flex gap-3 border-l-2 border-sky-500 pl-3 py-1">
+                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
                               <div className="flex-1 flex flex-col gap-2">
-                                <span className="font-mono text-xs font-bold text-sky-500 uppercase tracking-wider">
+                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                                   PHASE 2 &bull; ALTERNATE ROUTING & RE-SOURCING (48H - 2 WEEKS)
                                 </span>
                                 <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
                                   {cSuiteEnrichment.strategicPhases.tactical}
                                 </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
-                                  <span className="font-bold text-sky-500 uppercase">Alternate Logistics Protocols:</span>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
+                                  <span className="font-bold uppercase text-slate-500">Alternate Logistics Protocols:</span>
                                   <ul className="list-disc pl-4 flex flex-col gap-1">
                                     <li>Deploy dedicated flatbed courier fleets under pre-file DOT permits.</li>
                                     <li>Re-allocate inbound shipments to pre-approved secondary sea-port bays.</li>
@@ -1460,16 +1471,16 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                             </div>
 
                             {/* Phase 3 */}
-                            <div className="flex gap-3 border-l-2 border-slate-400 pl-3 py-1">
+                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
                               <div className="flex-1 flex flex-col gap-2">
-                                <span className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                                   PHASE 3 &bull; CAPITAL POLICY & RESILIENCY ADJUSTMENT
                                 </span>
-                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-400" : "text-slate-650"}`}>
                                   {cSuiteEnrichment.strategicPhases.structural}
                                 </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-300" : "bg-slate-100/50 border-slate-200 text-slate-600"}`}>
-                                  <span className="font-bold text-slate-400 uppercase">Resiliency Policy Adjustments:</span>
+                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
+                                  <span className="font-bold uppercase text-slate-500">Resiliency Policy Adjustments:</span>
                                   <ul className="list-disc pl-4 flex flex-col gap-1">
                                     <li>Re-balance process workloads to alternate autoclaves or lines.</li>
                                     <li>Postpone secondary general maintenance runs to maximize capacity limits.</li>
@@ -1497,16 +1508,14 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                         return (
                           <div className={`border transition-all duration-300 p-4 flex flex-col gap-4 ${
                             isFullyAuthorized 
-                              ? isDark
-                                ? "border-[#86BC25] bg-[#86BC25]/5 shadow-[0_0_15px_rgba(134,188,37,0.15)]"
-                                : "border-[#86BC25] bg-[#86BC25]/5 shadow-[0_0_15px_rgba(134,188,37,0.08)]" 
+                              ? "border-[#86BC25]/60 bg-[#86BC25]/5" 
                               : isDark
                                 ? "border-[#1E293B] bg-[#0A0D14]"
                                 : "border-slate-200 bg-slate-50"
                           }`}>
                             <div>
                               <div className="flex items-center justify-between">
-                                <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono">
+                                <h4 className={`text-[10px] font-bold uppercase tracking-wider font-mono ${isDark ? "text-slate-400" : "text-slate-700"}`}>
                                   Executive Governance & SLA Compliance
                                 </h4>
                                 <span className={`text-[8px] font-mono px-1.5 py-0.5 border ${
@@ -1527,7 +1536,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                             <div className="flex flex-col gap-3.5 text-xs">
                               {/* SLA & Contractual Exposure */}
                               <div className={`flex flex-col gap-1 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">SLA & Contractual Exposure</span>
+                                <span className={`text-[9px] font-mono uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>SLA & Contractual Exposure</span>
                                 <p className={`leading-snug font-sans text-[10px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                                   {cSuiteEnrichment.slaRisk}
                                 </p>
@@ -1535,7 +1544,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                               {/* Evidence-Based Risk Foundation */}
                               <div className={`flex flex-col gap-1 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Evidence-Based Risk Foundation</span>
+                                <span className={`text-[9px] font-mono uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>Evidence-Based Risk Foundation</span>
                                 <p className={`leading-snug font-sans text-[10px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                                   {cSuiteEnrichment.evidenceBase}
                                 </p>
@@ -1543,34 +1552,34 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                               {/* Compliance & Capital Threshold Check */}
                               <div className={`flex flex-col gap-2 border-b pb-2.5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
-                                <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Compliance & Capital Threshold Check</span>
-                                <div className={`grid grid-cols-2 gap-2 border p-2 font-mono text-[9px] select-none ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                                <span className={`text-[9px] font-mono uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600 font-semibold"}`}>Compliance & Capital Threshold Check</span>
+                                <div className={`grid grid-cols-2 gap-2 border p-2 font-mono text-[9px] select-none ${isDark ? "bg-[#0F1520] border-slate-800" : "bg-white border-slate-200"}`}>
                                   <div>
-                                    <span className="text-slate-400 block text-[8px] uppercase">Expedited CapEx Limit</span>
-                                    <span className={`font-bold ${isDark ? "text-slate-200" : "text-slate-800"}`}>$1,000,000</span>
+                                    <span className="text-slate-500 block text-[8px] uppercase">Expedited CapEx Limit</span>
+                                    <span className={`font-bold ${isDark ? "text-slate-300" : "text-slate-800"}`}>$1,000,000</span>
                                   </div>
                                   <div className="text-right">
-                                    <span className="text-slate-400 block text-[8px] uppercase">Projected Run Cost</span>
-                                    <span className={`font-bold ${mitigatedWorkaroundCost > 1000000 ? "text-red-500 animate-pulse" : "text-[#86BC25]"}`}>
+                                    <span className="text-slate-500 block text-[8px] uppercase">Projected Run Cost</span>
+                                    <span className={`font-bold ${mitigatedWorkaroundCost > 1000000 ? "text-red-500 animate-pulse" : "text-slate-300"}`}>
                                       ${mitigatedWorkaroundCost.toLocaleString()}
                                     </span>
                                   </div>
                                 </div>
-                                <div className={`flex items-center gap-2 border p-2 font-mono text-[9px] ${isDark ? "border-[#1E293B] bg-slate-950/40" : "border-slate-200 bg-slate-100/50"}`}>
+                                <div className={`flex items-center gap-2 border p-2 font-mono text-[9px] ${isDark ? "border-slate-800 bg-slate-950/20" : "border-slate-200 bg-slate-100/50"}`}>
                                   <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${
                                     mitigatedWorkaroundCost > 1000000 ? "bg-red-500 animate-ping" : "bg-[#86BC25]"
                                   }`} />
-                                  <span className={`leading-normal font-sans ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                                  <span className={`leading-normal font-sans text-slate-400`}>
                                     {mitigatedWorkaroundCost > 1000000 
                                       ? "⚠️ EXCEEDED: Board CapEx Threshold Exceeded. Financial Committee clearance required." 
-                                      : "✅ COMPLIANT: Under Board expedited CapEx threshold."}
+                                      : "COMPLIANT: Under Board expedited CapEx threshold."}
                                   </span>
                                 </div>
                               </div>
 
                               {/* C-Suite Sign-Off Tracker */}
                               <div className="flex flex-col gap-2.5 pt-1">
-                                <span className="text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                                <span className={`text-[9px] font-mono font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-700"}`}>
                                   Boardroom Sign-Off Flow
                                 </span>
                                 <p className={`text-[9px] leading-normal font-sans ${isDark ? "text-slate-400" : "text-slate-500"}`}>
@@ -1583,7 +1592,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                                     onClick={() => handleSignOffToggle(inspectedRow.id, "cfo")}
                                     className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
                                       nodeSignOffs.cfo 
-                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        ? "bg-slate-800/60 border-[#86BC25] text-slate-200" 
                                         : isDark 
                                           ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
                                           : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
@@ -1613,7 +1622,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                                     onClick={() => handleSignOffToggle(inspectedRow.id, "coo")}
                                     className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
                                       nodeSignOffs.coo 
-                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        ? "bg-slate-800/60 border-[#86BC25] text-slate-200" 
                                         : isDark
                                           ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
                                           : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
@@ -1643,7 +1652,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                                     onClick={() => handleSignOffToggle(inspectedRow.id, "board")}
                                     className={`border p-2.5 flex items-center justify-between cursor-pointer select-none transition-colors ${
                                       nodeSignOffs.board 
-                                        ? "bg-[#86BC25]/10 border-[#86BC25] text-slate-900" 
+                                        ? "bg-slate-800/60 border-[#86BC25] text-slate-200" 
                                         : isDark
                                           ? "bg-slate-950 border-[#1E293B] text-slate-400 hover:border-slate-700 hover:bg-slate-900/40"
                                           : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:bg-slate-50"
@@ -1676,27 +1685,29 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                       {/* Crisis Task Force stakeholder escalation */}
                       <div className={`border p-4 flex flex-col gap-3 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
-                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono flex items-center gap-1.5 select-none">
-                          <Users className="h-4 w-4 text-[#86BC25]" />
+                        <h4 className={`text-[10px] font-bold uppercase tracking-wider font-mono flex items-center gap-1.5 select-none ${isDark ? "text-slate-400" : "text-slate-700"}`}>
+                          <Users className={`h-4 w-4 ${isDark ? "text-slate-400" : "text-slate-500"}`} />
                           Crisis Task Force Escalation
                         </h4>
                         
                         <div className="flex flex-col gap-2">
                           {inspectedRow.playbook.contacts.map((contact, idx) => (
-                            <div key={idx} className={`border p-3 text-[10px] leading-tight flex flex-col gap-2 ${isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200"}`}>
+                            <div key={idx} className={`border p-3 text-[10px] leading-tight flex flex-col gap-2 ${isDark ? "bg-[#0F1520] border-slate-800" : "bg-white border-slate-200"}`}>
                               <div className="flex items-start justify-between">
                                 <div>
                                   <div className={`font-bold font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-800"}`}>{contact.name}</div>
                                   <div className="text-slate-500 text-[9px] font-sans mt-0.5">{contact.role}</div>
                                 </div>
-                                <span className="text-[8px] font-mono text-[#86BC25] border border-[#86BC25]/20 bg-[#86BC25]/5 px-1.5 py-0.5 tracking-wider uppercase font-semibold select-none">
+                                <span className={`text-[8px] font-mono border px-1.5 py-0.5 tracking-wider uppercase font-semibold select-none ${
+                                  isDark ? "border-slate-800 bg-slate-900 text-slate-400" : "border-slate-200 bg-slate-100 text-slate-500"
+                                }`}>
                                   ACTIVE RESPONDER
                                 </span>
                               </div>
                               
-                              <div className={`border-t pt-2 flex items-center justify-between font-mono text-[9px] text-[#86BC25] ${isDark ? "border-slate-900" : "border-slate-100"}`}>
+                              <div className={`border-t pt-2 flex items-center justify-between font-mono text-[9px] ${isDark ? "border-slate-900 text-slate-400" : "border-slate-100 text-slate-600"}`}>
                                 <span>{contact.email}</span>
-                                <span className="text-slate-300 select-none">&bull;</span>
+                                <span className={`select-none ${isDark ? "text-slate-700" : "text-slate-300"}`}>&bull;</span>
                                 <span>{contact.phone}</span>
                               </div>
 
@@ -1713,7 +1724,11 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                                 </a>
                                 <button
                                   onClick={() => alert(`Direct MS Teams ping dispatched to ${contact.name} regarding urgent crisis resolution.`)}
-                                  className="flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border border-[#86BC25] bg-[#86BC25] text-black hover:bg-slate-900 hover:text-white hover:border-[#86BC25] transition-colors duration-75 cursor-pointer"
+                                  className={`flex-1 text-center font-mono text-[8px] font-bold uppercase py-1 border transition-colors duration-75 cursor-pointer ${
+                                    isDark 
+                                      ? "border-slate-800 bg-slate-900 hover:bg-slate-850 text-slate-200" 
+                                      : "border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700"
+                                  }`}
                                 >
                                   💬 Teams Escalation
                                 </button>
@@ -1728,11 +1743,11 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                       {/* Source Telemetry Reference */}
                       <div className={`border p-3 flex flex-col gap-1.5 select-none font-mono text-[8px] ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
-                        <span className="text-slate-500 font-bold uppercase tracking-wider flex items-center gap-1">
-                          <Terminal className="h-3.5 w-3.5 text-slate-500" />
+                        <span className={`font-bold uppercase tracking-wider flex items-center gap-1 ${isDark ? "text-slate-400" : "text-slate-700"}`}>
+                          <Terminal className={`h-3.5 w-3.5 ${isDark ? "text-slate-500" : "text-slate-600"}`} />
                           Raw Telemetry Source Ingestion
                         </span>
-                        <div className={`border p-2 break-all leading-normal select-text ${isDark ? "bg-[#0F1520] border-[#1E293B] text-slate-300" : "bg-white border-slate-200 text-slate-600"}`}>
+                        <div className={`border p-2 break-all leading-normal select-text ${isDark ? "bg-[#0F1520] border-slate-900 text-slate-400" : "bg-white border-slate-200 text-slate-600"}`}>
                           {inspectedRow.sourceData}
                         </div>
                       </div>

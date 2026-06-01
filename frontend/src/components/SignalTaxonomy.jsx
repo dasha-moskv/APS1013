@@ -1,12 +1,6 @@
-import { useState } from "react";
 import { Activity, ShieldCheck, Truck, Layers } from "lucide-react";
+import { getTaxonomy } from "../utils/riskHeuristics";
 
-export const getTaxonomy = (id) => {
-  if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Operations & Capacity";
-  if (id.startsWith("SUP-001A") || id.startsWith("SUP-109B") || id.startsWith("FAC-010") || id.startsWith("SUP-302B")) return "Logistics & Transit";
-  if (id.startsWith("SUP-401A") || id.startsWith("SUP-502A") || id.startsWith("SUP-404R") || id.startsWith("SUP-512S") || id.startsWith("SUP-212H")) return "Regulatory & Quality";
-  return "External Infrastructure";
-};
 
 const CATEGORIES = [
   { name: "Logistics & Transit", color: "bg-red-500", textColor: "text-red-500", borderColor: "border-red-500/20", icon: Truck },

@@ -4,7 +4,6 @@ import {
   Radio,
   FileText,
   Activity,
-  PlayCircle,
   ShieldAlert,
   LogOut,
 } from "lucide-react";

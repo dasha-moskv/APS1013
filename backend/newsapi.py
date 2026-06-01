@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1dzdLdMriR3NjKhi9gELzy69_3bENeg-V
 """
 
-!pip install requests python-dotenv openai
+# Dependencies can be installed using: pip install requests python-dotenv openai
 
 NEWS_API_KEY = "9af2368b8d1c40e5b45f47456a0c781e"
 

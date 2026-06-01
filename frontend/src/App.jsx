@@ -27,7 +27,7 @@ export default function App() {
   const [playbookData, setPlaybookData] = useState(null);
 
   // Phase 2/3 States
-  const [approvedPlaybooks, setApprovedPlaybooks] = useState({});
+  const [, setApprovedPlaybooks] = useState({});
   const [feedbackHistory, setFeedbackHistory] = useState([]);
 
   const toggleDark = () => setIsDark(prev => !prev);
@@ -81,7 +81,7 @@ export default function App() {
   }, []);
 
   // Callback from Phase 1 GeoJSON Ingest to populate new sub-tier threat logs
-  const handleSupplyBaseInitialized = (programName, nodeCount) => {
+  const handleSupplyBaseInitialized = (programName, _nodeCount) => {
     // Append a specialized Tier-2 shock matching the loaded program
     if (programName.includes("Renton")) {
       const parsedSignal = {

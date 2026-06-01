@@ -42,3 +42,11 @@ export function formatTimeToHit(days) {
   const months = Math.round(days / 30);
   return `${months} months`;
 }
+
+export function getTaxonomy(id) {
+  if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Operations & Capacity";
+  if (id.startsWith("SUP-001A") || id.startsWith("SUP-109B") || id.startsWith("FAC-010") || id.startsWith("SUP-302B")) return "Logistics & Transit";
+  if (id.startsWith("SUP-401A") || id.startsWith("SUP-502A") || id.startsWith("SUP-404R") || id.startsWith("SUP-512S") || id.startsWith("SUP-212H")) return "Regulatory & Quality";
+  return "External Infrastructure";
+}
+
