@@ -9,6 +9,7 @@ flowchart TD
 
     subgraph Frontend["Frontend / User Interface"]
         U2[View Disruption Cards<br>Risk Score, Impacted Parts]:::phase1
+        U8[View Filtered Noise Signals<br>in AI Judge Screen]:::phase1
         U4[View Aggregated Analytics]:::phase1
         
         U3{Generate Full Playbook?}:::phase2
@@ -34,7 +35,7 @@ flowchart TD
     subgraph Processing["Processing & Validation Engine"]
         P1[Filter Noise & Identify Impacted Parts]:::phase1
         P2[Scoring Model: Likelihood, Impact, Time-to-Hit]:::phase1
-        P_Fork{" "}:::phase1
+        P3{AI Judge:<br>Noise Filter}:::phase1
     end
 
     subgraph Analytics["Analytics Engine"]
@@ -65,11 +66,14 @@ flowchart TD
 
     %% Processing Flow
     P1 --> P2
-    P2 --> P_Fork
+    P2 --> P3
 
-    %% The Split: Real-Time Stream vs Background Analytics
-    P_Fork -->|Publish Disruption Cards| U2
-    P_Fork -->|Background Logging| A1
+    %% AI Judge Split: Validated vs Filtered
+    P3 -->|Validated Anomaly| U2
+    P3 -->|Filtered Noise| U8
+
+    %% Analytics Ingestion (Only validated active signals logged for macro analysis)
+    P3 -->|Background Logging| A1
 
     %% Analytics Flow
     A1 --> A2
