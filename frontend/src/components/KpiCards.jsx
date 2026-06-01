@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import * as Icons from "lucide-react";
 
 

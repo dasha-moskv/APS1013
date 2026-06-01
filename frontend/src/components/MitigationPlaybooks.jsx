@@ -1,15 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   Activity, 
   DollarSign, 
   BookOpen, 
   ArrowRight,
-  UserCheck,
   Award,
   Layers,
   Globe,
   Info,
-  CheckSquare
+  CheckSquare,
+  AlertOctagon,
+  Clock,
+  Send,
+  Terminal as TerminalIcon,
+  RefreshCw,
+  Mail
 } from "lucide-react";
 
 export default function MitigationPlaybooks({ 
@@ -19,13 +24,19 @@ export default function MitigationPlaybooks({
   knowledgeGraph,
   playbookData
 }) {
-  const activeFallbackBom = playbookData?.fallbackBom || [];
-  const activeRecommendationsMap = playbookData?.playbookRecommendations || {};
-  const activeDefaultRecommendations = playbookData?.defaultRecommendations || [];
   const [selectedThreatId, setSelectedThreatId] = useState("");
   const [selectedThreat, setSelectedThreat] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
   
+  // Custom interactive state triggers
+  const [selectedScenarioId, setSelectedScenarioId] = useState("SCENARIO_A");
+  const [customMailBody, setCustomMailBody] = useState("");
+  const [isMailEditing, setIsMailEditing] = useState(false);
+  const [mailSentStatus, setMailSentStatus] = useState("IDLE"); // IDLE, SENDING, SENT
+  const [erpDispatchStatus, setErpDispatchStatus] = useState("IDLE"); // IDLE, DISPATCHING, SUCCESS
+  const [erpLogs, setErpLogs] = useState([]);
+  const erpLogsEndRef = useRef(null);
+
   // FAA compliance checks states
   const [complianceChecks, setComplianceChecks] = useState({
     typeCertificate: false,
@@ -35,13 +46,18 @@ export default function MitigationPlaybooks({
 
   const [approvedList, setApprovedList] = useState({});
 
+  // Set default threat selection when the threat list loads.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (threatRows && threatRows.length > 0) {
       const defaultThreat = threatRows.find(t => t.severity >= 7.0) || threatRows[0];
       setSelectedThreatId(defaultThreat.id);
     }
   }, [threatRows]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
+  // Sync all derived threat panel state when the selected threat ID changes.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (selectedThreatId && threatRows) {
       const threat = threatRows.find(t => t.id === selectedThreatId);
@@ -51,8 +67,38 @@ export default function MitigationPlaybooks({
         aslVerified: false,
         faiQueued: false
       });
+      // Reset scenario and actions states
+      setSelectedScenarioId("SCENARIO_A");
+      setMailSentStatus("IDLE");
+      setErpDispatchStatus("IDLE");
+      setErpLogs([]);
+      setIsMailEditing(false);
     }
   }, [selectedThreatId, threatRows]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  // Sync custom mail template when threat or scenario changes
+  const activeDetails = playbookData?.threatDetails?.[selectedThreatId];
+  const activeScenario = activeDetails?.mitigationScenarios?.find(s => s.scenarioId === selectedScenarioId) || activeDetails?.mitigationScenarios?.[0];
+  const activeMailTemplate = activeDetails?.automatedComms?.[0];
+
+  // Sync custom mail body when the active mail template changes.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (activeMailTemplate) {
+      setCustomMailBody(activeMailTemplate.messageBodyTemplate);
+    } else {
+      setCustomMailBody("");
+    }
+  }, [selectedThreatId, selectedScenarioId, activeMailTemplate]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  // Scroll ERP terminal logs to bottom automatically
+  useEffect(() => {
+    if (erpLogsEndRef.current) {
+      erpLogsEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [erpLogs]);
 
   const handleToggleCompliance = (key) => {
     setComplianceChecks(prev => ({
@@ -77,14 +123,55 @@ export default function MitigationPlaybooks({
     }
   };
 
+  // Automated communication script trigger simulation
+  const handleSendComms = () => {
+    setMailSentStatus("SENDING");
+    setTimeout(() => {
+      setMailSentStatus("SENT");
+    }, 1800);
+  };
+
+  // ERP Webhook dispatch simulation
+  const handleDispatchErp = () => {
+    setErpDispatchStatus("DISPATCHING");
+    setErpLogs([]);
+
+    const logMessages = [
+      "⚡ INITIATING ERP API INTEGRATION HANDSHAKE...",
+      "🔗 ESTABLISHING TRUSTED WEBHOOK CONNECTION TO SAP ECC / S4HANA...",
+      `📦 RETRIEVING DOWNSTREAM MATERIAL RECORD: ${activeScenario?.erpUpdates?.adjust_safety_stock?.material_id || "MAT-N/A"}`,
+      `🏢 IDENTIFIED PRODUCTION PLANT BOUNDARY: ${activeScenario?.erpUpdates?.adjust_safety_stock?.plant_id || "PLANT-N/A"}`,
+      `🔧 UPDATING MATERIAL REQUIREMENT PLANNING (MRP) SAFETY BUFFER...`,
+      `   -> Original safety stock: 1 operational baseline unit`,
+      `   -> Revised target buffer: ${activeScenario?.erpUpdates?.adjust_safety_stock?.new_safety_stock_level || 6} units`,
+      "✅ MRP DATABASE RECORD UPDATED SUCCESSFULLY.",
+      "📝 GENERATING EXPEDITED CONTINGENCY PURCHASE ORDER...",
+      `   -> Connected Vendor ID: ${activeScenario?.erpUpdates?.trigger_expedited_po?.vendor_id || "VEND-N/A"}`,
+      `   -> Overriding purchase order: ${activeScenario?.erpUpdates?.trigger_expedited_po?.original_po_id || "PO-N/A"}`,
+      `   -> Carrier code allocated: ${activeScenario?.erpUpdates?.trigger_expedited_po?.logistics_carrier_code || "CARR-N/A"}`,
+      `   -> Premium billing allocation: ${activeScenario?.erpUpdates?.trigger_expedited_po?.freight_billing_code || "PREM-N/A"}`,
+      "🚀 TRANSMITTING PURCHASING OVERRIDE ENVELOPE TO PARTNER EDI...",
+      "🎉 ERP WEBHOOK WORKFLOW FULLY EXECUTED! NOMINAL VELOCITY TRIGGERED."
+    ];
+
+    logMessages.forEach((msg, idx) => {
+      setTimeout(() => {
+        setErpLogs(prev => [...prev, `[${new Date().toISOString().split("T")[1].slice(0, 8)}] ${msg}`]);
+        if (idx === logMessages.length - 1) {
+          setErpDispatchStatus("SUCCESS");
+        }
+      }, idx * 250);
+    });
+  };
+
   const dailyExposure = selectedThreat
     ? selectedThreat.id === "FAC-001" ? 14500000 : selectedThreat.id === "SUP-001A" ? 8800000 : 4500000
     : 4500000;
   
   const isApproved = selectedThreat ? approvedList[selectedThreat.id] || false : false;
 
-  // Dynamic Graph BOM Mapping: Traversing Decoupled Knowledge Graph
-  let bom = activeFallbackBom;
+  // Dynamic Graph BOM Mapping
+  let bom = [];
   if (selectedThreat && knowledgeGraph) {
     const currentNode = knowledgeGraph.nodes.find(n => n.id === selectedThreat.id);
     if (currentNode) {
@@ -113,10 +200,6 @@ export default function MitigationPlaybooks({
       }
     }
   }
-
-
-
-  const recommendations = selectedThreat ? (activeRecommendationsMap[selectedThreat.id] || activeDefaultRecommendations) : activeDefaultRecommendations;
 
   // SVG Coordinates Mapping for clean tree column distribution
   const tierXMapping = { 3: 50, 2: 210, 1: 370, 0: 530 };
@@ -152,6 +235,14 @@ export default function MitigationPlaybooks({
     return matchedThreat.severity >= 9.0;
   };
 
+  // Math for dynamic scenario mitigation overlays
+  const ttrReduction = activeScenario?.ttrReductionDays || 0;
+  const initialTtr = activeDetails?.vulnerabilityTimeline?.timeToRecovery || selectedThreat?.timeToHit || 15;
+  const mitigatedTtr = Math.max(1, initialTtr - ttrReduction);
+  const ttsValue = activeDetails?.vulnerabilityTimeline?.timeToSurvive || 8;
+  const netDeficit = ttsValue - mitigatedTtr;
+  const isDeficitResolved = netDeficit >= 0;
+
   return (
     <div className={`flex flex-1 flex-col gap-3 p-3 animate-fade-in font-sans text-xs ${
       isDark ? "text-slate-300" : "text-slate-700"
@@ -167,9 +258,7 @@ export default function MitigationPlaybooks({
         </p>
       </div>
 
-      {/* ---------------------------------------------------------------
-          ── HIGH-PRECISION MINIMALIST N-TIER DEPENDENCY GRAPH ──
-          --------------------------------------------------------------- */}
+      {/* ── N-TIER STRUCTURAL DEPENDENCY GRAPH (Retained from base) ── */}
       {knowledgeGraph && (
         <div className={`border p-4 rounded-none transition-colors duration-300 relative ${
           isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
@@ -188,7 +277,7 @@ export default function MitigationPlaybooks({
 
           <div className="grid grid-cols-12 gap-3.5">
             {/* Left: SVG Canvas (8 columns) */}
-            <div className="col-span-12 lg:col-span-8 border border-slate-800 bg-[#070A11] relative overflow-hidden h-[290px] flex items-center justify-center">
+            <div className="col-span-12 lg:col-span-8 border border-slate-800 bg-[#070A11] relative overflow-hidden h-[250px] flex items-center justify-center">
               {/* Columns Header Titles */}
               <div className="absolute top-2 left-0 right-0 grid grid-cols-4 text-center font-mono text-[8px] font-bold text-slate-600 tracking-wider pointer-events-none select-none border-b border-slate-900 pb-1">
                 <span>TIER 3: RAW</span>
@@ -198,14 +287,13 @@ export default function MitigationPlaybooks({
               </div>
 
               {/* Clean Vector SVG Graph */}
-              <svg className="w-full h-full pt-6 select-none" viewBox="0 0 580 290">
+              <svg className="w-full h-full pt-6 select-none" viewBox="0 0 580 250">
                 {/* DRAW LINKS / EDGES */}
                 {knowledgeGraph.links.map((link, idx) => {
                   const sourcePos = getSvgCoordinates(link.source);
                   const targetPos = getSvgCoordinates(link.target);
-
                   const isBlastRadius = selectedThreatId === link.source || selectedThreatId === link.target;
-                  const linkColor = isBlastRadius ? "#334155" : "#1E293B";
+                  const linkColor = isBlastRadius ? "#EF4444" : "#1E293B";
 
                   return (
                     <g key={idx}>
@@ -213,8 +301,9 @@ export default function MitigationPlaybooks({
                         d={`M ${sourcePos.x} ${sourcePos.y} C ${(sourcePos.x + targetPos.x) / 2} ${sourcePos.y}, ${(sourcePos.x + targetPos.x) / 2} ${targetPos.y}, ${targetPos.x} ${targetPos.y}`}
                         fill="none"
                         stroke={linkColor}
-                        strokeWidth="1"
+                        strokeWidth={isBlastRadius ? "1.5" : "1"}
                         strokeDasharray={isBlastRadius ? "2 2" : "none"}
+                        className="transition-all duration-300"
                       />
                     </g>
                   );
@@ -237,26 +326,27 @@ export default function MitigationPlaybooks({
                     >
                       {/* Clean Slate Node circle */}
                       <circle
-                        r="7"
+                        r="8"
                         fill="#070A11"
-                        stroke={isSelected ? "#86BC25" : "#1E293B"}
-                        strokeWidth={isSelected ? "2" : "1"}
+                        stroke={isSelected ? "#86BC25" : critical ? "#EF4444" : "#1E293B"}
+                        strokeWidth={isSelected ? "2.5" : "1"}
                         className="transition-all duration-150 group-hover:stroke-slate-400"
                       />
 
                       {/* Small Center Indicator Dot (Muted Red ONLY for Critical delays) */}
                       {critical && (
                         <circle
-                          r="2.5"
+                          r="3"
                           fill="#EF4444"
+                          className="animate-ping"
                         />
                       )}
 
                       {/* ID Label */}
                       <text
-                        y="-11"
+                        y="-12"
                         textAnchor="middle"
-                        fill={isSelected ? "#86BC25" : "#475569"}
+                        fill={isSelected ? "#86BC25" : critical ? "#EF4444" : "#475569"}
                         className="font-mono text-[8px] font-bold tracking-wider pointer-events-none select-none uppercase"
                       >
                         {node.id}
@@ -264,7 +354,7 @@ export default function MitigationPlaybooks({
 
                       {/* Hover text label */}
                       <text
-                        y="15"
+                        y="16"
                         textAnchor="middle"
                         fill={isSelected ? "#F1F5F9" : "#334155"}
                         className="font-sans text-[7px] font-semibold tracking-wide pointer-events-none select-none group-hover:fill-slate-400"
@@ -277,7 +367,7 @@ export default function MitigationPlaybooks({
               </svg>
             </div>
 
-            {/* Right: Ontological Details Panel (4 columns) */}
+            {/* Right: Ontological Details Panel */}
             <div className="col-span-12 lg:col-span-4 flex flex-col gap-2.5">
               {hoveredNode || selectedThreat ? (
                 <div className={`border p-3.5 flex flex-col gap-3 h-full font-mono text-[9px] ${
@@ -294,7 +384,7 @@ export default function MitigationPlaybooks({
                     <div className="flex justify-between">
                       <span className="text-slate-500 uppercase text-[8px]">Role</span>
                       <span className={`font-bold font-sans ${isDark ? "text-slate-200" : "text-slate-700"}`}>
-                        {(hoveredNode || selectedThreat).type}
+                        {(hoveredNode || selectedThreat).type || "Tier Node"}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -302,12 +392,14 @@ export default function MitigationPlaybooks({
                       <span className="font-bold">Tier {(hoveredNode || selectedThreat).tier}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 uppercase text-[8px]">Exposure</span>
-                      <span className="font-bold">${((hoveredNode || selectedThreat).dailyExposure || dailyExposure).toLocaleString()}</span>
+                      <span className="text-slate-500 uppercase text-[8px]">Daily Exposure</span>
+                      <span className="font-bold">
+                        ${((hoveredNode || selectedThreat).dailyExposure || dailyExposure).toLocaleString()}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500 uppercase text-[8px]">Safety Stock</span>
-                      <span className="font-bold">{(hoveredNode || selectedThreat).bufferInventoryLevel || "Active stock"}</span>
+                      <span className="font-bold">{(hoveredNode || selectedThreat).bufferInventoryLevel || "Active stock (8 Days)"}</span>
                     </div>
                   </div>
 
@@ -332,10 +424,15 @@ export default function MitigationPlaybooks({
         </div>
       )}
 
+      {/* ── MAIN WORKBENCH GRID ── */}
       <div className="grid grid-cols-12 gap-3">
-        {/* Left Control Panel: Select Threat and Business Context (4 columns) */}
-        <div className="col-span-12 lg:col-span-4 flex flex-col gap-3">
-          {/* Active Threat Selector Dropdown */}
+        
+        {/* ==========================================
+            LEFT COLUMN: CONTROLS & EXPOSURE (5 Cols)
+            ========================================== */}
+        <div className="col-span-12 lg:col-span-5 flex flex-col gap-3">
+          
+          {/* Threat Selector Card */}
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
@@ -354,214 +451,142 @@ export default function MitigationPlaybooks({
               >
                 {threatRows.map(row => (
                   <option key={row.id} value={row.id}>
-                    [{row.id}] {row.facility}
+                    [{row.id}] {row.facility} — Severity {row.severity}
                   </option>
                 ))}
               </select>
             </div>
           </div>
 
-          {/* Business Context & SLA Damages */}
+          {/* Quantified Financial Exposure Dashboard */}
           {selectedThreat && (
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
                 isDark ? "text-slate-300" : "text-slate-700"
               }`}>
                 <DollarSign className="h-4 w-4 text-[#86BC25]" />
-                Financial Impact Metrics
+                Quantified Financial Exposure Dashboard
               </h2>
-              
+
               <div className="flex flex-col gap-3 font-mono text-xs select-none">
-                <div className={`border p-3 flex flex-col gap-1 ${isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"}`}>
-                  <span className="text-[9px] text-slate-500 uppercase tracking-wider font-mono">Daily Exposure Stop cost</span>
-                  <span className="text-sm font-bold">
-                    ${(dailyExposure / 1000000).toFixed(2)}M / Day
-                  </span>
-                </div>
-
-                <div className="flex flex-col gap-1 text-[10px]">
-                  <span className="text-slate-500 uppercase text-[9px] tracking-wider font-bold">Contractual SLA Penalty Risk</span>
-                  <p className={`font-sans leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-                    {selectedThreat.id === "FAC-001" 
-                      ? "Everett line damages trigger at Day 12 ($1.5M daily penalty)."
-                      : selectedThreat.id === "SUP-001A"
-                        ? "Renton line halts on Day 10. Direct delivery delay is $850K/day."
-                        : "SLA Warning threshold active. Alternate sourcing pre-certified shifts permitted."
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Mapped Stakeholder Contacts */}
-          {selectedThreat && (
-            <div className={`border p-4 rounded-none transition-colors duration-300 ${
-              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-            }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <UserCheck className="h-4 w-4 text-[#86BC25]" />
-                Stakeholders & Comms Contacts
-              </h2>
-              
-              <div className="flex flex-col gap-2">
-                {selectedThreat.playbook.contacts.map((contact, i) => (
-                  <div key={i} className={`border p-2.5 flex flex-col gap-1 text-xs ${
-                    isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
-                  }`}>
-                    <span className={`font-bold font-sans ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                      {contact.name}
-                    </span>
-                    <span className="text-[9px] text-slate-500 font-mono uppercase font-bold tracking-wider leading-none">
-                      {contact.role}
-                    </span>
-                    <div className="text-[9px] font-mono text-slate-500 mt-1 select-all flex flex-col gap-0.5 leading-normal">
-                      <span>Email: {contact.email}</span>
-                      <span>Phone: {contact.phone}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Center/Right Panel: Deep-tier BOM, Historical Precedent & Decision Matrix (8 columns) */}
-        <div className="col-span-12 lg:col-span-8 flex flex-col gap-3">
-          
-          {/* G6: Tailored Mitigation Playbook Draft */}
-          {selectedThreat && (
-            <div className={`border p-4 rounded-none transition-colors duration-300 ${
-              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-            }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <BookOpen className="h-4 w-4 text-[#86BC25]" />
-                Tailored Mitigation Playbook Draft (AI-Drafted G6)
-              </h2>
-              
-              <div className="flex flex-col gap-3 font-mono text-[10px]">
-                <div className={`p-3 border flex flex-col gap-1 ${
-                  isDark ? "bg-[#111520] border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-600"
+                {/* Impacted Program Indicator */}
+                <div className={`border p-2.5 flex items-center justify-between ${
+                  isDark ? "bg-[#111520] border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
                 }`}>
-                  <span className="text-slate-500 uppercase text-[8px] font-bold">Estimated Recovery Timeline</span>
-                  <span className={`font-sans font-bold text-xs ${isDark ? "text-white" : "text-slate-800"}`}>
-                    {selectedThreat.playbook.timeline}
+                  <span className="text-[8px] uppercase text-slate-500 font-bold">Impacted Program</span>
+                  <span className="font-sans font-bold text-[#86BC25] uppercase tracking-wide">
+                    {activeDetails?.financialExposure?.impactedProgram || "Everett Widebody Assembly"}
                   </span>
                 </div>
 
-                <div className="flex flex-col gap-2 font-sans text-xs">
-                  <span className="text-slate-500 uppercase font-mono text-[8px] font-bold">AI Recommended Operational Plays</span>
-                  <div className="flex flex-col gap-2">
-                    {selectedThreat.playbook.steps.map((step, idx) => (
-                      <div key={idx} className={`border p-2.5 flex items-start gap-2.5 ${
-                        isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
-                      }`}>
-                        <span className="h-4 w-4 rounded-full border border-slate-800 bg-[#070A11] flex items-center justify-center font-mono text-[8px] font-bold text-slate-500 shrink-0 select-none">
-                          {idx + 1}
-                        </span>
-                        <p className={`text-[10px] leading-relaxed ${isDark ? "text-slate-300" : "text-slate-750"}`}>
-                          {step}
-                        </p>
-                      </div>
-                    ))}
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div className={`border p-3 flex flex-col gap-1 ${isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"}`}>
+                    <span className="text-[8px] text-slate-500 uppercase tracking-wider">Daily Stop Cost</span>
+                    <span className="text-sm font-bold text-red-500">
+                      ${((activeDetails?.financialExposure?.dailyStopLineCost || dailyExposure) / 1000000).toFixed(2)}M / Day
+                    </span>
+                  </div>
+
+                  <div className={`border p-3 flex flex-col gap-1 ${isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"}`}>
+                    <span className="text-[8px] text-slate-500 uppercase tracking-wider">SLA Penalty Risk</span>
+                    <span className="text-sm font-bold text-amber-500">
+                      ${((activeDetails?.financialExposure?.contractualSlaPenaltyRisk || 850000) / 1000).toFixed(0)}K / Day
+                    </span>
+                  </div>
+                </div>
+
+                {/* Unmitigated Total Exposure Gauge */}
+                <div className={`border p-3 flex flex-col gap-2 relative overflow-hidden ${
+                  isDark ? "bg-red-950/10 border-red-950/50" : "bg-red-50/50 border-red-100"
+                }`}>
+                  <div className="flex justify-between items-center z-10">
+                    <span className="text-[8px] text-red-400 uppercase tracking-wider font-bold">Unmitigated Exposure (Proj. Stop)</span>
+                    <span className="text-[9px] text-red-400 font-bold">
+                      Triggers on Day {activeDetails?.financialExposure?.daysToSlaTrigger || 10}
+                    </span>
+                  </div>
+                  <span className="text-lg font-bold text-red-500 z-10">
+                    ${((activeDetails?.financialExposure?.totalUnmitigatedExposure || 105600000) / 1000000).toFixed(1)}M
+                  </span>
+                  <div className="absolute right-3 bottom-1.5 text-slate-800 opacity-20 pointer-events-none select-none">
+                    <AlertOctagon className="h-10 w-10 text-red-500" />
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Deep-tier Bill of Materials (BOM) */}
-          <div className={`border p-4 rounded-none transition-colors duration-300 ${
-            isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-          }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
+          {/* Interactive Vulnerability Timeline Analysis */}
+          {activeDetails && (
+            <div className={`border p-4 rounded-none transition-colors duration-300 ${
+              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <Layers className="h-4 w-4 text-[#86BC25]" />
-              Deep-Tier BOM Hierarchy
-            </h2>
-            <div className="flex flex-col gap-1.5 font-mono text-[10px] select-none">
-              {bom.map((b, i) => (
-                <div key={i} className={`border p-2 flex items-center justify-between ${
-                  isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
-                }`}>
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Clock className="h-4 w-4 text-[#86BC25]" />
+                Vulnerability Timeline Analysis
+              </h2>
+
+              <div className="flex flex-col gap-3 font-mono text-xs select-none">
+                {/* Horizontal Timeline Bar */}
+                <div className="relative pt-1">
+                  <div className="flex mb-2 items-center justify-between text-[9px] font-bold text-slate-500">
+                    <span>TIMELINE STATUS</span>
+                    <span className={`px-2 py-0.5 border text-[8px] font-mono font-bold ${
+                      isDeficitResolved 
+                        ? "text-[#86BC25] border-[#86BC25]/20 bg-[#86BC25]/5" 
+                        : "text-red-500 border-red-950/20 bg-red-950/5 animate-pulse"
+                    }`}>
+                      {isDeficitResolved ? "MITIGATION SECURED" : "BUFFER DEFICIT"}
+                    </span>
+                  </div>
+                  <div className={`overflow-hidden h-2.5 text-xs flex rounded-none ${isDark ? "bg-slate-800" : "bg-slate-100"}`}>
+                    <div 
+                      style={{ width: `${Math.min(100, (ttsValue / (initialTtr + 5)) * 100)}%` }} 
+                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#86BC25]"
+                      title={`Time-to-Survive: ${ttsValue} Days`}
+                    />
+                    <div 
+                      style={{ width: `${Math.max(10, Math.min(100, ((mitigatedTtr - ttsValue) / (initialTtr + 5)) * 100))}%` }} 
+                      className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${
+                        isDeficitResolved ? "bg-sky-500" : "bg-red-500 animate-pulse"
+                      }`}
+                      title={`Mitigated TTR: ${mitigatedTtr} Days`}
+                    />
+                  </div>
+                  <div className="flex justify-between text-[7px] text-slate-500 font-bold mt-1.5">
+                    <span>Day 0</span>
+                    <span>Day {ttsValue} (TTS - Safety Buffer)</span>
+                    <span>Day {mitigatedTtr} (Mitigated TTR)</span>
+                    <span>Day {initialTtr} (Raw TTR)</span>
+                  </div>
+                </div>
+
+                {/* Quantitative Metric Callouts */}
+                <div className="grid grid-cols-3 gap-2 border-t border-slate-800/40 pt-2.5 mt-1 text-center">
                   <div className="flex flex-col">
-                    <span className="text-slate-500 font-bold uppercase text-[8px] tracking-wide">
-                      {typeof b.tier === 'number' ? `Tier ${b.tier}` : b.tier}
-                    </span>
-                    <span className={`font-sans font-bold text-xs mt-0.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                      {b.part}
+                    <span className="text-[7px] text-slate-500 uppercase font-bold">Time-to-Survive</span>
+                    <span className="text-xs font-bold text-[#86BC25]">{ttsValue} Days</span>
+                  </div>
+                  <div className="flex flex-col border-l border-r border-slate-800/40">
+                    <span className="text-[7px] text-slate-500 uppercase font-bold">Mitigated TTR</span>
+                    <span className={`text-xs font-bold ${isDeficitResolved ? "text-sky-400" : "text-red-500"}`}>
+                      {mitigatedTtr} Days
                     </span>
                   </div>
-                  <span className="px-1.5 py-0.5 text-[8px] font-bold border uppercase border-slate-800 bg-slate-900/10">
-                    {b.status}
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-[7px] text-slate-500 uppercase font-bold">Net Buffer Gap</span>
+                    <span className={`text-xs font-bold ${isDeficitResolved ? "text-[#86BC25]" : "text-red-500 animate-pulse"}`}>
+                      {netDeficit > 0 ? `+${netDeficit}` : netDeficit} Days
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Interactive Cost-Time-Risk Decision Matrix */}
-          <div className={`border p-4 rounded-none transition-colors duration-300 ${
-            isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
-          }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <Activity className="h-4 w-4 text-[#86BC25]" />
-              Mitigation Plays & Decision Matrix
-            </h2>
-            
-            <div className="flex flex-col gap-2">
-              <div className="overflow-x-auto select-none border border-slate-800/40">
-                <table className="w-full text-left font-mono text-[10px]">
-                  <thead className={`border-b ${isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-100 border-slate-200 text-slate-600"}`}>
-                    <tr>
-                      <th className="p-2 uppercase tracking-wide">Mitigation Play</th>
-                      <th className="p-2 uppercase tracking-wide">Workaround Cost</th>
-                      <th className="p-2 uppercase tracking-wide">Time Saved (TTR)</th>
-                      <th className="p-2 uppercase tracking-wide">Residual Risk</th>
-                      <th className="p-2 uppercase tracking-wide">Operational Summary</th>
-                    </tr>
-                  </thead>
-                  <tbody className={`divide-y ${isDark ? "divide-slate-800 text-slate-300" : "divide-slate-200 text-slate-600"}`}>
-                    {recommendations.map((rec, i) => (
-                      <tr key={i} className={isDark ? "hover:bg-slate-900/20" : "hover:bg-slate-50"}>
-                        <td className="p-2 font-bold font-sans text-xs">{rec.label}</td>
-                        <td className="p-2 font-bold">${rec.cost ? rec.cost.toLocaleString() : "0"}</td>
-                        <td className="p-2 font-bold">{rec.ttrDays} Days Saved</td>
-                        <td className="p-2 font-bold">
-                          <span className="border border-slate-800 bg-slate-900/5 px-1.5 py-0.5 text-slate-400">
-                            {rec.risk}
-                          </span>
-                        </td>
-                        <td className="p-2 font-sans text-[10px] leading-tight text-slate-500 max-w-[200px]">{rec.desc}</td>
-                      </tr>
-                    ))}
-                    {/* Default reallocate row */}
-                    <tr className={isDark ? "hover:bg-slate-900/20" : "hover:bg-slate-50"}>
-                      <td className="p-2 font-bold font-sans text-xs">Standard ASL Buffer Stocking</td>
-                      <td className="p-2 font-bold">$120,000</td>
-                      <td className="p-2 font-bold">3 Days Saved</td>
-                      <td className="p-2 font-bold">
-                        <span className="border border-slate-800 bg-slate-900/5 px-1.5 py-0.5 text-slate-400">Low</span>
-                      </td>
-                      <td className="p-2 font-sans text-[10px] leading-tight text-slate-500 max-w-[200px]">
-                        Utilize standard pre-certified buffers at Wichita depot locations.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
-          </div>
-
+          )}
 
           {/* Regulatory Compliance & Action Approval Panel */}
           {selectedThreat && (
@@ -569,13 +594,15 @@ export default function MitigationPlaybooks({
               isApproved 
                 ? "border-[#86BC25] bg-[#86BC25]/5" 
                 : isDark 
-                  ? "bg-[#0D111A] border-slate-800" 
+                  ? "bg-[#0D111A] border-[#1E293B]" 
                   : "bg-white border-slate-200"
             }`}>
               <div className="flex items-center justify-between mb-3 border-b pb-2 select-none border-slate-700/30">
-                <h2 className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 text-slate-300">
-                  <Award className="h-4 w-4 text-slate-405" />
-                  FAA Safety & Regulatory Compliance Sign-off
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isApproved ? "text-[#86BC25]" : isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <Award className="h-4 w-4" />
+                  FAA Safety & Regulatory compliance
                 </h2>
                 {isApproved && (
                   <span className="text-[8px] border border-[#86BC25] bg-[#86BC25]/10 px-2 py-0.5 text-[#86BC25] font-mono font-bold uppercase animate-pulse">
@@ -586,15 +613,15 @@ export default function MitigationPlaybooks({
 
               <div className="flex flex-col gap-3">
                 {/* Warning Alert */}
-                <div className={`border p-3 text-[10px] font-sans leading-relaxed select-none ${
+                <div className={`border p-2.5 text-[10px] font-sans leading-relaxed select-none ${
                   isDark ? "bg-[#111520] border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-600"
                 }`}>
-                  <p className="font-bold uppercase font-mono text-[9px] flex items-center gap-1 mb-1">
-                    <CheckSquare className="h-3.5 w-3.5 text-slate-400" />
+                  <p className="font-bold uppercase font-mono text-[9px] flex items-center gap-1 mb-1 text-amber-500">
+                    <CheckSquare className="h-3.5 w-3.5 text-amber-500" />
                     FAA Type Certificate Constraint Notice
                   </p>
-                  <span>
-                    Aerospace parts are bound strictly by legally locked Type Certificate recipes. Sourcing adjustments must operate strictly within pre-certified ASL certified partner networks.
+                  <span className="text-[9px] leading-relaxed">
+                    {activeDetails?.regulatoryCheckpoints?.notes || "Aerospace parts are bound strictly by legally locked Type Certificate recipes. Sourcing adjustments must operate strictly within pre-certified ASL networks."}
                   </span>
                 </div>
 
@@ -610,7 +637,7 @@ export default function MitigationPlaybooks({
                     />
                     <div>
                       <span className={complianceChecks.typeCertificate ? "text-slate-200 font-bold" : "text-slate-400"}>
-                        Verify FAA Type Certificate Integrity (No unapproved material substitutions recommended)
+                        Verify FAA Type Certificate Integrity (Verified: {activeDetails?.regulatoryCheckpoints?.typeCertificateVerified ? "PASS" : "N/A"})
                       </span>
                     </div>
                   </label>
@@ -625,7 +652,7 @@ export default function MitigationPlaybooks({
                     />
                     <div>
                       <span className={complianceChecks.aslVerified ? "text-slate-200 font-bold" : "text-slate-400"}>
-                        Cross-Reference Approved Supplier List (Sourcing capacity shifts strictly inside pre-certified ASL)
+                        Cross-Reference Approved Supplier List (ASL Alignment: {activeDetails?.regulatoryCheckpoints?.aslVerified ? "PASS" : "N/A"})
                       </span>
                     </div>
                   </label>
@@ -640,7 +667,7 @@ export default function MitigationPlaybooks({
                     />
                     <div>
                       <span className={complianceChecks.faiQueued ? "text-slate-200 font-bold" : "text-slate-400"}>
-                        Queue First Article Inspection (FAI) Document Prep (Required to accelerate tooling shifts)
+                        Queue FAI Calibration Worksheets ({activeDetails?.regulatoryCheckpoints?.faiRequired ? `Required: ${activeDetails?.regulatoryCheckpoints?.faiWorkflowId}` : "Not required"})
                       </span>
                     </div>
                   </label>
@@ -662,6 +689,296 @@ export default function MitigationPlaybooks({
                     <ArrowRight className="h-3.5 w-3.5" />
                     {isApproved ? "Playbook Approved" : "Sign Off & Approve Playbook Plan"}
                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ==========================================
+            RIGHT COLUMN: SCENARIOS & AUTOMATION (7 Cols)
+            ========================================== */}
+        <div className="col-span-12 lg:col-span-7 flex flex-col gap-3">
+          
+          {/* Scenario Configuration Switcher */}
+          {activeDetails && (
+            <div className={`border p-4 rounded-none transition-colors duration-300 ${
+              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+            }`}>
+              <div className="flex items-center justify-between mb-4 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <BookOpen className="h-4 w-4 text-[#86BC25]" />
+                  Multi-Scenario Mitigation plays Switcher
+                </h2>
+                <span className="text-[8px] font-mono border border-slate-700/60 px-2 py-0.5 text-slate-500">
+                  MCKINSEY RISK MATRIX
+                </span>
+              </div>
+
+              {/* Scenario selector tabs */}
+              <div className="flex gap-2.5 mb-3.5 select-none">
+                {activeDetails.mitigationScenarios.map((scen) => (
+                  <button
+                    key={scen.scenarioId}
+                    onClick={() => {
+                      setSelectedScenarioId(scen.scenarioId);
+                      setErpDispatchStatus("IDLE");
+                      setErpLogs([]);
+                    }}
+                    className={`flex-1 border p-3 flex flex-col gap-1 text-left rounded-none cursor-pointer transition-all duration-150 ${
+                      selectedScenarioId === scen.scenarioId 
+                        ? "border-[#86BC25] bg-[#86BC25]/5" 
+                        : isDark 
+                          ? "border-slate-800 bg-[#111520] hover:bg-[#161B26]" 
+                          : "border-slate-200 bg-slate-50 hover:bg-slate-100"
+                    }`}
+                  >
+                    <span className="text-[7px] text-slate-500 uppercase font-bold tracking-wider font-mono">
+                      {scen.operationalPlayType}
+                    </span>
+                    <span className={`text-xs font-bold font-sans ${isDark ? "text-white" : "text-slate-800"}`}>
+                      {scen.label}
+                    </span>
+                    <div className="flex items-center justify-between text-[8px] font-mono text-slate-500 mt-1 border-t border-slate-800/20 pt-1">
+                      <span>Cost: <span className="font-bold text-[#86BC25]">${(scen.workaroundCost / 1000).toFixed(0)}K</span></span>
+                      <span>Days Saved: <span className="font-bold text-sky-400">{scen.ttrReductionDays}d</span></span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Selected Scenario Playbook Panel */}
+              {activeScenario && (
+                <div className="flex flex-col gap-3 font-sans text-xs border-t border-slate-800/40 pt-3">
+                  <div className={`p-3 border flex flex-col gap-1 leading-normal ${
+                    isDark ? "bg-[#111520] border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-600"
+                  }`}>
+                    <span className="text-slate-500 uppercase text-[8px] font-bold font-mono">Operational Play Summary</span>
+                    <p className="text-[10px] leading-relaxed mt-0.5">{activeScenario.operationalSummary}</p>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <span className="text-slate-500 uppercase font-mono text-[8px] font-bold">Autonomous Playbook Execution Steps</span>
+                    <div className="flex flex-col gap-1.5">
+                      {activeScenario.executionSteps.map((step, idx) => (
+                        <div key={idx} className={`border p-2.5 flex items-start gap-2.5 ${
+                          isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
+                        }`}>
+                          <span className="h-4.5 w-4.5 rounded-full border border-slate-800 bg-[#070A11] flex items-center justify-center font-mono text-[8px] font-bold text-slate-500 shrink-0 select-none">
+                            {idx + 1}
+                          </span>
+                          <p className={`text-[10px] leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                            {step}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Deep-tier BOM Hierarchy (Retained from base) */}
+          {bom.length > 0 && (
+            <div className={`border p-4 rounded-none transition-colors duration-300 ${
+              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+            }`}>
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-2.5 flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Layers className="h-4 w-4 text-[#86BC25]" />
+                Deep-Tier BOM Hierarchy
+              </h2>
+              <div className="flex flex-col gap-1.5 font-mono text-[9px] select-none">
+                {bom.map((b, i) => (
+                  <div key={i} className={`border p-2 flex items-center justify-between ${
+                    isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
+                  }`}>
+                    <div className="flex flex-col">
+                      <span className="text-slate-500 font-bold uppercase text-[7px] tracking-wide">
+                        {b.tier}
+                      </span>
+                      <span className={`font-sans font-bold text-[10px] mt-0.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                        {b.part}
+                      </span>
+                    </div>
+                    <span className={`px-1.5 py-0.5 text-[8px] font-bold border uppercase ${
+                      b.status === "STARVED" ? "text-red-500 border-red-950/20 bg-red-950/10" :
+                      b.status === "DELAYED" ? "text-amber-500 border-amber-950/20 bg-amber-950/10" :
+                      b.status === "BUFFER" ? "text-[#86BC25] border-[#86BC25]/20 bg-[#86BC25]/10" :
+                      "text-slate-500 border-slate-800 bg-slate-900/10"
+                    }`}>
+                      {b.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Closed-Loop Automated Communication Portal */}
+          {activeMailTemplate && (
+            <div className={`border p-4 rounded-none transition-colors duration-300 ${
+              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+            }`}>
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Mail className="h-4 w-4 text-[#86BC25]" />
+                Closed-Loop Automated Communication Portal
+              </h2>
+
+              <div className="flex flex-col gap-2.5 font-mono text-[9px] select-none">
+                <div className={`border p-3 flex flex-col gap-2 ${
+                  isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
+                }`}>
+                  <div className="flex justify-between items-center text-[8px] text-slate-500 border-b border-slate-800/40 pb-2 mb-1">
+                    <span className="font-bold uppercase">CRM-EDI Message Dispatch Draft</span>
+                    <span className={`px-2 py-0.5 border text-[7px] font-bold ${
+                      mailSentStatus === "SENT" ? "text-[#86BC25] border-[#86BC25]/20 bg-[#86BC25]/5" :
+                      mailSentStatus === "SENDING" ? "text-sky-400 border-sky-400/20 bg-sky-400/5 animate-pulse" :
+                      "text-slate-500 border-slate-800 bg-slate-950"
+                    }`}>
+                      {mailSentStatus === "SENT" ? "TRANSMITTED TO PARTNER VIA SCRM-EDI" : mailSentStatus === "SENDING" ? "SENDING..." : "STANDBY"}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-1 text-[9px] text-slate-400 leading-normal">
+                    <span><span className="text-slate-600 font-bold uppercase mr-1">Recipient:</span> {activeMailTemplate.recipientRole} ({activeMailTemplate.recipientEmail})</span>
+                    <span><span className="text-slate-600 font-bold uppercase mr-1">EDI Channel:</span> {activeMailTemplate.channel} Protocol</span>
+                    <span><span className="text-slate-600 font-bold uppercase mr-1">Subject:</span> <span className="text-sky-400">{activeMailTemplate.messageSubject}</span></span>
+                  </div>
+
+                  {isMailEditing ? (
+                    <textarea
+                      value={customMailBody}
+                      onChange={(e) => setCustomMailBody(e.target.value)}
+                      className={`w-full p-2.5 border rounded-none font-mono text-[9.5px] leading-relaxed min-h-[110px] focus:ring-1 focus:ring-[#86BC25] focus:outline-none select-text ${
+                        isDark ? "bg-slate-950 border-slate-800 text-slate-300" : "bg-white border-slate-200 text-slate-700"
+                      }`}
+                    />
+                  ) : (
+                    <div className={`p-2.5 border font-mono text-[9.5px] leading-relaxed break-words whitespace-pre-wrap select-text max-h-[140px] overflow-y-auto ${
+                      isDark ? "bg-[#070A11] border-slate-900 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-600"
+                    }`}>
+                      {customMailBody}
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between border-t border-slate-800/40 pt-2 select-none">
+                    <button
+                      onClick={() => setIsMailEditing(prev => !prev)}
+                      className={`border px-2.5 py-1 font-mono text-[8px] uppercase tracking-wider rounded-none cursor-pointer transition-colors duration-150 ${
+                        isMailEditing 
+                          ? "border-[#86BC25] text-[#86BC25] bg-[#86BC25]/5" 
+                          : "border-slate-800 hover:border-slate-500 text-slate-400"
+                      }`}
+                    >
+                      {isMailEditing ? "Save Edits" : "Edit Message Script"}
+                    </button>
+
+                    <button
+                      onClick={handleSendComms}
+                      disabled={mailSentStatus !== "IDLE" || isApproved}
+                      className={`flex items-center gap-1.5 border px-3.5 py-1.5 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none cursor-pointer transition-all duration-150 ${
+                        mailSentStatus === "SENT"
+                          ? "border-[#86BC25] bg-[#86BC25]/10 text-[#86BC25]"
+                          : mailSentStatus === "SENDING"
+                            ? "border-sky-400 bg-sky-400/10 text-sky-400 cursor-not-allowed"
+                            : "border-sky-500/50 text-sky-400 hover:bg-sky-500/10 hover:scale-[1.02]"
+                      }`}
+                    >
+                      <Send className="h-3 w-3" />
+                      {mailSentStatus === "SENT" ? "Dispatch Complete" : mailSentStatus === "SENDING" ? "Transmitting..." : "Automate Sourcing Request"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Interactive ERP Execution Console */}
+          {activeScenario?.erpUpdates && (
+            <div className={`border p-4 rounded-none transition-colors duration-300 ${
+              isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+            }`}>
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <TerminalIcon className="h-4 w-4 text-[#86BC25]" />
+                ERP Webhook / MES Dispatch Console
+              </h2>
+
+              <div className="grid grid-cols-12 gap-3">
+                {/* Left: JSON Code Block Payload (7 columns) */}
+                <div className="col-span-12 lg:col-span-7 flex flex-col gap-2">
+                  <div className="flex justify-between items-center font-mono text-[8px] text-slate-500 select-none">
+                    <span>SAP S4HANA JSON WEBHOOK PAYLOAD</span>
+                    <span className="text-slate-600 font-bold">API v4.2</span>
+                  </div>
+                  <pre className={`p-3 border font-mono text-[8.5px] leading-relaxed overflow-x-auto select-text rounded-none ${
+                    isDark ? "bg-[#070A11] border-slate-900 text-sky-400" : "bg-slate-50 border-slate-200 text-sky-700"
+                  }`}>
+                    {JSON.stringify({
+                      action: "TRIGGER_MITIGATION_WORKFLOW",
+                      disruption_id: selectedThreatId,
+                      approved_scenario: selectedScenarioId,
+                      erp_updates: activeScenario.erpUpdates
+                    }, null, 2)}
+                  </pre>
+                  
+                  <div className="select-none flex justify-end">
+                    <button
+                      onClick={handleDispatchErp}
+                      disabled={erpDispatchStatus !== "IDLE" || !complianceChecks.typeCertificate || !complianceChecks.aslVerified || !complianceChecks.faiQueued}
+                      className={`flex items-center gap-1.5 border px-4 py-2 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none cursor-pointer transition-all duration-150 ${
+                        erpDispatchStatus === "SUCCESS"
+                          ? "border-[#86BC25] bg-[#86BC25]/15 text-[#86BC25]"
+                          : erpDispatchStatus === "DISPATCHING"
+                            ? "border-sky-400 bg-sky-400/10 text-sky-400 cursor-not-allowed"
+                            : complianceChecks.typeCertificate && complianceChecks.aslVerified && complianceChecks.faiQueued
+                              ? "border-[#86BC25] bg-[#86BC25]/10 text-[#86BC25] hover:bg-[#86BC25] hover:text-black hover:scale-[1.02]"
+                              : "border-slate-800 bg-slate-900/50 text-slate-500 cursor-not-allowed"
+                      }`}
+                    >
+                      <RefreshCw className={`h-3 w-3 ${erpDispatchStatus === "DISPATCHING" ? "animate-spin" : ""}`} />
+                      {erpDispatchStatus === "SUCCESS" ? "SAP Webhook Dispatched" : erpDispatchStatus === "DISPATCHING" ? "Connecting SAP..." : "Dispatch Webhook to SAP ERP"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right: Simulated Real-time Logging terminal feed (5 columns) */}
+                <div className="col-span-12 lg:col-span-5 flex flex-col gap-2">
+                  <div className="flex justify-between items-center font-mono text-[8px] text-slate-500 select-none">
+                    <span>LIVE CONNECTION LOGS</span>
+                    <span className="text-slate-600 font-bold">115200 BAUD</span>
+                  </div>
+
+                  <div className="border border-slate-900 bg-[#04060A] p-2.5 font-mono text-[7.5px] text-[#86BC25] select-text flex flex-col gap-1 min-h-[160px] max-h-[180px] overflow-y-auto">
+                    {erpLogs.length === 0 ? (
+                      <div className="flex flex-1 items-center justify-center text-slate-600 text-center select-none py-12">
+                        [SAP PORT LISTENER STANDBY - WAITING FOR WEBHOOK SIGN-OFF]
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-0.5">
+                        {erpLogs.map((log, index) => (
+                          <div key={index} className="leading-tight break-words font-mono">
+                            {log}
+                          </div>
+                        ))}
+                        {erpDispatchStatus === "DISPATCHING" && (
+                          <div className="flex items-center gap-1.5 text-sky-400 font-mono select-none mt-1 animate-pulse">
+                            <span>⚡ PROCESSING API PACKET BOUNDARY</span>
+                            <span className="animate-ping font-bold">...</span>
+                          </div>
+                        )}
+                        <div ref={erpLogsEndRef} />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

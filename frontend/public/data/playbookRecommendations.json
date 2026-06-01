@@ -5,15 +5,189 @@
     { "tier": 2, "part": "Casting Ingots #Ti-8890", "status": "NOMINAL" },
     { "tier": 3, "part": "Raw Titanium Sponge (Wichita)", "status": "BUFFER" }
   ],
-  "playbookRecommendations": {
-    "FAC-001": [
-      { "id": "air", "label": "Antonov Air Charter", "cost": 650000, "ttrDays": 4, "risk": "Low", "desc": "Bypass freight hubs; charter 3x Antonov flights." },
-      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": 280000, "ttrDays": 2, "risk": "Medium", "desc": "Authorize overtime shifts in structural integration." }
-    ],
-    "SUP-001A": [
-      { "id": "road", "label": "Oversized Highway Convoy", "cost": 420000, "ttrDays": 6, "risk": "Low", "desc": "Initiate Priority-A road transport with police escorts." },
-      { "id": "permits", "label": "Fast-Track KDOT Permits", "cost": 50000, "ttrDays": 3, "risk": "Medium", "desc": "Pre-approve oversized road permits in 24 hours." }
-    ]
+  "threatDetails": {
+    "FAC-001": {
+      "financialExposure": {
+        "impactedProgram": "B777/B767 Everett Widebody Line",
+        "dailyStopLineCost": 14500000,
+        "contractualSlaPenaltyRisk": 1500000,
+        "daysToSlaTrigger": 12,
+        "totalUnmitigatedExposure": 174000000
+      },
+      "vulnerabilityTimeline": {
+        "timeToHit": 0,
+        "timeToSurvive": 6,
+        "timeToRecovery": 18,
+        "netGap": -12
+      },
+      "regulatoryCheckpoints": {
+        "typeCertificateVerified": true,
+        "aslVerified": true,
+        "faiRequired": true,
+        "faiWorkflowId": "FAI-EVT-777-COMP",
+        "notes": "Structural spar shifts comply with widebody casting recipes. Portland secondary facility is active on ASL."
+      },
+      "mitigationScenarios": [
+        {
+          "scenarioId": "SCENARIO_A",
+          "label": "Antonov Heavy Air Charter",
+          "operationalPlayType": "Premium Logistics",
+          "workaroundCost": 650000,
+          "ttrReductionDays": 14,
+          "residualRiskLevel": "Low",
+          "operationalSummary": "Bypass congested ocean shipping lanes entirely by chartering 3x heavy Antonov cargo flights to transport composite wing skins and raw titanium spars directly to Everett.",
+          "executionSteps": [
+            "Secure heavy-lift airframes through Antonov logistics charter desk.",
+            "Coordinate military cargo runway access permits at Paine Field (PAE).",
+            "Establish temperature-controlled shipping container envelopes to protect composite resins in transit."
+          ],
+          "erpUpdates": {
+            "adjust_safety_stock": {
+              "material_id": "MAT-COMP-WNG",
+              "plant_id": "PLANT-EVT-01",
+              "new_safety_stock_level": 8,
+              "priority_override": "CRITICAL"
+            },
+            "trigger_expedited_po": {
+              "vendor_id": "VEND-TORAY-JP",
+              "original_po_id": "PO-8812A",
+              "logistics_carrier_code": "CARR-ANTONOV-AIR",
+              "freight_billing_code": "PREM-AIR-SCRM-01",
+              "notes": "Direct Antonov Paine Field air-bridge. Pre-approved widebody emergency overhead cap."
+            }
+          }
+        },
+        {
+          "scenarioId": "SCENARIO_B",
+          "label": "Double Shift Assembly Bays",
+          "operationalPlayType": "Operational Adjustments",
+          "workaroundCost": 280000,
+          "ttrReductionDays": 6,
+          "residualRiskLevel": "Medium",
+          "operationalSummary": "Authorize overtime and double shifts for local assembly mechanics. Sequence parallel cabling installations inside Everett Bays 3 and 4 to absorb structural delays.",
+          "executionSteps": [
+            "Authorize emergency overtime funding for IAM Local 751 assembly technicians.",
+            "Draft out-of-sequence work authorization sheets (travelled-work waivers).",
+            "Stage auxiliary power distribution frames in Bays 3 & 4 to enable 24/7 installations."
+          ],
+          "erpUpdates": {
+            "adjust_safety_stock": {
+              "material_id": "MAT-COMP-WNG",
+              "plant_id": "PLANT-EVT-01",
+              "new_safety_stock_level": 4,
+              "priority_override": "NORMAL"
+            },
+            "trigger_expedited_po": {
+              "vendor_id": "VEND-BOEING-INTERNAL",
+              "original_po_id": "PO-INTERNAL-OVERTIME",
+              "logistics_carrier_code": "N/A",
+              "freight_billing_code": "LABOR-OVERTIME-751",
+              "notes": "Overtime labor allocation for Parallel Cabling tracks."
+            }
+          }
+        }
+      ],
+      "automatedComms": [
+        {
+          "recipientRole": "Everett Sourcing Lead",
+          "recipientEmail": "alex.chen@everett.boeing.com",
+          "channel": "Email",
+          "messageSubject": "[ACTION REQUIRED] widebody capacity bottleneck - Everett Playbook Execution",
+          "messageBodyTemplate": "Hi Alex,\n\nProject Radar has modeled a net buffer deficit of -12 operational days for the B777/B767 widebody assembly line (Disruption ID: FAC-001). daily stop-line cost is $14.5M.\n\nTo preserve Rate 47 deliverables, we have drafted Scenario A (Antonov Heavy Air Charter) and Scenario B (Double Shift Assembly Bays).\n\nPlease verify airport clearance capacity for Antonov heavy frames at Paine Field (PAE) and queue the FAI documentation (FAI-EVT-777-COMP) immediately.\n\nBest regards,\nBoeing SCRM Platform Operations"
+        }
+      ]
+    },
+    "SUP-001A": {
+      "financialExposure": {
+        "impactedProgram": "B737 MAX Renton assembly Floor",
+        "dailyStopLineCost": 8800000,
+        "contractualSlaPenaltyRisk": 850000,
+        "daysToSlaTrigger": 10,
+        "totalUnmitigatedExposure": 105600000
+      },
+      "vulnerabilityTimeline": {
+        "timeToHit": 10,
+        "timeToSurvive": 8,
+        "timeToRecovery": 20,
+        "netGap": -12
+      },
+      "regulatoryCheckpoints": {
+        "typeCertificateVerified": true,
+        "aslVerified": true,
+        "faiRequired": false,
+        "faiWorkflowId": "N/A",
+        "notes": "Oversized highway road bypass operates inside certified transport corridors. No tooling re-qualification required."
+      },
+      "mitigationScenarios": [
+        {
+          "scenarioId": "SCENARIO_A",
+          "label": "Oversized Highway Convoy",
+          "operationalPlayType": "Premium Logistics",
+          "workaroundCost": 420000,
+          "ttrReductionDays": 14,
+          "residualRiskLevel": "Low",
+          "operationalSummary": "Bypass strike-bound rail yards entirely by mobilizing a dedicated fleet of 6 oversized heavy-haul road transports to haul Wichita fuselage shells directly to Renton.",
+          "executionSteps": [
+            "Mobilize pre-approved heavy-haul carrier fleet at Wichita depot.",
+            "Lobby KDOT, Idaho State Police, and Washington WSDOT for fast-tracked single-trip oversized corridor permits.",
+            "Schedule split-arrival sequences with Renton receiving bays to match overhead crane availability."
+          ],
+          "erpUpdates": {
+            "adjust_safety_stock": {
+              "material_id": "MAT-FUS-737",
+              "plant_id": "PLANT-RENT-02",
+              "new_safety_stock_level": 6,
+              "priority_override": "CRITICAL"
+            },
+            "trigger_expedited_po": {
+              "vendor_id": "VEND-SPIRIT-KS",
+              "original_po_id": "PO-99201A",
+              "logistics_carrier_code": "CARR-ROAD-HEAVY",
+              "freight_billing_code": "PREM-ROAD-SCRM-02",
+              "notes": "Expedited Wichita to Renton highway flatbed convoy. Fast-tracked KDOT permit fees included."
+            }
+          }
+        },
+        {
+          "scenarioId": "SCENARIO_B",
+          "label": "Fast-Track KDOT Permits",
+          "operationalPlayType": "Premium Logistics",
+          "workaroundCost": 50000,
+          "ttrReductionDays": 6,
+          "residualRiskLevel": "Medium",
+          "operationalSummary": "Lobby KDOT and state governors to accelerate oversized vehicle clearance approvals in 24 hours instead of the standard 10-day regulatory buffer window.",
+          "executionSteps": [
+            "Engage local state-governmental relations team in Topeka.",
+            "Provide structural CAD dimension reports to KDOT structural engineers to prove bridge weight compatibility.",
+            "Post pre-approved permit escrow funds ($50,000) to clear state toll boundaries automatically."
+          ],
+          "erpUpdates": {
+            "adjust_safety_stock": {
+              "material_id": "MAT-FUS-737",
+              "plant_id": "PLANT-RENT-02",
+              "new_safety_stock_level": 3,
+              "priority_override": "CRITICAL"
+            },
+            "trigger_expedited_po": {
+              "vendor_id": "VEND-SPIRIT-KS",
+              "original_po_id": "PO-99201A",
+              "logistics_carrier_code": "CARR-ROAD-EXP",
+              "freight_billing_code": "REG-PERMIT-FAST",
+              "notes": "State fast-track oversized permit application filing fees."
+            }
+          }
+        }
+      ],
+      "automatedComms": [
+        {
+          "recipientRole": "Spirit Global Sourcing Lead",
+          "recipientEmail": "s.jenkins@spiritaero.com",
+          "channel": "Email",
+          "messageSubject": "[URGENT] Renton Fuselage Rail deficit - contingency Verification Required",
+          "messageBodyTemplate": "Dear Sarah,\n\nProject Radar has flagged a midwest rail stoppage holding Renton fuselage deliveries (Disruption ID: SUP-001A). Local assembly buffers indicate an 8-day survival window.\n\nTo prevent traveled work on the Renton floor, we are preparing Scenario A (Oversized Highway Convoy) to move raw fuselages by road.\n\nPlease immediately reply within 4 hours to verify current heavy flatbed loading availability at the Wichita depot.\n\nBest regards,\nBoeing SCRM Operations"
+        }
+      ]
+    }
   },
   "defaultRecommendations": [
     { "id": "buffer", "label": "Strategic Buffer Stock Release", "cost": 120000, "ttrDays": 3, "risk": "Low", "desc": "Draw down certified inventory allocations in regional depots." },

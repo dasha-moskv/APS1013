@@ -1,4 +1,4 @@
-import { useState } from "react";
+// No React state needed in this purely presentational component.
 import { 
   ShieldAlert, 
   BarChart3, 

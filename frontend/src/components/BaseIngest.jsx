@@ -7,8 +7,7 @@ import {
   Globe, 
   Terminal, 
   Layers, 
-  AlertTriangle,
-  PlayCircle
+  AlertTriangle
 } from "lucide-react";
 
 const PRESETS = {

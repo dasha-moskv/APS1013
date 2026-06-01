@@ -17,5 +17,9 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      // Allow intentionally-unused function params when prefixed with underscore.
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
   },
 ])
