@@ -97,20 +97,13 @@
   },
   {
     "id": "SUP-701X",
-<<<<<<< HEAD
     "facility": "GE Aerospace Engine Manufacturing",
     "location": "Evendale, OH, US",
     "disruption": "GEnx engine assembly delays following turbine blade quality inspection findings",
-=======
-    "facility": "TSMC Gigafab 12",
-    "location": "Hsinchu, TW",
-    "disruption": "Seismic safety automatic shutdown",
->>>>>>> 2d1dd52 (Decoupled visual styling and formatted templates from JSON data models)
     "severity": 9.4,
     "likelihood": 90,
     "timeToHit": 0,
     "tier": 1,
-<<<<<<< HEAD
     "fullDescription": "Additional quality inspections have been introduced for a production batch of high-pressure turbine blades used in GEnx engine assembly programs. The increased inspection workload has temporarily reduced engine production throughput, creating a risk of delayed engine deliveries to Boeing 787 assembly operations.",
     "sourceData": "FAA Airworthiness Notifications, GE Aerospace Supplier Communications & Aerospace Manufacturing Industry Reports",
     "mapPosition": {
@@ -172,36 +165,6 @@
       "role": "Tier-2 / Titanium Forgings",
       "status": "Critical threat"
     },
-=======
-    "fullDescription": "An automatic seismic safety trip activated at TSMC Gigafab 12 following a localized minor earthquake. Cleanroom systems have suspended lithography lines for calibration inspection, temporarily halting inbound supply lines of 3nm wafers.",
-    "sourceData": "Taiwan Central Weather Bureau feeds & Fab-12 IoT Automated Shutdown API",
-    "coordinates": [121.0116, 24.773],
-    "playbook": {
-      "steps": [
-        "Initiate safety recalibration protocols on EUV lithography systems.",
-        "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand.",
-        "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems."
-      ],
-      "contacts": [
-        { "name": "Dr. Wei Chang", "role": "Director of Fab 12 Engineering", "email": "w_chang@tsmc.com.tw", "phone": "+886 3-563-7011" },
-        { "name": "Global Logistics Coordinator", "role": "Semiconductor Lead Dispatcher", "email": "semi-ops@tsmc.com.tw", "phone": "+886 3-563-7090" }
-      ],
-      "timeline": "36 to 48 hours for EUV safety resets"
-    }
-  },
-  {
-    "id": "SUP-401A",
-    "facility": "Pfizer Puurs Plant",
-    "location": "Puurs, BE",
-    "disruption": "Autoclave sterilizer mechanical valve failure",
-    "severity": 8.0,
-    "likelihood": 80,
-    "timeToHit": 0,
-    "tier": 1,
-    "fullDescription": "Autoclave sterilizer system in building 14 experienced a mechanical exhaust valve rupture during a vaccine formulation run. Production has been halted pending sterilization validation and regulatory safety loops.",
-    "sourceData": "Pfizer Puurs Facility SCADA System Alert & Emerson Valve IoT Stream",
-    "coordinates": [4.2774, 51.0772],
->>>>>>> 2d1dd52 (Decoupled visual styling and formatted templates from JSON data models)
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -383,7 +346,6 @@
     ]
   },
   {
-<<<<<<< HEAD
     "id": "SUP-883T",
     "facility": "ATI Specialty Materials",
     "location": "Monroe, NC, US",
@@ -400,19 +362,6 @@
       "role": "Tier-2 / Nickel Superalloys",
       "status": "Elevated Risk"
     },
-=======
-    "id": "FAC-010",
-    "facility": "Tesla Giga Texas",
-    "location": "Austin, TX, US",
-    "disruption": "Lithium battery cell import transport delays",
-    "severity": 6.5,
-    "likelihood": 70,
-    "timeToHit": 10,
-    "tier": 0,
-    "fullDescription": "Delays in inbound shipments of structural dry-electrode 4680 lithium-ion battery cells from Asian suppliers due to shipping lane adjustments in the Panama Canal. Battery assembly lines running low on buffer stocks.",
-    "sourceData": "Panama Canal Transit Booking Registry & Tesla Supply Chain API",
-    "coordinates": [-97.7431, 30.2672],
->>>>>>> 2d1dd52 (Decoupled visual styling and formatted templates from JSON data models)
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -510,7 +459,6 @@
     "sourceData": "Ludwigshafen Chemical Park IoT SCADA Feed & Nord-Flow pipeline telemetry API",
     "coordinates": [8.4451, 49.4875],
     "playbook": {
-<<<<<<< HEAD
       "mitigationPlan": {
         "steps": [
           "Engage local liquefied natural gas (LNG) backup vaporization arrays to steady synthesis chamber pressure.",
@@ -598,44 +546,6 @@
         "summary": "TODO"
       }
     ]
-=======
-      "steps": [
-        "Engage local liquefied natural gas (LNG) backup vaporization arrays to steady synthesis chamber pressure.",
-        "Divert non-critical precursor synthesis lines to BASF Antwerp chemical hub to balance pipeline drops.",
-        "Optimize catalyst bed temperatures to maintain minimum synthetic precursor outputs."
-      ],
-      "contacts": [
-        { "name": "Dr. Hans Mueller", "role": "Ludwigshafen Synthesis Operations Director", "email": "hans.mueller@basf.com", "phone": "+49 621 60-0" },
-        { "name": "Pipeline Grid Dispatcher", "role": "Chemical Feedstock Control", "email": "grid-control@basf.com", "phone": "+49 621 60-9921" }
-      ],
-      "timeline": "10 to 14 days for pipeline pressure re-stabilization"
-    }
-  },
-  {
-    "id": "FAC-008",
-    "facility": "NVIDIA Compute Cluster",
-    "location": "CA, US",
-    "disruption": "AI model training rack power grids surge",
-    "severity": 4.2,
-    "likelihood": 30,
-    "timeToHit": 0,
-    "tier": 0,
-    "fullDescription": "Brief local power surge tripped three high-performance computing hardware cooling racks at the central AI model training cluster in Santa Clara. Failover servers absorbed computation seamlessly with zero data loss.",
-    "sourceData": "NVIDIA Cluster Infrastructure Telemetry Monitor (NV-GRID-08) & PG&E Grid Feeds",
-    "coordinates": [-121.9552, 37.3541],
-    "playbook": {
-      "steps": [
-        "Execute heat calibration loops on the affected server chassis arrays.",
-        "Coordinate grid diagnostics with local power utility (PG&E) to review automatic regulator relays.",
-        "Adjust AI network priority nodes to route computing threads through the Oregon cloud data cluster."
-      ],
-      "contacts": [
-        { "name": "Amish Patel", "role": "Cloud Infrastructure Architect", "email": "apatel@nvidia.com", "phone": "+1 (408) 555-0143" },
-        { "name": "PG&E Industrial Accounts", "role": "Grid Safety Liaison Desk", "email": "industrial-desk@pge.com", "phone": "+1 (800) 555-8291" }
-      ],
-      "timeline": "24 hours for system coolant re-stabilization and PG&E diagnostics"
-    }
->>>>>>> 2d1dd52 (Decoupled visual styling and formatted templates from JSON data models)
   },
   {
     "id": "SUP-8472",

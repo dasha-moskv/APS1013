@@ -1,6 +1,6 @@
 import { Search, Bell, Play } from "lucide-react";
 
-export default function Topbar({ onTriggerDemoSignal, mockSignalsLeft, isDark }) {
+export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark }) {
   return (
     <header
       id="topbar"
@@ -43,16 +43,16 @@ export default function Topbar({ onTriggerDemoSignal, mockSignalsLeft, isDark })
       {/* ── Live Telemetry Ingestion Simulator ── */}
       <button
         onClick={onTriggerDemoSignal}
-        disabled={mockSignalsLeft === 0}
+        disabled={signalsLeft === 0}
         className={`flex cursor-pointer items-center gap-1.5 border px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none transition-colors duration-150 select-none
-                   ${mockSignalsLeft > 0 
+                   ${signalsLeft > 0 
                      ? "border-[#86BC25] bg-[#86BC25]/10 text-[#86BC25] hover:bg-[#86BC25] hover:text-black" 
                      : isDark
                        ? "border-slate-800 bg-slate-900/50 text-slate-500 cursor-not-allowed"
                        : "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed"}`}
       >
-        <Play className="h-3 w-3" fill={mockSignalsLeft > 0 ? "currentColor" : "none"} />
-        Simulate Live Signal ({mockSignalsLeft} Left)
+        <Play className="h-3 w-3" fill={signalsLeft > 0 ? "currentColor" : "none"} />
+        Simulate Live Signal ({signalsLeft} Left)
       </button>
 
       {/* ── Live System Telemetry Status ── */}
