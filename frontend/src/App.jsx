@@ -9,7 +9,6 @@ import SignalTaxonomy from "./components/SignalTaxonomy";
 // New Phase Components
 import BaseIngest from "./components/BaseIngest";
 import MitigationPlaybooks from "./components/MitigationPlaybooks";
-import ActionOrchestration from "./components/ActionOrchestration";
 import AIJudgeGovernance from "./components/AIJudgeGovernance";
 
 
@@ -138,10 +137,12 @@ export default function App() {
       [threatId]: true
     }));
     
-    // Jump to the Action Orchestration screen immediately to execute!
-    setTimeout(() => {
-      setActiveTab("orchestration");
-    }, 800);
+    setToast({
+      id: "PLAYBOOK_APPROVED",
+      msg: `MITIGATION PLAYBOOK APPROVED: Active recovery strategy initiated for Node ${threatId}.`
+    });
+
+    setTimeout(() => setToast(null), 5000);
   };
 
   // Callback from Home Threat Table feedback forms to dynamically log human reviews
@@ -150,92 +151,10 @@ export default function App() {
 
     setToast({
       id: "GOVERNANCE",
-      msg: `GOVERNANCE ACTION REGISTERED: Analyst feedback received for ${feedback.facility}. Real-aligning AI Judge scoring heuristics.`
+      msg: `GOVERNANCE REVIEW REGISTERED: Analyst review received for ${feedback.facility}.`
     });
 
     setTimeout(() => setToast(null), 5000);
-  };
-
-  // Callback from Phase 3 Supplier Portal Simulator to trigger closed-loop score updates
-  const handleSupplierResponse = (threatId, supplierStatus) => {
-    setThreatRows(prevRows => 
-      prevRows.map(row => {
-          if (row.id === threatId) {
-            if (supplierStatus === "mitigated") {
-              return {
-                ...row,
-                disruption: `[RESOLVED BY WAREHOUSE BUFFER OVERRIDE] ${row.disruption}`,
-                severity: 1.2,
-                likelihood: 0,
-                timeToHit: -1,
-                mapPosition: {
-                  ...row.mapPosition,
-                  color: "#86BC25",
-                  status: "Nominal"
-                }
-              };
-            } else if (supplierStatus === "partial") {
-              return {
-                ...row,
-                disruption: `[PARTIALLY MITIGATED VIA HIGHWAY FLATS] ${row.disruption}`,
-                severity: 4.5,
-                timeToHit: 3,
-                mapPosition: {
-                  ...row.mapPosition,
-                  color: "#FFB300",
-                  status: "Elevated Risk"
-                }
-              };
-            } else if (supplierStatus === "confirmed") {
-              return {
-                ...row,
-                severity: 9.5,
-                mapPosition: {
-                  ...row.mapPosition,
-                  color: "#D32F2F",
-                  status: "Critical threat"
-                }
-              };
-            }
-          }
-          return row;
-      })
-    );
-
-    // Boardroom Math reactive update: Reduce at-risk metrics dynamically!
-    setKpiData(prevKpi => 
-      prevKpi.map(kpi => {
-        if (kpi.id === "monitored-nodes") {
-          const reduction = supplierStatus === "mitigated" ? 18.5 : supplierStatus === "partial" ? 12.0 : 0.0;
-          return {
-            ...kpi,
-            value: Math.max(4.5, kpi.value - reduction),
-            subtext: `-$${reduction.toFixed(1)}M liability offset from resolved supplier shock`
-          };
-        }
-        if (kpi.id === "active-risks") {
-          const reduction = supplierStatus === "mitigated" ? 1 : 0;
-          const newValue = Math.max(0, kpi.value - reduction);
-          const nextCritical = Math.max(0, (kpi.criticalCount || 0) - reduction);
-          return {
-            ...kpi,
-            value: newValue,
-            criticalCount: nextCritical,
-            elevatedCount: Math.max(0, newValue - nextCritical),
-            subtext: `Supplier portal confirmations matched and closed`
-          };
-        }
-        if (kpi.id === "network-health") {
-          const increment = supplierStatus === "mitigated" ? 4.8 : supplierStatus === "partial" ? 2.1 : -1.2;
-          return {
-            ...kpi,
-            value: Math.min(99.8, kpi.value + increment),
-            subtext: `Realigned from closed-loop supplier portal response`
-          };
-        }
-        return kpi;
-      })
-    );
   };
 
   // Simulates live satellite threat signals coming in and updates central state
@@ -391,14 +310,7 @@ export default function App() {
             />
           )}
 
-          {activeTab === "orchestration" && (
-            <ActionOrchestration 
-              isDark={isDark} 
-              threatRows={threatRows} 
-              approvedPlaybooks={approvedPlaybooks} 
-              onSupplierResponse={handleSupplierResponse}
-            />
-          )}
+
 
           {activeTab === "governance" && (
             <AIJudgeGovernance 

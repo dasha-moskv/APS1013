@@ -13,7 +13,6 @@ const navItems = [
   { icon: Radio, label: "Risk Radar", id: "radar" },
   { icon: FileText, label: "Base Ingest", id: "ingest" },
   { icon: Activity, label: "Mitigation Playbooks", id: "playbooks" },
-  { icon: PlayCircle, label: "Action Orchestration", id: "orchestration" },
   { icon: ShieldAlert, label: "AI Judge & Governance", id: "governance" },
 ];
 
