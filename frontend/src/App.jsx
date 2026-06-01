@@ -26,7 +26,6 @@ export default function App() {
   const [mockSignals, setMockSignals] = useState([]);
   const [droppedSignals, setDroppedSignals] = useState([]);
   const [playbookData, setPlaybookData] = useState(null);
-  const [ingestionPresets, setIngestionPresets] = useState(null);
 
   // Phase 2/3 States
   const [approvedPlaybooks, setApprovedPlaybooks] = useState({});
@@ -64,13 +63,9 @@ export default function App() {
       fetch("/data/playbookRecommendations.json").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch playbook recommendations");
         return res.json();
-      }),
-      fetch("/data/ingestionPresets.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch ingestion presets");
-        return res.json();
       })
     ])
-      .then(([threats, kpis, graph, mockSig, droppedSig, playbooks, presets]) => {
+      .then(([threats, kpis, graph, mockSig, droppedSig, playbooks]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
@@ -78,7 +73,6 @@ export default function App() {
         setMockSignals(mockSig);
         setDroppedSignals(droppedSig);
         setPlaybookData(playbooks);
-        setIngestionPresets(presets);
         setLoading(false);
       })
       .catch((err) => {
@@ -384,7 +378,6 @@ export default function App() {
             <BaseIngest 
               isDark={isDark} 
               onSupplyBaseInitialized={handleSupplyBaseInitialized}
-              presets={ingestionPresets}
             />
           )}
 

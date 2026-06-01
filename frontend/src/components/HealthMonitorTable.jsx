@@ -415,7 +415,6 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
   // Playbook generation states
   const [isGenerating, setIsGenerating] = useState(false);
   const [playbookGenerated, setPlaybookGenerated] = useState(false);
-  const [loadingLines, setLoadingLines] = useState([]);
   // C-suite boardroom sign-off state
   const [signOffs, setSignOffs] = useState({});
 
@@ -549,29 +548,13 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
     return sortConfig.direction === "asc" ? <span className="text-[#86BC25] ml-1 select-none font-bold">▲</span> : <span className="text-[#86BC25] ml-1 select-none font-bold">▼</span>;
   };
 
-  // Playbook generation: staged terminal loading
-  const handleGeneratePlaybook = (row) => {
+  // Playbook generation loading trigger
+  const handleGeneratePlaybook = () => {
     setIsGenerating(true);
-    setLoadingLines([]);
-    const logs = [
-      "⚡ CONNECTING TO RADAR MITIGATION ENGINE...",
-      "🔍 EXTRACTING RELEVANT DATA SCHEMA FOR " + row.id,
-      "🤖 ANALYZING GEOSPATIAL SIGNAL FOOTPRINTS...",
-      "🔄 CALCULATING OPTIMAL LOGISTICS WORKAROUNDS...",
-      "📈 QUERYING DOMESTIC INVENTORY BUFFER CODES...",
-      "✅ MITIGATION PLAYBOOK COMPILED SUCCESSFULLY!"
-    ];
-    logs.forEach((line, index) => {
-      setTimeout(() => {
-        setLoadingLines(prev => [...prev, line]);
-        if (index === logs.length - 1) {
-          setTimeout(() => {
-            setIsGenerating(false);
-            setPlaybookGenerated(true);
-          }, 400);
-        }
-      }, (index + 1) * 350);
-    });
+    setTimeout(() => {
+      setIsGenerating(false);
+      setPlaybookGenerated(true);
+    }, 1200);
   };
 
   const cSuiteEnrichment = inspectedRow ? nodeCSuiteData[inspectedRow.id] : null;
@@ -1214,7 +1197,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                 <div className={`mt-auto border-t pt-4 flex flex-col gap-3 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
                   {!isGenerating && (
                     <button
-                      onClick={() => handleGeneratePlaybook(inspectedRow)}
+                      onClick={() => handleGeneratePlaybook()}
                       className="w-full cursor-pointer border border-[#86BC25] bg-[#86BC25] text-black font-bold uppercase tracking-wider text-[10px] py-2.5 rounded-none hover:bg-slate-950 hover:text-white hover:border-[#86BC25] transition-colors duration-75"
                     >
                       ⚡ Generate Mitigation Playbook
@@ -1223,14 +1206,27 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
 
                   {/* Loading Progress State */}
                   {isGenerating && (
-                    <div className={`w-full border p-4 font-mono text-[9px] flex flex-col gap-1.5 ${isDark ? "bg-slate-950 border-[#1E293B] text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"}`}>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="h-3 w-3 rounded-none border-2 border-dashed border-[#86BC25] animate-spin" />
-                        <span className={`font-bold uppercase tracking-wider ${isDark ? "text-slate-100" : "text-slate-800"}`}>AGENT COMPILING RISK SOLUTIONS...</span>
+                    <div className={`w-full border p-6 flex flex-col items-center justify-center gap-4 rounded-none transition-all duration-300 ${
+                      isDark ? "bg-[#090D16] border-[#1E293B]" : "bg-slate-50 border-slate-200"
+                    }`}>
+                      <div className="relative flex items-center justify-center h-12 w-12">
+                        {/* Outer rotating ring */}
+                        <div className="absolute inset-0 rounded-full border-[3px] border-[#86BC25]/10 border-t-[#86BC25] animate-spin" />
+                        {/* Inner reverse-rotating ring */}
+                        <div className="absolute h-8 w-8 rounded-full border-2 border-[#86BC25]/5 border-b-[#86BC25]/40 animate-spin [animation-direction:reverse] [animation-duration:1s]" />
+                        {/* Center core pulse */}
+                        <div className="h-3 w-3 rounded-full bg-[#86BC25] animate-pulse" />
                       </div>
-                      {loadingLines.map((line, i) => (
-                        <div key={i} className="animate-fade-in leading-relaxed text-[#86BC25] font-semibold">{line}</div>
-                      ))}
+                      <div className="flex flex-col items-center gap-1 text-center select-none">
+                        <span className={`text-[10px] font-mono font-bold tracking-widest uppercase ${
+                          isDark ? "text-slate-200" : "text-slate-800"
+                        }`}>
+                          Compiling Risk Playbook
+                        </span>
+                        <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider animate-pulse">
+                          Deloitte AI engine generating mitigations...
+                        </span>
+                      </div>
                     </div>
                   )}
                 </div>
