@@ -10,12 +10,7 @@
     "tier": 0,
     "fullDescription": "Operational bottlenecks on widebody (777, 767) assembly lines are expanding due to raw structural composite shipping delays from Tier-1 suppliers. Heavy backlogs are accumulating at Everett, threatening delivery schedules by 12+ operational days.",
     "sourceData": "Telemetry Ingestion Stream: EVT-FAC-904-MONITOR (Real-time Factory Floor Throughput)",
-    "mapPosition": {
-      "coordinates": [-122.2731, 47.9218],
-      "color": "#86BC25",
-      "role": "Internal / Assembly",
-      "status": "Nominal"
-    },
+    "coordinates": [-122.2731, 47.9218],
     "playbook": {
       "steps": [
         "Reallocate titanium structural spars from reserve logistics stocks at the Wichita depot.",
@@ -40,12 +35,7 @@
     "tier": 1,
     "fullDescription": "Wichita fuselage assembly rail shipments are temporarily halted due to localized freight rail transport strikes within the central midwest logistics corridor. Delivery of critical B737 MAX fuselage shells is currently suspended.",
     "sourceData": "GPS Logistical Tracker Stream: SUP-001A-MIDWEST-RAIL & Reuters Labor News Feed",
-    "mapPosition": {
-      "coordinates": [-97.2798, 37.6436],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Fuselage",
-      "status": "Critical threat"
-    },
+    "coordinates": [-97.2798, 37.6436],
     "playbook": {
       "steps": [
         "Initiate oversize flatbed road transport workarounds under Priority-A emergency aerospace clearance.",
@@ -63,22 +53,17 @@
     "id": "SUP-701X",
     "facility": "TSMC Gigafab 12",
     "location": "Hsinchu, TW",
-    "disruption": "Seismic sensor trigger automatic shutdown",
+    "disruption": "Seismic safety automatic shutdown",
     "severity": 9.4,
     "likelihood": 90,
     "timeToHit": 0,
     "tier": 1,
     "fullDescription": "An automatic seismic safety trip activated at TSMC Gigafab 12 following a localized minor earthquake. Cleanroom systems have suspended lithography lines for calibration inspection, temporarily halting inbound supply lines of 3nm wafers.",
     "sourceData": "Taiwan Central Weather Bureau feeds & Fab-12 IoT Automated Shutdown API",
-    "mapPosition": {
-      "coordinates": [121.0116, 24.773],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Foundry",
-      "status": "Critical threat"
-    },
+    "coordinates": [121.0116, 24.773],
     "playbook": {
       "steps": [
-        "Initiate safety recalibration protocols on extreme ultraviolet (EUV) lithography systems.",
+        "Initiate safety recalibration protocols on EUV lithography systems.",
         "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand.",
         "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems."
       ],
@@ -86,7 +71,7 @@
         { "name": "Dr. Wei Chang", "role": "Director of Fab 12 Engineering", "email": "w_chang@tsmc.com.tw", "phone": "+886 3-563-7011" },
         { "name": "Global Logistics Coordinator", "role": "Semiconductor Lead Dispatcher", "email": "semi-ops@tsmc.com.tw", "phone": "+886 3-563-7090" }
       ],
-      "timeline": "36 to 48 hours for cleanroom validation and EUV safety resets"
+      "timeline": "36 to 48 hours for EUV safety resets"
     }
   },
   {
@@ -100,12 +85,7 @@
     "tier": 1,
     "fullDescription": "Autoclave sterilizer system in building 14 experienced a mechanical exhaust valve rupture during a vaccine formulation run. Production has been halted pending sterilization validation and regulatory safety loops.",
     "sourceData": "Pfizer Puurs Facility SCADA System Alert & Emerson Valve IoT Stream",
-    "mapPosition": {
-      "coordinates": [4.2774, 51.0772],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Formulation",
-      "status": "Critical threat"
-    },
+    "coordinates": [4.2774, 51.0772],
     "playbook": {
       "steps": [
         "Divert liquid bulk formulation queues to parallel autoclave lines #5 and #6.",
@@ -130,12 +110,7 @@
     "tier": 2,
     "fullDescription": "Inbound high-precision optics and customized reflector lenses for extreme ultraviolet (EUV) systems delayed at Amsterdam Schiphol Airport due to a severe bottleneck in transatlantic temperature-controlled air freight capacity.",
     "sourceData": "Schiphol Airport Air Cargo Manifest Feeds & DHL Priority Tracking API (ASML-SCHIP-109B)",
-    "mapPosition": {
-      "coordinates": [5.3700, 51.4200],
-      "color": "#FFB300",
-      "role": "Tier-2 / Lithography EUV",
-      "status": "Elevated Risk"
-    },
+    "coordinates": [5.3700, 51.4200],
     "playbook": {
       "steps": [
         "Reroute subsequent optics shipments through Brussels Airport (BRU) using dedicated air-charter services.",
@@ -160,12 +135,7 @@
     "tier": 1,
     "fullDescription": "Inbound regional logistics controls in Shaanxi province slowing down the chemical feedstock shipping lines of high-purity etching gases for NAND Flash manufacturing lines.",
     "sourceData": "Samsung China Local Supply Logistics Ingest Feeds & Shaanxi Transit Registry",
-    "mapPosition": {
-      "coordinates": [108.9402, 34.3416],
-      "color": "#FFB300",
-      "role": "Tier-1 / NAND Flash",
-      "status": "Elevated Risk"
-    },
+    "coordinates": [108.9402, 34.3416],
     "playbook": {
       "steps": [
         "Activate high-purity chemical buffer reserves held at the Xi'an bonded warehouse zone.",
@@ -190,12 +160,7 @@
     "tier": 0,
     "fullDescription": "Composite autoclave curing oven #4 returned critical temperature sensor discrepancy during a quality test run. The oven is offline for preventive calibration, reducing overall widebody fuselage curing volume by 33%.",
     "sourceData": "SC Plant IoT Stream: SC-FAC-03-AUTOCLAVE-04 (Autoclave Chamber Heat Telemetry)",
-    "mapPosition": {
-      "coordinates": [-80.0403, 32.8943],
-      "color": "#FFB300",
-      "role": "Internal / Assembly",
-      "status": "Elevated Risk"
-    },
+    "coordinates": [-80.0403, 32.8943],
     "playbook": {
       "steps": [
         "Redistribute curing loads to active autoclaves #1 and #2 under 24/7 accelerated shifts.",
@@ -220,12 +185,7 @@
     "tier": 0,
     "fullDescription": "Delays in inbound shipments of structural dry-electrode 4680 lithium-ion battery cells from Asian suppliers due to shipping lane adjustments in the Panama Canal. Battery assembly lines running low on buffer stocks.",
     "sourceData": "Panama Canal Transit Booking Registry & Tesla Supply Chain API",
-    "mapPosition": {
-      "coordinates": [-97.7431, 30.2672],
-      "color": "#FFB300",
-      "role": "Internal / Battery Pack",
-      "status": "Elevated Risk"
-    },
+    "coordinates": [-97.7431, 30.2672],
     "playbook": {
       "steps": [
         "Initiate emergency land-bridge rail transport from Port of Seattle to Austin.",
@@ -250,12 +210,7 @@
     "tier": 1,
     "fullDescription": "Inbound raw titanium sponge feedstock supplies are delayed at West Coast receiving ports due to customs inspection backlogs. Forging operations at Portland are running at 50% capacity.",
     "sourceData": "Customs Clearance Port Manifest Ingestion Ingest API (LAX/LGB Port Inbound manifests)",
-    "mapPosition": {
-      "coordinates": [-122.5694, 45.4243],
-      "color": "#86BC25",
-      "role": "Tier-1 / Forged Metal",
-      "status": "Nominal"
-    },
+    "coordinates": [-122.5694, 45.4243],
     "playbook": {
       "steps": [
         "Procure emergency backup chemical feedstock supplies from qualified secondary domestic distributor (Apex Materials).",
@@ -280,17 +235,12 @@
     "tier": 2,
     "fullDescription": "Inbound natural gas feedstock supply pipelines to Ludwigshafen chemical park experiencing pressure fluctuations. Automatic reduction in high-heat chemical synthesis units activated to preserve catalyst beds.",
     "sourceData": "Ludwigshafen Chemical Park IoT SCADA Feed & Nord-Flow pipeline telemetry API",
-    "mapPosition": {
-      "coordinates": [8.4451, 49.4875],
-      "color": "#86BC25",
-      "role": "Tier-2 / Special Chemicals",
-      "status": "Nominal"
-    },
+    "coordinates": [8.4451, 49.4875],
     "playbook": {
       "steps": [
         "Engage local liquefied natural gas (LNG) backup vaporization arrays to steady synthesis chamber pressure.",
         "Divert non-critical precursor synthesis lines to BASF Antwerp chemical hub to balance pipeline drops.",
-        "Optimize catalyst bed temperatures to maintain minimum synthetic precursor quality outputs."
+        "Optimize catalyst bed temperatures to maintain minimum synthetic precursor outputs."
       ],
       "contacts": [
         { "name": "Dr. Hans Mueller", "role": "Ludwigshafen Synthesis Operations Director", "email": "hans.mueller@basf.com", "phone": "+49 621 60-0" },
@@ -310,12 +260,7 @@
     "tier": 0,
     "fullDescription": "Brief local power surge tripped three high-performance computing hardware cooling racks at the central AI model training cluster in Santa Clara. Failover servers absorbed computation seamlessly with zero data loss.",
     "sourceData": "NVIDIA Cluster Infrastructure Telemetry Monitor (NV-GRID-08) & PG&E Grid Feeds",
-    "mapPosition": {
-      "coordinates": [-121.9552, 37.3541],
-      "color": "#86BC25",
-      "role": "Internal / AI Infrastructure",
-      "status": "Nominal"
-    },
+    "coordinates": [-121.9552, 37.3541],
     "playbook": {
       "steps": [
         "Execute heat calibration loops on the affected server chassis arrays.",
@@ -326,26 +271,21 @@
         { "name": "Amish Patel", "role": "Cloud Infrastructure Architect", "email": "apatel@nvidia.com", "phone": "+1 (408) 555-0143" },
         { "name": "PG&E Industrial Accounts", "role": "Grid Safety Liaison Desk", "email": "industrial-desk@pge.com", "phone": "+1 (800) 555-8291" }
       ],
-      "timeline": "24 hours for system coolant re-stabilization and diagnostic checks"
+      "timeline": "24 hours for system coolant re-stabilization and PG&E diagnostics"
     }
   },
   {
     "id": "SUP-8472",
     "facility": "Toray Industries, Inc.",
     "location": "Ehime, JP",
-    "disruption": "Raw carbon fiber chemical pre-cursor shortage",
+    "disruption": "Raw carbon fiber pre-cursor shortage",
     "severity": 4.2,
     "likelihood": 30,
     "timeToHit": 45,
     "tier": 2,
     "fullDescription": "Acrylonitrile precursor chemical synthesis plant in Masaki-cho, Ehime experienced a brief downtime sequence following an automatic seismic safety shutdown. Plant structural components remain healthy, awaiting standard inspections before restart.",
     "sourceData": "Japan Meteorological Agency Seismic Trigger Feeds & Plant Automated Control API",
-    "mapPosition": {
-      "coordinates": [133.0906, 33.8569],
-      "color": "#86BC25",
-      "role": "Tier-2 / Carbon Fiber",
-      "status": "Nominal"
-    },
+    "coordinates": [133.0906, 33.8569],
     "playbook": {
       "steps": [
         "Conduct immediate structural integrity checks on storage tanks and precursor pipelines.",

@@ -218,7 +218,7 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
                   <div className="flex justify-between items-center select-none">
                     <span className="font-bold text-red-400">[{s.id}] {s.source}</span>
                     <span className="text-[8px] border border-amber-800 bg-amber-950/10 px-1 py-0.2 text-amber-500 font-bold">
-                      {s.rule}
+                      FILTERED: {s.reason} (Noise Score: {s.noiseScore}%)
                     </span>
                   </div>
                   <p className="font-sans leading-relaxed text-[10px] mt-1 text-slate-400">{s.detail}</p>

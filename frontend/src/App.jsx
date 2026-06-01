@@ -212,29 +212,30 @@ export default function App() {
     setKpiData(prevKpi => 
       prevKpi.map(kpi => {
         if (kpi.id === "monitored-nodes") {
-          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
           const reduction = supplierStatus === "mitigated" ? 18.5 : supplierStatus === "partial" ? 12.0 : 0.0;
           return {
             ...kpi,
-            value: `$${Math.max(4.5, current - reduction).toFixed(1)}M`,
+            value: Math.max(4.5, kpi.value - reduction),
             subtext: `-$${reduction.toFixed(1)}M liability offset from resolved supplier shock`
           };
         }
         if (kpi.id === "active-risks") {
-          const current = parseInt(kpi.value);
           const reduction = supplierStatus === "mitigated" ? 1 : 0;
+          const newValue = Math.max(0, kpi.value - reduction);
+          const nextCritical = Math.max(0, (kpi.criticalCount || 0) - reduction);
           return {
             ...kpi,
-            value: `${Math.max(0, current - reduction)} Sites`,
+            value: newValue,
+            criticalCount: nextCritical,
+            elevatedCount: Math.max(0, newValue - nextCritical),
             subtext: `Supplier portal confirmations matched and closed`
           };
         }
         if (kpi.id === "network-health") {
-          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
           const increment = supplierStatus === "mitigated" ? 4.8 : supplierStatus === "partial" ? 2.1 : -1.2;
           return {
             ...kpi,
-            value: `${Math.min(99.8, current + increment).toFixed(1)}%`,
+            value: Math.min(99.8, kpi.value + increment),
             subtext: `Realigned from closed-loop supplier portal response`
           };
         }
@@ -257,31 +258,30 @@ export default function App() {
     setKpiData(prevKpi =>
       prevKpi.map(kpi => {
         if (kpi.id === "monitored-nodes") {
-          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
           const exposures = { "SUP-404R": 34.5, "SUP-512S": 22.4, "SUP-771A": 12.8, "SUP-212H": 18.2 };
           const addition = exposures[signal.id] || 15.0;
           return { 
             ...kpi, 
-            value: `$${(current + addition).toFixed(1)}M`,
+            value: kpi.value + addition,
             subtext: `+$${addition.toFixed(1)}M added from new disruption`
           };
         }
         if (kpi.id === "active-risks") {
-          const current = parseInt(kpi.value);
           const criticals = threatRows.filter(r => r.severity >= 9.0 || (r.id === signal.id && signal.severity >= 9.0)).length + 1;
           const elevateds = (threatRows.length + 1) - criticals;
           return { 
             ...kpi, 
-            value: `${current + 1} Sites`,
+            value: kpi.value + 1,
+            criticalCount: criticals,
+            elevatedCount: elevateds,
             subtext: `${criticals} Critical | ${elevateds} Elevated`
           };
         }
         if (kpi.id === "network-health") {
-          const current = parseFloat(kpi.value.replace(/[^0-9.]/g, ""));
-          const nextVal = Math.max(45, current - 1.8).toFixed(1);
+          const nextVal = Math.max(45, kpi.value - 1.8);
           return { 
             ...kpi, 
-            value: `${nextVal}%`,
+            value: nextVal,
             subtext: `SLA warning threshold: 90.0%`
           };
         }

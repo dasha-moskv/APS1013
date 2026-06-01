@@ -492,7 +492,9 @@ export default function MitigationPlaybooks({
                   isDark ? "bg-[#111520] border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
                 }`}>
                   <div className="flex flex-col">
-                    <span className="text-slate-500 font-bold uppercase text-[8px] tracking-wide">{b.tier}</span>
+                    <span className="text-slate-500 font-bold uppercase text-[8px] tracking-wide">
+                      {typeof b.tier === 'number' ? `Tier ${b.tier}` : b.tier}
+                    </span>
                     <span className={`font-sans font-bold text-xs mt-0.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                       {b.part}
                     </span>
@@ -532,8 +534,8 @@ export default function MitigationPlaybooks({
                     {recommendations.map((rec, i) => (
                       <tr key={i} className={isDark ? "hover:bg-slate-900/20" : "hover:bg-slate-50"}>
                         <td className="p-2 font-bold font-sans text-xs">{rec.label}</td>
-                        <td className="p-2 font-bold">{rec.cost}</td>
-                        <td className="p-2 font-bold">{rec.ttr}</td>
+                        <td className="p-2 font-bold">${rec.cost ? rec.cost.toLocaleString() : "0"}</td>
+                        <td className="p-2 font-bold">{rec.ttrDays} Days Saved</td>
                         <td className="p-2 font-bold">
                           <span className="border border-slate-800 bg-slate-900/5 px-1.5 py-0.5 text-slate-400">
                             {rec.risk}

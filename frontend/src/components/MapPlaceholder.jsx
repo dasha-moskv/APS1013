@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Crosshair, Shield, Activity, MapPin, RefreshCw } from "lucide-react";
+import { getTaxonomy } from "./SignalTaxonomy";
 
 export default function MapPlaceholder({ threatRows = [], loading = true }) {
   const [selectedPin, setSelectedPin] = useState(null);
@@ -89,10 +90,10 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
     const newMarkers = [];
 
     threatRows
-      .filter(row => row.mapPosition && row.mapPosition.coordinates)
+      .filter(row => row.coordinates)
       .forEach(row => {
-        const [lng, lat] = row.mapPosition.coordinates;
-        const color = row.mapPosition.color || "#86BC25";
+        const [lng, lat] = row.coordinates;
+        const color = row.severity >= 9.0 ? "#D32F2F" : row.severity >= 7.0 ? "#FFB300" : "#86BC25";
 
         // Check if this specific pin is within the 6-second ingestion window
         const isNew = row.ingestedAt > 0 && (Date.now() - row.ingestedAt < 6000);
@@ -147,14 +148,22 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
         const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
 
         marker.on("click", () => {
+          const dynamicRole = row.id.startsWith("FAC")
+            ? "Internal / Assembly"
+            : `Tier-${row.tier} / ${getTaxonomy(row.id).split(" & ")[0]}`;
+          const dynamicStatus = row.severity >= 9.0 
+            ? "Critical threat" 
+            : row.severity >= 7.0 
+              ? "Elevated Risk" 
+              : "Nominal";
           setSelectedPin({
             id: row.id,
             name: row.facility,
             location: row.location,
             tier: row.tier,
-            role: row.mapPosition.role,
-            status: row.mapPosition.status,
-            coordinates: row.mapPosition.coordinates,
+            role: dynamicRole,
+            status: dynamicStatus,
+            coordinates: row.coordinates,
             color
           });
         });
@@ -166,7 +175,7 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
   }, [threatRows, loading, tick]);
 
   const activePinsCount = threatRows.filter(
-    row => row.mapPosition && row.mapPosition.coordinates
+    row => row.coordinates
   ).length;
 
   return (
