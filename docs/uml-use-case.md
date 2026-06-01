@@ -24,7 +24,6 @@ flowchart LR
         
         %% Phase 3: Execution & Closed Loop
         UC_Approve([Approve Mitigation Plan]):::phase3
-        UC_ExecSystem([Execute ERP / System Actions]):::phase3
         UC_AutoComms([Send Automated Supplier Inquiries]):::phase3
         UC_InboundResp([Process Inbound Supplier Response]):::phase3
     end
@@ -33,7 +32,6 @@ flowchart LR
     subgraph ExternalSystems ["External Systems"]
         direction TB
         DataSources("🌐 Public Data Streams"):::actor
-        ERPSystem("⚙️ Enterprise ERP / MRP"):::actor
         Supplier("🏭 Target Supplier"):::actor
     end
 
@@ -42,8 +40,7 @@ flowchart LR
         ThreatAI("🤖 Threat Validator AI (NLP)"):::aiActor
         ImpactAI("🤖 Impact Analyzer AI (Graph)"):::aiActor
         GenAI("🤖 Playbook Gen AI (LLM/RAG)"):::aiActor
-        OrchestratorAI("🤖 Execution & Comms AI"):::aiActor
-        HistDB("🗄️ Historical Precedent DB"):::actor
+        OrchestratorAI("🤖 Supplier Portal Simulator AI"):::aiActor
     end
 
     %% --- ASSOCIATIONS (Initiators to Use Cases) ---
@@ -58,13 +55,8 @@ flowchart LR
     UC_Triage --- ThreatAI
     
     UC_AssessBOM --- ImpactAI
-    UC_AssessBOM --- ERPSystem
     
     UC_DraftPlaybook --- GenAI
-    UC_DraftPlaybook --- HistDB
-    
-    UC_ExecSystem --- OrchestratorAI
-    UC_ExecSystem --- ERPSystem
     
     UC_AutoComms --- OrchestratorAI
     UC_AutoComms --- Supplier
@@ -83,7 +75,6 @@ flowchart LR
     UC_ReqScenario -. "<<include>>" .-> UC_DraftPlaybook
     
     %% Execution flow
-    UC_Approve -. "<<include>>" .-> UC_ExecSystem
     UC_Approve -. "<<include>>" .-> UC_AutoComms
     
     %% Closed Loop Feedback
