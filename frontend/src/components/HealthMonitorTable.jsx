@@ -411,6 +411,7 @@ const nodePipelineData = {
 export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark, onHumanFeedback, onDeleteSignal }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
+  const [deletingRow, setDeletingRow] = useState(null);
   
   // Playbook generation states
   const [isGenerating, setIsGenerating] = useState(false);
@@ -1115,11 +1116,7 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                       INSPECT
                     </button>
                     <button
-                      onClick={() => {
-                        if (confirm(`Are you sure you want to delete disruption signal [${row.id}] for ${row.facility}?`)) {
-                          onDeleteSignal && onDeleteSignal(row.id);
-                        }
-                      }}
+                      onClick={() => setDeletingRow(row)}
                       className="cursor-pointer border border-red-500 bg-transparent text-red-500 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded-none hover:bg-red-500 hover:text-white transition-colors duration-75 ml-1.5"
                     >
                       DELETE
@@ -1810,6 +1807,60 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   </div>
               </div>
             )}
+          </div>
+        </>
+      )}
+      {/* ── Custom Deletion Confirmation Popup ── */}
+      {deletingRow && (
+        <>
+          {/* Backdrop */}
+          <div 
+            onClick={() => setDeletingRow(null)}
+            className="fixed inset-0 z-[9998] bg-black/45 backdrop-blur-[1.5px] transition-opacity duration-150"
+          />
+          {/* Modal Card */}
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-[90%] max-w-sm border shadow-2xl p-5 font-sans animate-fade-in select-none bg-[#0D121E] border-red-500/30 text-slate-200">
+            <div className="flex flex-col gap-3.5">
+              <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
+                <AlertTriangle className="h-4.5 w-4.5 text-red-500 animate-pulse" />
+                <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-red-400">
+                  Confirm Signal Purge
+                </h3>
+              </div>
+
+              <div className="text-xs leading-relaxed text-slate-400 font-sans">
+                <p>
+                  You are about to purge disruption signal <strong className="font-mono text-red-400 bg-red-950/20 px-1 border border-red-900/30">[{deletingRow.id}]</strong> from the active threat registry console:
+                </p>
+                <div className="mt-2.5 p-2 bg-slate-950 border border-slate-900 text-[10px] flex flex-col gap-0.5">
+                  <span className="text-slate-500 uppercase text-[8px] font-mono">Target Node:</span>
+                  <span className="font-bold text-slate-300 font-sans">{deletingRow.facility}</span>
+                  <span className="text-slate-500 uppercase text-[8px] font-mono mt-1">Disruption:</span>
+                  <span className="text-slate-300 font-sans">{deletingRow.disruption}</span>
+                </div>
+                <p className="mt-2.5 text-amber-500 font-mono text-[9px] uppercase tracking-wide">
+                  ⚠️ This action deletes the signal from current memory.
+                </p>
+              </div>
+
+              <div className="flex justify-end gap-2 border-t border-slate-800 pt-3 font-mono text-[9px] uppercase font-bold">
+                <button
+                  onClick={() => setDeletingRow(null)}
+                  className="px-3.5 py-1.5 border border-slate-800 hover:border-slate-500 text-slate-400 cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    onDeleteSignal && onDeleteSignal(deletingRow.id);
+                    setDeletingRow(null);
+                  }}
+                  className="px-3.5 py-1.5 bg-red-600 text-white border border-red-500 hover:bg-red-700 cursor-pointer ml-2"
+                >
+                  Confirm Purge
+                </button>
+              </div>
+            </div>
           </div>
         </>
       )}
