@@ -3,6 +3,8 @@ import json
 import random
 import asyncio
 import time
+import shutil
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sse_starlette.sse import EventSourceResponse
@@ -32,8 +34,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-THREAT_REGISTRY_PATH = "../frontend/public/data/threatRegistry.json"
-SIGNALS_PATH = "../frontend/public/data/signals.json"
+# Resolve dynamic backend-isolated directories
+BACKEND_ROOT = Path(__file__).resolve().parent
+DATA_DIR = BACKEND_ROOT / "data"
+DATA_DIR.mkdir(exist_ok=True)
+
+THREAT_REGISTRY_PATH = DATA_DIR / "threatRegistry.json"
+SIGNALS_PATH = DATA_DIR / "signals.json"
+
+# Copy baseline JSON databases from frontend assets folder if not present
+FRONTEND_DATA_DIR = BACKEND_ROOT / ".." / "frontend" / "public" / "data"
+if FRONTEND_DATA_DIR.exists():
+    if not THREAT_REGISTRY_PATH.exists() and (FRONTEND_DATA_DIR / "threatRegistry.json").exists():
+        shutil.copy(FRONTEND_DATA_DIR / "threatRegistry.json", THREAT_REGISTRY_PATH)
+    if not SIGNALS_PATH.exists() and (FRONTEND_DATA_DIR / "signals.json").exists():
+        shutil.copy(FRONTEND_DATA_DIR / "signals.json", SIGNALS_PATH)
 
 # Highly realistic fallback supply base signals when OpenAI is not configured
 MOCK_POOL = [
