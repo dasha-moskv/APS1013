@@ -1,14 +1,35 @@
 import { useState, useEffect, useRef } from "react";
-import { Crosshair, RefreshCw } from "lucide-react";
+import { Crosshair, RefreshCw, Maximize2, Minimize2 } from "lucide-react";
 import { getTaxonomy } from "../utils/riskHeuristics";
 
 export default function MapPlaceholder({ threatRows = [], loading = true }) {
   const [selectedPin, setSelectedPin] = useState(null);
   const [tick, setTick] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
+
+  // ESC key keydown listener to exit fullscreen
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isFullscreen) {
+        setIsFullscreen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isFullscreen]);
+
+  // Invalidate and recalculate Leaflet canvas boundaries when fullscreen toggles
+  useEffect(() => {
+    if (mapInstanceRef.current) {
+      setTimeout(() => {
+        mapInstanceRef.current.invalidateSize();
+      }, 100);
+    }
+  }, [isFullscreen]);
 
   // Effect 1: Initialize interactive Leaflet map exactly once when loading is complete
   useEffect(() => {
@@ -181,8 +202,11 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
   return (
     <div
       id="slot-map"
-      className="relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-none
-                 bg-[#090D16] border border-slate-800 font-sans text-white"
+      className={`${
+        isFullscreen
+          ? "fixed inset-0 z-[9999] w-screen h-screen"
+          : "relative flex h-full min-h-[300px] flex-col"
+      } overflow-hidden rounded-none bg-[#090D16] border border-slate-800 font-sans text-white transition-all duration-300`}
     >
       {/* ── Terminal Header Overlay ── */}
       <div className="absolute top-0 left-0 right-0 z-[1000] flex h-10 items-center justify-between border-b border-slate-800 bg-[#090D16]/95 px-4 select-none">
@@ -195,6 +219,15 @@ export default function MapPlaceholder({ threatRows = [], loading = true }) {
         <div className="flex items-center gap-4 text-[9px] font-mono text-slate-500">
           <span>SECURE FEEDS: {loading ? "INITIALIZING..." : `${activePinsCount} TRACKED`}</span>
           <span className="h-1.5 w-1.5 rounded-full bg-[#86BC25] animate-ping" />
+          {!loading && (
+            <button
+              onClick={() => setIsFullscreen(!isFullscreen)}
+              className="cursor-pointer border border-slate-800 bg-[#0C1220]/80 p-1 text-slate-400 hover:text-white hover:border-slate-500 transition-colors duration-75 flex items-center justify-center rounded-none ml-1 z-10"
+              title={isFullscreen ? "Exit Fullscreen [ESC]" : "Enter Fullscreen"}
+            >
+              {isFullscreen ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
+            </button>
+          )}
         </div>
       </div>
 
