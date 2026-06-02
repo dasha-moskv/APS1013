@@ -672,9 +672,9 @@ export default function HealthMonitorTable({
                   </td>
 
                   {/* Disruption Description */}
-                  <td className={`py-1.5 px-3 align-middle max-w-sm overflow-hidden text-ellipsis leading-tight font-sans ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      <span className={`inline-block font-mono text-[8px] px-1.5 py-0.5 border select-none leading-none rounded-none uppercase font-bold tracking-wider ${
+                  <td className={`py-1.5 px-3 align-middle max-w-[400px] overflow-hidden font-sans ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                    <div className="flex items-center gap-1.5 min-w-0 w-full overflow-hidden whitespace-nowrap">
+                      <span className={`inline-block shrink-0 font-mono text-[8px] px-1.5 py-0.5 border select-none leading-none rounded-none uppercase font-bold tracking-wider ${
                         getTaxonomy(row.id) === "Logistics & Transit" 
                           ? isDark ? "bg-red-950/40 text-red-400 border-red-900/50" : "bg-red-50 text-red-600 border-red-200"
                           : getTaxonomy(row.id) === "Operations & Capacity" 
@@ -685,7 +685,7 @@ export default function HealthMonitorTable({
                       }`}>
                         {getTaxonomy(row.id)}
                       </span>
-                      <span>{row.disruption}</span>
+                      <span className="truncate min-w-0 font-medium" title={row.disruption}>{row.disruption}</span>
                     </div>
                   </td>
 
