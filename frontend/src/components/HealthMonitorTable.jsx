@@ -627,7 +627,7 @@ export default function HealthMonitorTable({
               <th className="py-2 px-3 w-20 text-right font-bold">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className={`divide-y ${isDark ? "divide-[#1E293B]" : "divide-slate-100"}`}>
             {loading ? (
               /* Inline Table Loading Spinner */
               <tr>
