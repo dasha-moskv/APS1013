@@ -135,7 +135,9 @@ export default function App() {
 
       setToast({
         id: parsedSignal.id,
-        msg: `BASE INITIALIZED: Ingested B737 MAX Renton Supply Grid. New sub-tier risk registered: ${parsedSignal.facility}`
+        title: "BASE INITIALIZED:",
+        msg: `Ingested B737 MAX Renton Supply Grid. New sub-tier risk registered: ${parsedSignal.facility}`,
+        color: "#86BC25"
       });
 
       setTimeout(() => setToast(null), 6000);
@@ -151,7 +153,9 @@ export default function App() {
     
     setToast({
       id: "PLAYBOOK_APPROVED",
-      msg: `MITIGATION PLAYBOOK APPROVED: Active recovery strategy initiated for Node ${threatId}.`
+      title: "PLAYBOOK APPROVED:",
+      msg: `Active recovery strategy initiated for Node ${threatId}.`,
+      color: "#3B82F6"
     });
 
     setTimeout(() => setToast(null), 5000);
@@ -161,7 +165,9 @@ export default function App() {
     setThreatRows(prev => prev.filter(t => t.id !== id));
     setToast({
       id: "SIGNAL_DELETED",
-      msg: `SIGNAL DELETED: Successfully removed disruption signal ${id} from active threat registry.`
+      title: "SIGNAL PURGED:",
+      msg: `Successfully removed disruption signal ${id} from active threat registry.`,
+      color: "#EF4444"
     });
     setTimeout(() => setToast(null), 4000);
   };
@@ -172,7 +178,9 @@ export default function App() {
 
     setToast({
       id: "GOVERNANCE",
-      msg: `GOVERNANCE REVIEW REGISTERED: Analyst review received for ${feedback.facility}.`
+      title: "GOVERNANCE REVIEW REGISTERED:",
+      msg: `Analyst review received for ${feedback.facility}.`,
+      color: "#A855F7"
     });
 
     setTimeout(() => setToast(null), 5000);
@@ -226,7 +234,9 @@ export default function App() {
     // 3. Render high-fidelity alert toast banner
     setToast({
       id: signal.id,
-      msg: `INGESTION SIGNAL DETECTED: ${signal.facility} (${signal.location}) — ${signal.disruption}`
+      title: "NEW RADAR SIGNAL DETECTED:",
+      msg: `${signal.facility} (${signal.location}) — ${signal.disruption}`,
+      color: "#EAB308"
     });
 
     // Auto dismiss toast after 6 seconds
@@ -242,12 +252,26 @@ export default function App() {
       
       {/* ── Dynamic Live Alert Ingestion Toast Banner ── */}
       {toast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 border border-[#86BC25] bg-[#0C1220] px-4 py-2.5 font-mono text-[10px] text-white shadow-2xl rounded-none select-none">
+        <div 
+          style={{ borderColor: toast.color || "#86BC25" }}
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 border bg-[#0C1220] px-4 py-2.5 font-mono text-[10px] text-white shadow-2xl rounded-none select-none animate-fade-in"
+        >
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#86BC25] opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#86BC25]"></span>
+            <span 
+              style={{ backgroundColor: toast.color || "#86BC25" }}
+              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+            />
+            <span 
+              style={{ backgroundColor: toast.color || "#86BC25" }}
+              className="relative inline-flex h-2 w-2 rounded-full"
+            />
           </span>
-          <span className="font-bold text-[#86BC25] tracking-wider uppercase">NEW RADAR SIGNAL DETECTED:</span>
+          <span 
+            style={{ color: toast.color || "#86BC25" }}
+            className="font-bold tracking-wider uppercase"
+          >
+            {toast.title || "ALERT DETECTED:"}
+          </span>
           <span>{toast.msg}</span>
           <button 
             onClick={() => setToast(null)} 
