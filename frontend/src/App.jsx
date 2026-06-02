@@ -39,33 +39,46 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Auto-ingest signals when streaming mode is active at randomized time intervals
+  // Connect to backend Server-Sent Events stream when streaming mode is active
   useEffect(() => {
     if (!isStreaming) return;
 
-    if (demoIndex >= signals.length) {
+    const eventSource = new EventSource("http://localhost:8000/api/stream");
+
+    eventSource.addEventListener("new_signal", (event) => {
+      const signal = JSON.parse(event.data);
+      const mappedSignal = {
+        ...signal,
+        ingestedAt: Date.now(),
+        coordinates: signal.coordinates || signal.mapPosition?.coordinates
+      };
+      setThreatRows(prev => [mappedSignal, ...prev]);
+      setDemoIndex(prev => prev + 1);
+
+      setToast({
+        id: mappedSignal.id,
+        title: "REAL-TIME STREAMING SIGNAL:",
+        msg: `${mappedSignal.facility} (${mappedSignal.location}) — ${mappedSignal.disruption}`,
+        color: "#3B82F6"
+      });
+      setTimeout(() => setToast(null), 5000);
+    });
+
+    eventSource.onerror = (err) => {
+      console.error("SSE Stream connection error:", err);
+      eventSource.close();
       setIsStreaming(false);
-      return;
-    }
-
-    let timeoutId;
-    const triggerNext = () => {
-      handleTriggerDemoSignal();
     };
-
-    // Random interval between 3 and 6 seconds
-    const randomDelay = Math.floor(Math.random() * 3000) + 3000;
-    timeoutId = setTimeout(triggerNext, randomDelay);
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId);
+      eventSource.close();
     };
-  }, [isStreaming, demoIndex, signals]);
+  }, [isStreaming]);
 
-  // Parallel Ingestion of all 9 decoupled JSON databases
+  // Parallel Ingestion of all 9 decoupled databases
   useEffect(() => {
     Promise.all([
-      fetch("/data/threatRegistry.json").then((res) => {
+      fetch("http://localhost:8000/api/threat-registry").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch threat telemetry");
         return res.json();
       }),
@@ -77,7 +90,7 @@ export default function App() {
         if (!res.ok) throw new Error("Failed to fetch knowledge graph");
         return res.json();
       }),
-      fetch("/data/signals.json").then((res) => {
+      fetch("http://localhost:8000/api/signals").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch signals");
         return res.json();
       }),
@@ -111,7 +124,7 @@ export default function App() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error loading unified telemetry databases:", err);
+        console.error("Error loading unified telemetry databases from API:", err);
         setLoading(false);
       });
   }, []);
@@ -186,14 +199,24 @@ export default function App() {
   };
 
   const handleDeleteSignal = (id) => {
-    setThreatRows(prev => prev.filter(t => t.id !== id));
-    setToast({
-      id: "SIGNAL_DELETED",
-      title: "SIGNAL PURGED:",
-      msg: `Successfully removed disruption signal ${id} from active threat registry.`,
-      color: "#EF4444"
-    });
-    setTimeout(() => setToast(null), 4000);
+    fetch(`http://localhost:8000/api/signals/${id}`, { method: "DELETE" })
+      .then(res => {
+        if (!res.ok) throw new Error("Delete request failed");
+        return res.json();
+      })
+      .then(() => {
+        setThreatRows(prev => prev.filter(t => t.id !== id));
+        setToast({
+          id: "SIGNAL_DELETED",
+          title: "SIGNAL PURGED:",
+          msg: `Successfully removed disruption signal ${id} from active threat registry.`,
+          color: "#EF4444"
+        });
+        setTimeout(() => setToast(null), 4000);
+      })
+      .catch(err => {
+        console.error("Error deleting signal on backend:", err);
+      });
   };
 
   // Callback from Home Threat Table feedback forms to dynamically log human reviews
@@ -210,71 +233,72 @@ export default function App() {
     setTimeout(() => setToast(null), 5000);
   };
 
-  // Simulates live satellite threat signals coming in and updates central state
+  // Triggers backend simulator to generate a new live signal using agent pipelines or structured mock logic
   const handleTriggerDemoSignal = () => {
-    if (demoIndex >= signals.length) {
-      setIsStreaming(false);
-      return;
-    }
-
-    const baseSignal = signals[demoIndex];
-    const signal = { 
-      ...baseSignal, 
-      ingestedAt: Date.now(),
-      coordinates: baseSignal.coordinates || baseSignal.mapPosition?.coordinates
-    };
-    setDemoIndex(prev => prev + 1);
-
-    // 1. Append new signal to the front of threat registry
-    setThreatRows(prev => [signal, ...prev]);
-
-    // 2. Parse and recalculate KPI scorecards reactively (boardroom math updates)
-    setKpiData(prevKpi =>
-      prevKpi.map(kpi => {
-        if (kpi.id === "monitored-nodes") {
-          const exposures = { "SUP-404R": 34.5, "SUP-512S": 22.4, "SUP-771A": 12.8, "SUP-212H": 18.2 };
-          const addition = exposures[signal.id] || 15.0;
-          return { 
-            ...kpi, 
-            value: kpi.value + addition,
-            subtext: `+$${addition.toFixed(1)}M added from new disruption`
-          };
-        }
-        if (kpi.id === "active-risks") {
-          const criticals = threatRows.filter(r => r.severity >= 9.0 || (r.id === signal.id && signal.severity >= 9.0)).length + 1;
-          const elevateds = (threatRows.length + 1) - criticals;
-          return { 
-            ...kpi, 
-            value: kpi.value + 1,
-            criticalCount: criticals,
-            elevatedCount: elevateds,
-            subtext: `${criticals} Critical | ${elevateds} Elevated`
-          };
-        }
-        if (kpi.id === "network-health") {
-          const nextVal = Math.max(45, kpi.value - 1.8);
-          return { 
-            ...kpi, 
-            value: nextVal,
-            subtext: `SLA warning threshold: 90.0%`
-          };
-        }
-        return kpi;
+    fetch("http://localhost:8000/api/signals/simulate", { method: "POST" })
+      .then(res => {
+        if (!res.ok) throw new Error("Simulation request failed");
+        return res.json();
       })
-    );
+      .then(signal => {
+        const mappedSignal = {
+          ...signal,
+          ingestedAt: Date.now(),
+          coordinates: signal.coordinates || signal.mapPosition?.coordinates
+        };
+        setThreatRows(prev => [mappedSignal, ...prev]);
+        setDemoIndex(prev => prev + 1);
 
-    // 3. Render high-fidelity alert toast banner
-    setToast({
-      id: signal.id,
-      title: "NEW RADAR SIGNAL DETECTED:",
-      msg: `${signal.facility} (${signal.location}) — ${signal.disruption}`,
-      color: "#EAB308"
-    });
+        // Parse and recalculate KPI scorecards reactively (boardroom math updates)
+        setKpiData(prevKpi =>
+          prevKpi.map(kpi => {
+            if (kpi.id === "monitored-nodes") {
+              const exposures = { "SUP-404R": 34.5, "SUP-512S": 22.4, "SUP-771A": 12.8, "SUP-212H": 18.2 };
+              const addition = exposures[mappedSignal.id] || 15.0;
+              return { 
+                ...kpi, 
+                value: kpi.value + addition,
+                subtext: `+$${addition.toFixed(1)}M added from new disruption`
+              };
+            }
+            if (kpi.id === "active-risks") {
+              const criticals = threatRows.filter(r => r.severity >= 9.0 || (r.id === mappedSignal.id && mappedSignal.severity >= 9.0)).length + 1;
+              const elevateds = (threatRows.length + 1) - criticals;
+              return { 
+                ...kpi, 
+                value: kpi.value + 1,
+                criticalCount: criticals,
+                elevatedCount: elevateds,
+                subtext: `${criticals} Critical | ${elevateds} Elevated`
+              };
+            }
+            if (kpi.id === "network-health") {
+              const nextVal = Math.max(45, kpi.value - 1.8);
+              return { 
+                ...kpi, 
+                value: nextVal,
+                subtext: `SLA warning threshold: 90.0%`
+              };
+            }
+            return kpi;
+          })
+        );
 
-    // Auto dismiss toast after 6 seconds
-    setTimeout(() => {
-      setToast(null);
-    }, 6000);
+        // Render alert toast banner
+        setToast({
+          id: mappedSignal.id,
+          title: "NEW RADAR SIGNAL DETECTED:",
+          msg: `${mappedSignal.facility} (${mappedSignal.location}) — ${mappedSignal.disruption}`,
+          color: "#EAB308"
+        });
+
+        setTimeout(() => {
+          setToast(null);
+        }, 6000);
+      })
+      .catch(err => {
+        console.error("Error simulating signal on backend:", err);
+      });
   };
 
   return (

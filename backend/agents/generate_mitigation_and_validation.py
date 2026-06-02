@@ -5,7 +5,10 @@ import sys
 import json
 
 load_dotenv(override=True)
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    api_key = "dummy-key"
+client = OpenAI(api_key=api_key)
 
 
 def construct_prompt(disruption_cards, supply_base):
