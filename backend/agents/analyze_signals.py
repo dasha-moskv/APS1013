@@ -92,6 +92,8 @@ The output must follow this general shape:
   "timeToHit": 0,
   "tier": 1,
   "fullDescription": "Detailed explanation of the disruption and why it matters to Boeing.",
+  "downstreamBusinessImpact": "Brief summary of how this affects downstream production or revenue.",
+  "mitigationObjective": "The primary goal of the response strategy.",
   "sourceData": "Public or simulated source data description",
   "mapPosition": {{
     "coordinates": [0.0, 0.0],

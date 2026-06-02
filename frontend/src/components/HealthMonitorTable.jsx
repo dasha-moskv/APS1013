@@ -838,7 +838,7 @@ export default function HealthMonitorTable({
                         Downstream Business Impact
                       </span>
                       <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
-                        {inspectedRow.downstreamImpact || ""}
+                        {inspectedRow.downstreamBusinessImpact || inspectedRow.mapPosition?.downstreamBusinessImpact || "Threatens core SLA commitments and operational run-rates at primary integration hubs."}
                       </p>
                     </div>
                     <div className="flex flex-col gap-1">
@@ -846,7 +846,7 @@ export default function HealthMonitorTable({
                         Mitigation Objective
                       </span>
                       <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
-                        {inspectedRow.mitigationObjective || ""}
+                        {inspectedRow.mitigationObjective || inspectedRow.mapPosition?.mitigationObjective || "Establish immediate redundant routing profiles and secure certified secondary supplies."}
                       </p>
                     </div>
                   </div>
