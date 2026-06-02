@@ -11,7 +11,10 @@
     "fullDescription": "A micro-computed tomography (CT) scan at the Derby assembly plant detected a core density fluctuation in a batch of composite turbofan casing forgings. Assembly line operations for widebody engine components have been suspended to prevent structural casing fracture risk.",
     "sourceData": "Nondestructive Inspection Feed: RR-DERBY-CT-901 & Quality Systems IoT Stream",
     "mapPosition": {
-      "coordinates": [-1.4552, 52.8931],
+      "coordinates": [
+        -1.4552,
+        52.8931
+      ],
       "color": "#D32F2F",
       "role": "Tier-1 / Turbofans",
       "status": "Critical threat"
@@ -50,7 +53,9 @@
         "url": "TODO",
         "summary": "TODO"
       }
-    ]
+    ],
+    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
+    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules."
   },
   {
     "id": "SUP-512S",
@@ -64,7 +69,10 @@
     "fullDescription": "High-pressure testing of main landing gear shock absorbers experienced a catastrophic valve seal failure, causing localized toxic hydraulic fluid spillage. Clean-up procedures are active, temporarily halting system testing runs in building 4.",
     "sourceData": "SCADA Environmental Monitor Feed: SAFRAN-BIDOS-B4 & OEM Emerson Alerts",
     "mapPosition": {
-      "coordinates": [-0.605, 43.181],
+      "coordinates": [
+        -0.605,
+        43.181
+      ],
       "color": "#D32F2F",
       "role": "Tier-1 / Landing Gear",
       "status": "Critical threat"
@@ -103,7 +111,9 @@
         "url": "TODO",
         "summary": "TODO"
       }
-    ]
+    ],
+    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
+    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules."
   },
   {
     "id": "SUP-771A",
@@ -117,7 +127,10 @@
     "fullDescription": "Bauxite transport operations at the Pinjarra refinery have been suspended following a structural conveyor belt snap on the primary loading line. Raw aluminum refining output is throttled by 40% until belt splicing is complete.",
     "sourceData": "Pinjarra IoT Mechanical Stress Feed: ALCOA-PINJ-CVY-08 & Local Maintenance Registry",
     "mapPosition": {
-      "coordinates": [115.875, -32.628],
+      "coordinates": [
+        115.875,
+        -32.628
+      ],
       "color": "#FFB300",
       "role": "Tier-3 / Raw Aluminum",
       "status": "Elevated Risk"
@@ -156,7 +169,9 @@
         "url": "TODO",
         "summary": "TODO"
       }
-    ]
+    ],
+    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
+    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules."
   },
   {
     "id": "SUP-212H",
@@ -170,7 +185,10 @@
     "fullDescription": "A chemical bath used for coating auxiliary power unit (APU) turbine blades was flagged with an elevated contamination rating due to a leaking gasket. Turbine blade coating operations have been suspended to prevent structural delamination.",
     "sourceData": "Honeywell Chemical Control System: PHX-CHEM-BATH-02 & Gasket Leak IoT Alert",
     "mapPosition": {
-      "coordinates": [-112.0, 33.435],
+      "coordinates": [
+        -112.0,
+        33.435
+      ],
       "color": "#FFB300",
       "role": "Tier-1 / APU Assemblies",
       "status": "Elevated Risk"
@@ -209,6 +227,8 @@
         "url": "TODO",
         "summary": "TODO"
       }
-    ]
+    ],
+    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
+    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules."
   }
 ]
