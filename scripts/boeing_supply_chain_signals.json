@@ -38,7 +38,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669712,
     "sources": [
       {
         "title": "Seven years on: Boeing 777X Certification Delay Pushes Toward 2027",
@@ -91,7 +91,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669712,
     "sources": [
       {
         "title": "Boeing Commits US$1bn to Kansas Facility & Workforce",
@@ -139,7 +139,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669712,
     "sources": [
       {
         "title": "President Xi Jinping Has Promised China Will Buy 200 Boeing 737s. Here Is One More Big Reason the Stock Is a Buy in 2026.",
@@ -192,7 +192,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing strike in St. Louis ends after union approves new contract",
@@ -470,7 +470,7 @@
     },
     "downstreamImpact": "Risk of assembly line stoppage due to critical component quarantine; extended quality-checking overhead.",
     "mitigationObjective": "Restore quality compliance buffers and clear assembly backlogs.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "UPS Saw No Need for Changes After 2011 Boeing Defect Letter",
@@ -568,7 +568,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing\u2019s 737 MAX Milestone Links Backlog, China Demand And Future Airspace",
@@ -651,7 +651,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Is Boeing's Growing Backlog Strengthening Its Recovery Prospects?",
@@ -709,7 +709,7 @@
     },
     "downstreamImpact": "Reduced manufacturing capacity at sub-tier casting/forging hubs, increasing downstream lead times.",
     "mitigationObjective": "Diversify feedstock sourcing streams to bypass raw mineral shortages.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Airbus And Boeing Report March 2026 Commercial Aircraft Orders and Deliveries",
@@ -792,7 +792,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Time was Boeing\u2019s strongest weapon in months-long labor dispute with St. Louis machinists",
@@ -850,7 +850,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing backlog tops 6,200 jets after April sales surge",
@@ -898,7 +898,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing and the Supply Chain Cost of Industrial Complexity",
@@ -946,7 +946,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing Revenue Jumps on Deliveries as Losses Narrow and Backlog Hits Record",
@@ -1004,7 +1004,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "The Boeing Company (BA) Eyes Strong Recovery as Backlog Surges and Margins Stabilize",
@@ -1052,7 +1052,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing And Airbus Backlogs Surge \u2014 Why Dedicated Parts Makers Like Wheels And Brakes Are The Real Beneficiaries",
@@ -1100,7 +1100,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing\u2019s backlog boom puts cash flow to the test",
@@ -1148,7 +1148,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing receives more heat from Congress to settle St. Louis strike",
@@ -1196,7 +1196,7 @@
     },
     "downstreamImpact": "Reduced manufacturing capacity at sub-tier casting/forging hubs, increasing downstream lead times.",
     "mitigationObjective": "Diversify feedstock sourcing streams to bypass raw mineral shortages.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing China Megadeal Could Recast Backlog, Risk Profile And Services Story",
@@ -1244,7 +1244,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490357,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "The Boeing strike enters 4th month \u2014 here's how it got to this point",
@@ -1292,7 +1292,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing says wiring flaws could delay first-quarter deliveries of 737 MAX jets",
@@ -1380,7 +1380,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Hawley Urges Boeing to Negotiate with Missouri Workers on Strike",
@@ -1428,7 +1428,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "US Senate committee slams Boeing for cutting health care to striking St. Louis workers",
@@ -1481,7 +1481,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing boosts deliveries and backlog in Q4 but core aircraft unit remains loss-making",
@@ -1529,7 +1529,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "\u2018Fight together, win together\u2019: Striking Boeing workers rally in St. Louis",
@@ -1587,7 +1587,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "The Iran War Will Delay Commercial Aircraft Production, Boeing Warns",
@@ -1635,7 +1635,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Machinists\u2019 strike barely impacts Boeing\u2019s Q3 revenue of $23.3B",
@@ -1683,7 +1683,7 @@
     },
     "downstreamImpact": "Risk of assembly line stoppage due to critical component quarantine; extended quality-checking overhead.",
     "mitigationObjective": "Restore quality compliance buffers and clear assembly backlogs.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing Reports Supply Chain Quality Improvements",
@@ -1736,7 +1736,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing stock beat masks supply chain nightmare",
@@ -1784,7 +1784,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing executives say operations \u2018turning a corner,\u2019 despite 777X delay, charge",
@@ -1832,7 +1832,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669713,
     "sources": [
       {
         "title": "Boeing (BA) Valuation Check After New Vietnam Aircraft Orders And Growing Backlog",
@@ -1880,7 +1880,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing reports narrower quarterly loss as revenue rises to $22.2B and backlog hits record",
@@ -1933,7 +1933,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Last Year\u2019s Boeing Strike Has Delayed F-15EX Deployment to Japan",
@@ -1981,7 +1981,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Aircraft order backlog eases to 12 years as Airbus outsells Boeing again in 2025",
@@ -2044,7 +2044,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Why Boeing is Reshaping its Defence Supply Chain Workforce",
@@ -2057,12 +2057,12 @@
     "id": "SUP-672DB",
     "facility": "Spirit AeroSystems Wichita Plant",
     "location": "Wichita, KS, US",
-    "disruption": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment (4 articles)",
+    "disruption": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment (3 articles)",
     "severity": 5.0,
     "likelihood": 70,
     "timeToHit": 1,
     "tier": 1,
-    "fullDescription": "[Clustered Event - 4 Sources Reporting] Boeing closes Spirit AeroSystems purchase in major supply chain realignment\u00a0\u00a0Reuters\n\nAdditional coverage:\n- Spirit AeroSystems expresses \u201csubstantial doubt\u201d about company\u2019s future (Source: Aerospace Global News)\n- Spirit AeroSystems Outlines Latest Boeing 737 Disruption (Source: Aviation Week)\n- Spirit AeroSystems plunges 27% after bleak cash-flow outlook shocks investors (Source: Reuters)",
+    "fullDescription": "[Clustered Event - 3 Sources Reporting] Boeing closes Spirit AeroSystems purchase in major supply chain realignment\u00a0\u00a0Reuters\n\nAdditional coverage:\n- Spirit AeroSystems Outlines Latest Boeing 737 Disruption (Source: Aviation Week)\n- Spirit AeroSystems plunges 27% after bleak cash-flow outlook shocks investors (Source: Reuters)",
     "sourceData": "Google News RSS Ingest: Reuters (United States (EN))",
     "mapPosition": {
       "coordinates": [
@@ -2092,17 +2092,12 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment",
         "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQWXdRSzU0SkVhQTNiT3Z1eTUyR0d2TTc5R0twZUp5WURxV1dyMkNqN1F6cnJyQWQ5SWxXOFRKM01yTXg5TkpOSndETkVzMHdkdGlhSUF5N2JJRkNKdFZpa0dhaWJ6QzltdzgzRTZEaVU4TVNZUzJEX2pQdC1uNFQ4TjVwRHpjNVNaLXNpY21Od2VfUVhfOTU0Zmh6dThBN2NZQ0FnS1RnWUh5NEp1dTIwM0p6ZUl1YTlfSzloVWxSUjJrcG8yQUw4SFpmbkFfdjFwLXZBOWM0cEFUT3dzS210NWdR?oc=5",
         "summary": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment\u00a0\u00a0Reuters"
-      },
-      {
-        "title": "Spirit AeroSystems expresses \u201csubstantial doubt\u201d about company\u2019s future",
-        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUkY4RWtrbTZhQzJXQnNCNklIQUdQeXE0QkJlSDRrZ3ZfcENERFd3UHh3Wk0za255WnhmQzU5Zl9ydHZJZzVlbVo2RkRNU0FhT1FYSldPZzhfYmt3TWdablhqTVlyZ25jNTlybjIwWTBLanJtem5HajY2b2M3aktQVjlrRXJ2dDhzNVN6OWZKaHFQRFZ6M2J5TU1oX0laMlVUQmJBSlZob3NUQQ?oc=5",
-        "summary": "Spirit AeroSystems expresses \u201csubstantial doubt\u201d about company\u2019s future\u00a0\u00a0Aerospace Global News"
       },
       {
         "title": "Spirit AeroSystems Outlines Latest Boeing 737 Disruption",
@@ -2155,7 +2150,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "The Boeing strike is dragging on at its F-15 and Hornet factories in the Midwest",
@@ -2203,7 +2198,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing Downplays Strike's Impact On Key Defense Programs",
@@ -2256,7 +2251,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing strike reaches Day 93",
@@ -2304,7 +2299,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "ACG doubles Boeing backlog with 50 737 MAX order",
@@ -2367,7 +2362,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing stays silent on Machinists\u2019 proposed strike settlement",
@@ -2415,7 +2410,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing: Supply Chain Challenges Plague 777X Delivery",
@@ -2463,7 +2458,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Thousands of Boeing workers who build fighter jets just went on strike",
@@ -2511,7 +2506,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "Boeing hit by $5bn in penalties as new jet delayed",
@@ -2564,7 +2559,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "United Automobile, Aerospace and Agricultural Implement Workers of America",
@@ -2577,12 +2572,12 @@
     "id": "SUP-B24CB",
     "facility": "GE Aerospace Evendale Facility",
     "location": "Evendale, OH, US",
-    "disruption": "GE Aerospace strike: Both sides return to negotiating table (44 articles)",
+    "disruption": "GE Aerospace strike: Both sides return to negotiating table (43 articles)",
     "severity": 5.0,
     "likelihood": 90,
     "timeToHit": 14,
     "tier": 1,
-    "fullDescription": "[Clustered Event - 44 Sources Reporting] GE Aerospace strike: Both sides return to negotiating table\u00a0\u00a0FOX19 | Cincinnati\n\nAdditional coverage:\n- Striking UAW workers, GE Aerospace back at negotiation table as strike hits second week (Source: WLWT)\n- Over 600 Workers at GE Aerospace (GE)\u2019s Facilities Go on Strike (Source: Yahoo Finance)\n- GE Aerospace reaches five-year labor deal with 600 striking UAW workers (Source: Reuters)\n- Union representing GE Aerospace employees on strike files unfair labor charges (Source: The Business Journals)\n- Strike at GE Aerospace: Workers protest against healthcare costs. (Source: Haber Aero)\n- GE Aerospace releases statement, shares offer summary as UAW strike hits day 5 (Source: WLWT)\n- GE Aerospace, UAW reach agreement on new 5-year contracts, ending strike (Source: WLWT)\n- GE Aerospace workers reach deal with bosses following 2 weeks of strikes (Source: AeroTime)\n- UAW president stops in Cincinnati as GE Aerospace union workers approve strike (Source: WLWT)\n- Over 600 UAW workers at two GE Aerospace facilities go on strike (Source: Reuters)\n- GE Aerospace's UAW workers rally ahead of potential strike approval (Source: WVXU)\n- UAW, GE Aerospace reach tentative deal after strike at Ohio and Kentucky plants (Source: CBT News)\n- GE Aerospace Stock Falls After Labor Deal. A Boeing Staff Dispute Is Ongoing. (Source: Barron's)\n- Union president joins GE Aerospace workers on picket line amid ongoing strike (Source: WLWT)\n- 'Insulting offer' | GE Aerospace workers authorize strike action over benefits (Source: HR Grapevine)\n- GE Aerospace workers continue to hold the line one week after strike announcement (Source: WLWT)\n- Hundreds of UAW workers continue strike outside GE Aerospace over contract disputes following expiration (Source: FOX19 | Cincinnati)\n- UAW bureaucracy shuts down powerful GE Aerospace strike in Cincinnati, Ohio area (Source: World Socialist Web Site)\n- 'We got to stand together' | Picketers mark first day of UAW strike at GE Aerospace (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace remain on strike (Source: FOX19 | Cincinnati)\n- UAW members at GE Aerospace plants in Evendale, Erlanger vote for potential strike (Source: WLWT)\n- On Strike: UAW workers at GE Aerospace walk off job (Source: FOX19 | Cincinnati)\n- UAW leadership: Union filing unfair labor practice charge against GE Aerospace, company denies allegation (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace in Evendale and Erlanger begin strike (Source: WLWT)\n- GE Aerospace workers across Greater Cincinnati vote to strike (Source: The Business Journals)\n- UAW and GE Aerospace reach tentative agreement, union spokesperson says (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers walk out as defense industry strikes spread (Source: World Socialist Web Site)\n- UAW president Shawn Fain rallies with GE Aerospace workers as strike looms (Source: Cincinnati Enquirer)\n- GE Aerospace workers go on strike over failed contract negotiations (Source: Cincinnati Enquirer)\n- GE Aerospace worker strike is 'a wake-up call,' says UAW president Shawn Fain (Source: Cincinnati Enquirer)\n- UAW reaches tentative agreement with GE Aerospace after strike (Source: Detroit Free Press)\n- 'I hope the company is reasonable' | UAW workers rally against GE Aerospace as strike looms (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers in Ohio and Kentucky face midnight strike deadline (Source: World Socialist Web Site)\n- UAW on strike: More than 640 GE Aerospace workers in Cincinnati take to picket line (Source: Detroit Free Press)\n- GE Aerospace workers strike over healthcare costs, profit sharing (Source: WKRC)\n- 'Overwhelmingly ready': GE Aerospace union workers authorize strike as early as this week (Source: Cincinnati Enquirer)\n- 'We'll be out here': GE Aerospace worker of 25 years talks Evendale strike (Source: Cincinnati Enquirer)\n- GE Aerospace strikers: \u201cThere\u2019s got to be a line in the sand\u2014that\u2019s what we\u2019re doing\u201d (Source: World Socialist Web Site)\n- GE Aerospace workers strike on Labor Day, echoing past labor disputes (Source: WKRC)\n- GE Aerospace workers in Cincinnati go on strike after UAW rejects latest offer (Source: The Business Journals)\n- 'Big pillar in our community': Workers at GE Aerospace officially go on strike (Source: WKRC)\n- GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute (Source: USA Today)\n- UAW strike at GE Aerospace could end this week (Source: WVXU)",
+    "fullDescription": "[Clustered Event - 43 Sources Reporting] GE Aerospace strike: Both sides return to negotiating table\u00a0\u00a0FOX19 | Cincinnati\n\nAdditional coverage:\n- Striking UAW workers, GE Aerospace back at negotiation table as strike hits second week (Source: WLWT)\n- Over 600 Workers at GE Aerospace (GE)\u2019s Facilities Go on Strike (Source: Yahoo Finance)\n- GE Aerospace reaches five-year labor deal with 600 striking UAW workers (Source: Reuters)\n- Union representing GE Aerospace employees on strike files unfair labor charges (Source: The Business Journals)\n- Strike at GE Aerospace: Workers protest against healthcare costs. (Source: Haber Aero)\n- GE Aerospace releases statement, shares offer summary as UAW strike hits day 5 (Source: WLWT)\n- GE Aerospace, UAW reach agreement on new 5-year contracts, ending strike (Source: WLWT)\n- GE Aerospace workers reach deal with bosses following 2 weeks of strikes (Source: AeroTime)\n- UAW president stops in Cincinnati as GE Aerospace union workers approve strike (Source: WLWT)\n- Over 600 UAW workers at two GE Aerospace facilities go on strike (Source: Reuters)\n- GE Aerospace's UAW workers rally ahead of potential strike approval (Source: WVXU)\n- UAW, GE Aerospace reach tentative deal after strike at Ohio and Kentucky plants (Source: CBT News)\n- GE Aerospace Stock Falls After Labor Deal. A Boeing Staff Dispute Is Ongoing. (Source: Barron's)\n- Union president joins GE Aerospace workers on picket line amid ongoing strike (Source: WLWT)\n- 'Insulting offer' | GE Aerospace workers authorize strike action over benefits (Source: HR Grapevine)\n- GE Aerospace workers continue to hold the line one week after strike announcement (Source: WLWT)\n- Hundreds of UAW workers continue strike outside GE Aerospace over contract disputes following expiration (Source: FOX19 | Cincinnati)\n- UAW bureaucracy shuts down powerful GE Aerospace strike in Cincinnati, Ohio area (Source: World Socialist Web Site)\n- 'We got to stand together' | Picketers mark first day of UAW strike at GE Aerospace (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace remain on strike (Source: FOX19 | Cincinnati)\n- UAW members at GE Aerospace plants in Evendale, Erlanger vote for potential strike (Source: WLWT)\n- On Strike: UAW workers at GE Aerospace walk off job (Source: FOX19 | Cincinnati)\n- UAW leadership: Union filing unfair labor practice charge against GE Aerospace, company denies allegation (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace in Evendale and Erlanger begin strike (Source: WLWT)\n- GE Aerospace workers across Greater Cincinnati vote to strike (Source: The Business Journals)\n- UAW and GE Aerospace reach tentative agreement, union spokesperson says (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers walk out as defense industry strikes spread (Source: World Socialist Web Site)\n- UAW president Shawn Fain rallies with GE Aerospace workers as strike looms (Source: Cincinnati Enquirer)\n- GE Aerospace workers go on strike over failed contract negotiations (Source: Cincinnati Enquirer)\n- GE Aerospace worker strike is 'a wake-up call,' says UAW president Shawn Fain (Source: Cincinnati Enquirer)\n- UAW reaches tentative agreement with GE Aerospace after strike (Source: Detroit Free Press)\n- 'I hope the company is reasonable' | UAW workers rally against GE Aerospace as strike looms (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers in Ohio and Kentucky face midnight strike deadline (Source: World Socialist Web Site)\n- UAW on strike: More than 640 GE Aerospace workers in Cincinnati take to picket line (Source: Detroit Free Press)\n- GE Aerospace workers strike over healthcare costs, profit sharing (Source: WKRC)\n- 'Overwhelmingly ready': GE Aerospace union workers authorize strike as early as this week (Source: Cincinnati Enquirer)\n- 'We'll be out here': GE Aerospace worker of 25 years talks Evendale strike (Source: Cincinnati Enquirer)\n- GE Aerospace strikers: \u201cThere\u2019s got to be a line in the sand\u2014that\u2019s what we\u2019re doing\u201d (Source: World Socialist Web Site)\n- GE Aerospace workers strike on Labor Day, echoing past labor disputes (Source: WKRC)\n- GE Aerospace workers in Cincinnati go on strike after UAW rejects latest offer (Source: The Business Journals)\n- 'Big pillar in our community': Workers at GE Aerospace officially go on strike (Source: WKRC)\n- GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute (Source: USA Today)",
     "sourceData": "Google News RSS Ingest: FOX19 | Cincinnati (United States (EN))",
     "mapPosition": {
       "coordinates": [
@@ -2612,7 +2607,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490358,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "GE Aerospace strike: Both sides return to negotiating table",
@@ -2828,11 +2823,6 @@
         "title": "GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute",
         "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMXVCN1BWTW1xZ2JkcUtqUFFiU1Y2Q0IxaFhEM0ZPTXpreXJ0MklKT2NpRFUyaWZXYTFVRjB6NlNCaGhLU3RMUmtraDNDZVFFR3NaNklqUlpoNkI0ZTNsWXg2ZE1UcFotV2ZsZnVPc3pSZlRidzFlNzRDRHE4WGJzTlczbTdvRHdJR0lKUGFyYmFOSEtBSE9md2FnbHgzWmhxaTNYZQ?oc=5",
         "summary": "GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute\u00a0\u00a0USA Today"
-      },
-      {
-        "title": "UAW strike at GE Aerospace could end this week",
-        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1wb21xaEM0SkptVXYtbDBiSEJxWjJ1VUZiaW9FbkZfN21EbmdQTTV2UUpIQktneDZoaUR5SFVQUk1mNFVBZ1h4SHIyZDNfMnpfcWVoMXpGUmlGaldzd1JXa1RrX1N0RmFfaWpuNWtURzAwUzFFYlROUGg2ZVFldw?oc=5",
-        "summary": "UAW strike at GE Aerospace could end this week\u00a0\u00a0WVXU"
       }
     ]
   },
@@ -2840,12 +2830,12 @@
     "id": "SUP-7F68B",
     "facility": "GE Aerospace Evendale Facility",
     "location": "Evendale, OH, US",
-    "disruption": "GE Aerospace workers vote to ratify contract, ending Cincinnati-area strike (9 articles)",
+    "disruption": "GE Aerospace workers vote to ratify contract, ending Cincinnati-area strike (10 articles)",
     "severity": 5.0,
     "likelihood": 90,
     "timeToHit": 14,
     "tier": 1,
-    "fullDescription": "[Clustered Event - 9 Sources Reporting] GE Aerospace workers vote to ratify contract, ending Cincinnati-area strike\u00a0\u00a0Manufacturing Dive\n\nAdditional coverage:\n- UAW workers on strike after failed negotiations with GE Aerospace (Source: Spectrum News)\n- UAW, GE Aerospace reach tentative agreement on new contract after strike (Source: WLWT)\n- UAW workers at GE Aerospace approve new contract, ending strike (Source: WVXU)\n- GE Aerospace Ends Strike: 600 Workers Reach Deal (Source: Manufacturing.net)\n- A two-week strike at GE Aerospace has resulted in a temporary agreement. (Source: Haber Aero)\n- HAL and GE Aerospace strike $1bn deal to supply engines for new Tejas Mk1A fighters (Source: Aerospace Global News)\n- GE Aerospace strike may end after company and union reach 'tentative agreement' (Source: Cincinnati Enquirer)\n- GE Aerospace & HAL Strike Breakthrough To Co-Produce F414 Jet Engine: Boost For Make In India (Source: Indian Aerospace and Defence Bulletin)",
+    "fullDescription": "[Clustered Event - 10 Sources Reporting] GE Aerospace workers vote to ratify contract, ending Cincinnati-area strike\u00a0\u00a0Manufacturing Dive\n\nAdditional coverage:\n- UAW workers on strike after failed negotiations with GE Aerospace (Source: Spectrum News)\n- UAW, GE Aerospace reach tentative agreement on new contract after strike (Source: WLWT)\n- UAW strike at GE Aerospace could end this week (Source: WVXU)\n- GE Aerospace Ends Strike: 600 Workers Reach Deal (Source: Manufacturing.net)\n- A two-week strike at GE Aerospace has resulted in a temporary agreement. (Source: Haber Aero)\n- HAL and GE Aerospace strike $1bn deal to supply engines for new Tejas Mk1A fighters (Source: Aerospace Global News)\n- GE Aerospace strike may end after company and union reach 'tentative agreement' (Source: Cincinnati Enquirer)\n- UAW workers at GE Aerospace approve new contract, ending strike (Source: WVXU)\n- GE Aerospace & HAL Strike Breakthrough To Co-Produce F414 Jet Engine: Boost For Make In India (Source: Indian Aerospace and Defence Bulletin)",
     "sourceData": "Google News RSS Ingest: Manufacturing Dive (United States (EN))",
     "mapPosition": {
       "coordinates": [
@@ -2875,7 +2865,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669714,
     "sources": [
       {
         "title": "GE Aerospace workers vote to ratify contract, ending Cincinnati-area strike",
@@ -2893,9 +2883,9 @@
         "summary": "UAW, GE Aerospace reach tentative agreement on new contract after strike\u00a0\u00a0WLWT"
       },
       {
-        "title": "UAW workers at GE Aerospace approve new contract, ending strike",
-        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcW5wZWJLN0ZXU3ZXOGxOWVdVckJMQ3htUFJIbGNSLWhoVmJNeV83dzJiT01RQ2k2Y215ZFdyTk5JSktKVVYxd2RHT1NmdzFobkM1QUVwdl9Jc0hSNGJEWm5acEQ4ZkpPUGhZMVBzQXFzMlpRNkJXVGpaS184UTdPSzBJekIyT0MzSTktcEV3Nkw4S09Sc1VadUYyQ3FLTERmZXMwVnRRT18?oc=5",
-        "summary": "UAW workers at GE Aerospace approve new contract, ending strike\u00a0\u00a0WVXU"
+        "title": "UAW strike at GE Aerospace could end this week",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1wb21xaEM0SkptVXYtbDBiSEJxWjJ1VUZiaW9FbkZfN21EbmdQTTV2UUpIQktneDZoaUR5SFVQUk1mNFVBZ1h4SHIyZDNfMnpfcWVoMXpGUmlGaldzd1JXa1RrX1N0RmFfaWpuNWtURzAwUzFFYlROUGg2ZVFldw?oc=5",
+        "summary": "UAW strike at GE Aerospace could end this week\u00a0\u00a0WVXU"
       },
       {
         "title": "GE Aerospace Ends Strike: 600 Workers Reach Deal",
@@ -2918,6 +2908,11 @@
         "summary": "GE Aerospace strike may end after company and union reach 'tentative agreement'\u00a0\u00a0Cincinnati Enquirer"
       },
       {
+        "title": "UAW workers at GE Aerospace approve new contract, ending strike",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcW5wZWJLN0ZXU3ZXOGxOWVdVckJMQ3htUFJIbGNSLWhoVmJNeV83dzJiT01RQ2k2Y215ZFdyTk5JSktKVVYxd2RHT1NmdzFobkM1QUVwdl9Jc0hSNGJEWm5acEQ4ZkpPUGhZMVBzQXFzMlpRNkJXVGpaS184UTdPSzBJekIyT0MzSTktcEV3Nkw4S09Sc1VadUYyQ3FLTERmZXMwVnRRT18?oc=5",
+        "summary": "UAW workers at GE Aerospace approve new contract, ending strike\u00a0\u00a0WVXU"
+      },
+      {
         "title": "GE Aerospace & HAL Strike Breakthrough To Co-Produce F414 Jet Engine: Boost For Make In India",
         "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPYWtjeE9LV3llTkE3eURwRlhmeF9yTGltNWpjU242TWdXbU5ET0VJNmdGWmdNbi1VRE1JamRiNlhGRU9yX1dfYTExcU03eEdmbnRKQ0ZXSkR2dGQxRDYtWHRMdnBVSVhheGJRcVM4WTRpaS02aS1iR3lXbm5ZQXlkbzlKTVhLVlgxRkljVTRCMkZFLXVJVDEta242WXdLbEI4YlRmUm0xaTdkYnNWNm9ldERqMGQtZkxEaldhSEluRQ?oc=5",
         "summary": "GE Aerospace & HAL Strike Breakthrough To Co-Produce F414 Jet Engine: Boost For Make In India\u00a0\u00a0Indian Aerospace and Defence Bulletin"
@@ -2928,12 +2923,12 @@
     "id": "SUP-DC68B",
     "facility": "Spirit AeroSystems Wichita Plant",
     "location": "Wichita, KS, US",
-    "disruption": "Firefighters battle fire at Spirit AeroSystems after lightning strike (24 articles)",
+    "disruption": "Firefighters battle fire at Spirit AeroSystems after lightning strike (23 articles)",
     "severity": 7.0,
     "likelihood": 90,
     "timeToHit": 14,
     "tier": 1,
-    "fullDescription": "[Clustered Event - 24 Sources Reporting] Firefighters battle fire at Spirit AeroSystems after lightning strike\u00a0\u00a0KWCH\n\nAdditional coverage:\n- Lightning strike causes fire a Spirit AeroSystems building (Source: KSN.com)\n- Wichita Spirit AeroSystems workers unconcerned about Boeing strikes (Source: KAKE)\n- Lightning strike causes fire at Spirit AeroSystems fabrication building (Source: The Business Journals)\n- Wichita Spirit AeroSystems Workers Remain Unconcerned Despite Boeing Defense Strike In St. Louis (Source: Simple Flying)\n- Spirit AeroSystems union workforce approves new contract, ending strike at Kansas plant (Source: Reuters)\n- Spirit AeroSystems restores Wichita operations as union workers end strike (Source: Skies Mag)\n- Workers at Spirit AeroSystems begin strike as contract talks resume (Source: KCUR)\n- Spirit AeroSystems weighs hundreds more furloughs or layoffs if Boeing strike goes beyond Nov. 25 (Source: CNBC)\n- \u2018They accept our demands\u2019: Machinists approve Spirit AeroSystems contract, end strike (Source: Wichita Eagle)\n- Spirit AeroSystems to furlough 700 workers as Boeing machinist strike continues (Source: CNBC)\n- Spirit AeroSystems to halt work at Wichita plant as union votes to strike (Source: Reuters)\n- Boeing Strike Causes Spirit AeroSystems to Furlough 700 Workers (Source: TravelPulse)\n- Spirit AeroSystems and union reach tentative deal, creating path to end US strike (Source: Reuters)\n- Hit by Boeing strike, supplier Spirit Aero to furlough 700 employees (Source: Al Jazeera)\n- Spirit Aero to furlough 700 workers for 21 days due to Boeing strike (Source: Reuters)\n- Some Spirit AeroSystems employees could be working remotely during strike (Source: KSN.com)\n- Spirit AeroSystems Engineering Union Accepts New Contract Offering 23% Wage Increase (Source: Simple Flying)\n- 6,000 workers strike Spirit AeroSystems in Wichita, Kansas (Source: World Socialist Web Site)\n- Machinists union turns down Spirit AeroSystems contract offer, approves strike (Source: KWCH)\n- Boeing, Airbus supplier Spirit AeroSystems closes Wichita plant as workers go on strike (Source: Skies Mag)\n- Spirit AeroSystems chief executive Gentile resigns after production challenges and labour strike (Source: FlightGlobal)\n- Strike by DHL Services workers set to commence at Spirit Aerosystems next Monday (Source: Unite the Union)\n- Call for DHL supply chain workforce at Spirit Aerosystems in Northern Ireland to vote \u2018Yes\u2019 for industrial action over threatened real terms pay cut (Source: Unite the Union)",
+    "fullDescription": "[Clustered Event - 23 Sources Reporting] Firefighters battle fire at Spirit AeroSystems after lightning strike\u00a0\u00a0KWCH\n\nAdditional coverage:\n- Lightning strike causes fire a Spirit AeroSystems building (Source: KSN.com)\n- Wichita Spirit AeroSystems workers unconcerned about Boeing strikes (Source: KAKE)\n- Lightning strike causes fire at Spirit AeroSystems fabrication building (Source: The Business Journals)\n- Wichita Spirit AeroSystems Workers Remain Unconcerned Despite Boeing Defense Strike In St. Louis (Source: Simple Flying)\n- Spirit AeroSystems union workforce approves new contract, ending strike at Kansas plant (Source: Reuters)\n- Spirit AeroSystems restores Wichita operations as union workers end strike (Source: Skies Mag)\n- Workers at Spirit AeroSystems begin strike as contract talks resume (Source: KCUR)\n- Spirit AeroSystems weighs hundreds more furloughs or layoffs if Boeing strike goes beyond Nov. 25 (Source: CNBC)\n- \u2018They accept our demands\u2019: Machinists approve Spirit AeroSystems contract, end strike (Source: Wichita Eagle)\n- Spirit AeroSystems to furlough 700 workers as Boeing machinist strike continues (Source: CNBC)\n- Spirit AeroSystems to halt work at Wichita plant as union votes to strike (Source: Reuters)\n- Boeing Strike Causes Spirit AeroSystems to Furlough 700 Workers (Source: TravelPulse)\n- Spirit AeroSystems and union reach tentative deal, creating path to end US strike (Source: Reuters)\n- Hit by Boeing strike, supplier Spirit Aero to furlough 700 employees (Source: Al Jazeera)\n- Spirit Aero to furlough 700 workers for 21 days due to Boeing strike (Source: Reuters)\n- Spirit AeroSystems Engineering Union Accepts New Contract Offering 23% Wage Increase (Source: Simple Flying)\n- 6,000 workers strike Spirit AeroSystems in Wichita, Kansas (Source: World Socialist Web Site)\n- Machinists union turns down Spirit AeroSystems contract offer, approves strike (Source: KWCH)\n- Boeing, Airbus supplier Spirit AeroSystems closes Wichita plant as workers go on strike (Source: Skies Mag)\n- Spirit AeroSystems chief executive Gentile resigns after production challenges and labour strike (Source: FlightGlobal)\n- Strike by DHL Services workers set to commence at Spirit Aerosystems next Monday (Source: Unite the Union)\n- Call for DHL supply chain workforce at Spirit Aerosystems in Northern Ireland to vote \u2018Yes\u2019 for industrial action over threatened real terms pay cut (Source: Unite the Union)",
     "sourceData": "Google News RSS Ingest: KWCH (United States (EN))",
     "mapPosition": {
       "coordinates": [
@@ -2963,7 +2958,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Firefighters battle fire at Spirit AeroSystems after lightning strike",
@@ -3046,11 +3041,6 @@
         "summary": "Spirit Aero to furlough 700 workers for 21 days due to Boeing strike\u00a0\u00a0Reuters"
       },
       {
-        "title": "Some Spirit AeroSystems employees could be working remotely during strike",
-        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxObS1ldUdSWFQwdTVCSnRFUXh2RERWb20yOHhkWGxnNWk2dzFVUFp2YnpiZHBza3hhZHR5dE15bUhib2M4WG54WlE5RzlOem5OTDlpTUpVSDBsX1VqTklEOC1WQzFkSy1pNkoycy1WMHowZEcyV0h4d0VqQ2MxZXNnTFUzbTdSTlVwcDJfSmtpdjUweWl3SW9WOGRKS05NM0dBeVRKZXB4Q3BUY0dD?oc=5",
-        "summary": "Some Spirit AeroSystems employees could be working remotely during strike\u00a0\u00a0KSN.com"
-      },
-      {
         "title": "Spirit AeroSystems Engineering Union Accepts New Contract Offering 23% Wage Increase",
         "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOSk5Xd091Z3RsUWR4M0F5dFNieThDNkRQYnNtZ2FhVFQ4bGdhWHljRHV1aDhVZHBGVTV5UTlYbU5lbXBWU05Ia2R4MFpRQ1VWeG50cWJqNHBDdGhRdkFsN2xqWnFhcS1oTDd5SlFXS3BQUFlGRXhveVczeGZfNFRVRF9OYTBZazNzS1M2WVVRN0RzbkdrNGpsYnJBeEhSTEgwSGFvYWZwbUVJbFJRLU8zeTJxYw?oc=5",
         "summary": "Spirit AeroSystems Engineering Union Accepts New Contract Offering 23% Wage Increase\u00a0\u00a0Simple Flying"
@@ -3126,7 +3116,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "'We're hearing a bunch of rumors': GE Aerospace strike hits 1 week with no end in sight",
@@ -3174,7 +3164,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "UAW-backed GE Aerospace employees ratify new deal, return to work",
@@ -3237,7 +3227,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "UAW Local 952 to postpone start of bargaining until early November",
@@ -3285,7 +3275,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "UAW wins tentative contract with GE Aerospace",
@@ -3338,7 +3328,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "GE Aerospace strike: What to know",
@@ -3386,7 +3376,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "UAW workers strike approaching nearly 24 hours, plant operations continue",
@@ -3434,7 +3424,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Battle lines harden in US defense industry strikes at Boeing and GE Aerospace",
@@ -3482,7 +3472,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Fire ignites after lightning strikes Spirit building, company says",
@@ -3530,7 +3520,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "The Future of Disruption and Recovery Products",
@@ -3578,7 +3568,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Contracts expiring for GE Aerospace and GE Vernova workers in the US",
@@ -3626,7 +3616,7 @@
     },
     "downstreamImpact": "Risk of assembly line stoppage due to critical component quarantine; extended quality-checking overhead.",
     "mitigationObjective": "Restore quality compliance buffers and clear assembly backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Spirit AeroSystems\u2019 safety stock minimizes delivery disruption after strike",
@@ -3674,7 +3664,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Spirit AeroSystems suspends production at Kansas site due to worker strike",
@@ -3722,12 +3712,60 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "GE Aerospace's struggle with supply constraints hits jet engine deliveries",
         "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPRERtc25YcGEzVmhMRDJfdy1UU3RMUGkyLTFBemxBU2NlSDAweUdtblNFcmVZUDdtTGJoLXhsbndGQzMtTEc1dTR6N2dCOXRncjNDZjZ2d0hjRElEbF9EaU9Cck5qeFB0M0lTN0Y4ODRQUWdyLXJ5ak5tOFlRczY5R2R3MW1mYzlhelo1Qk45aFpzRk9wcXdVVlk1blUtd2FQVzVtbHprWGlrd3BacjlDVm5Zb1FKY0hzRW9YZTQ1RnlCcDJvSWk3X3BCNEk3U1JIc2dQaA?oc=5",
         "summary": "GE Aerospace's struggle with supply constraints hits jet engine deliveries\u00a0\u00a0Reuters"
+      }
+    ]
+  },
+  {
+    "id": "SUP-156FB",
+    "facility": "Spirit AeroSystems Wichita Plant",
+    "location": "Wichita, KS, US",
+    "disruption": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern",
+    "severity": 3.0,
+    "likelihood": 80,
+    "timeToHit": 10,
+    "tier": 1,
+    "fullDescription": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern\u00a0\u00a0Simple Flying",
+    "sourceData": "Google News RSS Ingest: Simple Flying (United States (EN))",
+    "mapPosition": {
+      "coordinates": [
+        -97.2798,
+        37.6436
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselages & Wings",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy temperature-controlled road courier truck fleets to collect stalled air cargo.",
+          "Secure expedited customs processing priority via dedicated aerospace customs brokers.",
+          "Divert incoming logistical shipments to secondary operational maritime gateways."
+        ],
+        "timeline": "5 to 7 business days for custom clearance and trucking"
+      },
+      "validationPlan": {
+        "steps": [
+          "Verify transit handling logs to ensure correct temperature/vibration bounds were kept.",
+          "Audit receiving bay intake capacity sheets before staged highway convoy arrivals."
+        ],
+        "timeline": "2 business days of transit telemetry validation"
+      }
+    },
+    "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
+    "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
+    "ingestedAt": 1780413669715,
+    "sources": [
+      {
+        "title": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern",
+        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQbUlDVlpSTEw5ZnBLemVjbzM4aEk0ZnlOd1VYVVFrT0dvbEM0X0xGOEYwTE1tQmk1VEVyT3ZoejBPV0czSjVlYzhVSkx1c1dCaldtN3M5cXVIbEhlbHlXSWNNWWVlOW56V1NnbHAzQjlVVVZybk1weTh4N1ZBcjltaU9R?oc=5",
+        "summary": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern\u00a0\u00a0Simple Flying"
       }
     ]
   },
@@ -3770,7 +3808,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Just Can't Deliver On Time: Which Jets Are Furthest Behind?",
@@ -3818,7 +3856,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing's Surprise Recovery Offers Supply Chain Optimism",
@@ -3866,7 +3904,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing $695 Billion Backlog Is Just the Beginning. Here\u2019s Where BA Could Go by 2030.",
@@ -3914,7 +3952,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Is Boeing's Recent China Deal a Win or a Miss for Investors",
@@ -3962,7 +4000,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Global Services Invests In AI, USM, Inventory To Boost Supply",
@@ -4015,7 +4053,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "DGCA says no fault found in Boeing fuel control switch after Air India grounds plane",
@@ -4063,7 +4101,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing asks suppliers to check for Middle East impact as war rages",
@@ -4116,7 +4154,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Middle East conflict impact on Airbus, Boeing",
@@ -4164,7 +4202,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Air India Orders More Airbus, Boeing Narrowbodies",
@@ -4217,7 +4255,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Why Boeing Has Seen Such A Rebound In 787 Dreamliner Production",
@@ -4265,7 +4303,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing deliveries up 69% while Airbus struggles with supply chain issues",
@@ -4318,7 +4356,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "The Great Reroute: How Boeing Is Moving Parts Around A War Zone",
@@ -4366,7 +4404,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "The Real Reason Why The Boeing 777X Is Delayed",
@@ -4414,7 +4452,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing's airplane deliveries are the highest in 7 years. Now it's about to pick up the pace",
@@ -4462,7 +4500,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "You'll Never Believe What Caused This Ryanair 737 MAX In-Flight Engine Shutdown",
@@ -4520,7 +4558,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing\u2019s monthly deliveries dip in November",
@@ -4568,7 +4606,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "How Airbus\u2019 Supply Chain Power Is Disrupting Boeing\u2019s Reign",
@@ -4616,7 +4654,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "GE Aerospace: Aviation Supply Challenges Will Continue In 2025",
@@ -4664,60 +4702,12 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Digital Disruption: The Global 7500 Showstopper and GE's Digital Connectivity",
         "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNaEFpbFdzV2RnM2FKZ0lSWFpRT3VaS00zNE9rZ2licHJxT0UwYk1PRW1WYUgwVmliWkJnXzJyby1lTl9tWDk1VE9nZXRuUEotZDFZX0xSZndWRW9EMlQzUEZqVklkaENNdHkwUldfRmFqTVlaN3lUTDYxWUQ0U0N0WE1VMllZMWZZcWZHVUZCTlF2QjRXbTJwOTRlM0RNSi1KSlA1RUNvMGJ3cHd4R2t4eTdQZ2ZRY2J4MExQcmtmZWU0SFhCd2RTck12NHM?oc=5",
         "summary": "Digital Disruption: The Global 7500 Showstopper and GE's Digital Connectivity\u00a0\u00a0GE Aerospace"
-      }
-    ]
-  },
-  {
-    "id": "SUP-156FB",
-    "facility": "Spirit AeroSystems Wichita Plant",
-    "location": "Wichita, KS, US",
-    "disruption": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern",
-    "severity": 3.0,
-    "likelihood": 80,
-    "timeToHit": 10,
-    "tier": 1,
-    "fullDescription": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern\u00a0\u00a0Simple Flying",
-    "sourceData": "Google News RSS Ingest: Simple Flying (United Kingdom (EN))",
-    "mapPosition": {
-      "coordinates": [
-        -97.2798,
-        37.6436
-      ],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Fuselages & Wings",
-      "status": "Elevated Risk"
-    },
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Deploy temperature-controlled road courier truck fleets to collect stalled air cargo.",
-          "Secure expedited customs processing priority via dedicated aerospace customs brokers.",
-          "Divert incoming logistical shipments to secondary operational maritime gateways."
-        ],
-        "timeline": "5 to 7 business days for custom clearance and trucking"
-      },
-      "validationPlan": {
-        "steps": [
-          "Verify transit handling logs to ensure correct temperature/vibration bounds were kept.",
-          "Audit receiving bay intake capacity sheets before staged highway convoy arrivals."
-        ],
-        "timeline": "2 business days of transit telemetry validation"
-      }
-    },
-    "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
-    "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490359,
-    "sources": [
-      {
-        "title": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern",
-        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQbUlDVlpSTEw5ZnBLemVjbzM4aEk0ZnlOd1VYVVFrT0dvbEM0X0xGOEYwTE1tQmk1VEVyT3ZoejBPV0czSjVlYzhVSkx1c1dCaldtN3M5cXVIbEhlbHlXSWNNWWVlOW56V1NnbHAzQjlVVVZybk1weTh4N1ZBcjltaU9R?oc=5",
-        "summary": "Spirit AeroSystems Reports \"Substantial Doubt\" Over Continuing As A Going Concern\u00a0\u00a0Simple Flying"
       }
     ]
   },
@@ -4760,7 +4750,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Company stock (US0970231058): Strong April orders with 135 net new bookings",
@@ -4808,7 +4798,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Iran zerst\u00f6rt E-3C Sentry",
@@ -4856,7 +4846,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Sun Express: Leichter Tailstrike einer Boeing 737 in Frankfurt",
@@ -4904,7 +4894,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Airbus \"tr\u00e4ge\", Boeing \"beeindruckend\": Machtkampf der Flugzeugbauer",
@@ -4952,7 +4942,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing stock (US0970231058): Defense orders and commercial recovery in focus",
@@ -5010,7 +5000,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing 787: Boeing-Lieferungen an Lufthansa verz\u00f6gern sich durch US-Shutdown",
@@ -5063,7 +5053,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing r\u00e4umt weitere Verz\u00f6gerung beim Gro\u00dfraumjet 777-9 ein",
@@ -5111,7 +5101,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing erwartet neue Versp\u00e4tung bei 777-9 - Wirtschaft - SZ.de",
@@ -5164,7 +5154,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing: St\u00e4rkstes Februar-Ergebnis seit 2017 bei den Auslieferungen",
@@ -5212,7 +5202,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490359,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Trifft der Shutdown in den USA Lufthansas Boeing 787 mit Allegris?",
@@ -5265,7 +5255,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Shares: A Recovery Built on Solid Fundamentals",
@@ -5323,7 +5313,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing\u2019s Certification Hurdle: A Self-Inflicted Delay, Says Regulator",
@@ -5371,7 +5361,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing 777 von Latam war bei Tailstrike in Mailand viel zu langsam",
@@ -5424,7 +5414,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Secures Major Order Amid Cautious Market Sentiment",
@@ -5472,7 +5462,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing 787-9 landet mit einem Jahr Delay in Frankfurt",
@@ -5520,7 +5510,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Piloten von Turkish Airlines schon wieder in Tailstrike-Vorfall verwickelt",
@@ -5573,7 +5563,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Jumbo-Jet muss Flug nach 20 Minuten abbrechen",
@@ -5621,7 +5611,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Jubil\u00e4um: F-15E Strike Eagle erreicht 10.000 Flugstunden",
@@ -5669,7 +5659,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "R\u00e4tselhafter US-Flugzeug-Absturz der \u201eFliegenden Tankstelle\u201c: Was jetzt \u00fcber den Fall KC-135 bekannt ist",
@@ -5717,7 +5707,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Shares Navigate Geopolitical Sanctions and Major Defense Contract",
@@ -5765,7 +5755,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing: Israel bekommt neueste F-15-Version",
@@ -5813,7 +5803,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing KC-46A f\u00fcr weltweite Eins\u00e4tze freigegeben",
@@ -5861,7 +5851,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669715,
     "sources": [
       {
         "title": "Boeing Shares Receive Bullish Endorsement from Citigroup with Significant Upside Projected",
@@ -5909,7 +5899,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Flammen aus Triebwerk: Video zeigt dramatische Momente",
@@ -5957,7 +5947,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Airbus verkauft zehn weitere A330 Neo",
@@ -6005,7 +5995,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing schlie\u00dft Kauf von Aurora Flight Sciences ab",
@@ -6053,7 +6043,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing F-15EX hei\u00dft jetzt \"Eagle II\"",
@@ -6101,7 +6091,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Atlas Air Boeing 747 schl\u00e4gt mit drei Triebwerken auf die Runway",
@@ -6149,7 +6139,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "US Air Force erh\u00e4lt ersten Boeing MH-139A \u201eGrey Wolf\u201c",
@@ -6197,7 +6187,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Rolls-Royce best\u00e4tigt Gespr\u00e4che mit Boeing \u00fcber NMA/797-Triebwerke",
@@ -6250,7 +6240,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "AVIATION: Boeing 787 Probleme infographic",
@@ -6298,7 +6288,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "USA entsendet Boeing B-52 nach Europa",
@@ -6346,7 +6336,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "28 Hours Trapped on a Plane: Passengers Recount Grueling Experience On Cathay Pacific Flight From Hell",
@@ -6394,7 +6384,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "China moves to limit Boeing deliveries amid trade war, reports say",
@@ -6442,7 +6432,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing's Smallest 737 Max Faces New Doubts as a Key Buyer Wavers",
@@ -6490,12 +6480,60 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Ein zweiw\u00f6chiger Streik bei GE Aerospace hat zu einer vorl\u00e4ufigen Einigung gef\u00fchrt.",
         "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNQndOLXdWSDI0bmNvRGY3M053QVo5elZTamV4Y21CLUUxWjExRWNtNUV0cldHNnBNZ1RKQWFQZTU3LUprUVpYUDVRcDFIN2UxV3dBNmY0TkNHV0NKX01zUWdEUzVwRG9FZEI3ZEc2ZVpBdTJLekZuZEhQQ05raGtWY0pnV0hSTFNFR01peEw0cmtzQmNlWU1yemJwQUptWDAtRHU4UnNibWZRT2ZCYWh6U2VGd19JbWR3NlB1bjhBRm42Y2VKYS1j?oc=5",
         "summary": "Ein zweiw\u00f6chiger Streik bei GE Aerospace hat zu einer vorl\u00e4ufigen Einigung gef\u00fchrt.\u00a0\u00a0Haber Aero"
+      }
+    ]
+  },
+  {
+    "id": "SUP-ECEAB",
+    "facility": "GE Aerospace Evendale Facility",
+    "location": "Evendale, OH, US",
+    "disruption": "Streik bei GE Aerospace: Arbeiter protestieren gegen die Gesundheitskosten.",
+    "severity": 2.5,
+    "likelihood": 70,
+    "timeToHit": 1,
+    "tier": 1,
+    "fullDescription": "Streik bei GE Aerospace: Arbeiter protestieren gegen die Gesundheitskosten.\u00a0\u00a0Haber Aero",
+    "sourceData": "Google News RSS Ingest: Haber Aero (Germany (DE))",
+    "mapPosition": {
+      "coordinates": [
+        -84.2619,
+        39.2573
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Aircraft Engines",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Isolate compromised network switches to quarantine ransomware vectors.",
+          "Deploy backup offline telemetry capture setups on primary manufacturing lines.",
+          "Activate pre-audited disaster recovery servers and initialize database restoration."
+        ],
+        "timeline": "24 to 72 hours for server recovery and network quarantine"
+      },
+      "validationPlan": {
+        "steps": [
+          "Execute complete antivirus and vulnerability scans across all reconnected hosts.",
+          "Verify data logs are back to operational synchronization standards."
+        ],
+        "timeline": "12 hours of network safety logging before production restart"
+      }
+    },
+    "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
+    "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
+    "ingestedAt": 1780413669716,
+    "sources": [
+      {
+        "title": "Streik bei GE Aerospace: Arbeiter protestieren gegen die Gesundheitskosten.",
+        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOYVBxajdyZDVpc1lJb1dCUjFfSjRtUDgwVWs0cXNEX1dPRzIyeTdjMVV0UmZVRTluUXlzT1JraDRQcnNWck1zNjVUdXJsbkZTWFZhS3lsTzd1a0x4VzdMVXBSd1NZbzFzRDRHT0Itcmp0NWpxSmJEUFpPLTlsWm40MjM0U0pkY28xaTM0YXRuSWhxcFY5WVVN?oc=5",
+        "summary": "Streik bei GE Aerospace: Arbeiter protestieren gegen die Gesundheitskosten.\u00a0\u00a0Haber Aero"
       }
     ]
   },
@@ -6538,7 +6576,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "GE Aerospace: Starke Auftragslage, aber \u00fcberteuert?",
@@ -6586,7 +6624,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "GE Aerospace Ramps Up Hiring to Tackle Record $190 Billion Order Backlog",
@@ -6634,7 +6672,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Jefferies confirme son conseil \"achat\" sur Boeing",
@@ -6682,7 +6720,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing takes near $5 billion hit on 777X program",
@@ -6730,7 +6768,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Safran, Figeac Aero, Lat\u00e9co\u00e8re... La crise de Boeing secoue la supply chain",
@@ -6778,7 +6816,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Gr\u00e8ve des travailleurs de Boeing : une position strat\u00e9gique pour faire trembler l'\u00e9conomie mondiale",
@@ -6826,7 +6864,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Avec 600 livraisons, Boeing rebondit en 2025 mais reste distanc\u00e9 par Airbus",
@@ -6874,7 +6912,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "F-15, Chinook, B-52 : Boeing promet une nouvelle vie \u00e0 ses vieilles gloires",
@@ -6922,7 +6960,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Bourse de Paris : Actualit\u00e9 financi\u00e8re, cotations et cours en direct",
@@ -6970,7 +7008,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Afrique : le trafic a\u00e9rien de passagers devrait cro\u00eetre de 6% par an jusqu\u2019en 2044",
@@ -7018,7 +7056,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Poursuite de la gr\u00e8ve chez Boeing, qui publie sa plus lourde perte en quatre ans",
@@ -7066,7 +7104,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Salon du Bourget 2023 : Boeing annonce les appareils pr\u00e9sents lors du prochain salon",
@@ -7119,7 +7157,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\"La fili\u00e8re a\u00e9ronautique n\u2019est pas malade, mais conna\u00eet des difficult\u00e9s\"",
@@ -7167,7 +7205,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Typhon \u00e0 Taiwan : la nacelle-moteur d\u2019un 747 d\u2019UPS fait un \u00ab strike \u00bb (contact) \u00e0 l'atterrissage avec la piste",
@@ -7215,7 +7253,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "USA : Les commandes \u00e0 l'industrie p\u00e9nalis\u00e9es par l'a\u00e9ronautique en d\u00e9cembre",
@@ -7263,7 +7301,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing Stock Braces For Bumpy Q3 Landing (CORRECTED)",
@@ -7311,7 +7349,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing : apr\u00e8s 10 jours, le mouvement de gr\u00e8ve s'enlise, pas de sortie de crise en vue",
@@ -7359,7 +7397,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "La Boeing French Team accueille deux nouveaux membres",
@@ -7417,7 +7455,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "DHL Express modernise sa flotte par la commande de neuf Boeing B777-200LR convertis en avions cargo par Mammoth Freighters",
@@ -7465,7 +7503,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "US Stocks Rally on Friday, But Book Weekly Losses",
@@ -7513,7 +7551,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "F/A-18 Block III Super Hornet Tour",
@@ -7561,7 +7599,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Isra\u00ebl commande 25 des derniers chasseurs F-15 \u00e0 Boeing",
@@ -7609,7 +7647,7 @@
     },
     "downstreamImpact": "Long-term lead time volatility and cost spikes for high-temperature superalloys.",
     "mitigationObjective": "Reduce geopolitical dependency by diversifying trade and shipping lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Une balle d\u00e9couverte dans le vol United Airlines UA1511 \u00e0 Newark",
@@ -7657,7 +7695,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing annonce le lancement d\u2019une augmentation de capital d\u2019environ 19 milliards de dollars",
@@ -7705,7 +7743,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing conteste le choix de Lockheed par le Danemark",
@@ -7753,7 +7791,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Nouveau retard de livraison de l'avion-citerne de Boeing-Arm\u00e9e US",
@@ -7801,7 +7839,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u00abJ\u2019envoyais d\u00e9j\u00e0 des messages d\u2019adieu\u00bb : un avion avec un moteur crachant des flammes oblig\u00e9 d\u2019atterrir d\u2019urgence en Italie (vid\u00e9os)",
@@ -7849,7 +7887,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u00ab Nous n\u2019avons pas d\u2019inqui\u00e9tude dans l\u2019absolu quant \u00e0 la solidit\u00e9 de la supply chain en France face aux mont\u00e9es en cadences \u00e0 venir \u00bb",
@@ -7897,7 +7935,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Kuehne+Nagel met en service son premier Boeing 747-8 Freighter",
@@ -7945,7 +7983,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "L'approvisionnement, point faible de Boeing et d'Airbus-expert",
@@ -7993,7 +8031,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing et Lockheed-Martin contestent l'attribution du contrat du futur bombardier de l'US Air Force",
@@ -8046,7 +8084,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "A\u00e9ronautique : Alphavest Capital et Boeing s\u2019allient pour cr\u00e9er cinq centres au Maroc",
@@ -8109,7 +8147,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Riyadh Air: Boeing delays start-up",
@@ -8157,7 +8195,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Un incident s\u2019est produit sur un vol Luxair entre Luxembourg et Dublin",
@@ -8205,7 +8243,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490360,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Le successeur du Boeing B-52 sera construit par Northrop-Grumman",
@@ -8253,7 +8291,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing, Airline Partners Set New Standard for Parts Authentication",
@@ -8301,7 +8339,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing s\u2019allie \u00e0 l\u2019UM6P pour dynamiser l\u2019industrie marocaine",
@@ -8349,7 +8387,7 @@
     },
     "downstreamImpact": "Long-term production halts if supplier defaults; critical re-verticalization needed.",
     "mitigationObjective": "Stabilize systemic single-point-of-failure to protect primary program line flows.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Ecosyst\u00e8me Boeing : E2IP Technologies, 11\u00e8me fournisseur \u00e0 s'installer au Maroc",
@@ -8397,7 +8435,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "United States: Boeing announces 17,000 job cuts amid ongoing employee strike",
@@ -8445,7 +8483,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing Distribution launches unified ecommerce platform",
@@ -8493,7 +8531,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Evidence shows Jeju Air pilots shut off less-damaged engine before crash, source says",
@@ -8541,7 +8579,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u304c10\uff0d12\u6708\u306b57%\u5897\u53ce\u3001\u30ad\u30e3\u30c3\u30b7\u30e5\u5275\u51fa\uff0d\u7d0d\u5165\u6a5f\u6570\u306f3\u500d\u5897",
@@ -8589,7 +8627,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u306e\u6709\u4eba\u5b87\u5b99\u8239\u300c\u30b9\u30bf\u30fc\u30e9\u30a4\u30ca\u30fc\u300d\u306e\u201c\u4e8b\u6545\u201d\u304c\u81f4\u547d\u7684\u306a\u6b20\u9665\u3060\u3063\u305f\u7406\u7531\u2026\u5730\u306b\u843d\u3061\u305f\u540d\u9580\u30d6\u30e9\u30f3\u30c9",
@@ -8637,7 +8675,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u306e\u682a\u4fa1\u4e88\u6e2c\uff1a2026\u5e74\u306bBA\u682a\u306f\u4e0a\u6607\u306b\u8ee2\u3058\u308b\u304b\uff1f",
@@ -8685,7 +8723,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u3001777X\u306e\u7d0d\u5165\u9045\u5ef6\u309210\u6708\u672b\u306e\u6c7a\u7b97\u767a\u8868\u3067\u516c\u8868\u304b \u5546\u7528\u904b\u822a\u306f2027\u5e74\u306b\u305a\u308c\u8fbc\u3080\u898b\u901a\u3057",
@@ -8738,7 +8776,7 @@
     },
     "downstreamImpact": "Inbound transport delay causing structural assembly shortages at integration hangars.",
     "mitigationObjective": "Bypass congested ports and secure priority transportation lanes.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669716,
     "sources": [
       {
         "title": "Boeing\u2019s 777-8F Freighter Entry Set for 2029 Following Delay of 777-9 Passenger Jet",
@@ -8786,7 +8824,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "Safran CEO cautious on supply chain once Boeing grounding lifted",
@@ -8834,7 +8872,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30a8\u30df\u30ec\u30fc\u30c4\u822a\u7a7a\u793e\u9577\u3001777X\u306e\u7d0d\u5165\u9045\u5ef6\u3092\u30dc\u30fc\u30a4\u30f3\u30b0\u304b\u3089\u3067\u306f\u306a\u304f\u30cb\u30e5\u30fc\u30b9\u3067\u77e5\u308a\u82db\u7acb\u3061",
@@ -8882,7 +8920,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "DHL\u3068JAL\u3001\u30dc\u30fc\u30a4\u30f3\u30b0767\u30d5\u30ec\u30a4\u30bf\u30fc\u3092\u6d3b\u7528\u3057\u305f \u30d1\u30fc\u30c8\u30ca\u30fc\u30b7\u30c3\u30d7\u3092\u5f37\u5316 - DHL - Japan \u65e5\u672c",
@@ -8930,7 +8968,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0(BA.US)\u306e\u30b9\u30c8\u30e9\u30a4\u30ad\u304c\u300c\u9023\u9396\u53cd\u5fdc\u300d\u3092\u5f15\u304d\u8d77\u3053\u3057\u3001\u30b9\u30d4\u30ea\u30c3\u30c8\u30a8\u30a2\u30ed\u30b7\u30b9\u30c6\u30e0\u30ba\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9(SPR.US)\u306e\u7b2c3\u56db\u534a\u671f\u306e\u640d\u5931\u304c\u62e1\u5927\u3057\u305f",
@@ -8978,7 +9016,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u3001777X\u9045\u5ef6\u306749\u5104\u30c9\u30eb\u640d\u5931\u8a08\u4e0a\u30fc\u904b\u822a\u958b\u59cb\u6642\u671f\u307e\u305f\u5ef6\u671f",
@@ -9036,7 +9074,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u306e\u5927\u578b\u6a5f\uff17\uff17\uff17\uff38\u3001\u53d7\u6ce8\u306e\uff13\u5206\u306e\uff11\u5931\u3046\u30ea\u30b9\u30af\uff0d\u7d0d\u671f\u9045\u308c\u3067",
@@ -9084,7 +9122,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u3001B777X\u306e\u7d0d\u5165\u304c2026\u5e74\u307e\u3067\u9045\u5ef6\u3059\u308b\u3053\u3068\u3092\u6b63\u5f0f\u767a\u8868 \u5f53\u521d\u4e88\u5b9a\u304b\u30896\u5e74\u9045\u308c",
@@ -9137,7 +9175,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u672c\u67658\u65e5\u9593\u3060\u3063\u305f\u306f\u305a\u306e\u30df\u30c3\u30b7\u30e7\u30f3\u3067\u5b87\u5b99\u98db\u884c\u58eb\u304c\u56fd\u969b\u5b87\u5b99\u30b9\u30c6\u30fc\u30b7\u30e7\u30f3\u304b\u3089\u5e30\u9084\u3067\u304d\u305a\u6700\u59272025\u5e74\u307e\u3067\u6ede\u5728\u5ef6\u671f\u306b\u306a\u308b\u53ef\u80fd\u6027",
@@ -9185,7 +9223,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u3001B777X\u306e\u751f\u7523\u30922023\u5e74\u672b\u307e\u3067\u505c\u6b62 \u7d0d\u5165\u306f2025\u5e74\u307e\u3067\u9045\u5ef6\u3059\u308b\u3053\u3068\u3092\u767a\u8868",
@@ -9238,7 +9276,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30b9\u30da\u30fc\u30b9X\u3068\u30dc\u30fc\u30a4\u30f3\u30b0\u306e\u5b87\u5b99\u98db\u884c\u58eb\u8f38\u9001\u30012019\u5e74\u306b\u9045\u308c\u306e\u53ef\u80fd\u6027",
@@ -9286,7 +9324,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30ef\u30a4\u30c9\u30dc\u30c7\u30a3\u6a5f\u306e\u4e0d\u8db3\u306f\u5f53\u5206\u7d9a\u304f",
@@ -9334,7 +9372,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30c9\u30ed\u30fc\u30f3\u3092\u6483\u589c\u3059\u308b\u6301\u3061\u904b\u3073\u53ef\u80fd\u306a\u30ec\u30fc\u30b6\u30fc\u7832\u3092\u30dc\u30fc\u30a4\u30f3\u30b0\u304c\u958b\u767a\u3001\u30c7\u30e2\u30e0\u30fc\u30d3\u30fc\u3092\u516c\u958b\u4e2d",
@@ -9382,7 +9420,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u97f3\u901f\u306e5\u500d\u3001\u6642\u901f6000km\u3067\u98db\u3076\u8d85\u97f3\u901f\u5075\u5bdf\u6a5f\u300cSon of Blackbird\u300d\u306e\u69cb\u60f3\u3092\u30dc\u30fc\u30a4\u30f3\u30b0\u304c\u767a\u8868",
@@ -9430,7 +9468,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u30012018\u5e74\u306e\u6c11\u9593\u6a5f\u7d0d\u5165\u306f806\u6a5f\u3067\u53f2\u4e0a\u6700\u9ad8 \u53d7\u6ce8\u6b8b\u3082\u5897\u52a0",
@@ -9488,7 +9526,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u300e\u30a8\u30fc\u30b9\u30b3\u30f3\u30d0\u30c3\u30c87\u300f\u5b9f\u5728\u306e\u6a5f\u4f533\u7a2e\u3092\u8ffd\u52a0\u3059\u308bDLC\u4eca\u6625\u914d\u4fe1\u3078\u3002F-15 S/MTD\u3001F-16XL\u306a\u3069\u5b9f\u9a13\u6a5f\u304c\u767b\u5834",
@@ -9536,7 +9574,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "Weekly top: Iran hits US base; Danantara takes IDR7 tn debt",
@@ -9584,7 +9622,7 @@
     },
     "downstreamImpact": "Extended stoppage risk for direct program sub-assemblies; significant daily stop-line cost exposure.",
     "mitigationObjective": "Establish redundant transportation bridges and bypass active labor roadblocks.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "Thunder Strike\u306e\u30c7\u30eb\u30bf\u7ffc\u578b\u30c9\u30ed\u30fc\u30f3\u300cTSA Fantom MK2 VTOL\u300d\u3001\u6700\u5927\u7a4d\u8f09\u91cf\u306f45kg\u30673000km\u4ee5\u4e0a\u98db\u884c\u3067\u304d\u308b",
@@ -9632,7 +9670,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30dc\u30fc\u30a4\u30f3\u30b0\u3001\u6771\u4eac\u30fb\u540d\u53e4\u5c4b\u3067\u63a1\u7528 \u9632\u885b\u5951\u7d04\u30fb\u8abf\u9054\u30fb\u55b6\u696d\u30fb\u30d1\u30a4\u30ed\u30c3\u30c8",
@@ -9680,7 +9718,7 @@
     },
     "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
     "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "Anti-Balaka Militants in CAR",
@@ -9728,7 +9766,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30a8\u30df\u30ec\u30fc\u30c4\u822a\u7a7a\u3001B777X\u306e\u8def\u7dda\u6295\u5165\u30922023\u5e74\u306b\u5ef6\u671f",
@@ -9776,7 +9814,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u30df\u30b5\u30a4\u30eb\u6e80\u8f09\u306eF-15SA \u30b9\u30c6\u30eb\u30b9\u6a5f\u306b\u306a\u3044\u642d\u8f09\u91cf\u3092\u30a2\u30d4\u30fc\u30eb",
@@ -9824,7 +9862,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u7c73\u7a7a\u8ecd\u3001\u6b21\u4e16\u4ee3\u7206\u6483\u6a5f\u30e1\u30fc\u30ab\u30fc\u306b\u30ce\u30fc\u30b9\u30ed\u30c3\u30d7\u30fb\u30b0\u30e9\u30de\u30f3\u3092\u9078\u5b9a",
@@ -9872,7 +9910,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "UPS\u306eB747-400F\u3001\u4ec1\u5ddd\u7a7a\u6e2f\u99d0\u6a5f\u4e2d\u306b\u5c3b\u3082\u3061\u3059\u308b\u30c8\u30e9\u30d6\u30eb\u304c\u767a\u751f",
@@ -9920,7 +9958,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "KC-46A\u3067\u65b0\u305f\u306a\u30ab\u30c6\u30b4\u30ea\u30fc1\u306e\u6b20\u9665\u3001\u71c3\u6599\u30dd\u30f3\u30d7\u306e\u632f\u52d5\u304c\u539f\u56e0",
@@ -9968,7 +10006,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u7c73\u7a7a\u8ecd\u304c3\u5ea6\u76ee\u306e\u9045\u5ef6\u3092\u767a\u8868\u3001KC-46A\u306e\u4e0d\u5177\u5408\u89e3\u6d88\u306f1\u5e74\u534a\u9045\u308c\u306e2027\u5e74\u590f",
@@ -10016,7 +10054,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u65e5\u672c\u306b\u5f15\u304d\u6e21\u3055\u308c\u305fKC-46A\u3001\u6b20\u9665\u4fee\u6b63\u3084\u8cbb\u7528\u8ca0\u62c5\u306b\u3064\u3044\u3066\u53e3\u3092\u3064\u3050\u3080\u7c73\u7a7a\u8ecd\u3068\u30dc\u30fc\u30a4\u30f3\u30b0",
@@ -10064,7 +10102,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "F-15J\u6539\u4fee\u6a5f\u306f\u7d0d\u5165\u9045\u5ef6\u304c\u6fc3\u539a\u30012028\u5e74\u5ea6\u306b\u3082\u9593\u306b\u5408\u308f\u306a\u3044\u53ef\u80fd\u6027",
@@ -10112,7 +10150,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "\u518d\u3073\u7834\u3089\u308c\u305f\u7d04\u675f\u3001KC-46A\u306e\u4e0d\u5177\u5408\u89e3\u6d88\u306f2025\u5e74\u304b\u30892026\u5e74\u306b\u305a\u308c\u8fbc\u3080",
@@ -10160,7 +10198,7 @@
     },
     "downstreamImpact": "Reduced assembly line curing volume, risking final delivery schedules.",
     "mitigationObjective": "Maximize parallel capacity run-rates to absorb downtime backlogs.",
-    "ingestedAt": 1780413490361,
+    "ingestedAt": 1780413669717,
     "sources": [
       {
         "title": "F/A-18E/F\u306e\u6b20\u9665\u304c\u89e3\u6d88\u3057\u305f\u306e\u304b\u306f\u4e0d\u660e\u3001\u305d\u308c\u3067\u3082\u30dc\u30fc\u30a4\u30f3\u30b0\u306fCFT\u63d0\u4f9b\u304c\u53ef\u80fd\u3068\u4e3b\u5f35",
