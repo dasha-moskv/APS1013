@@ -408,7 +408,7 @@ const nodePipelineData = {
   }
 };
 
-export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark, onHumanFeedback }) {
+export default function HealthMonitorTable({ rowData = [], loading = true, selectedCategories = [], onSelectCategories, isDark, onHumanFeedback, onDeleteSignal }) {
   const [selectedTier, setSelectedTier] = useState("ALL");
   const [inspectedRow, setInspectedRow] = useState(null);
   
@@ -1107,12 +1107,22 @@ export default function HealthMonitorTable({ rowData = [], loading = true, selec
                   </td>
 
                   {/* Action inspect button with tactile hit fill state */}
-                  <td className="py-1.5 px-3 align-middle text-right" onClick={(e) => e.stopPropagation()}>
+                  <td className="py-1.5 px-3 align-middle text-right whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                     <button
                       onClick={() => setInspectedRow(row)}
                       className="cursor-pointer border border-[#86BC25] bg-transparent text-[#86BC25] px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded-none hover:bg-[#86BC25] hover:text-black transition-colors duration-75"
                     >
                       INSPECT
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Are you sure you want to delete disruption signal [${row.id}] for ${row.facility}?`)) {
+                          onDeleteSignal && onDeleteSignal(row.id);
+                        }
+                      }}
+                      className="cursor-pointer border border-red-500 bg-transparent text-red-500 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded-none hover:bg-red-500 hover:text-white transition-colors duration-75 ml-1.5"
+                    >
+                      DELETE
                     </button>
                   </td>
                 </tr>

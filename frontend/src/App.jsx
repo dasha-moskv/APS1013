@@ -145,6 +145,15 @@ export default function App() {
     setTimeout(() => setToast(null), 5000);
   };
 
+  const handleDeleteSignal = (id) => {
+    setThreatRows(prev => prev.filter(t => t.id !== id));
+    setToast({
+      id: "SIGNAL_DELETED",
+      msg: `SIGNAL DELETED: Successfully removed disruption signal ${id} from active threat registry.`
+    });
+    setTimeout(() => setToast(null), 4000);
+  };
+
   // Callback from Home Threat Table feedback forms to dynamically log human reviews
   const handleHumanFeedback = (feedback) => {
     setFeedbackHistory(prev => [feedback, ...prev]);
@@ -288,6 +297,7 @@ export default function App() {
                   onSelectCategories={setSelectedCategories}
                   isDark={isDark}
                   onHumanFeedback={handleHumanFeedback}
+                  onDeleteSignal={handleDeleteSignal}
                 />
               </div>
             </div>
