@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, RefreshCw, DollarSign, FileText, AlertTriangle, Users, Award, Globe, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, AlertCircle, ArrowRight } from "lucide-react";
+import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, RefreshCw, DollarSign, FileText, AlertTriangle, Users, Award, Globe, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, AlertCircle, ArrowRight, Info } from "lucide-react";
 import { getTaxonomy, getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
 
 
@@ -608,21 +608,39 @@ export default function HealthMonitorTable({
               <th className="py-2 px-3 text-left font-bold">Disruption Signal</th>
               <th 
                 onClick={() => requestSort("severity")}
-                className={`py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
+                className={`py-2 px-3 w-40 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
-                Risk Severity {renderSortIndicator("severity")}
+                <div className="flex items-center justify-end gap-1">
+                  <Info 
+                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                    title="Calculated from natural language keyword weights on news headlines (1.0 = Low, 10.0 = Critical)."
+                  />
+                  <span>Risk Severity {renderSortIndicator("severity")}</span>
+                </div>
               </th>
               <th 
                 onClick={() => requestSort("likelihood")}
-                className={`py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
+                className={`py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
-                Likelihood {renderSortIndicator("likelihood")}
+                <div className="flex items-center justify-end gap-1">
+                  <Info 
+                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                    title="Probability (0%-100%) of disruption occurrence, estimated from category baseline values."
+                  />
+                  <span>Likelihood {renderSortIndicator("likelihood")}</span>
+                </div>
               </th>
               <th 
                 onClick={() => requestSort("timeToHit")}
-                className={`py-2 px-3 w-28 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
+                className={`py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
-                Time-to-hit {renderSortIndicator("timeToHit")}
+                <div className="flex items-center justify-end gap-1">
+                  <Info 
+                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                    title="Logistical latency buffer mapping the number of days before the threat disrupts Boeing operations."
+                  />
+                  <span>Time-to-hit {renderSortIndicator("timeToHit")}</span>
+                </div>
               </th>
               <th className="py-2 px-3 w-20 text-right font-bold">Action</th>
             </tr>

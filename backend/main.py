@@ -4,6 +4,7 @@ import random
 import asyncio
 import time
 import shutil
+import logging
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,6 +21,13 @@ from utils import (
     read_from_json,
     send_to_json
 )
+
+# Setup specialized supply chain radar pipeline logs
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger("radar_pipeline")
 
 load_dotenv(override=True)
 
@@ -149,40 +157,60 @@ def get_signals():
 @app.post("/api/signals/simulate")
 def simulate_signal():
     try:
-        # Check if OpenAI Key is configured to run real agents
-        if os.getenv("OPENAI_API_KEY"):
-            try:
-                supply_base = supply_base_prompt()
-                current_json_data = read_from_json()
-                raw_signal = collect_public_signals(supply_base, current_json_data) 
-                new_data = analyze_signals(supply_base, current_json_data, raw_signal)
-                send_to_json(new_data)
-                return new_data
-            except Exception as agent_err:
-                print(f"[WARN] Agent pipeline failed: {agent_err}. Falling back to pre-configured pool.")
-        
-        # Safe premium fallback generator
-        fallback = random.choice(MOCK_POOL).copy()
-        fallback["id"] = f"SUP-{random.randint(100, 999)}X"
-        fallback["ingestedAt"] = int(time.time() * 1000)
-        
-        # Append to signals.json
+        # Load the real processed signals
+        real_signals = []
         try:
             with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            data.insert(0, fallback)
-            with open(SIGNALS_PATH, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
-        except Exception as file_err:
-            print(f"[ERROR] Failed to save fallback signal to JSON: {file_err}")
+                real_signals = json.load(f)
+        except Exception as e:
+            logger.warning(f"Failed to read signals.json pool: {e}. Falling back to mocks.")
             
-        return fallback
+        # Load baseline threat registry rows to detect overlap
+        registry_ids = set()
+        try:
+            with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                reg_data = json.load(f)
+                registry_ids = {item["id"] for item in reg_data}
+        except Exception as e:
+            logger.warning(f"Failed to read threatRegistry.json: {e}")
+
+        # Filter out already active threat signals
+        unloaded_signals = [s for s in real_signals if s["id"] not in registry_ids]
+        
+        selected_signal = None
+        if unloaded_signals:
+            selected_signal = unloaded_signals[0].copy()
+            logger.info("SIMULATOR PIPELINE HEALTH: Selecting un-ingested real geocoded signal from registry pool.")
+        else:
+            # Fallback to premium mocks if pool is fully drained
+            logger.warning("SIMULATOR PIPELINE HEALTH: No un-ingested signals in pool. Generating a unique fallback.")
+            pool = real_signals if real_signals else MOCK_POOL
+            selected_signal = random.choice(pool).copy()
+            selected_signal["id"] = f"SUP-{random.randint(100, 999)}A"
+            
+        selected_signal["ingestedAt"] = int(time.time() * 1000)
+        
+        # Append directly to threatRegistry.json so it integrates persistently with map & list grids
+        try:
+            with open(THREAT_REGISTRY_PATH, "r+", encoding="utf-8") as f:
+                data = json.load(f)
+                data.insert(0, selected_signal)
+                f.seek(0)
+                json.dump(data, f, indent=2)
+                f.truncate()
+            logger.info(f"SIMULATOR PIPELINE SUCCESS: Committed non-overlapping signal {selected_signal['id']} to live threat registry database.")
+        except Exception as file_err:
+            logger.error(f"SIMULATOR PIPELINE FAILURE: Failed to save signal to registry: {file_err}")
+            
+        return selected_signal
     except Exception as e:
+        logger.error(f"SIMULATOR PIPELINE CRITICAL ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/api/signals/{id}")
 def delete_signal(id: str):
     updated = False
+    logger.info(f"DELETION PIPELINE INITIATED: Requesting purge of node ID {id}")
     
     # 1. Try removing from signals.json
     try:
@@ -195,7 +223,7 @@ def delete_signal(id: str):
                 f.truncate()
                 updated = True
     except Exception as e:
-        print(f"[WARN] signals.json remove error: {e}")
+        logger.warning(f"signals.json remove error: {e}")
         
     # 2. Try removing from threatRegistry.json
     try:
@@ -208,38 +236,76 @@ def delete_signal(id: str):
                 f.truncate()
                 updated = True
     except Exception as e:
-        print(f"[WARN] threatRegistry.json remove error: {e}")
+        logger.warning(f"threatRegistry.json remove error: {e}")
         
     if not updated:
+        logger.error(f"DELETION PIPELINE FAILURE: Request to purge non-existent node ID {id}")
         raise HTTPException(status_code=404, detail="Disruption signal ID not found.")
         
+    logger.info(f"DELETION PIPELINE SUCCESS: Successfully purged node ID {id} from active threat registries.")
     return {"message": f"Successfully deleted signal {id}"}
 
 @app.get("/api/stream")
 async def stream_signals():
     async def event_generator():
+        streamed_ids = set()
+        logger.info("STREAM PIPELINE HEALTH: New Server-Sent Events (SSE) connection established.")
+        
         while True:
-            # Simulate a new threat signal arriving at random intervals (3 to 7 seconds)
-            await asyncio.sleep(random.randint(3, 7))
+            # Sleep 4 to 8 seconds between streams
+            await asyncio.sleep(random.randint(4, 8))
             
-            fallback = random.choice(MOCK_POOL).copy()
-            fallback["id"] = f"SUP-{random.randint(100, 999)}S"
-            fallback["ingestedAt"] = int(time.time() * 1000)
-            
-            # Save it to signals database so it becomes queryable/persistent
+            # Load active registry rows and signals pool
+            registry_ids = set()
             try:
-                with open(SIGNALS_PATH, "r+", encoding="utf-8") as f:
-                    data = json.load(f)
-                    data.insert(0, fallback)
-                    f.seek(0)
-                    json.dump(data, f, indent=2)
-                    f.truncate()
+                with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                    reg_data = json.load(f)
+                    registry_ids = {item["id"] for item in reg_data}
             except Exception as e:
-                print(f"[ERROR] Failed to save streamed signal: {e}")
+                logger.warning(f"STREAM PIPELINE: Failed to read threatRegistry.json: {e}")
+                
+            real_signals = []
+            try:
+                with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
+                    real_signals = json.load(f)
+            except Exception as e:
+                logger.warning(f"STREAM PIPELINE: Failed to load signals pool: {e}")
+                
+            # Filter signals with zero overlap (not in threat registry, and not already streamed)
+            unstreamed = [s for s in real_signals if s["id"] not in registry_ids and s["id"] not in streamed_ids]
+            
+            selected_signal = None
+            if unstreamed:
+                # Pick the highest-priority signal (by severity)
+                sorted_unstreamed = sorted(unstreamed, key=lambda x: x.get("severity", 0), reverse=True)
+                selected_signal = sorted_unstreamed[0].copy()
+                streamed_ids.add(selected_signal["id"])
+                logger.info(f"STREAM PIPELINE ACTIVE: Dispatching real news alert. ID={selected_signal['id']} | Facility={selected_signal['facility']} | Severity={selected_signal['severity']}")
+            else:
+                # Fallback generator if pool is exhausted
+                logger.warning("STREAM PIPELINE DRAINED: All pool signals active. Generating unique mock alert.")
+                pool = real_signals if real_signals else MOCK_POOL
+                selected_signal = random.choice(pool).copy()
+                selected_signal["id"] = f"SUP-{random.randint(100, 999)}S"
+                selected_signal["ingestedAt"] = int(time.time() * 1000)
+                
+            # Update the live threatRegistry persistently so the signal is stored
+            try:
+                with open(THREAT_REGISTRY_PATH, "r+", encoding="utf-8") as f:
+                    data = json.load(f)
+                    # Deduplicate in active file save just in case
+                    if not any(item["id"] == selected_signal["id"] for item in data):
+                        data.insert(0, selected_signal)
+                        f.seek(0)
+                        json.dump(data, f, indent=2)
+                        f.truncate()
+                logger.info(f"STREAM DATABASE UPDATE: Saved streamed signal {selected_signal['id']} to live threat registry database.")
+            except Exception as e:
+                logger.error(f"STREAM DATABASE FAILURE: Failed to append streamed signal to registry: {e}")
                 
             yield {
                 "event": "new_signal",
-                "data": json.dumps(fallback)
+                "data": json.dumps(selected_signal)
             }
             
     return EventSourceResponse(event_generator())
