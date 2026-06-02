@@ -611,12 +611,26 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-40 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <span 
-                    title="Calculated from natural language keyword weights on news headlines (1.0 = Low, 10.0 = Critical)."
-                    className="cursor-help inline-block leading-none"
-                  >
+                  <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                  </span>
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark 
+                        ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                        : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                        <span className="h-2 w-2 bg-red-500 rounded-none" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">Risk Severity Metric</span>
+                      </div>
+                      <p className={`text-[10px] leading-relaxed mb-2 font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        The estimated magnitude of impact of a disruption on the supply chain node (scale of 1.0 = Low to 10.0 = Critical).
+                      </p>
+                      <div className={`border-t pt-2 mt-2 font-mono text-[9px] ${isDark ? "border-slate-800 text-slate-400" : "border-slate-100 text-slate-500"}`}>
+                        <span className="block font-bold uppercase text-[8px] text-[#86BC25] mb-1">Computation Model:</span>
+                        Baseline score of 2.5 + NLP keyword heuristic weights on news headline/description (+4.5 for critical terms like 'halt'/'shutdown', +2.5 for major like 'strike'/'defect', +0.5 for minor).
+                      </div>
+                    </div>
+                  </div>
                   <span>Risk Severity {renderSortIndicator("severity")}</span>
                 </div>
               </th>
@@ -625,12 +639,26 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <span 
-                    title="Probability (0%-100%) of disruption occurrence, estimated from category baseline values."
-                    className="cursor-help inline-block leading-none"
-                  >
+                  <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                  </span>
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark 
+                        ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                        : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                        <span className="h-2 w-2 bg-sky-500 rounded-none" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-sky-400">Likelihood Metric</span>
+                      </div>
+                      <p className={`text-[10px] leading-relaxed mb-2 font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        The estimated probability (0% - 100%) of the disruption occurrence at the facility.
+                      </p>
+                      <div className={`border-t pt-2 mt-2 font-mono text-[9px] ${isDark ? "border-slate-800 text-slate-400" : "border-slate-100 text-slate-500"}`}>
+                        <span className="block font-bold uppercase text-[8px] text-[#86BC25] mb-1">Computation Model:</span>
+                        Estimated from category baseline probabilities defined in the supply chain risk taxonomy templates (e.g., Labor & Workforce: 90%, Quality & Safety: 85%, Logistics: 80%, Material Shortages: 75%).
+                      </div>
+                    </div>
+                  </div>
                   <span>Likelihood {renderSortIndicator("likelihood")}</span>
                 </div>
               </th>
@@ -639,12 +667,26 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <span 
-                    title="Logistical latency buffer mapping the number of days before the threat disrupts Boeing operations."
-                    className="cursor-help inline-block leading-none"
-                  >
+                  <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                  </span>
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark 
+                        ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                        : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                        <span className="h-2 w-2 bg-amber-500 rounded-none" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400">Time-to-hit Metric</span>
+                      </div>
+                      <p className={`text-[10px] leading-relaxed mb-2 font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        Logistical latency buffer representing the number of days before the threat disrupts Boeing operations.
+                      </p>
+                      <div className={`border-t pt-2 mt-2 font-mono text-[9px] ${isDark ? "border-slate-800 text-slate-400" : "border-slate-100 text-slate-500"}`}>
+                        <span className="block font-bold uppercase text-[8px] text-[#86BC25] mb-1">Computation Model:</span>
+                        Mapped from the risk taxonomy template based on typical operational latency profiles per risk type (e.g., 0 days for Natural Disasters, 5 days for Quality sweeps, 10 days for Logistics congestion, 14 days for Labor actions).
+                      </div>
+                    </div>
+                  </div>
                   <span>Time-to-hit {renderSortIndicator("timeToHit")}</span>
                 </div>
               </th>
