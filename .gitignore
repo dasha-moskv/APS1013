@@ -30,3 +30,5 @@ frontend/lerna-debug.log*
 
 #Depreciated
 runs/
+venv/
+

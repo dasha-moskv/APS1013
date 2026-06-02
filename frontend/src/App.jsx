@@ -52,7 +52,10 @@ export default function App() {
         ingestedAt: Date.now(),
         coordinates: signal.coordinates || signal.mapPosition?.coordinates
       };
-      setThreatRows(prev => [mappedSignal, ...prev]);
+      setThreatRows(prev => {
+        const filtered = prev.filter(t => t.id !== mappedSignal.id);
+        return [mappedSignal, ...filtered];
+      });
       setDemoIndex(prev => prev + 1);
 
       setToast({
@@ -246,7 +249,10 @@ export default function App() {
           ingestedAt: Date.now(),
           coordinates: signal.coordinates || signal.mapPosition?.coordinates
         };
-        setThreatRows(prev => [mappedSignal, ...prev]);
+        setThreatRows(prev => {
+          const filtered = prev.filter(t => t.id !== mappedSignal.id);
+          return [mappedSignal, ...filtered];
+        });
         setDemoIndex(prev => prev + 1);
 
         // Parse and recalculate KPI scorecards reactively (boardroom math updates)

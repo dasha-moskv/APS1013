@@ -385,6 +385,39 @@ def clean_html(raw_html):
     clean_text = re.sub(r'<[^>]+>', '', raw_html)
     return html.unescape(clean_text)
 
+def get_core_disruption(d):
+    """Strips incident IDs, article counts, and procedural mock variation suffixes."""
+    # Remove leading [Inc #xxx] or [Incident #xxx]
+    d = re.sub(r'^\[Inc(?:ident)?\s*#?\d+\]\s*', '', d)
+    # Remove trailing article counts (e.g. (61 articles))
+    d = re.sub(r'\s*\(\d+\s*articles\)', '', d)
+    # Remove procedural mock variation suffixes
+    suffixes = [
+        " (Shift-", " (critical", " due to section", " (pressure", " (temperature",
+        " (vibration", " (micro-", " (Secondary", " (Shift", " (Incident"
+    ]
+    for suffix in suffixes:
+        if suffix in d:
+            d = d.split(suffix)[0]
+    return d.strip()
+
+def tokenize_title(t):
+    """Tokenizes title for Jaccard similarity comparison, filtering out stopwords."""
+    words = re.findall(r'\w+', t.lower())
+    stop_words = {
+        "boeing", "supply", "chain", "to", "the", "a", "an", "on", "in", 
+        "for", "with", "and", "is", "after", "by", "of", "at", "as", "from", 
+        "about", "over", "ba", "us", "corp", "co", "ltd", "inc", "company",
+        "delays", "delay", "halts", "halt", "shortage", "shortages", "strike", "strikes"
+    }
+    return {w for w in words if w not in stop_words and len(w) > 2}
+
+def jaccard_similarity(set1, set2):
+    if not set1 or not set2:
+        return 0.0
+    return len(set1.intersection(set2)) / len(set1.union(set2))
+
+
 def fetch_rss_feed(query, feed_config):
     """Fetch RSS feed from Google News."""
     encoded_query = urllib.parse.quote(query)
@@ -517,40 +550,107 @@ def resolve_entities(title, description):
 
 def generate_signals_json(df):
     """Transforms Pandas DataFrame into 100% compliant frontend JSON schemas."""
-    json_signals = []
+
+
+    def share_significant_keywords(tokens1, tokens2):
+        keywords = {
+            "strike", "union", "contract", "labor", "layoff", "negotiat",
+            "defect", "inspect", "faa", "safety", "airworthiness", "quality",
+            "shortage", "titanium", "alloy", "nickel", "cast", "forg",
+            "delay", "logistics", "rail", "port", "ship", "freight",
+            "capacity", "autoclave", "kiln", "halt", "shutdown", "offline",
+            "power", "energy", "outage", "grid", "freeze", "cyber", "ransomware"
+        }
+        common = tokens1.intersection(tokens2)
+        return len(common.intersection(keywords)) >= 1 or len(common) >= 2
+
+    # Cluster articles
+    clusters = []
     
     for idx, row in df.iterrows():
         title = row["Title"]
         desc = row["Description"]
         tax_code, tax_name = assign_risk_taxonomy(title, desc)
         supplier, meta = resolve_entities(title, desc)
-        severity = calculate_severity(title, desc)
+        facility = meta["facility"]
         
+        title_tokens = tokenize_title(title)
+        
+        # Check if it fits in an existing cluster
+        matched_cluster = None
+        for cluster in clusters:
+            if cluster["facility"] == facility and cluster["tax_code"] == tax_code:
+                sim = jaccard_similarity(title_tokens, cluster["title_tokens"])
+                if sim >= 0.20 or share_significant_keywords(title_tokens, cluster["title_tokens"]):
+                    matched_cluster = cluster
+                    break
+                    
+        if matched_cluster:
+            matched_cluster["articles"].append(row)
+            matched_cluster["title_tokens"].update(title_tokens)
+        else:
+            clusters.append({
+                "facility": facility,
+                "tax_code": tax_code,
+                "tax_name": tax_name,
+                "supplier": supplier,
+                "meta": meta,
+                "title_tokens": title_tokens,
+                "articles": [row]
+            })
+            
+    json_signals = []
+    
+    for cluster in clusters:
+        primary = cluster["articles"][0]
+        title = primary["Title"]
+        desc = primary["Description"]
+        meta = cluster["meta"]
+        tax_code = cluster["tax_code"]
+        tax_name = cluster["tax_name"]
+        
+        # Calculate max severity across the cluster
+        max_severity = 1.0
+        for art in cluster["articles"]:
+            sev = calculate_severity(art["Title"], art["Description"])
+            if sev > max_severity:
+                max_severity = sev
+                
         # Unique ID Hash Generation
-        hash_str = title + row["PublishedAt"]
+        hash_str = title + primary.get("URL", "")
         hash_id = hashlib.md5(hash_str.encode('utf-8')).hexdigest()[:4].upper()
         item_id = f"SUP-{hash_id}B"
         
-        # Load Playbook and Risk Scenario defaults based on Taxonomy
         playbook_tmpl = PLAYBOOK_TEMPLATES.get(tax_code, PLAYBOOK_TEMPLATES["MP"])
         
-        # Construct compliant schema
+        sources_list = []
+        for art in cluster["articles"]:
+            sources_list.append({
+                "title": art["Title"],
+                "url": art["URL"],
+                "summary": art["Description"] if art["Description"] else art["Title"]
+            })
+            
+        full_description = desc if desc else title
+        if len(cluster["articles"]) > 1:
+            full_description = f"[Clustered Event - {len(cluster['articles'])} Sources Reporting] {full_description}\n\nAdditional coverage:\n" + "\n".join([f"- {art['Title']} (Source: {art['Source']})" for art in cluster["articles"][1:]])
+            
         json_signals.append({
             "id": item_id,
             "facility": meta["facility"],
             "location": meta["location"],
-            "disruption": title,
-            "severity": severity,
+            "disruption": title if len(cluster["articles"]) == 1 else f"{title} ({len(cluster['articles'])} articles)",
+            "severity": max_severity,
             "likelihood": playbook_tmpl["likelihood"],
             "timeToHit": playbook_tmpl["time_to_hit"],
             "tier": meta["tier"],
-            "fullDescription": desc if desc else title,
-            "sourceData": f"Google News RSS Ingest: {row['Source']} ({row['RegionSource']})",
+            "fullDescription": full_description,
+            "sourceData": f"Google News RSS Ingest: {primary['Source']} ({primary['RegionSource']})",
             "mapPosition": {
                 "coordinates": meta["coordinates"],
                 "color": meta["color"],
                 "role": meta["role"],
-                "status": "Critical threat" if severity >= 7.0 else "Elevated Risk"
+                "status": "Critical threat" if max_severity >= 7.0 else "Elevated Risk"
             },
             "playbook": {
                 "mitigationPlan": {
@@ -565,13 +665,7 @@ def generate_signals_json(df):
             "downstreamImpact": playbook_tmpl["downstream_impact"],
             "mitigationObjective": playbook_tmpl["mitigation_objective"],
             "ingestedAt": int(time.time() * 1000),
-            "sources": [
-                {
-                    "title": title,
-                    "url": row["URL"],
-                    "summary": desc if desc else title
-                }
-            ]
+            "sources": sources_list
         })
         
     return json_signals
@@ -667,6 +761,98 @@ def run_batch_processor():
     with open(live_signals_path, "w", encoding="utf-8") as f:
         json.dump(json_signals, f, indent=2)
     print(f"[+] TRANSFORMATION COMPLETE: Saved {len(json_signals)} fully compliant threat records directly to portal database: {live_signals_path}")
+
+    # Prepend and cluster new signals directly into the threat registry (active table database)
+    registry_paths = [
+        "/Users/epheriami/Downloads/Projects/aps1013/project/backend/data/threatRegistry.json",
+        "/Users/epheriami/Downloads/Projects/aps1013/project/frontend/public/data/threatRegistry.json"
+    ]
+    
+    for registry_path in registry_paths:
+        if os.path.exists(registry_path):
+            try:
+                with open(registry_path, "r", encoding="utf-8") as f:
+                    existing_registry = json.load(f)
+            except Exception as e:
+                print(f"[!] Warning: Failed to load registry at {registry_path}: {e}")
+                existing_registry = []
+                
+            updated_registry = list(existing_registry)
+            new_added_count = 0
+            
+            for sig in json_signals:
+                facility = sig["facility"]
+                disruption = sig["disruption"]
+                core = get_core_disruption(disruption)
+                tokens = tokenize_title(core)
+                
+                clustered = False
+                for item in updated_registry:
+                    if item.get("facility", "") == facility:
+                        item_disruption = item.get("disruption", "")
+                        item_core = get_core_disruption(item_disruption)
+                        item_tokens = tokenize_title(item_core)
+                        
+                        sim = jaccard_similarity(tokens, item_tokens)
+                        if item_core.lower() == core.lower() or sim >= 0.65:
+                            if "sources" not in item or not isinstance(item["sources"], list):
+                                item["sources"] = [
+                                    {
+                                        "title": item_core,
+                                        "url": item.get("sources", [{}])[0].get("url", "") if isinstance(item.get("sources"), list) and len(item.get("sources")) > 0 else "",
+                                        "summary": item.get("fullDescription", "")
+                                    }
+                                ]
+                                
+                            incoming_sources = sig.get("sources", [])
+                            if not isinstance(incoming_sources, list):
+                                incoming_sources = []
+                            if not incoming_sources:
+                                incoming_sources = [
+                                    {
+                                        "title": disruption,
+                                        "url": sig.get("sources", [{}])[0].get("url", "") if isinstance(sig.get("sources"), list) and len(sig.get("sources")) > 0 else "",
+                                        "summary": sig.get("fullDescription", "")
+                                    }
+                                ]
+                                
+                            for src in incoming_sources:
+                                title = src.get("title", "")
+                                url = src.get("url", "")
+                                summary = src.get("summary", "")
+                                
+                                existing_titles = {s.get("title", "").lower() for s in item["sources"]}
+                                if title.lower() not in existing_titles:
+                                    item["sources"].append({
+                                        "title": title,
+                                        "url": url,
+                                        "summary": summary
+                                    })
+                                    
+                            count = len(item["sources"])
+                            item["disruption"] = f"{item_core} ({count} articles)"
+                            
+                            clean_matched_desc = re.sub(r'^\[Clustered Event\s*-\s*\d+\s*(?:Sources Reporting|Occurrences)\]\s*', '', item.get("fullDescription", ""))
+                            clean_matched_desc = re.sub(r'^\[Inc(?:ident)?\s*#?\d+\]\s*', '', clean_matched_desc)
+                            clean_matched_desc = re.split(r'\s*Additional report\s*', clean_matched_desc, flags=re.IGNORECASE)[0].strip()
+                            
+                            item["fullDescription"] = f"[Clustered Event - {count} Sources Reporting] {clean_matched_desc}"
+                                
+                            item["severity"] = max(item.get("severity", 1.0), sig.get("severity", 1.0))
+                            item["ingestedAt"] = max(item.get("ingestedAt", 0), sig.get("ingestedAt", 0))
+                            clustered = True
+                            break
+                            
+                if not clustered:
+                    updated_registry.insert(0, sig)
+                    new_added_count += 1
+            
+            try:
+                with open(registry_path, "w", encoding="utf-8") as f:
+                    json.dump(updated_registry, f, indent=2)
+                print(f"[+] AUTO-WRITE REGISTRY: Appended {new_added_count} new unique threats, clustered remaining into threat registry: {registry_path}")
+            except Exception as e:
+                print(f"[!] Error: Failed to write updated registry to {registry_path}: {e}")
     
     # Also save to scripts folder for record-keeping
     json_path = os.path.join(output_dir, "boeing_supply_chain_signals.json")
