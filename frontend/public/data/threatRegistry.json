@@ -12,7 +12,10 @@
     "downstreamBusinessImpact": "Delayed delivery of 777/767 widebody aircraft, impacting quarterly revenue targets.",
     "mitigationObjective": "Restore assembly line flow and minimize net buffer deficit of -12 operational days.",
     "sourceData": "Telemetry Ingestion Stream: EVT-FAC-904-MONITOR (Real-time Factory Floor Throughput)",
-    "coordinates": [-122.2731, 47.9218],
+    "coordinates": [
+      -122.2731,
+      47.9218
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -62,7 +65,10 @@
     "downstreamBusinessImpact": "Potential stop-line at Renton for 737 MAX; daily stop-line cost estimated at $8.8M.",
     "mitigationObjective": "Establish oversized highway convoy bridge to bypass rail disruptions.",
     "sourceData": "GPS Logistical Tracker Stream: SUP-001A-MIDWEST-RAIL & Reuters Labor News Feed",
-    "coordinates": [-97.2798, 37.6436],
+    "coordinates": [
+      -97.2798,
+      37.6436
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -113,7 +119,10 @@
     "mitigationObjective": "Accelerate inspection throughput while maintaining FAA Type Certificate compliance.",
     "sourceData": "FAA Airworthiness Notifications, GE Aerospace Supplier Communications & Aerospace Manufacturing Industry Reports",
     "mapPosition": {
-      "coordinates": [-84.2619, 39.2573],
+      "coordinates": [
+        -84.2619,
+        39.2573
+      ],
       "color": "#D32F2F",
       "role": "Tier-1 / Aircraft Engines",
       "status": "Critical threat"
@@ -168,7 +177,10 @@
     "mitigationObjective": "Secure alternate ASL-certified titanium feedstock to stabilize forging output.",
     "sourceData": "US Customs Import Data, Port of Long Beach Congestion Reports & Aerospace Metals Industry Monitoring Services",
     "mapPosition": {
-      "coordinates": [-122.6742, 45.5231],
+      "coordinates": [
+        -122.6742,
+        45.5231
+      ],
       "color": "#D32F2F",
       "role": "Tier-2 / Titanium Forgings",
       "status": "Critical threat"
@@ -222,7 +234,10 @@
     "downstreamBusinessImpact": "Delay in EUV system integration, impacting semiconductor manufacturing capacity and avionics lead times.",
     "mitigationObjective": "Bypass Schiphol bottleneck via Brussels air-charter and dedicated road transit.",
     "sourceData": "Schiphol Airport Air Cargo Manifest Feeds & DHL Priority Tracking API (ASML-SCHIP-109B)",
-    "coordinates": [5.3700, 51.4200],
+    "coordinates": [
+      5.37,
+      51.42
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -272,7 +287,10 @@
     "downstreamBusinessImpact": "NAND Flash supply chain disruption, impacting storage component availability for flight computers.",
     "mitigationObjective": "Secure priority transport permits and activate emergency chemical buffer reserves.",
     "sourceData": "Samsung China Local Supply Logistics Ingest Feeds & Shaanxi Transit Registry",
-    "coordinates": [108.9402, 34.3416],
+    "coordinates": [
+      108.9402,
+      34.3416
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -322,7 +340,10 @@
     "downstreamBusinessImpact": "33% reduction in fuselage curing volume, risking delivery dates for Charleston-built aircraft.",
     "mitigationObjective": "Restore full autoclave capacity and validate thermal consistency for safety compliance.",
     "sourceData": "SC Plant IoT Stream: SC-FAC-03-AUTOCLAVE-04 (Autoclave Chamber Heat Telemetry)",
-    "coordinates": [-80.0403, 32.8943],
+    "coordinates": [
+      -80.0403,
+      32.8943
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -373,7 +394,10 @@
     "mitigationObjective": "Diversify nickel feedstock sourcing within the approved supplier base to reduce geopolitical dependency.",
     "sourceData": "USGS Critical Minerals Reports, International Trade Bulletins & Aerospace Metals Industry Monitoring Services",
     "mapPosition": {
-      "coordinates": [-80.5495, 34.9854],
+      "coordinates": [
+        -80.5495,
+        34.9854
+      ],
       "color": "#FFB300",
       "role": "Tier-2 / Nickel Superalloys",
       "status": "Elevated Risk"
@@ -427,7 +451,10 @@
     "downstreamBusinessImpact": "Reduced forging capacity leading to structural part shortages for Tier-1 integrators.",
     "mitigationObjective": "Prioritize critical structural forgings through customs and port processing.",
     "sourceData": "Customs Clearance Port Manifest Ingestion Ingest API (LAX/LGB Port Inbound manifests)",
-    "coordinates": [-122.5694, 45.4243],
+    "coordinates": [
+      -122.5694,
+      45.4243
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -477,7 +504,10 @@
     "downstreamBusinessImpact": "Potential shortage of chemical precursors for aerospace composites and resins.",
     "mitigationObjective": "Stabilize synthesis chamber pressure using LNG backup and load balancing.",
     "sourceData": "Ludwigshafen Chemical Park IoT SCADA Feed & Nord-Flow pipeline telemetry API",
-    "coordinates": [8.4451, 49.4875],
+    "coordinates": [
+      8.4451,
+      49.4875
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
@@ -528,7 +558,10 @@
     "mitigationObjective": "Expedite propulsion electronics shipments via priority air freight and alternate hubs.",
     "sourceData": "Air Cargo Market Reports, FAA Logistics Advisories & Honeywell Supplier Communications",
     "mapPosition": {
-      "coordinates": [-112.0740, 33.4484],
+      "coordinates": [
+        -112.074,
+        33.4484
+      ],
       "color": "#FFB300",
       "role": "Tier-1 / Propulsion Electronics",
       "status": "Elevated Risk"
@@ -582,7 +615,10 @@
     "downstreamBusinessImpact": "Possible shortage of carbon fiber prepreg, the primary material for 787 structures.",
     "mitigationObjective": "Perform seismic structural inspections to authorize facility restart.",
     "sourceData": "Japan Meteorological Agency Seismic Trigger Feeds & Plant Automated Control API",
-    "coordinates": [133.0906, 33.8569],
+    "coordinates": [
+      133.0906,
+      33.8569
+    ],
     "playbook": {
       "mitigationPlan": {
         "steps": [
