@@ -2,6 +2,7 @@ import os
 import json
 import random
 import asyncio
+import time
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sse_starlette.sse import EventSourceResponse
@@ -148,7 +149,7 @@ def simulate_signal():
         # Safe premium fallback generator
         fallback = random.choice(MOCK_POOL).copy()
         fallback["id"] = f"SUP-{random.randint(100, 999)}X"
-        fallback["ingestedAt"] = int(asyncio.get_event_loop().time() * 1000)
+        fallback["ingestedAt"] = int(time.time() * 1000)
         
         # Append to signals.json
         try:
@@ -208,7 +209,7 @@ async def stream_signals():
             
             fallback = random.choice(MOCK_POOL).copy()
             fallback["id"] = f"SUP-{random.randint(100, 999)}S"
-            fallback["ingestedAt"] = int(asyncio.get_event_loop().time() * 1000)
+            fallback["ingestedAt"] = int(time.time() * 1000)
             
             # Save it to signals database so it becomes queryable/persistent
             try:

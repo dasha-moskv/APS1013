@@ -1,5 +1,47 @@
 [
   {
+    "id": "SUP-990S",
+    "facility": "Derby Foundry Ltd",
+    "location": "Derby, UK",
+    "disruption": "Turbine blade casting kiln shutdown due to refractory brick failure",
+    "severity": 8.4,
+    "likelihood": 90,
+    "timeToHit": 14,
+    "tier": 1,
+    "fullDescription": "Kiln #3 at the Derby casting yard suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs.",
+    "sourceData": "Factory IoT Kiln Status Feed: DERBY-KILN-03-ERR & Maintenance Log",
+    "mapPosition": {
+      "coordinates": [
+        -1.4552,
+        52.8931
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Casting",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer priority molding dies to backup casting facility in Munich.",
+          "Authorize overtime pay for engineering teams repairing Kiln #3.",
+          "Utilize reserve turbine blade safety stock held at Schiphol hub."
+        ],
+        "timeline": "6 to 8 business days for complete kiln liner replacement"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs of Kiln #3 during heat-up cycles to verify insulation integrity.",
+          "Perform non-destructive stress testing on the first batch of replacement castings.",
+          "Audit casting quality and dimensions against FAA approved specification sheets."
+        ],
+        "timeline": "2 business days for thermal certification and quality sign-off"
+      }
+    },
+    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
+    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.",
+    "ingestedAt": 362252127
+  },
+  {
     "id": "SUP-404R",
     "facility": "Rolls-Royce plc",
     "location": "Derby, GB",
