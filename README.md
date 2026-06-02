@@ -140,6 +140,30 @@ Project Radar strictly adheres to a premium, color-disciplined corporate aesthet
 
 ---
 
+## 🛰️ Signal Clustering & State Deduplication Architecture
+
+Project Radar implements an intelligent signal clustering and state deduplication subsystem to process raw news streams and simulated telemetry alerts without polluting the boardroom cockpit:
+
+1. **Jaccard Similarity Clustering ($\ge 65\%$ Threshold)**: 
+   - Uses a custom token-based Jaccard similarity and exact core-disruption matching helper on the backend (`main.py` and `google_news_batch_processor.py`).
+   - If two alerts target the same facility and share $\ge 65\%$ word similarity, they are clustered into a single parent active threat card (dynamically incrementing the `(X articles)` count and appending to `sources`).
+   - If the disruption signals represent different incidents (e.g. a logistics rail strike vs. a power grid freeze), they bypass clustering and safely coexist as distinct threat rows in the registry table.
+2. **Robust Splitting Heuristics**:
+   - Cleans the governance risk briefing logs using a robust case-insensitive and whitespace-flexible regular expression split: `re.split(r'\s*Additional report\s*', clean_desc, flags=re.IGNORECASE)`.
+   - This prevents duplicate legacy reports and keeps the Executive Governance Briefing panel to a clean, concise single-paragraph core description.
+3. **Frontend State Deduplication**:
+   - The React core in `App.jsx` dynamically intercepts live SSE streams (`new_signal` events) and mock post-simulation returns.
+   - It filters out previous entries of the updated threat by ID before prepending the mapped signal to the top of the table state:
+     ```javascript
+     setThreatRows(prev => {
+       const filtered = prev.filter(t => t.id !== mappedSignal.id);
+       return [mappedSignal, ...filtered];
+     });
+     ```
+     This prevents duplicate row generation in the UI data grid.
+
+---
+
 ## ⚙️ Decoupled Database Engineering
 
 To ensure the system is completely ready for enterprise backend API integrations, the frontend has been fully decoupled from static mock data. On app boot, parallel `fetch()` routines load all data from `/public/data/`:
