@@ -1,0 +1,34 @@
+supply_bases = [{
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -122.2731,
+            47.9218
+        ]
+    },
+    "properties": {
+        "supplier_id": "FAC-001",
+        "supplier_name": "Boeing Everett Factory",
+        "facility_type": "Internal",
+        "tier": 0,
+        "commodity_category": "Widebody Final Assembly",
+        "criticality": "Critical",
+        "address": "3003 W Casino Rd",
+        "city": "Everett",
+        "state_province": "WA",
+        "country": "US",
+        "alternative_suppliers": []
+    },
+    ...
+}]
+
+// UPLOAD LOGIC
+validate(supply_bases)
+    check_geometry()
+    check_metadata()
+
+// DATA INGESTION
+listener(supply_bases)
+    for base in supply_bases:
+        spatial_monitor(base)
+
