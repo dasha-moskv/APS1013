@@ -1,6 +1,6 @@
-import { Search, Bell, Play } from "lucide-react";
+import { Search, Bell, Play, Pause } from "lucide-react";
 
-export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark }) {
+export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark, isStreaming, onToggleStreaming }) {
   return (
     <header
       id="topbar"
@@ -40,18 +40,44 @@ export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark }) {
       {/* ── Spacer ── */}
       <div className="flex-1" />
 
+      {/* ── Live Streaming Control Button ── */}
+      <button
+        onClick={onToggleStreaming}
+        disabled={signalsLeft === 0}
+        className={`flex cursor-pointer items-center gap-1.5 border px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none transition-all duration-150 select-none
+                   ${signalsLeft > 0 
+                     ? isStreaming
+                       ? "border-amber-500 bg-amber-500/10 text-amber-500 hover:bg-amber-500 hover:text-black"
+                       : "border-sky-500 bg-sky-500/10 text-sky-500 hover:bg-sky-500 hover:text-black"
+                     : isDark
+                       ? "border-slate-800 bg-slate-900/50 text-slate-500 cursor-not-allowed"
+                       : "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed"}`}
+      >
+        {isStreaming ? (
+          <>
+            <Pause className="h-3 w-3" fill="currentColor" />
+            Pause Stream
+          </>
+        ) : (
+          <>
+            <Play className="h-3 w-3" fill="currentColor" />
+            Start Stream
+          </>
+        )}
+      </button>
+
       {/* ── Live Telemetry Ingestion Simulator ── */}
       <button
         onClick={onTriggerDemoSignal}
-        disabled={signalsLeft === 0}
+        disabled={signalsLeft === 0 || isStreaming}
         className={`flex cursor-pointer items-center gap-1.5 border px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none transition-colors duration-150 select-none
-                   ${signalsLeft > 0 
+                   ${signalsLeft > 0 && !isStreaming
                      ? "border-[#86BC25] bg-[#86BC25]/10 text-[#86BC25] hover:bg-[#86BC25] hover:text-black" 
                      : isDark
                        ? "border-slate-800 bg-slate-900/50 text-slate-500 cursor-not-allowed"
                        : "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed"}`}
       >
-        <Play className="h-3 w-3" fill={signalsLeft > 0 ? "currentColor" : "none"} />
+        <Play className="h-3 w-3" fill={signalsLeft > 0 && !isStreaming ? "currentColor" : "none"} />
         Simulate Live Signal ({signalsLeft} Left)
       </button>
 

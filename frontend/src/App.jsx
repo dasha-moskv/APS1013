@@ -35,8 +35,32 @@ export default function App() {
   const toggleDark = () => setIsDark(prev => !prev);
   
   const [demoIndex, setDemoIndex] = useState(0);
+  const [isStreaming, setIsStreaming] = useState(false);
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  // Auto-ingest signals when streaming mode is active at randomized time intervals
+  useEffect(() => {
+    if (!isStreaming) return;
+
+    if (demoIndex >= signals.length) {
+      setIsStreaming(false);
+      return;
+    }
+
+    let timeoutId;
+    const triggerNext = () => {
+      handleTriggerDemoSignal();
+    };
+
+    // Random interval between 3 and 6 seconds
+    const randomDelay = Math.floor(Math.random() * 3000) + 3000;
+    timeoutId = setTimeout(triggerNext, randomDelay);
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isStreaming, demoIndex, signals]);
 
   // Parallel Ingestion of all 9 decoupled JSON databases
   useEffect(() => {
@@ -188,7 +212,10 @@ export default function App() {
 
   // Simulates live satellite threat signals coming in and updates central state
   const handleTriggerDemoSignal = () => {
-    if (demoIndex >= signals.length) return;
+    if (demoIndex >= signals.length) {
+      setIsStreaming(false);
+      return;
+    }
 
     const baseSignal = signals[demoIndex];
     const signal = { 
@@ -302,6 +329,8 @@ export default function App() {
           onTriggerDemoSignal={handleTriggerDemoSignal} 
           signalsLeft={signals.length - demoIndex}
           isDark={isDark}
+          isStreaming={isStreaming}
+          onToggleStreaming={() => setIsStreaming(!isStreaming)}
         />
 
         {/* ── High-density Dashboard content ── */}
