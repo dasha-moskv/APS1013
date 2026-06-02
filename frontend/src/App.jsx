@@ -25,6 +25,8 @@ export default function App() {
   const [signals, setsignals] = useState([]);
   const [droppedSignals, setDroppedSignals] = useState([]);
   const [playbookData, setPlaybookData] = useState(null);
+  const [cSuiteData, setCSuiteData] = useState({});
+  const [pipelineData, setPipelineData] = useState({});
 
   // Phase 2/3 States
   const [, setApprovedPlaybooks] = useState({});
@@ -36,7 +38,7 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Parallel Ingestion of all 7 decoupled JSON databases
+  // Parallel Ingestion of all 9 decoupled JSON databases
   useEffect(() => {
     Promise.all([
       fetch("/data/threatRegistry.json").then((res) => {
@@ -62,9 +64,17 @@ export default function App() {
       fetch("/data/playbookRecommendations.json").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch playbook recommendations");
         return res.json();
+      }),
+      fetch("/data/cSuiteData.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch C-Suite telemetry");
+        return res.json();
+      }),
+      fetch("/data/pipelineData.json").then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch pipeline telemetry");
+        return res.json();
       })
     ])
-      .then(([threats, kpis, graph, signal, droppedSig, playbooks]) => {
+      .then(([threats, kpis, graph, signal, droppedSig, playbooks, csuite, pipeline]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
         setThreatRows(mappedThreats);
         setKpiData(kpis);
@@ -72,6 +82,8 @@ export default function App() {
         setsignals(signal);
         setDroppedSignals(droppedSig);
         setPlaybookData(playbooks);
+        setCSuiteData(csuite);
+        setPipelineData(pipeline);
         setLoading(false);
       })
       .catch((err) => {
@@ -298,6 +310,8 @@ export default function App() {
                   isDark={isDark}
                   onHumanFeedback={handleHumanFeedback}
                   onDeleteSignal={handleDeleteSignal}
+                  cSuiteData={cSuiteData}
+                  pipelineData={pipelineData}
                 />
               </div>
             </div>

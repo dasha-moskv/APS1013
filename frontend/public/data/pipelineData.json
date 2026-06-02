@@ -1,0 +1,103 @@
+{
+  "FAC-001": {
+    "crawlers": [
+      { "type": "Geospatial Logs", "icon": "MapPin", "detail": "RFID composite cargo containers logged at Wichita central depot." },
+      { "type": "Industrial IoT", "icon": "Activity", "detail": "Everett assembly floor throughput sensors (EVT-FAC-904) flag assembly idle cycles." }
+    ],
+    "agentInsight": "NLP processor parsed factory logs and identified structural composite delays, projecting a 12+ day wider assembly threat corridor.",
+    "timestamp": "2026-05-28T09:12:04Z",
+    "confidence": "98.4%",
+    "latency": "142ms",
+    "dataSize": "45.2 KB",
+    "events": [
+      { "time": "09:12:04 UTC", "label": "Initial Sensor Match", "desc": "Everett floor sensor EVT-FAC-904 logs consecutive idle times." },
+      { "time": "09:15:20 UTC", "label": "Crawler Extraction", "desc": "RFID container scanners at Wichita track raw structural composite delay." },
+      { "time": "09:18:11 UTC", "label": "LLM NLP Synthesis", "desc": "Agent correlates floor idle cycles with shipping latency coefficient." },
+      { "time": "09:20:00 UTC", "label": "Decision Support Active", "desc": "Formulated Boeing Everett widebody mitigation playbook proposal." }
+    ]
+  },
+  "SUP-001A": {
+    "crawlers": [
+      { "type": "News Crawler", "icon": "Globe", "detail": "Scanned 14 local Midwest freight labor blogs and Reuters labor RSS streams." },
+      { "type": "Geospatial Logs", "icon": "MapPin", "detail": "BNSF freight GPS logistics tracker coordinates reveal stationary cargo cars." }
+    ],
+    "agentInsight": "Identified freight rail labor shutdown at key transit bottlenecks, calculating high Renton supply line starvation factor.",
+    "timestamp": "2026-05-28T14:22:15Z",
+    "confidence": "97.8%",
+    "latency": "195ms",
+    "dataSize": "124.8 KB",
+    "events": [
+      { "time": "14:22:15 UTC", "label": "News Feed Alert", "desc": "Local Midwest freight blogs flag impending regional rail union gridlock." },
+      { "time": "14:25:10 UTC", "label": "GPS Tracking Query", "desc": "BNSF GPS trackers report stationary cargo cars near Missouri junction." },
+      { "time": "14:28:40 UTC", "label": "Starvation Analysis", "desc": "AI Agent computes Wichita-to-Renton supply line starvation velocity." },
+      { "time": "14:30:00 UTC", "label": "Mitigation Initialized", "desc": "Formulated oversized road flatbed permits workaround routing options." }
+    ]
+  },
+  "SUP-701X": {
+    "crawlers": [
+      { "type": "SCADA Telemetry", "icon": "Activity", "detail": "TSMC Fab 12 seismic safety systems log automatic safety triggers at 0.12g." },
+      { "type": "News Crawler", "icon": "Globe", "detail": "Crawl Taiwan Weather Bureau feeds and local tech supply bulletins." }
+    ],
+    "agentInsight": "SCADA webhook pushed direct lithography EUV calibration safety shutdown status; agent pre-allocated packaging redirect to Fab 15.",
+    "timestamp": "2026-05-28T02:05:40Z",
+    "confidence": "99.6%",
+    "latency": "85ms",
+    "dataSize": "18.4 KB",
+    "events": [
+      { "time": "02:05:40 UTC", "label": "Seismic Alert Webhook", "desc": "TSMC Fab 12 local safety sensor registers minor 0.12g acceleration spike." },
+      { "time": "02:06:12 UTC", "label": "Weather Bureau Crawl", "desc": "Automatic RSS scrap confirms minor earthquake near Hsinchu science park." },
+      { "time": "02:08:45 UTC", "label": "EUV System Shutdown", "desc": "Lithography EUV systems log self-preservation calibration shutdown sequence." },
+      { "time": "02:10:00 UTC", "label": "Diversion Pre-Allocation", "desc": "Agent automatically checks and reserves assembly slots at Taichung Fab 15." }
+    ]
+  },
+  "SUP-401A": {
+    "crawlers": [
+      { "type": "Industrial IoT", "icon": "Activity", "detail": "SCADA Emerson exhaust valve sensor flags severe chemical bath pressure rupture." },
+      { "type": "Regulatory Code", "icon": "FileText", "detail": "Crawl EMA and FDA vaccine sterile products validation regulations loop criteria." }
+    ],
+    "agentInsight": "NLP extractor compiled EMA sterilization validation time-delay coefficients based on history, drafting redundant line diversion plan.",
+    "timestamp": "2026-05-28T10:14:55Z",
+    "confidence": "96.5%",
+    "latency": "220ms",
+    "dataSize": "54.1 KB",
+    "events": [
+      { "time": "10:14:55 UTC", "label": "SCADA Valve Rupture", "desc": "SCADA valve logs alert of autoclave exhaust valve pressure failure in Puurs." },
+      { "time": "10:17:33 UTC", "label": "Regulatory Loop Scan", "desc": "Agent queries EMA/FDA vaccine sterile validation loop requirements." },
+      { "time": "10:19:12 UTC", "label": "NLP Validation Modeling", "desc": "Agent projects FDA sterilizer re-clearance timeline models at 96 hours." },
+      { "time": "10:20:00 UTC", "label": "Alternative Routing", "desc": "Formulated Antwerp diversion slots and Emerson Belgium priority dispatch." }
+    ]
+  },
+  "SUP-109B": {
+    "crawlers": [
+      { "type": "Logistics Manifest", "icon": "Truck", "detail": "DHL transatlantic Priority manifest backlog coordinates at Schiphol tarmac." },
+      { "type": "Financial Feeds", "icon": "Coins", "detail": "Crawl air-charter cold chain capacity indices and spot price indicators." }
+    ],
+    "agentInsight": "Recognized Schiphol cargo bottle-neck early; calculated air-charter redirection options to Brussels and courier trucks.",
+    "timestamp": "2026-05-28T16:45:10Z",
+    "confidence": "98.9%",
+    "latency": "195ms",
+    "dataSize": "124.8 KB",
+    "events": [
+      { "time": "16:45:10 UTC", "label": "Logistics Query Match", "desc": "Priority air cargo tracker scans critical temperature logs at Schiphol tarmac." },
+      { "time": "16:48:30 UTC", "label": "Cold-Chain Capacity Analysis", "desc": "Agent runs spot price models and triggers carrier negotiation protocol." },
+      { "time": "16:50:00 UTC", "label": "Rescheduling Activated", "desc": "Formulated Brussels air charter schedules and priority temperature-controlled ground transit." }
+    ]
+  },
+  "SUP-8472": {
+    "crawlers": [
+      { "type": "SCADA Seismic", "icon": "Activity", "detail": "Japan Meteorological Agency local Ehime seismic vibration sensors record 3 on Shindo." },
+      { "type": "Industrial IoT", "icon": "FileText", "detail": "Toray Masaki-cho plant automated cleanroom particulate indicators." }
+    ],
+    "agentInsight": "Verified automatic shutdown sensor response; parsed local inspection schedules to pre-stage NA Tacoma depot cargo release.",
+    "timestamp": "2026-05-28T03:12:44Z",
+    "confidence": "96.2%",
+    "latency": "240ms",
+    "dataSize": "67.8 KB",
+    "events": [
+      { "time": "03:12:44 UTC", "label": "Seismic Sensor Match", "desc": "Japan Met seismic telemetry logs local Shindo 3 tremor in Ehime." },
+      { "time": "03:15:30 UTC", "label": "Cleanroom Particulates", "desc": "Toray Masaki-cho cleanroom air counters log safe, nominal ppm limits." },
+      { "time": "03:18:15 UTC", "label": "Restart Loop Scan", "desc": "Agent queries Japanese aviation authority inspection regulations registry." },
+      { "time": "03:20:00 UTC", "label": "Buffer Stock Dispatch", "desc": "Pre-filed customs pull entries for backup carbon fiber stocks in Tacoma." }
+    ]
+  }
+}
