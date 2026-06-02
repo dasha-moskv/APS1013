@@ -611,10 +611,12 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-40 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <Info 
-                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                  <span 
                     title="Calculated from natural language keyword weights on news headlines (1.0 = Low, 10.0 = Critical)."
-                  />
+                    className="cursor-help inline-block leading-none"
+                  >
+                    <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  </span>
                   <span>Risk Severity {renderSortIndicator("severity")}</span>
                 </div>
               </th>
@@ -623,10 +625,12 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-36 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <Info 
-                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                  <span 
                     title="Probability (0%-100%) of disruption occurrence, estimated from category baseline values."
-                  />
+                    className="cursor-help inline-block leading-none"
+                  >
+                    <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  </span>
                   <span>Likelihood {renderSortIndicator("likelihood")}</span>
                 </div>
               </th>
@@ -635,10 +639,12 @@ export default function HealthMonitorTable({
                 className={`py-2 px-3 w-32 text-right font-bold font-mono cursor-pointer transition-colors duration-75 select-none ${isDark ? "hover:bg-slate-800 hover:text-slate-100" : "hover:bg-slate-100 hover:text-slate-800"}`}
               >
                 <div className="flex items-center justify-end gap-1">
-                  <Info 
-                    className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200 cursor-help"
+                  <span 
                     title="Logistical latency buffer mapping the number of days before the threat disrupts Boeing operations."
-                  />
+                    className="cursor-help inline-block leading-none"
+                  >
+                    <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  </span>
                   <span>Time-to-hit {renderSortIndicator("timeToHit")}</span>
                 </div>
               </th>
