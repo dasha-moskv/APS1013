@@ -1,5 +1,101 @@
 [
   {
+    "id": "SUP-F69DB",
+    "facility": "Boeing Renton Final Assembly",
+    "location": "Renton, WA, US",
+    "disruption": "Air India grounds Boeing Dreamliner over possible fuel switch defect",
+    "severity": 7.0,
+    "likelihood": 85,
+    "timeToHit": 5,
+    "tier": 0,
+    "fullDescription": "Air India grounds Boeing Dreamliner over possible fuel switch defect\u00a0\u00a0LiveNOW from FOX",
+    "sourceData": "Google News RSS Ingest: LiveNOW from FOX (United States (EN))",
+    "mapPosition": {
+      "coordinates": [
+        -122.2034,
+        47.4797
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-0 / Main Line Assembly",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Initiate immediate engineering quality audits on active inventory batches.",
+          "Deploy specialized quality assurance teams to inspect supplier production floor.",
+          "Expedite backup component inspections from secondary certified distributors."
+        ],
+        "timeline": "4 to 7 operational days for inspection containment"
+      },
+      "validationPlan": {
+        "steps": [
+          "Conduct non-destructive ultrasound stress test runs on initial replacement parts.",
+          "Verify all quarantined batches meet metallurgical and FAA airworthiness standards."
+        ],
+        "timeline": "2 business days for engineering Stress Certification and sign-off"
+      }
+    },
+    "downstreamImpact": "Risk of assembly line stoppage due to critical component quarantine; extended quality-checking overhead.",
+    "mitigationObjective": "Restore quality compliance buffers and clear assembly backlogs.",
+    "ingestedAt": 1780374999752,
+    "sources": [
+      {
+        "title": "Air India grounds Boeing Dreamliner over possible fuel switch defect",
+        "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5QaFVTRHkwVjRDVnc1aE1CN2NNcThyQUk1akZENEVrMy1uejlETXNhWjBSRl9Gcmo4eEY1UTRIX1RCd2VWUHBIc05FWENlRUtzUXRzTVdlS3ZnUFJTQXZQNXdId2daVDNpbG5WMUtTSnBGdjdWR3dMSEdJU1nSAYIBQVVfeXFMT1JLYzdkeEJuZVE1MTlUaWJIbjRHajdSQlJScWZQcHpfeUtSMzVFd2Q1ZGNBLUVRRVhncTVEOVNLMWNiU1pwbnhOcTZWazlEYTNwTjhfY19ld0dEbzNlUHNmeG16eHB2bjA4aDdNNmowMGJScnNDS0NqVWxiVHQxcWtudw?oc=5",
+        "summary": "Air India grounds Boeing Dreamliner over possible fuel switch defect\u00a0\u00a0LiveNOW from FOX"
+      }
+    ]
+  },
+  {
+    "id": "SUP-728EB",
+    "facility": "Boeing Renton Final Assembly",
+    "location": "Renton, WA, US",
+    "disruption": "DGCA says no fault found in Boeing fuel control switch after Air India grounds plane",
+    "severity": 7.0,
+    "likelihood": 70,
+    "timeToHit": 1,
+    "tier": 0,
+    "fullDescription": "DGCA says no fault found in Boeing fuel control switch after Air India grounds plane\u00a0\u00a0BBC",
+    "sourceData": "Google News RSS Ingest: BBC (United States (EN))",
+    "mapPosition": {
+      "coordinates": [
+        -122.2034,
+        47.4797
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-0 / Main Line Assembly",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Isolate compromised network switches to quarantine ransomware vectors.",
+          "Deploy backup offline telemetry capture setups on primary manufacturing lines.",
+          "Activate pre-audited disaster recovery servers and initialize database restoration."
+        ],
+        "timeline": "24 to 72 hours for server recovery and network quarantine"
+      },
+      "validationPlan": {
+        "steps": [
+          "Execute complete antivirus and vulnerability scans across all reconnected hosts.",
+          "Verify data logs are back to operational synchronization standards."
+        ],
+        "timeline": "12 hours of network safety logging before production restart"
+      }
+    },
+    "downstreamImpact": "Loss of live SCADA telemetry, requiring slower manual tracking and quality logs.",
+    "mitigationObjective": "Quarantine network threats and restore clean, verified offline server states.",
+    "ingestedAt": 1780374999752,
+    "sources": [
+      {
+        "title": "DGCA says no fault found in Boeing fuel control switch after Air India grounds plane",
+        "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4yZHYzN0dfWU95aGRsVDRjUjhNUHhMOHg5Zl9JTm11d2ZBS2RlSk9OQVdJaUV3QjFQTUFRWFItZWp5bXlQR09uRi1XRTJsM3VVTHd0X0cyZWFQZw?oc=5",
+        "summary": "DGCA says no fault found in Boeing fuel control switch after Air India grounds plane\u00a0\u00a0BBC"
+      }
+    ]
+  },
+  {
     "id": "FAC-001",
     "facility": "Boeing Everett Factory",
     "location": "WA, US",
