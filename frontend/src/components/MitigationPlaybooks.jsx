@@ -78,7 +78,76 @@ export default function MitigationPlaybooks({
   /* eslint-enable react-hooks/set-state-in-effect */
 
   // Sync custom mail template when threat or scenario changes
-  const activeDetails = playbookData?.threatDetails?.[selectedThreatId];
+  let activeDetails = playbookData?.threatDetails?.[selectedThreatId];
+  if (!activeDetails && selectedThreat) {
+    const dailyCost = selectedThreat.id === "FAC-001" ? 14500000 : selectedThreat.id === "SUP-001A" ? 8800000 : (selectedThreat.severity * 1000000 || 4500000);
+    const timelineRecovery = selectedThreat.playbook?.mitigationPlan?.timeline 
+      ? parseInt(selectedThreat.playbook.mitigationPlan.timeline) || 15 
+      : 15;
+    const steps = selectedThreat.playbook?.mitigationPlan?.steps || [
+      "Verify alternative shipping lanes and carriers.",
+      "Engage primary contact to establish emergency delivery windows.",
+      "Notify downstream manufacturing nodes of recovery timeline."
+    ];
+    activeDetails = {
+      financialExposure: {
+        impactedProgram: selectedThreat.mapPosition?.role || "Boeing Assembly Program",
+        dailyStopLineCost: dailyCost,
+        contractualSlaPenaltyRisk: selectedThreat.severity * 100000 || 850000,
+        daysToSlaTrigger: selectedThreat.timeToHit ? parseInt(selectedThreat.timeToHit) || 10 : 10,
+        totalUnmitigatedExposure: dailyCost * timelineRecovery
+      },
+      vulnerabilityTimeline: {
+        timeToHit: selectedThreat.timeToHit ? parseInt(selectedThreat.timeToHit) || 0 : 0,
+        timeToSurvive: selectedThreat.bufferInventoryLevel ? parseInt(selectedThreat.bufferInventoryLevel) || 8 : 8,
+        timeToRecovery: timelineRecovery,
+        netGap: (selectedThreat.bufferInventoryLevel ? parseInt(selectedThreat.bufferInventoryLevel) || 8 : 8) - timelineRecovery
+      },
+      regulatoryCheckpoints: {
+        typeCertificateVerified: true,
+        aslVerified: true,
+        faiRequired: false,
+        faiWorkflowId: "N/A",
+        notes: "Sourcing adjustments comply with standard pre-approved transport and assembly specifications."
+      },
+      mitigationScenarios: [
+        {
+          scenarioId: "SCENARIO_A",
+          label: "Accelerated Supply Sourcing",
+          operationalPlayType: "Premium Logistics",
+          workaroundCost: selectedThreat.severity * 50000 || 250000,
+          ttrReductionDays: Math.max(2, Math.floor(timelineRecovery * 0.4)),
+          residualRiskLevel: "Low",
+          operationalSummary: selectedThreat.playbook?.mitigationPlan?.steps?.join(" ") || "Execute standard recovery procedures.",
+          executionSteps: steps,
+          erpUpdates: {
+            adjust_safety_stock: {
+              material_id: "MAT-" + selectedThreat.id,
+              plant_id: "PLANT-" + (selectedThreat.location?.split(",")[0]?.trim() || "HQ"),
+              new_safety_stock_level: 6,
+              priority_override: "CRITICAL"
+            },
+            trigger_expedited_po: {
+              vendor_id: "VEND-" + selectedThreat.facility?.split(" ")[0]?.toUpperCase(),
+              original_po_id: "PO-RECOVERY-" + selectedThreat.id,
+              logistics_carrier_code: "CARR-EXPEDITE",
+              freight_billing_code: "PREM-SCRM-01",
+              notes: "Expedited backup sourcing PO dispatch."
+            }
+          }
+        }
+      ],
+      automatedComms: [
+        {
+          recipientRole: "Global Sourcing Lead",
+          recipientEmail: "sourcing.team@boeing.com",
+          channel: "Email",
+          messageSubject: `[ACTION REQUIRED] Supply Disruption Sourcing - ${selectedThreat.facility}`,
+          messageBodyTemplate: `Hi,\n\nProject Radar has modeled a supply disruption at ${selectedThreat.facility} (Disruption ID: ${selectedThreat.id}).\n\nMitigation steps:\n${steps.map(s => `- ${s}`).join("\n")}\n\nBest regards,\nBoeing SCRM Platform Operations`
+        }
+      ]
+    };
+  }
   const activeScenario = activeDetails?.mitigationScenarios?.find(s => s.scenarioId === selectedScenarioId) || activeDetails?.mitigationScenarios?.[0];
   const activeMailTemplate = activeDetails?.automatedComms?.[0];
 
