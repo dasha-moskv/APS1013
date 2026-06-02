@@ -185,7 +185,7 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
   return (
     <div className="flex flex-1 flex-col gap-3 p-3">
       {/* Page Header */}
-      <div className="flex flex-col gap-1 border-b pb-2 select-none border-slate-700/50">
+      <div className={`flex flex-col gap-1 border-b pb-2 select-none ${isDark ? "border-slate-700/50" : "border-slate-200"}`}>
         <h1 className="text-base font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
           <Layers className="h-4 w-4 text-[#86BC25]" />
           Phase 1: Supply Base Ingestion & Validation
@@ -308,20 +308,20 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
                 {/* Step 1: Parse */}
                 <div className="flex gap-3 relative">
                   <div className={`absolute left-[9px] top-6 bottom-0 w-[1.5px] ${
-                    activeStep > 1 ? "bg-[#86BC25]" : "bg-slate-700 border-dashed"
+                    activeStep > 1 ? "bg-[#86BC25]" : isDark ? "bg-slate-700 border-dashed" : "bg-slate-300 border-dashed"
                   }`} />
                   <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] font-bold select-none ${
                     activeStep > 1 
                       ? "bg-[#86BC25]/20 border-[#86BC25] text-[#86BC25]" 
                       : activeStep === 1 
                         ? "bg-sky-500/10 border-sky-400 text-sky-400 animate-spin" 
-                        : "bg-slate-800 border-slate-700 text-slate-500"
+                        : isDark ? "bg-slate-800 border-slate-700 text-slate-500" : "bg-slate-100 border-slate-200 text-slate-400"
                   }`}>
                     {activeStep > 1 ? "✓" : activeStep === 1 ? <Loader2 className="h-3 w-3" /> : "1"}
                   </div>
                   <div>
                     <span className={`font-bold block uppercase tracking-wide ${
-                      activeStep === 1 ? "text-sky-400 animate-pulse" : activeStep > 1 ? "text-slate-300" : "text-slate-500"
+                      activeStep === 1 ? "text-sky-400 animate-pulse" : activeStep > 1 ? isDark ? "text-slate-300" : "text-slate-600" : "text-slate-500"
                     }`}>
                       1. Syntactic JSON Parsing & Verification
                     </span>
@@ -334,20 +334,20 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
                 {/* Step 2: Initialize */}
                 <div className="flex gap-3 relative">
                   <div className={`absolute left-[9px] top-6 bottom-0 w-[1.5px] ${
-                    activeStep > 2 ? "bg-[#86BC25]" : "bg-slate-700 border-dashed"
+                    activeStep > 2 ? "bg-[#86BC25]" : isDark ? "bg-slate-700 border-dashed" : "bg-slate-300 border-dashed"
                   }`} />
                   <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] font-bold select-none ${
                     activeStep > 2 
                       ? "bg-[#86BC25]/20 border-[#86BC25] text-[#86BC25]" 
                       : activeStep === 2 
                         ? "bg-sky-500/10 border-sky-400 text-sky-400 animate-spin" 
-                        : "bg-slate-800 border-slate-700 text-slate-500"
+                        : isDark ? "bg-slate-800 border-slate-700 text-slate-500" : "bg-slate-100 border-slate-200 text-slate-400"
                   }`}>
                     {activeStep > 2 ? "✓" : activeStep === 2 ? <Loader2 className="h-3 w-3" /> : "2"}
                   </div>
                   <div>
                     <span className={`font-bold block uppercase tracking-wide ${
-                      activeStep === 2 ? "text-sky-400 animate-pulse" : activeStep > 2 ? "text-slate-300" : "text-slate-500"
+                      activeStep === 2 ? "text-sky-400 animate-pulse" : activeStep > 2 ? isDark ? "text-slate-300" : "text-slate-600" : "text-slate-500"
                     }`}>
                       2. Target Supply Base Initialization
                     </span>
@@ -360,20 +360,20 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
                 {/* Step 3: Collectors */}
                 <div className="flex gap-3 relative">
                   <div className={`absolute left-[9px] top-6 bottom-0 w-[1.5px] ${
-                    activeStep > 3 ? "bg-[#86BC25]" : "bg-slate-700 border-dashed"
+                    activeStep > 3 ? "bg-[#86BC25]" : isDark ? "bg-slate-700 border-dashed" : "bg-slate-300 border-dashed"
                   }`} />
                   <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] font-bold select-none ${
                     activeStep > 3 
                       ? "bg-[#86BC25]/20 border-[#86BC25] text-[#86BC25]" 
                       : activeStep === 3 
                         ? "bg-sky-500/10 border-sky-400 text-sky-400 animate-spin" 
-                        : "bg-slate-800 border-slate-700 text-slate-500"
+                        : isDark ? "bg-slate-800 border-slate-700 text-slate-500" : "bg-slate-100 border-slate-200 text-slate-400"
                   }`}>
                     {activeStep > 3 ? "✓" : activeStep === 3 ? <Loader2 className="h-3 w-3" /> : "3"}
                   </div>
                   <div>
                     <span className={`font-bold block uppercase tracking-wide ${
-                      activeStep === 3 ? "text-sky-400 animate-pulse" : activeStep > 3 ? "text-slate-300" : "text-slate-500"
+                      activeStep === 3 ? "text-sky-400 animate-pulse" : activeStep > 3 ? isDark ? "text-slate-300" : "text-slate-600" : "text-slate-500"
                     }`}>
                       3. Public Signal Collectors Booting
                     </span>
@@ -400,28 +400,42 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
           </div>
 
           {/* Console / Terminal Output */}
-          <div className="border border-slate-800 bg-[#070A11] p-3 font-mono text-[9px] text-[#86BC25] select-text flex flex-col gap-2 min-h-[220px]">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 select-none">
-              <span className="font-bold tracking-wider uppercase text-slate-500 flex items-center gap-1.5">
+          <div className={`border p-3 font-mono text-[9px] select-text flex flex-col gap-2 min-h-[220px] transition-colors duration-300 ${
+            isDark 
+              ? "border-slate-800 bg-[#070A11]" 
+              : "border-slate-200 bg-slate-50"
+          }`}>
+            <div className={`flex items-center justify-between border-b pb-1.5 select-none ${
+              isDark ? "border-slate-800" : "border-slate-200"
+            }`}>
+              <span className={`font-bold tracking-wider uppercase flex items-center gap-1.5 ${
+                isDark ? "text-slate-500" : "text-slate-600"
+              }`}>
                 <Terminal className="h-3.5 w-3.5 text-[#86BC25]" />
                 RADAR INGEST CONSOLE FEED
               </span>
-              <span className="text-slate-600 font-bold">115200 BAUD</span>
+              <span className={`${isDark ? "text-slate-600" : "text-slate-400"} font-bold`}>115200 BAUD</span>
             </div>
             
             {consoleLogs.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center text-slate-600 select-none py-12">
+              <div className={`flex flex-1 items-center justify-center select-none py-12 ${
+                isDark ? "text-slate-600" : "text-slate-400"
+              }`}>
                 [TERMINAL STANDBY - WAITING FOR GEOSPATIAL LOGS]
               </div>
             ) : (
               <div className="flex flex-col gap-1 max-h-[260px] overflow-y-auto pr-1">
                 {consoleLogs.map((log, index) => (
-                  <div key={index} className="leading-relaxed break-words font-mono">
+                  <div key={index} className={`leading-relaxed break-words font-mono ${
+                    isDark ? "text-[#86BC25]" : "text-[#1E3A8A]"
+                  }`}>
                     {log}
                   </div>
                 ))}
                 {activeStep > 0 && activeStep < 4 && (
-                  <div className="flex items-center gap-1.5 text-sky-400 font-mono select-none mt-1 animate-pulse">
+                  <div className={`flex items-center gap-1.5 font-mono select-none mt-1 animate-pulse ${
+                    isDark ? "text-sky-400" : "text-sky-600"
+                  }`}>
                     <span>⚡ INITIALIZING COMPONENT STAGES</span>
                     <span className="animate-ping font-bold">...</span>
                   </div>
