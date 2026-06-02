@@ -190,7 +190,12 @@ export default function App() {
   const handleTriggerDemoSignal = () => {
     if (demoIndex >= signals.length) return;
 
-    const signal = { ...signals[demoIndex], ingestedAt: Date.now() };
+    const baseSignal = signals[demoIndex];
+    const signal = { 
+      ...baseSignal, 
+      ingestedAt: Date.now(),
+      coordinates: baseSignal.coordinates || baseSignal.mapPosition?.coordinates
+    };
     setDemoIndex(prev => prev + 1);
 
     // 1. Append new signal to the front of threat registry
