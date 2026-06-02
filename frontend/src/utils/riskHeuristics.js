@@ -7,7 +7,14 @@ export function getSeverityLabel(score) {
   return `${score.toFixed(1)}/10 NOMINAL`;
 }
 
-export function getSeverityColor(score) {
+export function getSeverityColor(score, isDark) {
+  if (isDark) {
+    if (score >= 9.0) return "text-red-400 bg-red-950/20 border-red-900/30";
+    if (score >= 7.0) return "text-amber-400 bg-amber-950/20 border-amber-900/30";
+    if (score >= 5.0) return "text-sky-400 bg-sky-950/20 border-sky-900/30";
+    if (score >= 3.0) return "text-slate-400 bg-slate-900/30 border-slate-800/50";
+    return "text-green-400 bg-green-950/20 border-green-900/30";
+  }
   if (score >= 9.0) return "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]";
   if (score >= 7.0) return "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]";
   if (score >= 5.0) return "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]";
@@ -22,7 +29,14 @@ export function getLikelihoodLabel(prob) {
   return "0% NOMINAL";
 }
 
-export function getLikelihoodColor(prob) {
+export function getLikelihoodColor(prob, isDark) {
+  if (isDark) {
+    if (prob >= 90) return "text-red-400 bg-red-950/20 border-red-900/30";
+    if (prob >= 70) return "text-amber-400 bg-amber-950/20 border-amber-900/30";
+    if (prob >= 40) return "text-sky-400 bg-sky-950/20 border-sky-900/30";
+    if (prob >= 1) return "text-slate-400 bg-slate-900/30 border-slate-800/50";
+    return "text-green-400 bg-green-950/20 border-green-900/30";
+  }
   if (prob >= 90) return "text-[#991B1B] bg-[#FEF2F2] border-[#FEE2E2]";
   if (prob >= 70) return "text-[#9A3412] bg-[#FFF7ED] border-[#FFEDD5]";
   if (prob >= 40) return "text-[#1E3A8A] bg-[#EFF6FF] border-[#DBEAFE]";

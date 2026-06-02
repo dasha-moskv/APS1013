@@ -692,7 +692,7 @@ export default function HealthMonitorTable({
                   {/* Risk Severity Badge (Right-aligned numeric) */}
                   <td className="py-1.5 px-3 align-middle text-right">
                     <span
-                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getSeverityColor(row.severity)}`}
+                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getSeverityColor(row.severity, isDark)}`}
                     >
                       {getSeverityLabel(row.severity)}
                     </span>
@@ -701,7 +701,7 @@ export default function HealthMonitorTable({
                   {/* Likelihood Badge (Right-aligned numeric) */}
                   <td className="py-1.5 px-3 align-middle text-right">
                     <span
-                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getLikelihoodColor(row.likelihood)}`}
+                      className={`inline-block border rounded-none px-2 py-0.5 text-[9px] font-mono font-bold tracking-wider ${getLikelihoodColor(row.likelihood, isDark)}`}
                     >
                       {getLikelihoodLabel(row.likelihood)}
                     </span>
@@ -802,11 +802,11 @@ export default function HealthMonitorTable({
             <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
-                <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
+                <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity, isDark).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
-                <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
+                <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood, isDark).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
