@@ -83,7 +83,10 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 │   └── eslint.config.js        # Linter code quality boundaries
 │
 ├── scripts/                    # Operational utility scripts
-│   └── generate_knowledge_graph.py # Knowledge graph data generation helper
+│   ├── generate_knowledge_graph.py # Knowledge graph data generation helper
+│   ├── google_news_batch_processor.py # Google News RSS Batch Processor & Translator
+│   ├── run_scheduler.py        # 7-second automatic background news scraper runner
+│   └── validate_schemas.py     # JSON schema validation helper
 │
 ├── .gitignore                  # Git tracking exclusion list
 └── README.md                   # Root documentation (this file)
@@ -96,6 +99,7 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 Project Radar strictly adheres to a premium, color-disciplined corporate aesthetic inspired by global management consulting standards:
 
 - **Dual Theme**: Full light/dark mode support. The dark canvas uses quiet slate-gray foundations (`#0F172A` / `#1E293B`) with frosted-glass panel boundaries; light mode uses clean white cards with `slate-100` separators.
+- **Aesthetic Custom Tooltips**: Default browser tooltips are fully replaced with custom React + CSS hover cards featuring high-contrast borders, dynamic entry transitions (`scale` + `opacity`), separate indicators (Crimson, Blue, Amber), and detailed Monospaced **Computation Models** detailing how the Risk Severity, Likelihood, and Time-to-hit values are generated.
 - **Accent Color**: Deloitte-green (`#86BC25`) is applied strategically for active tab indicators, primary submit buttons, status pings, and confirmation signals — never decoratively.
 - **Semantic Red**: `#EF4444` is reserved strictly for critical threat badges and severity-9+ indicators.
 - **Typography**: Google Fonts `Inter` (UI labels) and `JetBrains Mono` / system monospace (data terminals) for maximum information density and scannability.
@@ -108,7 +112,7 @@ Project Radar strictly adheres to a premium, color-disciplined corporate aesthet
 ### 📊 1. Risk Radar (Overview Dashboard)
 - **Boardroom Scorecard**: Live reactive KPI cards tracking critical facility statuses, total unresolved threats, and mean time to resolution.
 - **Geospatial Tracker**: Interactive Leaflet map marking active supply nodes, shipping ports, and threat proximity boundaries.
-- **Active Threat Registry**: A comprehensive data grid detailing active disruptions with severity tiers, category tags (Force Majeure, Logistics, Geopolitical, etc.), and a slide-out **Threat Classification Inspector** drawer per row.
+- **Active Threat Registry**: A comprehensive data grid detailing active disruptions with severity tiers, category tags (Force Majeure, Logistics, Geopolitical, etc.), and a slide-out **Threat Classification Inspector** drawer per row. Included custom interactive hover card tooltips explaining metric calculations.
 
 ### 📥 2. Ingestion Pipeline (Phase 1)
 - **GeoJSON Validator**: Drag-and-drop or select mock supply-base geo-coordinate files.
@@ -136,6 +140,30 @@ Project Radar strictly adheres to a premium, color-disciplined corporate aesthet
 
 ---
 
+## 🛰️ Signal Clustering & State Deduplication Architecture
+
+Project Radar implements an intelligent signal clustering and state deduplication subsystem to process raw news streams and simulated telemetry alerts without polluting the boardroom cockpit:
+
+1. **Jaccard Similarity Clustering ($\ge 65\%$ Threshold)**: 
+   - Uses a custom token-based Jaccard similarity and exact core-disruption matching helper on the backend (`main.py` and `google_news_batch_processor.py`).
+   - If two alerts target the same facility and share $\ge 65\%$ word similarity, they are clustered into a single parent active threat card (dynamically incrementing the `(X articles)` count and appending to `sources`).
+   - If the disruption signals represent different incidents (e.g. a logistics rail strike vs. a power grid freeze), they bypass clustering and safely coexist as distinct threat rows in the registry table.
+2. **Robust Splitting Heuristics**:
+   - Cleans the governance risk briefing logs using a robust case-insensitive and whitespace-flexible regular expression split: `re.split(r'\s*Additional report\s*', clean_desc, flags=re.IGNORECASE)`.
+   - This prevents duplicate legacy reports and keeps the Executive Governance Briefing panel to a clean, concise single-paragraph core description.
+3. **Frontend State Deduplication**:
+   - The React core in `App.jsx` dynamically intercepts live SSE streams (`new_signal` events) and mock post-simulation returns.
+   - It filters out previous entries of the updated threat by ID before prepending the mapped signal to the top of the table state:
+     ```javascript
+     setThreatRows(prev => {
+       const filtered = prev.filter(t => t.id !== mappedSignal.id);
+       return [mappedSignal, ...filtered];
+     });
+     ```
+     This prevents duplicate row generation in the UI data grid.
+
+---
+
 ## ⚙️ Decoupled Database Engineering
 
 To ensure the system is completely ready for enterprise backend API integrations, the frontend has been fully decoupled from static mock data. On app boot, parallel `fetch()` routines load all data from `/public/data/`:
@@ -150,6 +178,8 @@ To ensure the system is completely ready for enterprise backend API integrations
 | `mockSignals.json` | Demo live-ingest satellite signal payloads |
 | `droppedSignals.json` | AI-filtered low-risk signal records for governance view |
 | `playbookRecommendations.json` | Structured mitigation playbook scenarios & comms templates |
+| `ingestedPresets.json` | GeoJSON supply-base preset definitions |
+| `erpSystems.json` | ERP system configuration targets |
 
 ---
 
@@ -184,14 +214,21 @@ To ensure the system is completely ready for enterprise backend API integrations
     ```bash
     pip install -r requirements.txt
     ```
-4. Configure environment variables (create a `.env` file):
-    ```env
-    OPENAI_API_KEY=your_openai_api_key_here
-    NEWS_API_KEY=your_newsapi_key_here
-    ```
-5. Run the command-line agent:
+4. Run the command-line agent:
     ```bash
-    python main.py
+    uvicorn main:app --host 127.0.0.1 --port 8000
+    ```
+
+### 🛰️ Background Scraper Daemon
+To run the automated background scraper loop that feeds data continuously to the portal database:
+1. Navigate into the `scripts` folder and run the scheduler:
+    ```bash
+    cd scripts
+    python run_scheduler.py
+    ```
+2. Watch the logs outputted to `scripts/scheduler.log`:
+    ```bash
+    tail -f scheduler.log
     ```
 
 ---
@@ -203,6 +240,7 @@ To ensure the system is completely ready for enterprise backend API integrations
   - Injected dynamic playbook and C-suite telemetry generators in `MitigationPlaybooks` and `HealthMonitorTable` components, preventing blank pages or rendering crashes for unmapped supplier threats.
   - Formulated full-stage signal pipeline timelines and active crawler logs dynamically for all active threats using fallback synthesis loops.
 - **Interactive Deletion Control**: Embedded a red custom-styled **DELETE** button on each registry row (fully integrated with confirmation boxes and `e.stopPropagation` event bubbling checks) to remove signals in real-time from the active dashboard state.
+- **Custom Aesthetic Tooltips**: Built high-fidelity interactive CSS hover-cards with glassmorphic designs instead of standard browser tooltip titles, outlining exactly how critical metrics are processed.
 - **Clean Production Build**: `npm run build` compiles the full 1,750-module graph in ~103ms with zero errors via Vite 8.
 - **API-Ready Architecture**: No hardcoded business objects inside rendering components — all data flows through JSON fetch contracts, ready for live API substitution.
 - **Color Discipline**: Deloitte-green and semantic red are the only accent colors; all other UI uses slate/neutral tokens for a professional, corporate-ready aesthetic.

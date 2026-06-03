@@ -1,401 +1,648 @@
 [
   {
-    "id": "SUP-294X",
-    "facility": "Alcoa Smelting",
-    "location": "Reykjavik, IS",
-    "disruption": "Geothermal power grid surge triggers electrolytic cell freeze",
-    "severity": 7.6,
-    "likelihood": 85,
-    "timeToHit": 30,
-    "tier": 2,
-    "fullDescription": "A severe geothermal grid surge caused a localized power outage at the Reykjavik smelter, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells.",
-    "sourceData": "Power Grid SCADA Alert: REYK-SMELT-PWR & Smelter Operations Stream",
+    "id": "SUP-A606B",
+    "facility": "Boeing Renton Final Assembly",
+    "location": "Renton, WA, US",
+    "disruption": "Boeing strike in St. Louis ends after union approves new contract (47 articles)",
+    "severity": 5.0,
+    "likelihood": 90,
+    "timeToHit": 14,
+    "tier": 0,
+    "fullDescription": "[Clustered Event - 47 Sources Reporting] Boeing strike in St. Louis ends after union approves new contract\u00a0\u00a0Missouri Independent\n\nAdditional coverage:\n- St. Louis Boeing machinists approve contract, ending 15-week strike (Source: STLPR)\n- Boeing Strike in St. Louis Ends as Union Approves New Contract (Source: Assembly Magazine)\n- Bipartisan U.S. Senators Rip Boeing\u2019s Greed and Delay Tactics as Striking IAM Union Member Testifies in Washington (Source: IAM Union)\n- St. Louis-area Boeing workers back union proposal to end six-week strike (Source: Missouri Independent)\n- Bernie Sanders Urges Boeing CEO Ortberg to End St. Louis Strike, Supports IAM Union District 837 Members (Source: IAM Union)\n- IAM Union District 837 Members Reject Boeing\u2019s Latest Offer as Company\u2019s Refusal to Offer Fair Contract Continues to Threaten Military Readiness (Source: IAM Union)\n- Boeing, union agree to talks in St. Louis after a week of angry exchanges over strike (Source: Missouri Independent)\n- Bipartisan Group of House Armed Services Committee Members Urge Boeing to Negotiate in Good Faith as Military Deliveries Fall Further Behind Amidst Strike (Source: IAM Union)\n- Pacific Northwest IAM Boeing Workers Donate to Support IAM District 837 Boeing Workers on Strike in St. Louis (Source: IAM Union)\n- Senator Hawley Letter Continues Calls for Boeing to \u2018Get a Deal Done\u2019 with 3,200 Striking IAM Union St. Louis Defense Workers (Source: IAM Union)\n- US Boeing workers continue midwest strike after rejecting latest contract offer (Source: The Guardian)\n- Hawley and Sanders question Boeing\u2019s labor attorney about St. Louis strike (Source: Missouri Independent)\n- St. Louis-area Boeing workers back on strike after rejecting contract offer (Source: Missouri Independent)\n- Striking St. Louis Boeing union workers file federal labor law complaint (Source: Missouri Independent)\n- Source: Boeing tells employees about layoffs at Defense supply chain work group (Source: KING5.com)\n- Boeing workers reject latest contract offer, extending strike at three Midwest plants (Source: PBS)\n- Latest round of Boeing contract negotiations ends with no deal, strike continues (Source: STLPR)\n- IAM District 837 Members in St. Louis Reject Latest Boeing Offer, Strike for Fair Contract (Source: IAM Union)\n- Congressional Leaders Urge Boeing to Bargain in Good Faith Amid IAM Union Strike in St. Louis (Source: IAM Union)\n- Fresh Off Labor Strike, Boeing Set to Double F-15EX Production (Source: The National Interest)\n- IAM Union and Boeing Agree to Resume Mediation on Monday (Source: IAM Union)\n- Boeing rejects union\u2019s counteroffer; St. Louis strike continues (Source: FOX 2)\n- Amid strike, Boeing taking rare step of hiring permanent replacements for union workers (Source: Breaking Defense)\n- Boeing to hire replacements for union workers on strike (Source: STLPR)\n- Union rejects third Boeing St. Louis contract proposal, strike continues (Source: STLPR)\n- Boeing Workers to Vote Friday on Potential Strike Deal (Source: Inkstick Media)\n- Machinists ratify contract with Boeing, ending more than three-month strike (Source: The Labor Tribune)\n- St. Louis Boeing strikes continue after union rejects fourth offer (Source: Spectrum News)\n- Workers reject Boeing's latest offer after nearly three months on strike (Source: Reuters)\n- Striking Boeing workers approve labor deal, ending 101-day-long walkout (Source: Reuters)\n- Boeing workers end 102-day strike, approve five-year deal (Source: FOX 2)\n- Boeing defense workers ratify new contract to end 3-month strike (Source: Defense News)\n- Key Boeing supplier stops production at Wichita plant after workers vote to strike (Source: CNBC)\n- Six Thousand Machinists Strike Aircraft Parts Giant in Kansas\u2014Threatening Boeing Production (Source: Labor Notes |)\n- Workers at key Boeing supplier vote to end strike (Source: CNN)\n- About 3,200 Boeing jet and weapons workers begin strike - ABC News (Source: Breaking News, Latest News and Videos)\n- Boeing strike to continue after workers reject new contract - ABC News (Source: Breaking News, Latest News and Videos)\n- Boeing defence workers go on strike in new blow to aviation giant (Source: BBC)\n- Boeing defence workers set to strike on Monday in fresh blow to planemaker (Source: Financial Times)\n- Boeing execs accused of 'insulting' employees as contract dispute continues | Healthcare & Benefits (Source: HR Grapevine)\n- Boeing defense workers reject 4th company offer: Rank and file must take control of strike (Source: World Socialist Web Site)\n- Boeing defense workers ratify new contract to end 3 month strike in the Midwest (Source: The Independent)\n- Boeing fighter jet workers poised to strike after rejecting contract offer (Source: The Guardian)\n- Strike by Boeing defense workers continues into third month, as IAM and management resume mediated talks (Source: World Socialist Web Site)\n- Boeing strike at the crossroads: IAM officials appeal for Trump intervention while starving workers out on the picket line (Source: World Socialist Web Site)\n- USA : Boeing Workers Vote 96% in Favor of Strike After Rejecting New Agreement (Source: Senenews)",
+    "sourceData": "Google News RSS Ingest: Missouri Independent (United States (EN))",
     "mapPosition": {
       "coordinates": [
-        -21.8277,
-        64.1265
+        -122.2034,
+        47.4797
       ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Raw Materials",
+      "color": "#D32F2F",
+      "role": "Tier-0 / Main Line Assembly",
       "status": "Elevated Risk"
     },
+    "downstreamBusinessImpact": "Risk of assembly line stoppage in St. Louis; significant daily stop-line cost exposure for fighter jet programs.",
+    "mitigationObjective": "Protect production continuity of military propulsion components and bypass active labor roadblocks.",
     "playbook": {
       "mitigationPlan": {
         "steps": [
-          "Procure raw refined ingots from secondary smelter in Trondheim, Norway.",
-          "Initiate heavy machinery clearing of frozen electrolytic cells.",
-          "Re-route incoming bauxite shipments to operational Baltic processors."
+          "Initiate emergency logistics bypass pathways under Priority-A aerospace clearance.",
+          "Deploy parallel shift rotations to maximize operational capacity at active yards.",
+          "Consult alternative labor union registries to coordinate standby shift rosters."
         ],
-        "timeline": "3 to 4 weeks for complete cell cleaning and restart"
+        "timeline": "6 to 10 operational days for alternative logistics routing"
       },
       "validationPlan": {
         "steps": [
-          "Verify power supply stability metrics and install secondary surge protective relays.",
-          "Inspect re-started electrolytic cells for lining degradation or heat cracks.",
-          "Audit physical properties of the first aluminum batches produced after the restart."
+          "Track daily production output rates against baseline volume recovery requirements.",
+          "Audit standby technician credentials to guarantee active FAA safety certifications."
         ],
-        "timeline": "5 days of continuous operations quality tracking"
+        "timeline": "3 days of continuous logistics performance tracking"
       }
     },
-    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
-    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.",
-    "ingestedAt": 1780374240791
+    "ingestedAt": 1780413669713,
+    "sources": [
+      {
+        "title": "Boeing strike in St. Louis ends after union approves new contract",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOeWxOMk1IQy1oUU9UYWNqZWVxbHpPS1BaaVlXTUtyLXNySktDVUdROEF2b0U4SnU0MDhKTEVqNS1TcnFYTXZkVllVcWsxNkZ6ZGpwMUUxak50OHRHbV9mWUt1X0Y0TlpTM051MHhVdU1EZGpqYTNLejB5bVhad29EVU5pQTRVVEtqbHNDLU95VzlLSHJNU3BWN1hHelE5REQtZ01LbGpTX0Z4S19f?oc=5",
+        "summary": "Boeing strike in St. Louis ends after union approves new contract\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "St. Louis Boeing machinists approve contract, ending 15-week strike",
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPQkMtOUo4dVZzQTFzTWVBN2F6ckJWSFQ4N3lJdzJYeFVEV2lwdGc2TmlJWWxCZUtsYy01NzA2NVNIQWlNcHFyNEQ2MGc5X1RNTEZsR0tiVTJIUXNzVm1NbXJGcTZFOEQzaHJwWmk2cmd0Y2xJZ3dBbTRQN0p3RlVmZHVBdnpsbk9PVm5GckJybndaLWc?oc=5",
+        "summary": "St. Louis Boeing machinists approve contract, ending 15-week strike\u00a0\u00a0STLPR"
+      },
+      {
+        "title": "Boeing Strike in St. Louis Ends as Union Approves New Contract",
+        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNVFNpV05LUi1LWGxEVlFZNzg4SmtQRVFRQjctSmVub3d1U0hwcWlRUDI0WXJvX21VQXhJRHdRN3d1cW5KOWJ5YXFwQ1VPS0ZSTy1pck90MF82eDI0TFdHN0pvNEpvc0tSb01OZndCaEdnS1NvVWc4QmhfLVBvQWMwRUljd09raDU0TklIbXJxaXQxeE9HX1Ftel9OSzZ5c3FsdEFnNHlrWQ?oc=5",
+        "summary": "Boeing Strike in St. Louis Ends as Union Approves New Contract\u00a0\u00a0Assembly Magazine"
+      },
+      {
+        "title": "Bipartisan U.S. Senators Rip Boeing\u2019s Greed and Delay Tactics as Striking IAM Union Member Testifies in Washington",
+        "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPU3NSdnBjVVlyV0laVk1aRUFtNmJWWEZGNDdQU2UwQ0JEckpEb3dCZXhrcjNPdzhJM1BMTWx3bk5ITXVKYi1pczZLcC1pSWdQMWJrN01OX0NycmFtd0Q4OUZ4ZG52cVpvWTRnbVJfc05QYmFQNktkbkowMVV6WFphTS1kSHhLMkkyUEtZaG5kcmRMTkYyMDZKbFVoNmpFaTIwSFh4V0hpV292U0FaeDhST2hkMmhSaXlfTTd4SWc2TEl5QzhjWnhyNjdtZVBkb3B4eXlaN3R4LWFOM080ZzJv?oc=5",
+        "summary": "Bipartisan U.S. Senators Rip Boeing\u2019s Greed and Delay Tactics as Striking IAM Union Member Testifies in Washington\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "St. Louis-area Boeing workers back union proposal to end six-week strike",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQNDRrejZRZlpNaHA4ajN4bUpIcjBfOEsxWXF1YUFoaGhPc3FTRlJXYjNxbXE2Mzdkc2gzYVRLUW5TZWVON0RFdkhEVjBqNFhTa3NxQ3Z6aEJRdXktY2FqZHNjLW5QMXdYcGozNzNaQnB3MHBKR2hBdnpreXNMaS1heVVfOXYwSklPdmszSWFRMnVRM3pEb1dZbjcyYngtS3dHQ0VDOWpsYXZyeDhrSVdvcjFZdHNsQQ?oc=5",
+        "summary": "St. Louis-area Boeing workers back union proposal to end six-week strike\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "Bernie Sanders Urges Boeing CEO Ortberg to End St. Louis Strike, Supports IAM Union District 837 Members",
+        "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOcE55cDh1Y3dxbmlXcHp3SnZVRUNjV19LMXBOTHNsWWprMUtScTNJU0s5NldOR2pzWm5vUXBpVnUzc09ZbHJHX3k2TU9wTTI4UW8wbmFFYWp4TEtIR1JqM2wtSnJxcUZUTDdRbzNhZm9RQWlvenltcnVIWHd5NU5kRktlYjBlSnFoVzd4b2xvVTZuR19reUFlUkwwaF9qNzEzZ2NFR0wzUVNnSndFMk03OFVlWmt3S256U1lnSEYtdEdOQlMwa0VWeGxhRF8zUWpoLWc?oc=5",
+        "summary": "Bernie Sanders Urges Boeing CEO Ortberg to End St. Louis Strike, Supports IAM Union District 837 Members\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "IAM Union District 837 Members Reject Boeing\u2019s Latest Offer as Company\u2019s Refusal to Offer Fair Contract Continues to Threaten Military Readiness",
+        "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNVmZ6RWdNRzBXNThqSk42ZWI2YnREcUwyQy1EalZQdFNCUmJ6dkUyLUloZGdKVmxhcXhHVW04NzdzcVZNYTN4dkUxbVA5YnRtVEg0LVNMQUFhOWxaUTNjTzhJbFBvVnRtVHRQd1ZBR1VVWWtDbkh2dzVMYm1fRFF4Wjd6SEpCZ0diM3FHZ3Q3X2JUd1VzcmdDeW9OTmh0c2ZGNlpXQnNrSTB2M0pJdUxEWDhYZjJoaXl5MnJqcDBCVWtlaFFiYzFiLUJTVmpDNDhxQko1bktNa3IxTnp3YWFzcXBBYTQ5anpNM0NxRDdodXJxVDYzZFByam1FWjNyWGM?oc=5",
+        "summary": "IAM Union District 837 Members Reject Boeing\u2019s Latest Offer as Company\u2019s Refusal to Offer Fair Contract Continues to Threaten Military Readiness\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Boeing, union agree to talks in St. Louis after a week of angry exchanges over strike",
+        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNMDA0bHpwYlloOWJVOEVGak1qXzhaXzRBSHFlVDFzOHpuYi0tNVd3MUJsb0cwYzZCYmNySzk5bHVPYl9VczZmR2ZETGJsSno5cEpQUFdLQnhlOS05d0dldkFxLVc4QUVxR3E5aWZYVlZ0MHBvekxtWjUzRXJ1SWRzckxGbm56bFM4OFBFVnVBTGJkM0U0MnJWSkFFaC1rM3c2RmxITHMxTDhnSklJOXN2WVA0WXFzM2FDTlVDX0NaeTU2TVltamc?oc=5",
+        "summary": "Boeing, union agree to talks in St. Louis after a week of angry exchanges over strike\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "Bipartisan Group of House Armed Services Committee Members Urge Boeing to Negotiate in Good Faith as Military Deliveries Fall Further Behind Amidst Strike",
+        "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxNR1d6SE9FWDlEODhxd2hYVktid3JOeko5MUg1RGhkbkY0R3BiVzkyNzEwald4Z2w4Mk1ybmo3N2VycnRoTGE2MGwzcDlPdlpoYWdCSlJrYUwwRGhfdC1UV2xUT0NMWVFxQnpZSUVSTkgwdkxVdUNOeVN5UEZQaWdCMjA3THNYcGJUWVhjbHVWd0NiOWNRdVpXc1JJUnNMMmRvXy1uZUkyeVdYcWExTVlWbFNwckVjNE1DUXM3U3ZhUW1fdF9adjlqUllBS19BYXVZNC1menBsUFJ6T21JLTFWM3BuV3ltbGZ5elNqcHZHOUZzbVJlSTN0TExLLWJmMmFfZEMzYWFFV0FtNmVpSmZR?oc=5",
+        "summary": "Bipartisan Group of House Armed Services Committee Members Urge Boeing to Negotiate in Good Faith as Military Deliveries Fall Further Behind Amidst Strike\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Pacific Northwest IAM Boeing Workers Donate to Support IAM District 837 Boeing Workers on Strike in St. Louis",
+        "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQUHYwQUhybTVkZEFiS3l4NXVsc0wwdVNGdG1WTjNUU2hCMEQyVzVTZU1hci01MzFCMUlNYUVsak5BWlhjdTNLUGtnTy1fdTZHM2xNYVN2M2tvcGlhczFaYVpNTk1PRDk1WEplSWhxQmg0dlhjSW01YnQ3UmJpQU92MUdwUnFPajlQcXl6ZmdqQm95MHgwRm03aXN1a1Vsdmx0cjVSQ2x1T09zd2ZjbVY0MDRoTEFXbC02UjR4SVYtVG1GaWRzNGJnUzRyYnhmbGxwcGg2U3hsRHVyQQ?oc=5",
+        "summary": "Pacific Northwest IAM Boeing Workers Donate to Support IAM District 837 Boeing Workers on Strike in St. Louis\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Senator Hawley Letter Continues Calls for Boeing to \u2018Get a Deal Done\u2019 with 3,200 Striking IAM Union St. Louis Defense Workers",
+        "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPX1Q0MERmUFh2OVhuSDFtanlhZS1DZThVdjM4eUVHQk9CS2xqQl9LS1NzSllJd1d5eDVORTFhZXRSMTVSVDNVWlcwLUxqQ1B6X2FYUS1QalI1MmxNeGN1TlJaUTB4YkJqSUR3aDlMQnV2WU5FTS1yWmh4NHNMRGVxTktzREJkOWhjTjdPLUVFWFpXVVZlWDNqNGpaWHpKLWVvWlRQQVMtMHZjaE5qcmdaZkp3TGJXanNPU2VFT2hCdFVMcFVQTnUtaVRNM2tpcEF4b1EwajR0bE92MXdYSndWQTdtbjdSQ0ZuWnRZ?oc=5",
+        "summary": "Senator Hawley Letter Continues Calls for Boeing to \u2018Get a Deal Done\u2019 with 3,200 Striking IAM Union St. Louis Defense Workers\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "US Boeing workers continue midwest strike after rejecting latest contract offer",
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWU03b3R1OTdmU0tnWU9JTHZrbm5yWHRVNXlqWmdSWlZpMmt5WU9rdktaemRERHc5c0FTc3RBQVZubXhJX2RSdGlFS25sWUNqRWpkblhmVTRBRGd3bFM2dE43VGV4b1lnLWhJV3F0ZUR1TXJUNGRxZEVFWHJGc0lMRTJYaTdBcmlYUzJfYUY4Yk5KUXpaNlJTZA?oc=5",
+        "summary": "US Boeing workers continue midwest strike after rejecting latest contract offer\u00a0\u00a0The Guardian"
+      },
+      {
+        "title": "Hawley and Sanders question Boeing\u2019s labor attorney about St. Louis strike",
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNOXM1RXd2ZEcwbzdWQlVMWjlkY183STF0bXFua3lGR3lTTHdhbzJIdjh1UTVlTmF1Z1NGZy1rTFFnTjlrNHNJZnlBUkx3VWJ1THpnUGxOMzd3Wkx5dF9yOTIwV1Zpa2RCZXZGQk94MWc3WGV3cGtPc0NFamdCN20zMW9CTFVFMG11MUhnNmQ0Q1VNYUdkejhVZ3ZXamlXeVMxNDNnN0t1WjRwVFlQcllqdkdLSnVidDQ?oc=5",
+        "summary": "Hawley and Sanders question Boeing\u2019s labor attorney about St. Louis strike\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "St. Louis-area Boeing workers back on strike after rejecting contract offer",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPajZacDZUeTdPdHhYWk90cXBoR04wcjVOOEFVd0JwX21jZHIxaUR2TFA1VXdrcE8wWUtPeGFDRm5qZ0VaMjJmQ0Y2ZlVFN0dLWW9lcUtxa1VEZ2xhdjBURnhfdXlPNy1ndFNaM1RwS2VidFFmUXBIU1Y3Q3JJTXdwaGcxVEFUUExsUE5tbUZSbDRna0VLSUwzclNlOEVCYmhtME5CVURGeGx3c3I1NlZVeVlSa3I?oc=5",
+        "summary": "St. Louis-area Boeing workers back on strike after rejecting contract offer\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "Striking St. Louis Boeing union workers file federal labor law complaint",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOX2JsQktKVlVnZ0p3Wl9seWlJSlFFMXBUcXB4alBVN1JJRnhVTlkwMVF3amNJSUhTUTgxbWUyRTREdzJiUjY0dE80YnhZeFozd2x1aHBIZ1FGb0RCTTdFN3JSVC1TNEFCWTRvSF82d3FhWGFwdGMzVWpNaTJxUkJRdG1ERVIzeTU1VWNmVmhZaU1yZTZCWGNrOU8wX1kyYk9LTDNjX3paaHZOTVVsVnUyNg?oc=5",
+        "summary": "Striking St. Louis Boeing union workers file federal labor law complaint\u00a0\u00a0Missouri Independent"
+      },
+      {
+        "title": "Source: Boeing tells employees about layoffs at Defense supply chain work group",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNUDFQRTM5VFZsZEl1aGRFOTlXR1NhRFdZWFpHY2RXYjZzV3JUM0JyU3EyZkY2a3pnbFVBMEFra2EwX0JsRkFBbEFSN1dCUDBFaXhzT0Y5VGVmYXFfWE53VGxyV0dEV1dKUllocDNPeWRpbnItSkdNQWlNR2l6VFZKT1dXSE1xTEw1RFVlTXJMRXZQRzg0djNsRWM4bUFwaWxiQUY5ejJKVWphZjluOVgtUkhkUUh5UjRON3BpczFDSzhUWkJZV3luSkJ3M2FuSzg4ZGVQclFfNC1RdXBaTVp3Rw?oc=5",
+        "summary": "Source: Boeing tells employees about layoffs at Defense supply chain work group\u00a0\u00a0KING5.com"
+      },
+      {
+        "title": "Boeing workers reject latest contract offer, extending strike at three Midwest plants",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxORFhJNXA1Tm9xSkFHd1ozQmJacm14UFRNMndYRm1icm9VY0hoQ3NDVTJ2NjZxMVkyWV8td3JHSFlTOEpQelhjQkxYeEdJRlA5THFaS3RPWGZVaGJfMlEtc2I5dlB1V2hPbTJOZ1VtX3dkMVhGbjYxeDluNjVDY0JhTFR2SVVGMDJWYnFjMEhhWFRpdHlCTXFlTklZNFdHYUMyN3o2RDZrUWtKZy1pSnVFZERrdXRtZTJrS3BqM05B0gHDAUFVX3lxTFBWRnZfZTl2RFZ6aWJQd1pGUHFyMzVvcV9jTFlRV1UyblQ1YzdLLTR6Vm1tUVZNZFZUbXZlc1A1a0x4VWExY1VCVHlqQmZidUxkMFFNdC15MllVRmFkU1o2UGEwLXBSSi1Zb21HanJ2TkNCMEVHbzdfS1VxaHk5R2NCNkFZYnFUNDlua0pNOUNua05JREtYRHNFUDRGSmJhdThBaWtqOTJDM05rbTNVOU1Kb2s4NHBtR3NfZWU3YnEwLU5aUQ?oc=5",
+        "summary": "Boeing workers reject latest contract offer, extending strike at three Midwest plants\u00a0\u00a0PBS"
+      },
+      {
+        "title": "Latest round of Boeing contract negotiations ends with no deal, strike continues",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNMzl5bWlqY2E4NnJqeHZHUFQweGRBM1l2Qm1aQnM5dDhoY2F1TC1ackVKSG9GR3RDTVNQbW01eTVILU1CZ1lsOEs1MWI4RUMxWFNLbnYxUEI1eG1ld0I0UVVrVlJRaDIwMUNjN1NWMXM1dmZKU3dMdnRuTW0xOVEwaFdEUkNWZWRQVzFQRTlhSXRWWS1DekpCaEszY21zMi1ZNXIxMWZrWTFadzQ?oc=5",
+        "summary": "Latest round of Boeing contract negotiations ends with no deal, strike continues\u00a0\u00a0STLPR"
+      },
+      {
+        "title": "IAM District 837 Members in St. Louis Reject Latest Boeing Offer, Strike for Fair Contract",
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQXA2MnhjMk41TUlPZENsX2c2aXFwWDJhYkFLYk1LUGRBM29LbTFnd2VsenhaeDZpbVJ1dFBzYTJSeExiU0tkTHFmdXl4NGdXZ1FBbGVFOHJiTzNwLWFmV2c1Rk9VSUJtUEI2VXVjaDNvSVFxQUtPeUVFUjdwMGJBd3NEY1VybzJHRDhOODM5amFRNXlhanNCSTRFZUpDcEVWRF9MQ0RMUXhBWk1CZDI4RGtZaVgtNlU?oc=5",
+        "summary": "IAM District 837 Members in St. Louis Reject Latest Boeing Offer, Strike for Fair Contract\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Congressional Leaders Urge Boeing to Bargain in Good Faith Amid IAM Union Strike in St. Louis",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOMFk2SUNJcUlxVDNoWXV1cElmRU9zYUtLNDNBWVNKTlB5eHYyRF9uM0kxbkRUSGVBT3NjVUlyVkU4U2lRbzBPYTNnYVRydzRUVnJpZUg4TkVPMW9rODJFQzZCa1hlS1RETFVoYzMzY2ZjS1Zhc2xFcElHNVNGa1JhN1RneVlURnJMQ0dBeGNZYUtGYTN3VE8tRkRjZEF4QVRmdThBZi1JOGtlZ0czdk5MNlBuLU9VYlVPUC1vbVY1aDdPM3JR?oc=5",
+        "summary": "Congressional Leaders Urge Boeing to Bargain in Good Faith Amid IAM Union Strike in St. Louis\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Fresh Off Labor Strike, Boeing Set to Double F-15EX Production",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPU1BiWWQwcjZFeGNxUml4LWlKLUJLa1JDN3V6WEdHRkQtdlA5X2NYN2EzblVGUjhYd1NUSlVGY05GM1NnaFFDVmdrLUFHYkNkWFFsU1lISUszbmNCbnI5RHN4ZGNaUlBXWjU5WUNzZkVxVS1TcUJfdy12REVMa3BJMEZ0YjRFSGZhXzgtdXdNclN4REVWb2ZzNUZTdUtUWFdwWFJZQVFR?oc=5",
+        "summary": "Fresh Off Labor Strike, Boeing Set to Double F-15EX Production\u00a0\u00a0The National Interest"
+      },
+      {
+        "title": "IAM Union and Boeing Agree to Resume Mediation on Monday",
+        "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPRVVuY0ItZzlCdjVXVVlFdk5kSFRheXdyendSMHp4OVg0aDlyTUFaVV94VS1zYmtrbzgzMDQtWXV2U3k1RVJVZ0FzSTg1WklTWHVFT1FWU04zbkxQd0dyR3VEMkM5cWRqNXNLZWl5ZC1lSG42R1FncWlyb09IbnhjbzRoUHpibkRsWWJyZA?oc=5",
+        "summary": "IAM Union and Boeing Agree to Resume Mediation on Monday\u00a0\u00a0IAM Union"
+      },
+      {
+        "title": "Boeing rejects union\u2019s counteroffer; St. Louis strike continues",
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNT2c5eVMxYVdEYmtrTngtdlRFWWRQaVVacUNReGtJMEdWOG5MazdBSmhTRXpLd2pUdlRtREpQUVZtUmlyQjRuS3RoY3UzOHR2VDFwaW5QeVRCNjVleTVVZlRnM1VBWUtNRElUQkhUa0U2N2JFZGtMWGlaa181cUZXaGJDazUzOHExTEhFVzNST1U3ckJGWWUtek9paDlzOUpl0gGmAUFVX3lxTE5IcnRNYW9uV3VpMFRLNHE3ZXNobmZydHdRUDJYSjFGSXNseWpIZlN6OTUzLWhhQ2V1LWtGOUo5c2NGRVZpc216aVhCZFdmQWRmVmRfanZGdjJFdWgxZVhVUk5NU19WVHBSbk9XSTN4dVNoVDRKRjNUM1ZCX0pxQjVkUlloT3FwYjk5dXp3ajRIbzVHUzJybVk5bHo3b3BpZ3VPdzhFeGc?oc=5",
+        "summary": "Boeing rejects union\u2019s counteroffer; St. Louis strike continues\u00a0\u00a0FOX 2"
+      },
+      {
+        "title": "Amid strike, Boeing taking rare step of hiring permanent replacements for union workers",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPWUdDaTY3SUhwZm9DaXZqd2VGRW9QTFExLXF1UWJzcncxME9vdE1lOVJMVVV5QlFkU2ppVVJwNE9Ra09OMGl4M2U1RlVqLTZrSmN1b3hrU2gwTFhaOVdJV0dhYnZmS3lHUGtWLUFzTWdvVlRaVG9VeFhGQjRSY1l6Y3JOMERKa204RmtBeGpzeWwwbFhVZjlvWWRxa0k3OVBDLUEyTnhrXzVLVllTMkIwREtaOF9wWXRaeXRlYnFuano?oc=5",
+        "summary": "Amid strike, Boeing taking rare step of hiring permanent replacements for union workers\u00a0\u00a0Breaking Defense"
+      },
+      {
+        "title": "Boeing to hire replacements for union workers on strike",
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPbGpaSEp6OHlfQUNyQWtkU2JvRVZyR3J5VFBxd2kwWGJxenhuWks1SnFvbkVrX1JxMVNWcGRlQ21NVmxwbEhTT05GZzBMTlBOZmlySDZsTGlpbXUyZkwta3otMnYwV3AzU0t3ZmttMjJjSWlOWEZ1bDY2WmFLYkdlWHZYSXAtTmVFX1c4bzRISy1xWk0xeDl5bXhMQlJOVXlOU0E?oc=5",
+        "summary": "Boeing to hire replacements for union workers on strike\u00a0\u00a0STLPR"
+      },
+      {
+        "title": "Union rejects third Boeing St. Louis contract proposal, strike continues",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQZFc3MDQ5UEtBQWdubGVlOC1pYVlTUDIzdWlYaFRqN2ZCWFdQdDJHYlpGNGRJOG55SWtoeHBpUWd2OTRNY3h3OEJ6QjlYdmVRLWZZdmdEeEI4N1BHVmFkTHY3Zk1DVlM1dVVOZ21xYjNYUG9NSHR5ektya3hKTEFXNElnOUFNNHNBVTJfQURxcFFyd2dPa2RrVkpyWElXcjlPSVd3WGlfN1E2aVVVcnRROHBsaGRGa3ZF?oc=5",
+        "summary": "Union rejects third Boeing St. Louis contract proposal, strike continues\u00a0\u00a0STLPR"
+      },
+      {
+        "title": "Boeing Workers to Vote Friday on Potential Strike Deal",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQcFRHVW1JRmFiSGdYUWlYZEFEUWlPeHlnbEhUTWZSUWF1c193ZG9qMkk1bm8waUhXVUlVcGJlNk1sZEhoUk1DVnkwbWJOU3h4ejhpNEVJQmo0bi14dGctTlU2QVJnaUJWR0pMZXNfc0laQVM4ZnBwM2FXcVpYMXBGVE50RDlRSm94?oc=5",
+        "summary": "Boeing Workers to Vote Friday on Potential Strike Deal\u00a0\u00a0Inkstick Media"
+      },
+      {
+        "title": "Machinists ratify contract with Boeing, ending more than three-month strike",
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd09HTUZteXlWUHA5UkFjNG51c1dlRmVwa2hraHBTMjNCMGdDWlk1MVVpa3JPZVJ0QzZ5MDZEbEtTQWVsc0M4RHpNVVVfZmNqcC1PMEMxRHAzNHl1MkgyVHdDd0tmVmZtQmtFRjJFNGt6ZjFmVlRIdlBBZFhoUUFwTkhUYng3ckxIZHpab3c0U1J6dWREcy1Delo1Mmk2R1dpRFE?oc=5",
+        "summary": "Machinists ratify contract with Boeing, ending more than three-month strike\u00a0\u00a0The Labor Tribune"
+      },
+      {
+        "title": "St. Louis Boeing strikes continue after union rejects fourth offer",
+        "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQb1hfdEl6cXBjbW1BbmxOdVJEcEJyckhBdlg1MFZjSHJVLTBlalo0a3k2Skx6OFNtem1ZazBBdzlneVJfSjlTTUk2b2pPOGxic2J5OHkwWUhkcG5Uek9tSjU3UnF4d2hLeENtRlBxSGQyMjB1S2VVelg2djlJR3JNUUY5bHVfR2NPX1ZqY2dCX0xXYTFt?oc=5",
+        "summary": "St. Louis Boeing strikes continue after union rejects fourth offer\u00a0\u00a0Spectrum News"
+      },
+      {
+        "title": "Workers reject Boeing's latest offer after nearly three months on strike",
+        "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQN1RocFdyTFgzVGRTa0U4Y3FtNFl6M0Q1QVc4bDdtODduWmZ1VDQyaHRfOVBMbnFPekVxSWZtTW11cVdKT3N5azdIdUF0dGszX1JxaVJqUUR3bTRaanBHYnNsNkFBWkN6ak1tRXpuRHRIeWsyNS1mN0FUWE84OXhxaFlVWEdYbXpkVUpMTnFYdXNmZGNVUFlEdGtiUWFYR3hxQUUtaHNVaHdlTDB5djAyMGZLOGV4RDNOVWtHd2RsQU5NWTlPdHJHYXBkblJPZUZUbFlyeGEyRDN1RHVsdEhB?oc=5",
+        "summary": "Workers reject Boeing's latest offer after nearly three months on strike\u00a0\u00a0Reuters"
+      },
+      {
+        "title": "Striking Boeing workers approve labor deal, ending 101-day-long walkout",
+        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPRExsUkkxZ1Y5M2pvZnNsOXhRMXl3S05EMnd0eElTN0tRaHdDbDVWR05ZbHZkVUlzcTIycHNacFBieFN5NEF5LUpjc0ZWOFF4NklkSjVFMWdHbEo2TFpRb0JRLUh3Y0pCUlphRnc4MFlOTVB3UUxXNFd5cjFoSG12SFdNdGRZc05oSFBxdHJyNzBCdTBZTXRtbU45dEZHejV4aFFfeHdBNnRiUjZsemY3TmJTMHJfaHdjdFBEZDdMSERvVUJSNDdZSmpsRjhvUQ?oc=5",
+        "summary": "Striking Boeing workers approve labor deal, ending 101-day-long walkout\u00a0\u00a0Reuters"
+      },
+      {
+        "title": "Boeing workers end 102-day strike, approve five-year deal",
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQc1cwZW1tRWJmR0ZFMlBaZHAweTlJYXFHT2wxNlB5VFRvZ0lEVFJxWEtZcTEzd3k2ZTlXLXdDNGpEN0RENTFHVlp3NVJxNlhDRmNpQlM5cEtQSmRzUzZvOFlBVlJVY1g2WTA5Z193bm5uM2tuSm5ObmVQTUUyVERWZW8xNm9iemhEUDNtVGFRWFdFVm05WUHSAZsBQVVfeXFMT1I4RmlnU2JqY0R1ZHVKQkFGcHIwckRXbTJjSTg3V0tHNHVrOGpmcmRvY1VvWENlbTlmU3ZVZExNMmczQmJMTnV2WU83V2pvLUlscHVCdnJmVzJGNy1LM2pFbVNheUcwbVEwYm1KY0gwTlREZTBlTEJvcDhwMUZNWnZRNUIwQUlRUTRtblhZdUY1LWhybElCang0SjA?oc=5",
+        "summary": "Boeing workers end 102-day strike, approve five-year deal\u00a0\u00a0FOX 2"
+      },
+      {
+        "title": "Boeing defense workers ratify new contract to end 3-month strike",
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPSXJNMGN1R2lzd0IxVThuQTA2alRXeDVXcW5MdjRSODg3emFqZFFIYjNhQ1FzR2JJTy1HM1JaWDJQWmtNWW9jU1ROaXN6RkhMYWFockJFSFl4am00WmRCZzhuY3JhYUpIbjR1ZFM5S3VReHhtY0hTMHI0RzY5NEI5MW1vcERnY0F1SHkwMGl5S1BORlBvZ2FLaUhZMmFCdHRlRXhJYVlZb1kwSjdmaDNfME8xOA?oc=5",
+        "summary": "Boeing defense workers ratify new contract to end 3-month strike\u00a0\u00a0Defense News"
+      },
+      {
+        "title": "Key Boeing supplier stops production at Wichita plant after workers vote to strike",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUERMbkd1ZVN6cG1YTjdpaVRmdGZiQlNaYnA0UU1rY3VXRDJiLXNKSnZUT1dPM3R3TUFJZVRLaHE5SWZtc0lweENacTJZdU9WeW1LUi0waDU0cWVPQ2dHVjlhM0lUd05JZ2FlN1hid2QtUXlsS29ZWWVDUVk3MUJXd2h3MWVuZnN4OEtqX0dubkNRQXFueThWTkkyTUdDaWptS2tSRzBNbEXSAa4BQVVfeXFMUHNCVzIydGlRLW9CcC1lOS1lLXZWWXo2Y1pibFpKeUE4ZHF3UlJINVhDTFpTeUdjcHZ6b2txUHBDX1E3ano0OTJlcXVxZmgxRVFzXzJERk5JTjlrZV95Q3NJR0d4VWgwb1hUSzlOSy1zS1UtcUJ2QnRvUHFKZ0FjcGxYcDh2cnpHaWhuMm1oUGhMekpiMjhscDQtR3paaVZSUDNhSVJodEZTRVotcHp3?oc=5",
+        "summary": "Key Boeing supplier stops production at Wichita plant after workers vote to strike\u00a0\u00a0CNBC"
+      },
+      {
+        "title": "Six Thousand Machinists Strike Aircraft Parts Giant in Kansas\u2014Threatening Boeing Production",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQRlRUOHZRdlVYYXVVOEc3TXBuRnc1cE1Bc2NVT3Bwd0YyYzltOFNoNzE1eWlMV1JJX24zVmZ4RVY5Nm9MWldtRFNmb0FxdkdWZG41TENOOUV0NXdNT1VGMFd6cnZ5QU9hZDFGbmdNclN3U0pUODBpbXB2ZVh3VHJnX2FOYzJGOERIWm9rSFVrZGJhZFdLTHJ1aGQ3Sm9QdHFjYVFXMk9oaUhHSUJETHRESk9iX0dhemNYdmc?oc=5",
+        "summary": "Six Thousand Machinists Strike Aircraft Parts Giant in Kansas\u2014Threatening Boeing Production\u00a0\u00a0Labor Notes |"
+      },
+      {
+        "title": "Workers at key Boeing supplier vote to end strike",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5EdkVUZnRuX1BHMnA4dGM2eHU5ZGh4bDVubEV1RXpZRTBpOFY5bFViUHNsU25KOW1DYmhnTDV4R3pxdmNBaFNLZWkzY2FLWlhaU0JZRWpvNndUNWVFSnprMllnZE95Y3d5RHJ3MmZwcThaaU5qbE8tMW9Ba2VaZw?oc=5",
+        "summary": "Workers at key Boeing supplier vote to end strike\u00a0\u00a0CNN"
+      },
+      {
+        "title": "About 3,200 Boeing jet and weapons workers begin strike - ABC News",
+        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOGZmTW9pU0syVU5zcDlRRm10X2tGOHFmeEtXVEVuc21sc2o1YzBBRzNuNEhFU29lYVphaVBhWV80YXRkWGZpek9CS2NIb0o4ZnlhLWN2UjhSdlQ3VDVyLXRVTTgtVm5jdGNOaENQeUVyNUd6VXVJQmVTbFhHeVotaDNQNlhDZmZuNmZwekk1S2E5SGRaTVBF0gGcAUFVX3lxTE9lT2ViZ2l2ODNVRUVkQWxpVlFXSDRUY0pobVhVSDAwZ1p5TGdNN3QweldXSWlta1dTOUItdHV3V0RHQ1lQdXRGX1BSQkg0czd0all0bFAtZkh4b0M5dk84ZnR3eVpYS3YzbE5hSmZTQlZETkxhcUtDdU5TOXRmSHlaN2VZVnpxb3RNV3h6eWF5Wk4yalY3dmMxRTdhOQ?oc=5",
+        "summary": "About 3,200 Boeing jet and weapons workers begin strike\u00a0\u00a0ABC News - Breaking News, Latest News and Videos"
+      },
+      {
+        "title": "Boeing strike to continue after workers reject new contract - ABC News",
+        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNOGc5SWN3SVRLenlkVVFnRUtTQ1BGeU8zdlotY1lQdjBHS29WQXE1UkdpVThQZ21ueExXYzZrNHpBZHA4N1kxQnJ2U09VWmZtel9nLWo3MjVPSkxFRF9VT25HT1l2NDdZZlFLTmNLWnByU3FDVGFYQ0cxVXJLZE5KMWtJZHNtRVdrdEt4dVFaSFjSAZYBQVVfeXFMTzgyeEszeHp5bUFVbTA1akkzb2FNcHdRRGhNRGZHTlM4NUpxMGJ4MFFhNjgyT0U2T2JEcktVaTlVRXE2MU5HbFU4Y2g0Y1BjR0dhVGhWUzJCSXpyLWJPQjBaYkVYNDMzdnduMmdQTGNsc0tiVzNLUkZBakd6LW9fVTA3ZVk0QUNEV2hjeDZtU1VBRXo4R3RB?oc=5",
+        "summary": "Boeing strike to continue after workers reject new contract\u00a0\u00a0ABC News - Breaking News, Latest News and Videos"
+      },
+      {
+        "title": "Boeing defence workers go on strike in new blow to aviation giant",
+        "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFAwdUdsOFRUN2RpS2JsNGhBdUJOc2xYcjE0NXlwTWU2NmEwWmE2OEgxVzFNU0dCdmFLV09BM3k1R1ktS2pLSHRkSG9PaTFEX1dRVmgwMkxPbmdGQ01h?oc=5",
+        "summary": "Boeing defence workers go on strike in new blow to aviation giant\u00a0\u00a0BBC"
+      },
+      {
+        "title": "Boeing defence workers set to strike on Monday in fresh blow to planemaker",
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOeEJsdl9DOG1kRFZ4YUtFM1JRcW1Ubnc1SVZjeHdoV3Yxc0xVcEk0WXRVd3ZHZ2NraTN3cnI0WEt4bTlrVzRkTTVMNE9kTDM3U3ZaeGZKZUFmRWxpbkVUVXl0NjQzeWItQlFibWNsRk5ZRGJ2TkJqREZKRFZVc1hwSFI5RkQ?oc=5",
+        "summary": "Boeing defence workers set to strike on Monday in fresh blow to planemaker\u00a0\u00a0Financial Times"
+      },
+      {
+        "title": "Boeing execs accused of 'insulting' employees as contract dispute continues | Healthcare & Benefits",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeWsxNXVhSG91TEFvdnhpQy1OQTNsemV5QUc1TW5UNlpwTWNVTXJ2RGxoVllOMnB1Wkc0ckdUZ2pEUUhFaFMxb25pYlRVNlZ6d0ZuLUdoVnI1WGZacW1FX0xsVVdLWlNMTWRhenZWNUR5WWlxeC1RTXdNSWhSZmFtN1JnVnhIUzFZRVBhVmlFVXJJOG12SnpnTVhpTXJMMFRiVzFSRGgxWkNXcDlwdmhDSGtJcEJaQVVkQ0E?oc=5",
+        "summary": "Boeing execs accused of 'insulting' employees as contract dispute continues | Healthcare & Benefits\u00a0\u00a0HR Grapevine"
+      },
+      {
+        "title": "Boeing defense workers reject 4th company offer: Rank and file must take control of strike",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBJajFweVRmandWQ1AzYXkxRWRGaUFyY25wX3kwclJDM0kxVThkZVIzR0R0cUVjWWNoNF9IcDFyQzE3U25UMThqUFdEbGhYT2E4OXhWMi1ONTBmRV9qeS1MWVZodU9ZcmVX?oc=5",
+        "summary": "Boeing defense workers reject 4th company offer: Rank and file must take control of strike\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "Boeing defense workers ratify new contract to end 3 month strike in the Midwest",
+        "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZ01NNEJhUnhyOUpINXQwMC1PbS13X0pwSEhKcnhsckZwcjhINTZLVEQ4WWR1R04tMl92M0FFU3dKdTlDeGdmOHgzMmtPODNaMGp2OFI5M2tXaVljU1VpcGdyN2Z4QlZidVdDTTFmNnhwWFJJSmREZ0w1bi1fOGFPVXBoeXlIS1NZSnFzZE8tT01WLWlyelo1Q3hnV21uUQ?oc=5",
+        "summary": "Boeing defense workers ratify new contract to end 3 month strike in the Midwest\u00a0\u00a0The Independent"
+      },
+      {
+        "title": "Boeing fighter jet workers poised to strike after rejecting contract offer",
+        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxObmZZQ2o2MkxwQjkzTDBjV2V4b0hQbHNBdW81THl4SFZ5ZVVEaG9XZVZ0eWFpWFkxbUpSclhUcURoMmRuaXpTN1hBOUlFV1Zoc2pmWHdpREZJd3pJRlV2Y3JlWTZybGFtTVNhc3hJS1d1Z3JJVUJYanNHR25kdnN2WkJ1WERxR0NQRENIQ2Z2R3pjQXo2LS1B?oc=5",
+        "summary": "Boeing fighter jet workers poised to strike after rejecting contract offer\u00a0\u00a0The Guardian"
+      },
+      {
+        "title": "Strike by Boeing defense workers continues into third month, as IAM and management resume mediated talks",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB1dVo2cWM5eHdRNmVCa2tPRWxQamNsanJHM2ZqdDR1Q2NsdFNBRkI2X3k1RzJ2YlhOSzFnZjgzYmluU3g0WWd2TWZaYmcyYnBTV1lSYlQ0b3JkV3E1NTlYazVudU90SDRO?oc=5",
+        "summary": "Strike by Boeing defense workers continues into third month, as IAM and management resume mediated talks\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "Boeing strike at the crossroads: IAM officials appeal for Trump intervention while starving workers out on the picket line",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBrdEVrcEFtQkE3bk9zV0YtUzd5S0FrWUlLUXpmSG50cFgta0dDYWNzMi1jZ2pkblZodFQtOHp2TnRvWTdZeWZUUWo1MldkajZTQVBzZG9mdzVEZC12QUpFcmV5YW9FS3VO?oc=5",
+        "summary": "Boeing strike at the crossroads: IAM officials appeal for Trump intervention while starving workers out on the picket line\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "USA : Boeing Workers Vote 96% in Favor of Strike After Rejecting New Agreement",
+        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOQVdyYmF4R2ZYcGVnem5lZDAxOFlvV1RyNlZNWGgwVG1TSjBIYThQYS11ZW1oMzdWWmRjYk0tRnZoV18zWHdFZHlqU29wYjl3a0cxQzZ0UmY3RzFObElMVlpab0wwa2lLMWFzTlRJVWU5dkdnN3dydHlqTWIzLVctX1FKWWYwc09feHE4azRTQ2MtOFViVW1ES1BaaF9kblpyMUllazlBdC1BRlJjZnVtYXhvOGFqVmt2aEhtcmFLMlQ5N25kV0E?oc=5",
+        "summary": "USA : Boeing Workers Vote 96% in Favor of Strike After Rejecting New Agreement\u00a0\u00a0Senenews"
+      }
+    ]
   },
   {
-    "id": "SUP-955X",
-    "facility": "Alcoa Smelting",
-    "location": "Reykjavik, IS",
-    "disruption": "Geothermal power grid surge triggers electrolytic cell freeze",
-    "severity": 7.6,
-    "likelihood": 85,
-    "timeToHit": 30,
-    "tier": 2,
-    "fullDescription": "A severe geothermal grid surge caused a localized power outage at the Reykjavik smelter, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells.",
-    "sourceData": "Power Grid SCADA Alert: REYK-SMELT-PWR & Smelter Operations Stream",
+    "id": "SUP-672DB",
+    "facility": "Spirit AeroSystems Wichita Plant",
+    "location": "Wichita, KS, US",
+    "disruption": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment (3 articles)",
+    "severity": 5.0,
+    "likelihood": 70,
+    "timeToHit": 1,
+    "tier": 1,
+    "fullDescription": "[Clustered Event - 3 Sources Reporting] Boeing closes Spirit AeroSystems purchase in major supply chain realignment\u00a0\u00a0Reuters\n\nAdditional coverage:\n- Spirit AeroSystems Outlines Latest Boeing 737 Disruption (Source: Aviation Week)\n- Spirit AeroSystems plunges 27% after bleak cash-flow outlook shocks investors (Source: Reuters)",
+    "sourceData": "Google News RSS Ingest: Reuters (United States (EN))",
     "mapPosition": {
       "coordinates": [
-        -21.8277,
-        64.1265
+        -97.2798,
+        37.6436
       ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Raw Materials",
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselages & Wings",
       "status": "Elevated Risk"
     },
+    "downstreamBusinessImpact": "Uncertainty in airframe structure supply chain during ownership transition; potential for short-term rework delays.",
+    "mitigationObjective": "Stabilize Tier-1 fuselage supply flow during the Boeing-Spirit re-integration phase.",
     "playbook": {
       "mitigationPlan": {
         "steps": [
-          "Procure raw refined ingots from secondary smelter in Trondheim, Norway.",
-          "Initiate heavy machinery clearing of frozen electrolytic cells.",
-          "Re-route incoming bauxite shipments to operational Baltic processors."
+          "Isolate compromised network switches to quarantine ransomware vectors.",
+          "Deploy backup offline telemetry capture setups on primary manufacturing lines.",
+          "Activate pre-audited disaster recovery servers and initialize database restoration."
         ],
-        "timeline": "3 to 4 weeks for complete cell cleaning and restart"
+        "timeline": "24 to 72 hours for server recovery and network quarantine"
       },
       "validationPlan": {
         "steps": [
-          "Verify power supply stability metrics and install secondary surge protective relays.",
-          "Inspect re-started electrolytic cells for lining degradation or heat cracks.",
-          "Audit physical properties of the first aluminum batches produced after the restart."
+          "Execute complete antivirus and vulnerability scans across all reconnected hosts.",
+          "Verify data logs are back to operational synchronization standards."
         ],
-        "timeline": "5 days of continuous operations quality tracking"
+        "timeline": "12 hours of network safety logging before production restart"
       }
     },
-    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
-    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.",
-    "ingestedAt": 1780374239791
-  },
-  {
-    "id": "SUP-451X",
-    "facility": "Alcoa Smelting",
-    "location": "Reykjavik, IS",
-    "disruption": "Geothermal power grid surge triggers electrolytic cell freeze",
-    "severity": 7.6,
-    "likelihood": 85,
-    "timeToHit": 30,
-    "tier": 2,
-    "fullDescription": "A severe geothermal grid surge caused a localized power outage at the Reykjavik smelter, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells.",
-    "sourceData": "Power Grid SCADA Alert: REYK-SMELT-PWR & Smelter Operations Stream",
-    "mapPosition": {
-      "coordinates": [
-        -21.8277,
-        64.1265
-      ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Raw Materials",
-      "status": "Elevated Risk"
-    },
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Procure raw refined ingots from secondary smelter in Trondheim, Norway.",
-          "Initiate heavy machinery clearing of frozen electrolytic cells.",
-          "Re-route incoming bauxite shipments to operational Baltic processors."
-        ],
-        "timeline": "3 to 4 weeks for complete cell cleaning and restart"
+    "ingestedAt": 1780413669714,
+    "sources": [
+      {
+        "title": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment",
+        "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQWXdRSzU0SkVhQTNiT3Z1eTUyR0d2TTc5R0twZUp5WURxV1dyMkNqN1F6cnJyQWQ5SWxXOFRKM01yTXg5TkpOSndETkVzMHdkdGlhSUF5N2JJRkNKdFZpa0dhaWJ6QzltdzgzRTZEaVU4TVNZUzJEX2pQdC1uNFQ4TjVwRHpjNVNaLXNpY21Od2VfUVhfOTU0Zmh6dThBN2NZQ0FnS1RnWUh5NEp1dTIwM0p6ZUl1YTlfSzloVWxSUjJrcG8yQUw4SFpmbkFfdjFwLXZBOWM0cEFUT3dzS210NWdR?oc=5",
+        "summary": "Boeing closes Spirit AeroSystems purchase in major supply chain realignment\u00a0\u00a0Reuters"
       },
-      "validationPlan": {
-        "steps": [
-          "Verify power supply stability metrics and install secondary surge protective relays.",
-          "Inspect re-started electrolytic cells for lining degradation or heat cracks.",
-          "Audit physical properties of the first aluminum batches produced after the restart."
-        ],
-        "timeline": "5 days of continuous operations quality tracking"
+      {
+        "title": "Spirit AeroSystems Outlines Latest Boeing 737 Disruption",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNcjhsTFJEcWNlYzVFYnhYZFNHZ1E0cEpGWWhKMk5UOGZsZUs0ZnpHNVRaVDBEdGdCc0ZYMEtpVmRBMnRJa0VncHpIZ1BQc2p3c0xrMmUwOGZSN1hwdHVMM0VuajJNUXh0X3BKaEl6VHJxOFVpUUpHdGlSbTRKNmJuaHdQV3hjQWhwRVhPNWNzSVd0X1NhQU1tRDFsbXRVWGNXWWdfR2VEMzBDTlJaNy0tREF1ZjNYazlkdWc?oc=5",
+        "summary": "Spirit AeroSystems Outlines Latest Boeing 737 Disruption\u00a0\u00a0Aviation Week"
+      },
+      {
+        "title": "Spirit AeroSystems plunges 27% after bleak cash-flow outlook shocks investors",
+        "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNd1BBbmk3dFVMMFM1WlgyTkJhd3I0SE1MSkd4QzdCaURZRnRSYkJKdWkyUnNKNXlyWVQtZm1uWURKNHlhWDFORlZTbjRzdWkwbWZ0T1p0dEtiY3I4eUhvbXRhbTNtVEpweWZKQVFOU1ZpYUFWTW9KdEpLb1ltWmU1Rjktd2Q3VVU5OEd1bGdPczI1SWlvaUpDUmU4VmFMN1JwRHZTWUx6LURxZWFQX2FkUEtCT0lGUlNUcVBKZDA4XzFBQQ?oc=5",
+        "summary": "Spirit AeroSystems plunges 27% after bleak cash-flow outlook shocks investors\u00a0\u00a0Reuters"
       }
-    },
-    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
-    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.",
-    "ingestedAt": 1780374237465
+    ]
   },
   {
-    "id": "SUP-990S",
-    "facility": "Derby Foundry Ltd",
-    "location": "Derby, UK",
-    "disruption": "Turbine blade casting kiln shutdown due to refractory brick failure",
-    "severity": 8.4,
+    "id": "SUP-B24CB",
+    "facility": "GE Aerospace Evendale Facility",
+    "location": "Evendale, OH, US",
+    "disruption": "GE Aerospace strike: Both sides return to negotiating table (43 articles)",
+    "severity": 5.0,
     "likelihood": 90,
     "timeToHit": 14,
     "tier": 1,
-    "fullDescription": "Kiln #3 at the Derby casting yard suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs.",
-    "sourceData": "Factory IoT Kiln Status Feed: DERBY-KILN-03-ERR & Maintenance Log",
+    "fullDescription": "[Clustered Event - 43 Sources Reporting] GE Aerospace strike: Both sides return to negotiating table\u00a0\u00a0FOX19 | Cincinnati\n\nAdditional coverage:\n- Striking UAW workers, GE Aerospace back at negotiation table as strike hits second week (Source: WLWT)\n- Over 600 Workers at GE Aerospace (GE)\u2019s Facilities Go on Strike (Source: Yahoo Finance)\n- GE Aerospace reaches five-year labor deal with 600 striking UAW workers (Source: Reuters)\n- Union representing GE Aerospace employees on strike files unfair labor charges (Source: The Business Journals)\n- Strike at GE Aerospace: Workers protest against healthcare costs. (Source: Haber Aero)\n- GE Aerospace releases statement, shares offer summary as UAW strike hits day 5 (Source: WLWT)\n- GE Aerospace, UAW reach agreement on new 5-year contracts, ending strike (Source: WLWT)\n- GE Aerospace workers reach deal with bosses following 2 weeks of strikes (Source: AeroTime)\n- UAW president stops in Cincinnati as GE Aerospace union workers approve strike (Source: WLWT)\n- Over 600 UAW workers at two GE Aerospace facilities go on strike (Source: Reuters)\n- GE Aerospace's UAW workers rally ahead of potential strike approval (Source: WVXU)\n- UAW, GE Aerospace reach tentative deal after strike at Ohio and Kentucky plants (Source: CBT News)\n- GE Aerospace Stock Falls After Labor Deal. A Boeing Staff Dispute Is Ongoing. (Source: Barron's)\n- Union president joins GE Aerospace workers on picket line amid ongoing strike (Source: WLWT)\n- 'Insulting offer' | GE Aerospace workers authorize strike action over benefits (Source: HR Grapevine)\n- GE Aerospace workers continue to hold the line one week after strike announcement (Source: WLWT)\n- Hundreds of UAW workers continue strike outside GE Aerospace over contract disputes following expiration (Source: FOX19 | Cincinnati)\n- UAW bureaucracy shuts down powerful GE Aerospace strike in Cincinnati, Ohio area (Source: World Socialist Web Site)\n- 'We got to stand together' | Picketers mark first day of UAW strike at GE Aerospace (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace remain on strike (Source: FOX19 | Cincinnati)\n- UAW members at GE Aerospace plants in Evendale, Erlanger vote for potential strike (Source: WLWT)\n- On Strike: UAW workers at GE Aerospace walk off job (Source: FOX19 | Cincinnati)\n- UAW leadership: Union filing unfair labor practice charge against GE Aerospace, company denies allegation (Source: WCPO 9 Cincinnati)\n- UAW workers at GE Aerospace in Evendale and Erlanger begin strike (Source: WLWT)\n- GE Aerospace workers across Greater Cincinnati vote to strike (Source: The Business Journals)\n- UAW and GE Aerospace reach tentative agreement, union spokesperson says (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers walk out as defense industry strikes spread (Source: World Socialist Web Site)\n- UAW president Shawn Fain rallies with GE Aerospace workers as strike looms (Source: Cincinnati Enquirer)\n- GE Aerospace workers go on strike over failed contract negotiations (Source: Cincinnati Enquirer)\n- GE Aerospace worker strike is 'a wake-up call,' says UAW president Shawn Fain (Source: Cincinnati Enquirer)\n- UAW reaches tentative agreement with GE Aerospace after strike (Source: Detroit Free Press)\n- 'I hope the company is reasonable' | UAW workers rally against GE Aerospace as strike looms (Source: WCPO 9 Cincinnati)\n- GE Aerospace workers in Ohio and Kentucky face midnight strike deadline (Source: World Socialist Web Site)\n- UAW on strike: More than 640 GE Aerospace workers in Cincinnati take to picket line (Source: Detroit Free Press)\n- GE Aerospace workers strike over healthcare costs, profit sharing (Source: WKRC)\n- 'Overwhelmingly ready': GE Aerospace union workers authorize strike as early as this week (Source: Cincinnati Enquirer)\n- 'We'll be out here': GE Aerospace worker of 25 years talks Evendale strike (Source: Cincinnati Enquirer)\n- GE Aerospace strikers: \u201cThere\u2019s got to be a line in the sand\u2014that\u2019s what we\u2019re doing\u201d (Source: World Socialist Web Site)\n- GE Aerospace workers strike on Labor Day, echoing past labor disputes (Source: WKRC)\n- GE Aerospace workers in Cincinnati go on strike after UAW rejects latest offer (Source: The Business Journals)\n- 'Big pillar in our community': Workers at GE Aerospace officially go on strike (Source: WKRC)\n- GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute (Source: USA Today)",
+    "sourceData": "Google News RSS Ingest: FOX19 | Cincinnati (United States (EN))",
     "mapPosition": {
       "coordinates": [
-        -1.4552,
-        52.8931
+        -84.2619,
+        39.2573
       ],
       "color": "#D32F2F",
-      "role": "Tier-1 / Casting",
-      "status": "Critical threat"
-    },
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Transfer priority molding dies to backup casting facility in Munich.",
-          "Authorize overtime pay for engineering teams repairing Kiln #3.",
-          "Utilize reserve turbine blade safety stock held at Schiphol hub."
-        ],
-        "timeline": "6 to 8 business days for complete kiln liner replacement"
-      },
-      "validationPlan": {
-        "steps": [
-          "Inspect thermal imaging logs of Kiln #3 during heat-up cycles to verify insulation integrity.",
-          "Perform non-destructive stress testing on the first batch of replacement castings.",
-          "Audit casting quality and dimensions against FAA approved specification sheets."
-        ],
-        "timeline": "2 business days for thermal certification and quality sign-off"
-      }
-    },
-    "downstreamImpact": "Threatens core SLA commitments and operational run-rates at primary integration hubs. Direct exposure includes potential line halts, contract liquidation penalties, and customer delivery buffer depletion.",
-    "mitigationObjective": "Establish immediate redundant routing profiles, secure spot-market raw precursor supplies, and activate pre-audited storage buffer releases to protect final product delivery schedules.",
-    "ingestedAt": 362252127
-  },
-  {
-    "id": "SUP-404R",
-    "facility": "Rolls-Royce plc",
-    "location": "Derby, GB",
-    "disruption": "Turbofan casing alloy defect identified in micro-CT scan",
-    "severity": 8.8,
-    "likelihood": 95,
-    "timeToHit": 0,
-    "tier": 1,
-    "fullDescription": "A micro-computed tomography (CT) scan at the Derby assembly plant detected a core density fluctuation in a batch of composite turbofan casing forgings. Assembly line operations for widebody engine components have been suspended to prevent structural casing fracture risk.",
-    "downstreamBusinessImpact": "Interruption of widebody engine assembly, risking final aircraft delivery dates.",
-    "mitigationObjective": "Quarantine defective batches and restore casting throughput via secondary casting yards.",
-    "sourceData": "Nondestructive Inspection Feed: RR-DERBY-CT-901 & Quality Systems IoT Stream",
-    "mapPosition": {
-      "coordinates": [
-        -1.4552,
-        52.8931
-      ],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Turbofans",
-      "status": "Critical threat"
-    },
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Quarantine affected turbine casing batch #RR-CT-8890.",
-          "Reroute turbofan casing castings from secondary casting yard at Munich depot.",
-          "Calibrate micro-CT imaging arrays with standard titanium benchmark controls."
-        ],
-        "timeline": "5 to 7 operational days for metallurgical recertification"
-      },
-      "validationPlan": {
-        "steps": [
-          "Perform micro-CT scans on representative samples from batch #RR-CT-8890 to verify defect detection accuracy.",
-          "Conduct metallurgical composition and grain structure analysis against aerospace certification standards.",
-          "Review calibration records and recertify all imaging arrays before resuming full production inspection workflows."
-        ],
-        "timeline": "2 to 3 operational days for imaging validation, laboratory testing, and quality sign-off"
-      }
-    },
-    "sources": [
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      },
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      },
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      }
-    ]
-  },
-  {
-    "id": "SUP-512S",
-    "facility": "Safran Landing Systems",
-    "location": "Bidos, FR",
-    "disruption": "Hydraulic pressure testing valve seal failure in building 4",
-    "severity": 8.2,
-    "likelihood": 88,
-    "timeToHit": 10,
-    "tier": 1,
-    "fullDescription": "High-pressure testing of main landing gear shock absorbers experienced a catastrophic valve seal failure, causing localized toxic hydraulic fluid spillage. Clean-up procedures are active, temporarily halting system testing runs in building 4.",
-    "downstreamBusinessImpact": "Bottlenecks in landing gear shock absorber testing, slowing down narrowbody integration.",
-    "mitigationObjective": "Complete hazardous material cleanup and validate seal replacement integrity.",
-    "sourceData": "SCADA Environmental Monitor Feed: SAFRAN-BIDOS-B4 & OEM Emerson Alerts",
-    "mapPosition": {
-      "coordinates": [
-        -0.605,
-        43.181
-      ],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Landing Gear",
-      "status": "Critical threat"
-    },
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Deploy hazardous material cleanup shift to contain hydraulic spillage in building 4.",
-          "Procure emergency shock absorber seal packs from storage backup stocks in Bordeaux.",
-          "Authorize landing gear structural stress tests in parallel assembly building 6."
-        ],
-        "timeline": "48 to 72 hours for cleanroom validation and pressure test reset"
-      },
-      "validationPlan": {
-        "steps": [
-          "Perform contamination sampling throughout building 4 to verify complete hydraulic fluid removal.",
-          "Conduct hydraulic pressure and leak testing on all repaired shock absorber assemblies using replacement seal packs.",
-          "Review landing gear stress test results and certify assemblies meet structural and safety requirements before release."
-        ],
-        "timeline": "24 to 48 hours for contamination clearance, pressure testing, and engineering sign-off"
-      }
-    },
-    "sources": [
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      },
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      },
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      }
-    ]
-  },
-  {
-    "id": "SUP-771A",
-    "facility": "Alcoa of Australia Ltd",
-    "location": "Pinjarra, AU",
-    "disruption": "Bauxite conveyor belt structural snap, loading halted",
-    "severity": 6.0,
-    "likelihood": 75,
-    "timeToHit": 21,
-    "tier": 3,
-    "fullDescription": "Bauxite transport operations at the Pinjarra refinery have been suspended following a structural conveyor belt snap on the primary loading line. Raw aluminum refining output is throttled by 40% until belt splicing is complete.",
-    "downstreamBusinessImpact": "Reduced output of refined bauxite, impacting long-term aluminum feedstock availability.",
-    "mitigationObjective": "Repair primary conveyor loading line and stabilize calcination kiln throughput.",
-    "sourceData": "Pinjarra IoT Mechanical Stress Feed: ALCOA-PINJ-CVY-08 & Local Maintenance Registry",
-    "mapPosition": {
-      "coordinates": [
-        115.875,
-        -32.628
-      ],
-      "color": "#FFB300",
-      "role": "Tier-3 / Raw Aluminum",
+      "role": "Tier-1 / Aircraft Engines",
       "status": "Elevated Risk"
     },
+    "downstreamBusinessImpact": "Risk of delivery schedule slips for B737 and B787 programs due to component validation delays.",
+    "mitigationObjective": "Establish priority intake channels for high-criticality components requiring additional inspection.",
     "playbook": {
       "mitigationPlan": {
         "steps": [
-          "Initiate emergency conveyor belt splicing contract with Fenner Dunlop Australia.",
-          "Divert crude bauxite stocks to reserve stockpile yard B using heavy dumper fleets.",
-          "Increase calcination heating runs on parallel kiln lines to mitigate process temperature drops."
+          "Initiate emergency logistics bypass pathways under Priority-A aerospace clearance.",
+          "Deploy parallel shift rotations to maximize operational capacity at active yards.",
+          "Consult alternative labor union registries to coordinate standby shift rosters."
         ],
-        "timeline": "36 to 48 hours for vulcanized splicing and test runs"
+        "timeline": "6 to 10 operational days for alternative logistics routing"
       },
       "validationPlan": {
         "steps": [
-          "Inspect completed splice joints for alignment and tension compliance.",
-          "Run conveyor system at reduced throughput and monitor vibration and belt tracking metrics.",
-          "Verify restored material flow rates meet minimum production requirements for 24 consecutive hours."
+          "Track daily production output rates against baseline volume recovery requirements.",
+          "Audit standby technician credentials to guarantee active FAA safety certifications."
         ],
-        "timeline": "24 hours of operational monitoring following repair completion"
+        "timeline": "3 days of continuous logistics performance tracking"
       }
     },
+    "ingestedAt": 1780413669714,
     "sources": [
       {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
+        "title": "GE Aerospace strike: Both sides return to negotiating table",
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxORG9DcTUxeXRueDBSZXp4OThlM3haVERUYTJlQi12YlRfNmpxOGU0Nkp0WktESzkzV0UxbTRYa0I1SEY3VHpraktzS09FbnBuU195STNsS0NPNTUtYVdEU213YUZ6YnZyNlBVcU9rQmlNWjR0WHp2Y2o3ZEJoMGQybWtacXlxNnBSQWtBcy0xdGswOGvSAacBQVVfeXFMTXU2Zk54cXRjWHF5WmhNYzY5NkhVbjB1V05WYkMtMmhEeEFlRmFHVGczRWdORjNmQkxNeDFzV1djbXdKMG02N3VWZFdVd0VOZ21VUzJxYWhIN3ZVUlNlZnhwSUdCYUdXMEt0eHZGRi1qeXdLUDJ6TGtCMy1qV2ZZVkFPNkVsMkFiT2tnZnJfbWJIZ2FfeUZ4RlhVbnZLbzJmWHFIVzdZUEU?oc=5",
+        "summary": "GE Aerospace strike: Both sides return to negotiating table\u00a0\u00a0FOX19 | Cincinnati"
       },
       {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
+        "title": "Striking UAW workers, GE Aerospace back at negotiation table as strike hits second week",
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNOXNSVDlZNjlmWXFhRF9acG9DcldnY0Y1U1k1WHotX2lWZHplcWVzbVFHUVZCbEtjYVVQTmVTeWdJdnNWNWV3RGpEQUxrZmtmazBoZFpWbngxZ0JtVUxwcjNNYlJKSWxIeEoyY2FWbnBHOWp2RnhmNzhPVjNKc1poR3dKQTRRRmZYaFNoSUdiX3BtcUozZnc?oc=5",
+        "summary": "Striking UAW workers, GE Aerospace back at negotiation table as strike hits second week\u00a0\u00a0WLWT"
       },
       {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
+        "title": "Over 600 Workers at GE Aerospace (GE)\u2019s Facilities Go on Strike",
+        "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQVTd4V0tSOGZ0NGNCbkh1QUFOZVJoSU9QaUg2ZXl6NEp3czBfVXJEUFlBT1Zyd05UN1UxMVgtN0U3TXlGd2tqbFp3Z1hkZ0Q2cHY3cFF2X2FsRjc2OTZHVklYVVI0NG1CcTJyWnJTeUh5aEdRX1VSYlB0LWg3NmZyLQ?oc=5",
+        "summary": "Over 600 Workers at GE Aerospace (GE)\u2019s Facilities Go on Strike\u00a0\u00a0Yahoo Finance"
+      },
+      {
+        "title": "GE Aerospace reaches five-year labor deal with 600 striking UAW workers",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQTW4wYm0xN2kyaGNFc2N3NFFoWG93SnhuYk5iai1BT2pzdHhRWFFUUGlHSWNBYk1hMU9kSHdLTElYS0IxYWtqck84QmloT183cFRXbmFkVW1Gd0RsNjlCaENpSklnaHB1a1dlZmhGdjhtcnBKZjRQWDVjUzAxRkpZV2FsaGRXNm1lRlhObDZfNExucFlxamxBR3FwUmNQYUQ4VTJVVzZaWFpTUHNmemlHNTVib3ZiQk05Y3NnTDhRX19fQlNkdld2VGxR?oc=5",
+        "summary": "GE Aerospace reaches five-year labor deal with 600 striking UAW workers\u00a0\u00a0Reuters"
+      },
+      {
+        "title": "Union representing GE Aerospace employees on strike files unfair labor charges",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNQUdLTEUzbjhGOUNmTzdMN29zaEotZXQxQVlHa1R2S0RsM0UxeXd4SHF1TTVnSjFpVVZNNmVsamw5eDhVNmlHVHB5S1RvY1hRQkZkUmpDVnotMWJDY0o5N2ZsczBzeEFKTDRqSnV2NzFoYi0tVHRZYVdzN1VjUjlZY0hIaV9waFdlMHlpMkMtTXNSdi1sTW9ObmpRemVjQWlqRlBmSlFB?oc=5",
+        "summary": "Union representing GE Aerospace employees on strike files unfair labor charges\u00a0\u00a0The Business Journals"
+      },
+      {
+        "title": "Strike at GE Aerospace: Workers protest against healthcare costs.",
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQX1RsUWFIWndRNmJQY2xyMzZUV1JJQjRLd0Ffank5U0VoaVl2M3ZMY18yV2xTQXBQckg0S2h5MTlIUm1FOWxnMmxrSUlpa3NYQm9fNUtwbHVIUGxUNHRLUEZodTlwemgtclhUcmtXd1drU0lDbEszbW5sQ0JpQ2loZHhURkRaOVM4U0NGaGtOTnFGZDh3MHdpV0VUejdtSjRW?oc=5",
+        "summary": "Strike at GE Aerospace: Workers protest against healthcare costs.\u00a0\u00a0Haber Aero"
+      },
+      {
+        "title": "GE Aerospace releases statement, shares offer summary as UAW strike hits day 5",
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRGRWVXp1b202VnNzdHk1UUlUT2dMV2ROclJ5ZzREdFZ6SmM3SHNPS1dDM1VZLXY3MWo1SXN0VHFTYVNqRF9sclZMbXpVUFJMdEhxcDNCd1o3d1pxUGRiTDZHMDRqemotZ1JQMU9VbVplQzlQdjJDdGJ0WmtjNHcxcW12UWhaeHhpWmZzRzNLUEFKYmZWZ21SRw?oc=5",
+        "summary": "GE Aerospace releases statement, shares offer summary as UAW strike hits day 5\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "GE Aerospace, UAW reach agreement on new 5-year contracts, ending strike",
+        "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUThmaGE1Q2ZBV0Rxamd2aUpDLTFnLURsVGYwSWRxcExmTlZJZ0pLZm4xcW5ObkNMSHUwMEpHUFJFaUFVLVltakk1VHhlZV9mNFNoT0lxRU1MTUU2MU9pTGc5Tk94Tml1b3hSQXBRUEhJeTlXbEgyejhCWlFxWlJMSDlFeTV6MU0?oc=5",
+        "summary": "GE Aerospace, UAW reach agreement on new 5-year contracts, ending strike\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "GE Aerospace workers reach deal with bosses following 2 weeks of strikes",
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9fVmtVejRlT0d5UjFWUTZISUFjUmZwcTROdGZIZ0ZwSVcwUG9hc3dxb283SldFaUVEOHdQSlZFd0ZCY1RfT2VBVHVqVlBkY28yREQzRU9OdUZvSllveC1jMFRyT1dNdERlbGpkM3h6OWhFQdIBd0FVX3lxTE9fcXZXWktGdzh2WW9zTHZNdWFGTTBnWGh6dXpfdUVOQmRhOGtLQlhuM2lmVmZqLTJCVzV6YmhtUFhIM0VxR3pHWUxwSnZYdll3MHZmR2RLeWlnU3hIeE5GV1V1dHhCUHNmRldJa1V2ZEJPN3lpNlFZ?oc=5",
+        "summary": "GE Aerospace workers reach deal with bosses following 2 weeks of strikes\u00a0\u00a0AeroTime"
+      },
+      {
+        "title": "UAW president stops in Cincinnati as GE Aerospace union workers approve strike",
+        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPck1BZ3F5RWFTTEtWYXBndUxscUxtdDlPN2RZRGJ3NF81QTh4TzlTMUp5T1JSSUlYZUZXWW1Ia1VrMy1TZlNGanJZTDNYWl8yNzNrYzh3ejhOcE5ZNHZUZ1Z1NFE3bWZEVFRVZnkxUHBfakVreWRyZUYyczVSNGhhaXVHM0lQQ0Rnb3poNGZFaw?oc=5",
+        "summary": "UAW president stops in Cincinnati as GE Aerospace union workers approve strike\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "Over 600 UAW workers at two GE Aerospace facilities go on strike",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNYzlISnpBUWFPU21ZMnlGUkVQWDFHT2hGY1BzU2otU2NZaHdtMkdPZzg0M0J4Rl9zdFItNDBzQjZqSS1lbWR6R2hMOTltRkUwSWZFRHBrT3BOakpZS1JQWjJzYnZ6T1ZOR0xjMzFRQTNBNGZXUDZROXZjUXdJWXl5dlZRMEY0U0NEcU1Jd3ZfTlVybUgxU1lzbk8zamtCWWJaTUdwQUlnaUlLd0Q0X1hjTGw3WlBZNzZx?oc=5",
+        "summary": "Over 600 UAW workers at two GE Aerospace facilities go on strike\u00a0\u00a0Reuters"
+      },
+      {
+        "title": "GE Aerospace's UAW workers rally ahead of potential strike approval",
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNTHV1VnozdFY5VnJrSmVxY2psSUF4Xy1Ud3FQcGt6VEpmQnMxSElwaXIybklmVkUwNV9HVmZ5TEI0YTQ2V1cyOHY5MHlNT011MEFiT1VKU19Pb0hsSnRlQ09pTWo1Nmt1NExKbW1zVS1HUlNsUUtVRXhENUNSSWFwTDNGeUpfZDVPSjVtSmt3?oc=5",
+        "summary": "GE Aerospace's UAW workers rally ahead of potential strike approval\u00a0\u00a0WVXU"
+      },
+      {
+        "title": "UAW, GE Aerospace reach tentative deal after strike at Ohio and Kentucky plants",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQbE85UlpnakVBR3AtZ3JtTFB5YmhRcG1SeFpmUkotX25TYURseFZZcWJQNDM5clEwZGFQZ2tpbml3ZU9kckxEa2xPdWhFcjJnU2g2YzlWcmYxVUZjeGVVbDczYWdvang4Q2hlNi1BTzQ2T2x5VUw4RkJKXzZBLThJaXRCZktlVVdDYmZ6LU5wQWpxVmlwZ1RRLXB3TEs4Y3RodFNBMHVR?oc=5",
+        "summary": "UAW, GE Aerospace reach tentative deal after strike at Ohio and Kentucky plants\u00a0\u00a0CBT News"
+      },
+      {
+        "title": "GE Aerospace Stock Falls After Labor Deal. A Boeing Staff Dispute Is Ongoing.",
+        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQMW9ReHl4VmVQakM1bUloNDFmV0FxVTFrbFh2WVo2RW5MQ05hQ1FxREhQV29nLWRQNDNmbzlnWURCRXpvUDk3bWxkVFdFX2lHQUY5SHc5Z0pxRDd2ZUNxREhTN0RXNHhSRHdaa0xVMUdwbm1NOHZ3dU9sYXlYdF9CMWhR?oc=5",
+        "summary": "GE Aerospace Stock Falls After Labor Deal. A Boeing Staff Dispute Is Ongoing.\u00a0\u00a0Barron's"
+      },
+      {
+        "title": "Union president joins GE Aerospace workers on picket line amid ongoing strike",
+        "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNdG1QVGlCMk12cVRPSU44MEdFQWYxVU5GbGlBSWNDRVk3S19acUtuTUZ0a01YVzE5NjlpNW1YTXVsUjJERzNJTFVwVFVKVjV1bkpfdmZfU3dCQXZxMC1wRmJrMDc0ZzFTOFk5b0lsek80OGgzRnRvVXlHOWdIQlVtb1pOU1B3Q2VGTGNZWGhUVzlVMXE3T0VUTnRiOA?oc=5",
+        "summary": "Union president joins GE Aerospace workers on picket line amid ongoing strike\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "'Insulting offer' | GE Aerospace workers authorize strike action over benefits",
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQb3VDZUctbDZLZm1zTTRKWlZzc1lvSnZkNEVQU0JyTEdTNmtiUUhJX2pQeENXOUhmaHFzS2puT3FqNEEwZkhEbDMtZ3plcm9vUmhYS3dick01RHlvUUtBQ2pzQkQ1eGVRVXpueUFWek1fMk9sU2Y5bUg0V0c4N0hMbmJ3LWhnWk1MVC03MldkNTFBZ0V2bXNXRHFWZHI3MngwUVVQYjY4NnpHeTYxdm4zZUdid0FsaWM?oc=5",
+        "summary": "'Insulting offer' | GE Aerospace workers authorize strike action over benefits\u00a0\u00a0HR Grapevine"
+      },
+      {
+        "title": "GE Aerospace workers continue to hold the line one week after strike announcement",
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQLVUyRU5qTFVWZW1VTE5IeTl2VWE5UnFJLUYwVlMzZ0Q1dEJidnNKWFJEZHE0d2JPQXEzVEN3djc1bmFUNlhnT09PNzNTT091eTF0UlNma3JlYVItWTZ1THpaNlRPeWw3cjBLbjdwTmI4Z3ZIemlOdXRLWUFRQUVuOWhDZ3hjcWFRdVNn?oc=5",
+        "summary": "GE Aerospace workers continue to hold the line one week after strike announcement\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "Hundreds of UAW workers continue strike outside GE Aerospace over contract disputes following expiration",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOb2dKUVg2d1FpRHp0dDI1NU8tWU0ycDdTZGVOd2Nna2J6dFpiZnY2SlpZck0xTE1oQlA4VjB3NENXTkp1VWJQaEotMjJtZ0M2alRicnJaZUU5bjNSTHBRZnhFeDlVVXhNOFo1OTJHUUpBdjRyckt4bHNldnJHeVA3M25TQ1d1NlM2LVY3VGlvWS1uUTRmWXpqcjRPOVZ2VUdHVWdCbkIwT0dpRWRxcFNWOGRDQ1lKdjV2dnhmdEZiaEctaWhJVVJJcNIB3AFBVV95cUxQNVE0RXh0MmUxUW5seURMLUFWTy02bEo2anpyX2t0c0hJRW1ZM3pIdUlWTDBiM0Y0U1Qzdk5PODZzUy1sNmRwS2tCQUZIUTAyd29May1BQzExQU1iVzZQRmFVTEVEUmJsUm54b2czYjk0b0ZVZ2N6RzZGVnJ1cDFvQTM3bWJUcTJ4bnNQdmpKWkF5b2JQc1FBNVliQV9vbDlJUFNybHVXRC04WjlvTk94VXd4RVNFR2FSdkRFNHdybnVSZFFFQXRHcWpxWmZyM3M0M3BUb3V4Wm00ZVBY?oc=5",
+        "summary": "Hundreds of UAW workers continue strike outside GE Aerospace over contract disputes following expiration\u00a0\u00a0FOX19 | Cincinnati"
+      },
+      {
+        "title": "UAW bureaucracy shuts down powerful GE Aerospace strike in Cincinnati, Ohio area",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAxVGtBMkZ2Q2VuT251dHFZR1g5UnY5Z3czYjU3LUxrQnk3VjNQa2RKVjg2ZHhucVNDT2VKZnQ0WE9FaW4zdlVHemtOYjN6V0NfWGtSZE9EUGduUWxYTVpiYnJxc0xSWDRI?oc=5",
+        "summary": "UAW bureaucracy shuts down powerful GE Aerospace strike in Cincinnati, Ohio area\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "'We got to stand together' | Picketers mark first day of UAW strike at GE Aerospace",
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOaVNiRjFaS2NIRGp0UzQxNm1WVlkySlh3blE1WmcxOXA1Ulpxc2ZTeEp0bGhRaHlFbkF0NXdCdEtzU2xqQVFRZDlYVFA3TWJMdzc0S3pTUHA4MGR4WnJkVndqMXIxY1QtNHc3YVJDdnkwcXdibTNhZFNicVZ0aGQyekJndjM5UlBJUGVncmI1MjJvdFpuVXRFQ3ZIeTlvMEZMSW5yag?oc=5",
+        "summary": "'We got to stand together' | Picketers mark first day of UAW strike at GE Aerospace\u00a0\u00a0WCPO 9 Cincinnati"
+      },
+      {
+        "title": "UAW workers at GE Aerospace remain on strike",
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQWFRoUk05WXBLcnRONEc2YkJmZVFuZEVRSk5nUjVLQk5EZzJtSjBRRUpkLUM5cGZTWmpaQXZvaGdWSDFOM3JUcDVPRWdpWS04d1dSaEVmQTFXcTc5eEM5RUFBWGRNMHdwUFdhN295N3RHNmpZZmxBeTc3TWdycTBOS2o4S0Q?oc=5",
+        "summary": "UAW workers at GE Aerospace remain on strike\u00a0\u00a0FOX19 | Cincinnati"
+      },
+      {
+        "title": "UAW members at GE Aerospace plants in Evendale, Erlanger vote for potential strike",
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOVEI1Vm9QRlMtY2NxWDNaamszbVRLMVpLbUN6VGI4SW93T1FUSjloVVB6dXNkM3VBWjNqb2c4X01lMVY3TEYxd2hieEp1MG9ndG42RFJKSnB3SWpFbzdabEhMdV9yVnJNVFc4TkpGZ180R29sZWx4OEFvRnUtQ3Y0VVd2RUd3Qk04QmppNG5Ka2w0bWNzSnc?oc=5",
+        "summary": "UAW members at GE Aerospace plants in Evendale, Erlanger vote for potential strike\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "On Strike: UAW workers at GE Aerospace walk off job",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPQ05HUm9FWE9URFlPYjN2WVd6azZRX1dYMnRaYXU5YUZCemxBTDR5TWRBSkdaVjJHakRJUnRnRFlULS1Rd1JkRFF5RENlS05fLU10M21Ha0pmRW9odjF5TFFHc3ZCTEVrSGlYMzhxVlFBTE9CS2pVV3dYVEdRbFBZVFI1UllpUEdV0gGcAUFVX3lxTE5OU0ZrOG15SUV5b0l0T09UWDRqN1k0MVZlSGdoMHl1UkVoSWd2NHplYWhFWTZ3cjJuQi1saEEzNjBjc2xYalVVeGVBcTRfREpDTnFLOWJqWGRPLThhRmhieS0xMUZfa0FsQnZPNXQtVmJlZFFBWHVfeGx2SFdtamp1d2toZmlkTHVzTkxCd0w0LUNPS2hxaUpiY1BGeA?oc=5",
+        "summary": "On Strike: UAW workers at GE Aerospace walk off job\u00a0\u00a0FOX19 | Cincinnati"
+      },
+      {
+        "title": "UAW leadership: Union filing unfair labor practice charge against GE Aerospace, company denies allegation",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPa09mRkprUkhEV19sSWhqM1d1Y1JOaXBRYnBOMlpHUGdOTUtZYjFmZmZqR3Nuc3RJY09oaVZlYkRreXpUYVhKVTAtOElXQ3Q5U0hTSlBrZmwxWDl4RGR6MjVEb1lZVkJIU2lYU2ZheXhYZExZanNKVWhWdUFrcU13RTIweTI4WTg0d2RmenRKcFNTbHUtY2hybGhKbXYtdll3NkwzOUx3Mm1RQmpyOFZEZVE4el8wbE92czFXelN0R1hZR2RlQS0tNERtLTU?oc=5",
+        "summary": "UAW leadership: Union filing unfair labor practice charge against GE Aerospace, company denies allegation\u00a0\u00a0WCPO 9 Cincinnati"
+      },
+      {
+        "title": "UAW workers at GE Aerospace in Evendale and Erlanger begin strike",
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOTV9ZeERiUy1xY191QVc5Z25ETDZaUDZmd0JJSHRNVmJSMWszQV95THN1LTNHM2RhQWxldWJtTjQzMlFuWUlSeTlXY1YwSDZyaV8tRktFREZnR003T196ZnlDLW90N2U1OGVESWI0dzVSZDhWX3pSQWhrN3BacG43R01iOFQ4WEdiVkZkT2F1dVdHcEk?oc=5",
+        "summary": "UAW workers at GE Aerospace in Evendale and Erlanger begin strike\u00a0\u00a0WLWT"
+      },
+      {
+        "title": "GE Aerospace workers across Greater Cincinnati vote to strike",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPVVZZTWRlZmsxeTJsRVhtcEZma3lrTzBfV3ZMa0ZqRUxRNG5IQ1VSTC13Nm81U05kZ2Naam9ZdlBiWVNydjhDcTZ5OVV3VTlBX2NrUFhyd1R0V1JhTGxLaWx4azRqNndKN2lPV2tqQ0QxLV9XNFcxbWtLM1NBNlhYZG5DN2dqTmpnMFpoUXg4aEZIbWROYXlMeTZUVno4Y241eUIwXzRqSm9fNUU?oc=5",
+        "summary": "GE Aerospace workers across Greater Cincinnati vote to strike\u00a0\u00a0The Business Journals"
+      },
+      {
+        "title": "UAW and GE Aerospace reach tentative agreement, union spokesperson says",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNRVg4TGdSak9GVS15TGF0SVNhYkFGVVl1OEhyY2Y2Skl0NlBXSEU2ZGRDbnBaYmVSbGpRdm5ma196UFV2Qm5ZTFlpRDViRWZWRTFoelFmQjhuOFY1Mzh5R2trbmNfSWZpQVZsNjN0M2Ffci1JVHYzdkRKVEttV2FvaTFhWjMzMHM2Wk9yY3JPZURxbmpRWktmNThha0FLV0RIc3J2cHkwVGl1a3lsVzI5aWFRb2Fsd0VpTlh1ek5uenBNSjNoMFFGUGtmbV8?oc=5",
+        "summary": "UAW and GE Aerospace reach tentative agreement, union spokesperson says\u00a0\u00a0WCPO 9 Cincinnati"
+      },
+      {
+        "title": "GE Aerospace workers walk out as defense industry strikes spread",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5fbE9xS2xKWTRoeXlvaW1LWE94QmdLeGxqU2tnUjAzbEtyd3dReE5Uei05WlhkMkwxQW50Z1lwcUk2bHNDY0N2MUNFakIzd3gtdnk5aTNTS1o4Wk4zR1JOWXVIdmZONHRh?oc=5",
+        "summary": "GE Aerospace workers walk out as defense industry strikes spread\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "UAW president Shawn Fain rallies with GE Aerospace workers as strike looms",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPUlFIMmJReEhRNXg1YjV3eDBTTHRrMzNpV1BZeWkwdFNWdTlOUVJYXzFxSnJlWHlpamJtY3loWFBpaHBHZjdaazRQSDJndVpGSmpxVHBIQS1nWllQbV9RWmpLTVNJVnR5WDc3VTlkM0JwZU5yQnZnWTRHSno2RkNzTTNCNHBwcE41TlZzZ05FMF9rNGV3YzNfcTdWNW9Zc0JoRHR2NUhIZWV3OVgtTXRfRFZseXdmTlJ2MHVHc1MwVEE?oc=5",
+        "summary": "UAW president Shawn Fain rallies with GE Aerospace workers as strike looms\u00a0\u00a0Cincinnati Enquirer"
+      },
+      {
+        "title": "GE Aerospace workers go on strike over failed contract negotiations",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPTTEtZFhqMDFqN0g4OVVUWC1QTWYzQjlZYVU0b3R0NURFX05FZVZRQ1RoNDUyUy1sYmx4OGY4U3RXdEE1NS1fMVlOZXFZTHlxOVltaWNtRnl4Y0pYTzZ2MFZKSy1jVkFtTGVlUHRxd1lmckJhektKbTlzNTlzUDhwUW1KT1FQejlDNkFVeTNhZHNmak1taFJCZkxLNlJHVUhhUHNLMEdjZGc1Sk1NaDUzUWRXSVBTXzBY?oc=5",
+        "summary": "GE Aerospace workers go on strike over failed contract negotiations\u00a0\u00a0Cincinnati Enquirer"
+      },
+      {
+        "title": "GE Aerospace worker strike is 'a wake-up call,' says UAW president Shawn Fain",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPRVJXOXJBQWhEMmJjclp0dE1MNU8wc0lNYmNEWElLbjJBVW1FTDlRcWZsWXBvM00zRUZGd3pDeUZORWtuTFRmNUJKLVJfaGE0RWowb1R5MjBpR2pld1RORWdyTDROaFNIOUVDZHZrZk5MUFh4amR0eS1yeUdHWGpnRXhSU2lmbG9fbGpOdHhNOEpMV1A2eGMzLUt5a2F3SXc2OE8wRTFjS0d2Y0ZMTEpNaFJGNEYyUV9nRUpESTB0TTllekE?oc=5",
+        "summary": "GE Aerospace worker strike is 'a wake-up call,' says UAW president Shawn Fain\u00a0\u00a0Cincinnati Enquirer"
+      },
+      {
+        "title": "UAW reaches tentative agreement with GE Aerospace after strike",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQY1o1djcwb2JIaHVOczhCZDQ2dTIwWGwtWjVpaFBtMGFTNEh6OFh5YzRwYk9teDNPek1td1N1RHFPZmhJVVY3SE1lT0hReXJrbnZ1b01wMjhSNm8zOWxiLWt3MVF2aHZ5TlRaa09mR29MNS1uSjRaV2VMa2NuVnpOUnpBN1ZFWDdLOU5YamdTSjhEYnUzTWRwaFp6Qko3b0cwd2pBTUhFdk05NWVyc29SU2MyUjROcmt1SW9ORE0tVTRtM2c?oc=5",
+        "summary": "UAW reaches tentative agreement with GE Aerospace after strike\u00a0\u00a0Detroit Free Press"
+      },
+      {
+        "title": "'I hope the company is reasonable' | UAW workers rally against GE Aerospace as strike looms",
+        "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWm14dWU5eWd2ZjBTSWZjOGxfR3RSeWk0ZE1nVGJBcnA2UHZFWUQ0aGlZWmwySVhhMnBfOWpYWDlYYnhMV0NrN2RFUVdzSklVOEhYZ2pKNXdLM0pHT2pmRXBqRURZc2VPUG1ySjZCX0R0aWNaUjVLcGpQd2ZsUW16b09Sc2ozN0RaR0IyVy1NNUFLWDJlMHZ5dHYyTzJfaFAwNm16c1ZkYVFPOVJCOWl1Nzdjd1ZvUHBhQjJOaHRkY0FkUQ?oc=5",
+        "summary": "'I hope the company is reasonable' | UAW workers rally against GE Aerospace as strike looms\u00a0\u00a0WCPO 9 Cincinnati"
+      },
+      {
+        "title": "GE Aerospace workers in Ohio and Kentucky face midnight strike deadline",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9IMWZJY2tMVlBVUFNnN0tqenlVR2tzTHVDZzgtTzFfS1M2eVJza29iSzRpaHZ5MFFIdHpwb1VqOUkwM2ZQQW1fZGc3dkdVZkRjSDhEaWlDb0VfV2JKMXA3M1psUk5rbE5U?oc=5",
+        "summary": "GE Aerospace workers in Ohio and Kentucky face midnight strike deadline\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "UAW on strike: More than 640 GE Aerospace workers in Cincinnati take to picket line",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQOGtWS0dJakRtTFlnVmFFZW85cS1QWTY3Snh0dzNBTnpfdURGRUpQSWhMczhrOFktUGVBdEs2UE55Q1g5Um5iLVFubDlSV2Y5WDlfNDA4NFZsS0ZaSVB0UldhTWMtc1NKbmF2Z0NRdkZDZm1PQVo5eHBkUzNYV0ZkT3UxdXdZejdZclJLVXgxTE9oM1lFQ1JhQjh0WVZRS25Wb2tV?oc=5",
+        "summary": "UAW on strike: More than 640 GE Aerospace workers in Cincinnati take to picket line\u00a0\u00a0Detroit Free Press"
+      },
+      {
+        "title": "GE Aerospace workers strike over healthcare costs, profit sharing",
+        "url": "https://news.google.com/rss/articles/CBMi6AJBVV95cUxOWkIwYkJNRklUVFRzNTFqcHZBV1FKZzdNQnRhdmZWYUxBQ3c1bzQ5Nm1zWDJQVFRHVnJmTGprV0l6YW9oTkNuYjA4NzFXRE11M3lRX3RtcGI0WHZjbnZsdEoxOHBhSzVTQXVhWGFiV0hpSlg3VFJJY2pBOUJaWFJhaFNDNWRxMUREeDVlbEtvZFJDeGNMVDI1dmUxVjRUZnI3ZkFXYkZFOUZtY01BanhQUHpzUGpNMDBoUU5pa1l4MHo0M3p4T0M5M1k5RzIya3ZwYXlJak1WeERNbDk4d2pJVVlTclBEVGZRbENxNkEzWVF2MmpUUjhHUmtWZ2ZfbWlYV2JTSTlvYnk1LU5yRnpZcmVMdUgtbl92WjZFZTNUSG1reEpySXNvaV9VU3UzRWg3N3ZYOEhlamRjRzBXTDlpNnBEWkdmQmtBN1VkV0czTzZoUENOaFM1RzRXSks5T3JjellUODJqelQ?oc=5",
+        "summary": "GE Aerospace workers strike over healthcare costs, profit sharing\u00a0\u00a0WKRC"
+      },
+      {
+        "title": "'Overwhelmingly ready': GE Aerospace union workers authorize strike as early as this week",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQVEJhOVNqSWRKX3VIUVY1Z2M4S0RjRDZ4RHhKdlE3dUhOeEJZMkNKR3lraHBUS3NnWW1NWF9mMng0OTl0TGFyXzd5Mmp0dkVjOTNoYWJYTjZUaGRkV1JjNFJOYTlPUlZEU3N1X3dGZXZGaGlSM1Q0bm50T2ttWExib09iYm9aVUFpcF9PczF2T2FtOG0wRFRoUF9UNldJdnlrWHpfQ1RpNkp5SktLeEVyT1NNOU4?oc=5",
+        "summary": "'Overwhelmingly ready': GE Aerospace union workers authorize strike as early as this week\u00a0\u00a0Cincinnati Enquirer"
+      },
+      {
+        "title": "'We'll be out here': GE Aerospace worker of 25 years talks Evendale strike",
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPN01KU1JlVk9SUHBPQVpSWFZTOU1RZ1dCZ0MyTjVydnFyMXZVQlBScmY1VGx3cU5YWWRNbTRKUXlIUzNhYWY4eEtkMlc4aFN0OFB2TTk0Z1VoTlNLdmxMbUhnRThKWG11TkpfeEF5Y3NYR0Z4bzU4YzlxSThka0NLZzl4LUh0MTFfWEN2WlBRQ3V2cERWT3ZOVTZuZ0NvREVHZkpfM2JZb2Q5c1ZkLXRR?oc=5",
+        "summary": "'We'll be out here': GE Aerospace worker of 25 years talks Evendale strike\u00a0\u00a0Cincinnati Enquirer"
+      },
+      {
+        "title": "GE Aerospace strikers: \u201cThere\u2019s got to be a line in the sand\u2014that\u2019s what we\u2019re doing\u201d",
+        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pRDdtcU9wRjJKQl9MSGlObEl0cnVBTGdZWC1Md1dqb0ZoQUJmWUE0UnFWbkgtbXkzT25iemxKbFJRVHhwZWpXWVhCTzFPY3NHUlM1V25jZE1BNXROdFlpSXdVOVNiUUN3?oc=5",
+        "summary": "GE Aerospace strikers: \u201cThere\u2019s got to be a line in the sand\u2014that\u2019s what we\u2019re doing\u201d\u00a0\u00a0World Socialist Web Site"
+      },
+      {
+        "title": "GE Aerospace workers strike on Labor Day, echoing past labor disputes",
+        "url": "https://news.google.com/rss/articles/CBMiogJBVV95cUxNZ0RUb2k0NjROV2F4WVF5djNVRDRkTnVPaFBkYVppVGp6S0ppdUpDcFNZOFhXOW85RmRGa2FhTlNvSFk1NEE0RmpDQ2N6WGhyNW5pV1ZkRXdNNjNRbm11RUNyZFpMYUNtZ2pZREd1MHJ4bDdfZjFfNU44UGhjNVB5bXlLNmJxWkVGYWNEZWY3cEcxZFdUdklKS291WkRBQ1NTUGxNVkR4bllrNHVKUXo0TVI2S0loN3htMWFtNDQyN2N6ZUdONXJyMFlTZVFyUGZMUEVQd0dXS0FTeXVwVVJmMzU3UXBJOVRScXV2VHZ3NEFNWTMzZ3k5TU5OUnJnNUhpX05ZRDhBdW5aUjhNSWl2Y2J6ell5WllLM05JYkk4bFV2dw?oc=5",
+        "summary": "GE Aerospace workers strike on Labor Day, echoing past labor disputes\u00a0\u00a0WKRC"
+      },
+      {
+        "title": "GE Aerospace workers in Cincinnati go on strike after UAW rejects latest offer",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQQ2s4UmV4NVBzQmptUE56OE5OR25KU3ZibjZfRldqcXlvQ3k1UU9Rb2R1UGdOemdlSGE2UGtxWExjS2tCU0tjY3NUZTJFcXRhcE1DejBYa0k3aXZUTmdlRFdETFF6R2kwNl9RMjNtOWVDakJQbVJva2dSenZYY056dzM2dXRfMEFYN3N2OEZ5Mk9PclNMMGJ6eWF1QTUyZGRVcTktek11bzM?oc=5",
+        "summary": "GE Aerospace workers in Cincinnati go on strike after UAW rejects latest offer\u00a0\u00a0The Business Journals"
+      },
+      {
+        "title": "'Big pillar in our community': Workers at GE Aerospace officially go on strike",
+        "url": "https://news.google.com/rss/articles/CBMi9gJBVV95cUxQWUdMclo5RkE3R1BEc2JSUG9uNDE5eGNwNmg5QWxTVUZ6Y1Z2bXhmRjg2bEptWGk5ZmEyLUFuQnh2MmtKYmlJbF9qTTJKWGFrUnJwUVFQeUZJd1B6ZHF2S2Nqb1U4enc1bGtlUHIyOXlCdFN5VmZ3ZnIwNTNEbjd2V3VZeUN6eW4xMC04R2JrblZqUUNXdmdCMmM3M2xrS2NkMFpiTzY1c1JCS3NxbWo0SnhNR0hLQkQ4ZWcyOENxMmFWOFdNTmNBQ2ZSajh5R0ItSzFwcTZiRm1HTnZpMGJ1SFdtZVR2YUhqck5PVzBrTDJUWkNpbEtBX2REN2pvVF91Qmctc0ozN28tVWNVLW9tSmt0NnJaVGhIV3V6ZGZ6SVN0b0haSkR4akNsbGZCUTg3Q1QtRGFEdVRSc1pTY1FUN2k1UWRYcjFvM0Z2LV9Pb2toM3ZjQzlaeXBWZGtuZk1qaHZlbGNtZlFhMzNPdDZQWXl6Um9uZw?oc=5",
+        "summary": "'Big pillar in our community': Workers at GE Aerospace officially go on strike\u00a0\u00a0WKRC"
+      },
+      {
+        "title": "GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute",
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMXVCN1BWTW1xZ2JkcUtqUFFiU1Y2Q0IxaFhEM0ZPTXpreXJ0MklKT2NpRFUyaWZXYTFVRjB6NlNCaGhLU3RMUmtraDNDZVFFR3NaNklqUlpoNkI0ZTNsWXg2ZE1UcFotV2ZsZnVPc3pSZlRidzFlNzRDRHE4WGJzTlczbTdvRHdJR0lKUGFyYmFOSEtBSE9md2FnbHgzWmhxaTNYZQ?oc=5",
+        "summary": "GE Aerospace workers strike in Cincinnati and Kentucky over contract dispute\u00a0\u00a0USA Today"
       }
     ]
   },
   {
-    "id": "SUP-212H",
-    "facility": "Honeywell Aerospace",
-    "location": "Phoenix, AZ, US",
-    "disruption": "APU integration lines chemical bath contamination",
-    "severity": 7.9,
+    "id": "SUP-C68DB",
+    "facility": "Rolls-Royce Derby Plant",
+    "location": "Derby, UK",
+    "disruption": "Rolls-Royce best\u00e4tigt Gespr\u00e4che mit Boeing \u00fcber NMA/797-Triebwerke (2 articles)",
+    "severity": 2.5,
     "likelihood": 70,
-    "timeToHit": 0,
+    "timeToHit": 1,
     "tier": 1,
-    "fullDescription": "A chemical bath used for coating auxiliary power unit (APU) turbine blades was flagged with an elevated contamination rating due to a leaking gasket. Turbine blade coating operations have been suspended to prevent structural delamination.",
-    "downstreamBusinessImpact": "Potential shortage of APU units, impacting electrical power system availability for aircraft assembly.",
-    "mitigationObjective": "Decontaminate coating baths and ultrasound-verify blade structural integrity.",
-    "sourceData": "Honeywell Chemical Control System: PHX-CHEM-BATH-02 & Gasket Leak IoT Alert",
+    "fullDescription": "[Clustered Event - 2 Sources Reporting] Rolls-Royce best\u00e4tigt Gespr\u00e4che mit Boeing \u00fcber NMA/797-Triebwerke\u00a0\u00a0Aeroflap\n\nAdditional coverage:\n- Rolls-Royce hit by further setback to fixing Boeing 787 engines (Source: Reuters)",
+    "sourceData": "Google News RSS Ingest: Aeroflap (Germany (DE))",
     "mapPosition": {
       "coordinates": [
-        -112.0,
-        33.435
+        -1.4552,
+        52.8931
       ],
-      "color": "#FFB300",
-      "role": "Tier-1 / APU Assemblies",
+      "color": "#D32F2F",
+      "role": "Tier-1 / Aircraft Engines",
       "status": "Elevated Risk"
     },
+    "downstreamBusinessImpact": "Possible assembly line stoppage at Renton; estimated $8.8M daily cost exposure due to wing structural delays.",
+    "mitigationObjective": "Activate alternate logistics corridors and standby shift rosters to minimize factory-floor downtime.",
     "playbook": {
       "mitigationPlan": {
         "steps": [
-          "Drain and flush chemical coating bath #2. Replace gasket seals on all chemical fluid lines.",
-          "Divert APU turbine blade coating runs to reserve chemical array #4.",
-          "Quarantine all turbine blades treated during the gasket leak timeline for ultrasound structural checks."
+          "Isolate compromised network switches to quarantine ransomware vectors.",
+          "Deploy backup offline telemetry capture setups on primary manufacturing lines.",
+          "Activate pre-audited disaster recovery servers and initialize database restoration."
         ],
-        "timeline": "48 hours for bath cleaning, seal replacement, and chemical validation"
+        "timeline": "24 to 72 hours for server recovery and network quarantine"
       },
       "validationPlan": {
         "steps": [
-          "Perform chemical composition testing on the replenished coating bath to verify specification compliance.",
-          "Inspect replacement gasket seals for pressure retention and leak-free operation during production runs.",
-          "Conduct ultrasound and coating integrity checks on quarantined turbine blades before release to manufacturing."
+          "Execute complete antivirus and vulnerability scans across all reconnected hosts.",
+          "Verify data logs are back to operational synchronization standards."
         ],
-        "timeline": "24 to 48 hours for chemical certification, leak testing, and blade inspection sign-off"
+        "timeline": "12 hours of network safety logging before production restart"
       }
     },
+    "ingestedAt": 1780413669716,
     "sources": [
       {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
+        "title": "Rolls-Royce best\u00e4tigt Gespr\u00e4che mit Boeing \u00fcber NMA/797-Triebwerke",
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPLUU3b19XbUNPYUFVUDNkN1pidFd0ZjZiZm9qOGFXTjNhRDlpRzRQMmNtdzU2d3ZDZFV0R2h3WWlrd3BMaTNYY1k3SHNLLXFIVWl0cmgta3RXWFlEZWZITHpIMzJROGdaUDJpVGxVMDdoMzYyb2hTUkI3dGR5SG5IaWx2S0Z3VkUwOE5HOHBtVzhnMmZhMmVVamh5YWdnSFE2ZS02WFNSaEVVTlN1S1lQTW82VQ?oc=5",
+        "summary": "Rolls-Royce best\u00e4tigt Gespr\u00e4che mit Boeing \u00fcber NMA/797-Triebwerke\u00a0\u00a0Aeroflap"
       },
       {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
-      },
-      {
-        "title": "TODO",
-        "url": "TODO",
-        "summary": "TODO"
+        "title": "Rolls-Royce hit by further setback to fixing Boeing 787 engines",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPUk5oZmFKZUE4TDdoMndQQkhIWU1aenNBRXhZNG9RYkI2NC1kTlpyTkdEYlFncXZMUV9xdzQ3OXk5THNaaVZPSnVudWlQRmM2c2FNU2Rpa0szSlR1WlRESWJkQUphdVdQM3B3UjE4M3JnWEVkWTN1bEotZDZ6bDI1eWx6UWF3Q05KYjR3eDgwTU9MamN3N0pKT3dad1pPQm4wUWJxRWFWdDNURlh1WTluUzhGTW03SHM5Snc?oc=5",
+        "summary": "Rolls-Royce hit by further setback to fixing Boeing 787 engines\u00a0\u00a0Reuters"
       }
     ]
   }

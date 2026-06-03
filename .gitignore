@@ -27,6 +27,9 @@ frontend/lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+*.log
 
 #Depreciated
 runs/
+venv/
+
