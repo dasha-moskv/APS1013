@@ -214,14 +214,9 @@ To ensure the system is completely ready for enterprise backend API integrations
     ```bash
     pip install -r requirements.txt
     ```
-4. Configure environment variables (create a `.env` file):
-    ```env
-    OPENAI_API_KEY=your_openai_api_key_here
-    NEWS_API_KEY=your_newsapi_key_here
-    ```
-5. Run the command-line agent:
+4. Run the command-line agent:
     ```bash
-    python main.py
+    uvicorn main:app --host 127.0.0.1 --port 8000
     ```
 
 ### 🛰️ Background Scraper Daemon
