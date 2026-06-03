@@ -1,5 +1,87 @@
 [
   {
+    "id": "SUP-293Z",
+    "facility": "Nagoya Wing Systems",
+    "location": "Nagoya, JP",
+    "disruption": "[Inc #293] Carbon fiber autoclave pressure regulator seal rupture (temperature delta of -25% detected)",
+    "severity": 7.1,
+    "likelihood": 81,
+    "timeToHit": 12,
+    "tier": 2,
+    "fullDescription": "[Incident #293] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5.",
+    "sourceData": "Autoclave Telemetry Webhook: TAC-AUTO-819-PRESS",
+    "mapPosition": {
+      "coordinates": [
+        -123.03809612534488,
+        46.35563646081337
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Main Line Assembly",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Shift wing spar composite layup loads to secondary prepreg lines in Nagoya.",
+          "Authorize priority technician dispatch to replace autoclave hydraulic seals.",
+          "Accelerate custom clearance procedures for reserve prepreg shipments."
+        ],
+        "timeline": "5 to 7 days for seal replacement and autoclave recalibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Audit pressure profile logs over three consecutive test cycles.",
+          "Perform ultrasonic void-detection tests on the first post-repair layups."
+        ],
+        "timeline": "2 days of composite curing void inspections"
+      }
+    },
+    "downstreamBusinessImpact": "Composite wing structure assembly halts at final assembly line.",
+    "mitigationObjective": "Maintain fuselage/wing structural prepreg flow by activating Nagoya production bridges.",
+    "ingestedAt": 1780493332664
+  },
+  {
+    "id": "SUP-816B",
+    "facility": "Spirit AeroSystems",
+    "location": "Wichita, KS, US",
+    "disruption": "[Inc #816] Automated fuselage riveting head mechanical synchronization failure (micro-indicator Ref #8414 tripped)",
+    "severity": 8.8,
+    "likelihood": 88,
+    "timeToHit": 7,
+    "tier": 1,
+    "fullDescription": "[Incident #816] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
+    "sourceData": "Robotic PLC Diagnostics Feed: WIC-ROB-RIVET-01",
+    "mapPosition": {
+      "coordinates": [
+        -97.2798,
+        37.6436
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselages",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy specialized manual riveting crews to override robotic assembly line.",
+          "Secure replacement end-effector assembly from manufacturing backup center.",
+          "Adjust downstream Renton assembly intake timeline to match delayed shell delivery."
+        ],
+        "timeline": "3 business days for robotic head swap and calibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform non-destructive x-ray testing on stringer rivets in the affected zone.",
+          "Verify fastener squeeze force telemetry via manual torque audits."
+        ],
+        "timeline": "36 hours of robotic safety and squeeze verification"
+      }
+    },
+    "downstreamBusinessImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
+    "mitigationObjective": "Bypass robotic end-effector failure using manual riveting overlays and safety audits.",
+    "ingestedAt": 1780493325648
+  },
+  {
     "id": "SUP-A606B",
     "facility": "Boeing Renton Final Assembly",
     "location": "Renton, WA, US",

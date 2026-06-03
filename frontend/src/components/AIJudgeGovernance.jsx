@@ -4,7 +4,8 @@ import {
   BarChart3, 
   Activity, 
   Star,
-  UserCheck
+  UserCheck,
+  Info
 } from "lucide-react";
 
 export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppedSignals }) {
@@ -42,12 +43,30 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <BarChart3 className="h-4 w-4 text-[#86BC25]" />
-              AI Judge Noise Filter Performance
-            </h2>
+            <div className="flex items-center justify-between mb-3 select-none">
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <BarChart3 className="h-4 w-4 text-[#86BC25]" />
+                AI Judge Noise Filter Performance
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Noise Filter</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Visualizes the accuracy metrics of the AI Judge classifier model, evaluating precision rates and noise rejection logs.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="grid grid-cols-2 gap-3 select-none font-mono">
               <div className={`border p-3 flex flex-col gap-1 ${isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"}`}>
@@ -82,12 +101,30 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <UserCheck className="h-4 w-4 text-[#86BC25]" />
-              Human Analyst Reviews Log
-            </h2>
+            <div className="flex items-center justify-between mb-3 select-none">
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <UserCheck className="h-4 w-4 text-[#86BC25]" />
+                Human Analyst Reviews Log
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Analyst Reviews</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Shows historical overrides and validation feedback submitted by risk operations analysts to fine-tune signal classification thresholds.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {feedbackHistory.length === 0 ? (
               <div className={`border border-dashed p-6 text-center select-none ${
@@ -155,12 +192,30 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <Activity className="h-4 w-4 text-[#86BC25]" />
-              AI Judge Validation Audit Trail (Dropped Noise Feed)
-            </h2>
+            <div className="flex items-center justify-between mb-3 select-none">
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Activity className="h-4 w-4 text-[#86BC25]" />
+                AI Judge Validation Audit Trail (Dropped Noise Feed)
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Validation Logs</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Chronological audit trails of low-priority or redundant intelligence alerts automatically filtered out by the AI Judge layer.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="flex flex-col gap-2 font-mono text-[9px] select-none max-h-[460px] overflow-y-auto pr-1">
               {activeDroppedSignals.map(s => (

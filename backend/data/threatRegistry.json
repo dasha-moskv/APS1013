@@ -1,5 +1,293 @@
 [
   {
+    "id": "SUP-293Z",
+    "facility": "Nagoya Wing Systems",
+    "location": "Nagoya, JP",
+    "disruption": "[Inc #293] Carbon fiber autoclave pressure regulator seal rupture (temperature delta of -25% detected)",
+    "severity": 7.1,
+    "likelihood": 81,
+    "timeToHit": 12,
+    "tier": 2,
+    "fullDescription": "[Incident #293] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5.",
+    "sourceData": "Autoclave Telemetry Webhook: TAC-AUTO-819-PRESS",
+    "mapPosition": {
+      "coordinates": [
+        -123.03809612534488,
+        46.35563646081337
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Main Line Assembly",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Shift wing spar composite layup loads to secondary prepreg lines in Nagoya.",
+          "Authorize priority technician dispatch to replace autoclave hydraulic seals.",
+          "Accelerate custom clearance procedures for reserve prepreg shipments."
+        ],
+        "timeline": "5 to 7 days for seal replacement and autoclave recalibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Audit pressure profile logs over three consecutive test cycles.",
+          "Perform ultrasonic void-detection tests on the first post-repair layups."
+        ],
+        "timeline": "2 days of composite curing void inspections"
+      }
+    },
+    "downstreamBusinessImpact": "Composite wing structure assembly halts at final assembly line.",
+    "mitigationObjective": "Maintain fuselage/wing structural prepreg flow by activating Nagoya production bridges.",
+    "ingestedAt": 1780493332664,
+    "sources": [
+      {
+        "title": "[Inc #293] Carbon fiber autoclave pressure regulator seal rupture (temperature delta of -25% detected)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-293Z",
+        "summary": "[Incident #293] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      }
+    ]
+  },
+  {
+    "id": "SUP-816B",
+    "facility": "Spirit AeroSystems",
+    "location": "Wichita, KS, US",
+    "disruption": "[Inc #816] Automated fuselage riveting head mechanical synchronization failure (micro-indicator Ref #8414 tripped)",
+    "severity": 8.8,
+    "likelihood": 88,
+    "timeToHit": 7,
+    "tier": 1,
+    "fullDescription": "[Incident #816] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
+    "sourceData": "Robotic PLC Diagnostics Feed: WIC-ROB-RIVET-01",
+    "mapPosition": {
+      "coordinates": [
+        -97.2798,
+        37.6436
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselages",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy specialized manual riveting crews to override robotic assembly line.",
+          "Secure replacement end-effector assembly from manufacturing backup center.",
+          "Adjust downstream Renton assembly intake timeline to match delayed shell delivery."
+        ],
+        "timeline": "3 business days for robotic head swap and calibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform non-destructive x-ray testing on stringer rivets in the affected zone.",
+          "Verify fastener squeeze force telemetry via manual torque audits."
+        ],
+        "timeline": "36 hours of robotic safety and squeeze verification"
+      }
+    },
+    "downstreamBusinessImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
+    "mitigationObjective": "Bypass robotic end-effector failure using manual riveting overlays and safety audits.",
+    "ingestedAt": 1780493325648,
+    "sources": [
+      {
+        "title": "[Inc #816] Automated fuselage riveting head mechanical synchronization failure (micro-indicator Ref #8414 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-816B",
+        "summary": "[Incident #816] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      }
+    ]
+  },
+  {
+    "id": "SUP-994S",
+    "facility": "Howmet Engine Products",
+    "location": "Cleveland, OH, US",
+    "disruption": "[Inc #994] Single-crystal turbine blade mold vacuum pressure loss (micro-indicator Ref #1063 tripped)",
+    "severity": 8.1,
+    "likelihood": 87,
+    "timeToHit": 12,
+    "tier": 2,
+    "fullDescription": "[Incident #994] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5.",
+    "sourceData": "Vacuum SCADA Feed: CLEV-VAC-CH4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -81.6944,
+        41.4993
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-2 / Castings",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer molds and priority dies to backup casting furnace #5.",
+          "Deploy maintenance crews to inspect and replace vacuum flange seals.",
+          "Re-route high-temperature superalloy precursor supplies to operational bays."
+        ],
+        "timeline": "5 business days for vacuum flange replacement and safety test"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs during trial melt cycles to verify insulation.",
+          "Conduct non-destructive micro-focus CT scans on replacement blade castings."
+        ],
+        "timeline": "2 business days for vacuum certification and quality sign-off"
+      }
+    },
+    "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+    "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals.",
+    "ingestedAt": 1780493313518,
+    "sources": [
+      {
+        "title": "[Inc #994] Single-crystal turbine blade mold vacuum pressure loss (micro-indicator Ref #1063 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-994S",
+        "summary": "[Incident #994] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      }
+    ]
+  },
+  {
+    "id": "SUP-920T",
+    "facility": "Tokyo Precision Parts",
+    "location": "Tokyo, JP",
+    "disruption": "[Inc #920] Precision CNC micro-honing machine spindle calibration drift (micro-indicator Ref #2957 tripped)",
+    "severity": 6.7,
+    "likelihood": 81,
+    "timeToHit": 13,
+    "tier": 2,
+    "fullDescription": "[Incident #920] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol.",
+    "sourceData": "CNC Metrology Alarm: EA-CNC-HON-04",
+    "mapPosition": {
+      "coordinates": [
+        -80.16881803112527,
+        44.272050821831314
+      ],
+      "color": "#FFB300",
+      "role": "Tier-2 / Actuation",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy OEM laser interferometer calibration specialist team to reset honing spindle.",
+          "Pull pre-inspected servovalve sleeve safety stock from European logistics hub.",
+          "Engage parallel manufacturing lines #1 and #2 to run overtime shifts."
+        ],
+        "timeline": "4 days for laser realignment and calibration recertification"
+      },
+      "validationPlan": {
+        "steps": [
+          "Conduct air-gauge dimensional checks on first 50 sleeve samples post-repair.",
+          "Verify functional flow and pressure drop specs on automated hydraulic test benches."
+        ],
+        "timeline": "2 days of rigorous dimensional micro-auditing"
+      }
+    },
+    "downstreamBusinessImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
+    "mitigationObjective": "Prevent critical actuator delivery slippage by clearing dimensional micro-anomalies.",
+    "ingestedAt": 1780493312955,
+    "sources": [
+      {
+        "title": "[Inc #920] Precision CNC micro-honing machine spindle calibration drift (micro-indicator Ref #2957 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-920T",
+        "summary": "[Incident #920] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      }
+    ]
+  },
+  {
+    "id": "SUP-110Y",
+    "facility": "Penang Avionics Corp",
+    "location": "Penang, MY",
+    "disruption": "[Inc #110] Single-crystal turbine blade mold vacuum pressure loss due to section 2 calibration drift",
+    "severity": 8.1,
+    "likelihood": 94,
+    "timeToHit": 15,
+    "tier": 2,
+    "fullDescription": "[Incident #110] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol.",
+    "sourceData": "Vacuum SCADA Feed: CLEV-VAC-CH4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -79.81132375011249,
+        42.51946448755273
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Avionics",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer molds and priority dies to backup casting furnace #5.",
+          "Deploy maintenance crews to inspect and replace vacuum flange seals.",
+          "Re-route high-temperature superalloy precursor supplies to operational bays."
+        ],
+        "timeline": "5 business days for vacuum flange replacement and safety test"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs during trial melt cycles to verify insulation.",
+          "Conduct non-destructive micro-focus CT scans on replacement blade castings."
+        ],
+        "timeline": "2 business days for vacuum certification and quality sign-off"
+      }
+    },
+    "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+    "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals.",
+    "ingestedAt": 1780493312302,
+    "sources": [
+      {
+        "title": "[Inc #110] Single-crystal turbine blade mold vacuum pressure loss due to section 2 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-110Y",
+        "summary": "[Incident #110] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      }
+    ]
+  },
+  {
+    "id": "SUP-878T",
+    "facility": "GKN Aerospace Structures",
+    "location": "Filton, UK",
+    "disruption": "[Inc #878] Titanium laser-deposition additive nozzle blockage during casing print (Shift-A telemetry anomaly)",
+    "severity": 7.2,
+    "likelihood": 81,
+    "timeToHit": 15,
+    "tier": 1,
+    "fullDescription": "[Incident #878] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load.",
+    "sourceData": "Additive Sensor Telemetry: FILT-DED-NOZ-CRIT",
+    "mapPosition": {
+      "coordinates": [
+        -2.5936,
+        51.5222
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Engine Structures",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Quarantine the incomplete casing print and perform microstructure heat scans.",
+          "Replace laser-deposition nozzle assembly and clean titanium powder conduits.",
+          "Activate conventional forging production lines in Sweden as secondary routing."
+        ],
+        "timeline": "6 days for 3D printer print head rebuilding and powder flush"
+      },
+      "validationPlan": {
+        "steps": [
+          "Conduct automated CT scans on post-repair prints to inspect internal cavities.",
+          "Verify material grain structure and tensile properties on co-printed test bars."
+        ],
+        "timeline": "3 days of advanced metallurgy testing"
+      }
+    },
+    "downstreamBusinessImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
+    "mitigationObjective": "Bypass 3D printing nozzle clogs by activating Sweden's redundant forging tooling channels.",
+    "ingestedAt": 1780493311350,
+    "sources": [
+      {
+        "title": "[Inc #878] Titanium laser-deposition additive nozzle blockage during casing print (Shift-A telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-878T",
+        "summary": "[Incident #878] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      }
+    ]
+  },
+  {
     "id": "SUP-135B",
     "facility": "Honeywell Aerospace Systems",
     "location": "Phoenix, AZ, US",

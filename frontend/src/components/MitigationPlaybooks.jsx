@@ -339,9 +339,27 @@ export default function MitigationPlaybooks({
               <Globe className="h-4 w-4 text-slate-400" />
               N-Tier Structural Dependency Explorer
             </h2>
-            <span className="text-[8px] font-mono border border-slate-700/60 px-2 py-0.5 text-slate-500">
-              GRAPH COGNITIVE QUERY
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[8px] font-mono border border-slate-700/60 px-2 py-0.5 text-slate-500">
+                GRAPH COGNITIVE QUERY
+              </span>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Dependency Explorer</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Maps the structural supply chain network layers (Tier 0 to Tier 3) and blast radius dependencies upstream of the selected Boeing assembly node.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-12 gap-3.5">
@@ -505,11 +523,29 @@ export default function MitigationPlaybooks({
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <label className={`block text-[10px] font-mono font-bold uppercase tracking-wider mb-2 ${
-              isDark ? "text-slate-400" : "text-slate-600"
-            }`}>
-              Select Disruption Card
-            </label>
+            <div className="flex items-center justify-between mb-2 select-none">
+              <label className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+                isDark ? "text-slate-400" : "text-slate-600"
+              }`}>
+                Select Disruption Card
+              </label>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Disruption Selector</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Select an active disruption alert card from the registry to inspect dependencies, financial impacts, and execute regulatory mitigation playbooks.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="relative">
               <select
                 value={selectedThreatId}
@@ -532,12 +568,30 @@ export default function MitigationPlaybooks({
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <DollarSign className="h-4 w-4 text-[#86BC25]" />
-                Quantified Financial Exposure Dashboard
-              </h2>
+              <div className="flex items-center justify-between mb-3.5 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <DollarSign className="h-4 w-4 text-[#86BC25]" />
+                  Quantified Financial Exposure Dashboard
+                </h2>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Financial Exposure</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Calculates the real-time financial impact of the selected disruption, modeling daily assembly stop line costs and contractual SLA penalty risks.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex flex-col gap-3 font-mono text-xs select-none">
                 {/* Impacted Program Indicator */}
@@ -592,12 +646,30 @@ export default function MitigationPlaybooks({
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <Clock className="h-4 w-4 text-[#86BC25]" />
-                Vulnerability Timeline Analysis
-              </h2>
+              <div className="flex items-center justify-between mb-3.5 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <Clock className="h-4 w-4 text-[#86BC25]" />
+                  Vulnerability Timeline Analysis
+                </h2>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Timeline Analysis</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Compares the safety buffer inventory (Time-to-Survive) against the unmitigated and mitigated recovery windows to highlight net gap coverage.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex flex-col gap-3 font-mono text-xs select-none">
                 {/* Horizontal Timeline Bar */}
@@ -673,11 +745,29 @@ export default function MitigationPlaybooks({
                   <Award className="h-4 w-4" />
                   FAA Safety & Regulatory compliance
                 </h2>
-                {isApproved && (
-                  <span className="text-[8px] border border-[#86BC25] bg-[#86BC25]/10 px-2 py-0.5 text-[#86BC25] font-mono font-bold uppercase animate-pulse">
-                    PLAYBOOK APPROVED
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {isApproved && (
+                    <span className="text-[8px] border border-[#86BC25] bg-[#86BC25]/10 px-2 py-0.5 text-[#86BC25] font-mono font-bold uppercase animate-pulse">
+                      PLAYBOOK APPROVED
+                    </span>
+                  )}
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                    <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark 
+                        ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                        : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                        <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">FAA Compliance</span>
+                      </div>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        Enforces aviation regulatory sign-offs (ASL list alignment, Type Certificate verification) required before dispatching recovery purchase orders.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="flex flex-col gap-3">
@@ -781,9 +871,27 @@ export default function MitigationPlaybooks({
                   <BookOpen className="h-4 w-4 text-[#86BC25]" />
                   Multi-Scenario Mitigation plays Switcher
                 </h2>
-                <span className="text-[8px] font-mono border border-slate-700/60 px-2 py-0.5 text-slate-500">
-                  MCKINSEY RISK MATRIX
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[8px] font-mono border border-slate-700/60 px-2 py-0.5 text-slate-500">
+                    MCKINSEY RISK MATRIX
+                  </span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                    <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark 
+                        ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                        : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                        <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Plays Switcher</span>
+                      </div>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        Select and simulate different contingency plans (e.g. premium logistics, supplier switching) to review workaround costs and timeline reductions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Scenario selector tabs */}
@@ -855,12 +963,30 @@ export default function MitigationPlaybooks({
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-2.5 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <Layers className="h-4 w-4 text-[#86BC25]" />
-                Deep-Tier BOM Hierarchy
-              </h2>
+              <div className="flex items-center justify-between mb-2.5 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <Layers className="h-4 w-4 text-[#86BC25]" />
+                  Deep-Tier BOM Hierarchy
+                </h2>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">BOM Hierarchy</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Visualizes the deep-tier Bill of Materials (BOM) hierarchy, detailing which parts and materials are starved or delayed upstream of the Boeing assembly node.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div className="flex flex-col gap-1.5 font-mono text-[9px] select-none">
                 {bom.map((b, i) => (
                   <div key={i} className={`border p-2 flex items-center justify-between ${
@@ -893,12 +1019,30 @@ export default function MitigationPlaybooks({
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <Mail className="h-4 w-4 text-[#86BC25]" />
-                Closed-Loop Automated Communication Portal
-              </h2>
+              <div className="flex items-center justify-between mb-3.5 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <Mail className="h-4 w-4 text-[#86BC25]" />
+                  Closed-Loop Automated Communication Portal
+                </h2>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Communication Portal</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Facilitates rapid, secure outreach via pre-formatted templates to supplier contacts to confirm capacity and coordinate expedited shipments.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex flex-col gap-2.5 font-mono text-[9px] select-none">
                 <div className={`border p-3 flex flex-col gap-2 ${
@@ -974,12 +1118,30 @@ export default function MitigationPlaybooks({
             <div className={`border p-4 rounded-none transition-colors duration-300 ${
               isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
             }`}>
-              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3.5 flex items-center gap-1.5 ${
-                isDark ? "text-slate-300" : "text-slate-700"
-              }`}>
-                <TerminalIcon className="h-4 w-4 text-[#86BC25]" />
-                ERP Webhook / MES Dispatch Console
-              </h2>
+              <div className="flex items-center justify-between mb-3.5 select-none">
+                <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}>
+                  <TerminalIcon className="h-4 w-4 text-[#86BC25]" />
+                  ERP Webhook / MES Dispatch Console
+                </h2>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                  <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">ERP Dispatch</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Triggers real-time transactional updates directly to enterprise systems (SAP/ECC) to update safety buffers and issue backup purchase orders.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-12 gap-3">
                 {/* Left: JSON Code Block Payload (7 columns) */}

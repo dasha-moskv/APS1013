@@ -1,6 +1,25 @@
 import * as Icons from "lucide-react";
 
-
+const KPI_DESCRIPTIONS = {
+  "monitored-nodes": {
+    title: "Total Revenue Exposure",
+    desc: "The cumulative financial value at risk across all network nodes affected by active threats or disruptions.",
+    color: "bg-[#B91C1C]",
+    textColor: "text-[#B91C1C]"
+  },
+  "active-risks": {
+    title: "Disrupted Nodes",
+    desc: "The count of specific supply chain facilities or logistics hubs currently experiencing active disruptions, categorized by severity.",
+    color: "bg-slate-500",
+    textColor: "text-slate-400"
+  },
+  "network-health": {
+    title: "Network SLA Stability",
+    desc: "The percentage of supply chain nodes operating within agreed Service Level Agreement (SLA) parameters over the current telemetry window.",
+    color: "bg-[#86BC25]",
+    textColor: "text-[#86BC25]"
+  }
+};
 
 export default function KpiCards({ kpiData = [], loading = true, isDark }) {
   const bg = isDark ? "bg-[#0F1520] border-[#1E293B]" : "bg-white border-slate-200";
@@ -59,12 +78,36 @@ export default function KpiCards({ kpiData = [], loading = true, isDark }) {
           valueColor = "text-[#86BC25]";
         }
 
+        const descInfo = KPI_DESCRIPTIONS[kpi.id] || {
+          title: kpi.label,
+          desc: "Operational telemetry metric.",
+          color: "bg-slate-400",
+          textColor: "text-slate-400"
+        };
+
+        const tooltipPosition = kpi.id === "monitored-nodes" ? "top-full mt-1" : "bottom-full mb-1";
+
         return (
           <div
             key={kpi.id}
             id={kpi.id}
-            className={`flex flex-col justify-between p-4 rounded-none shadow-none ${borderColor} transition-colors duration-300 ${cardBg}`}
+            className={`group relative flex flex-col justify-between p-4 rounded-none shadow-none ${borderColor} transition-colors duration-300 ${cardBg}`}
           >
+            {/* Tooltip Overlay */}
+            <div className={`pointer-events-none absolute ${tooltipPosition} left-0 z-[100] w-72 max-w-[calc(100vw-32px)] p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+              isDark 
+                ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+            }`}>
+              <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                <span className={`h-2 w-2 rounded-none ${descInfo.color}`} />
+                <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${descInfo.textColor}`}>{descInfo.title}</span>
+              </div>
+              <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                {descInfo.desc}
+              </p>
+            </div>
+
             <div className="flex items-center justify-between">
               <span className={`text-[9px] font-bold uppercase tracking-wider font-sans ${labelText}`}>
                 {kpi.label}
@@ -87,3 +130,4 @@ export default function KpiCards({ kpiData = [], loading = true, isDark }) {
     </div>
   );
 }
+
