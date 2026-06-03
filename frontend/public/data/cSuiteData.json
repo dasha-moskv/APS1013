@@ -3,17 +3,34 @@
     "baseDailyExposure": 14500000,
     "baseTimelineDays": 10,
     "baseWorkaroundCost": 450000,
-    "slaRisk": "CRITICAL: Contractual liquidated damages trigger at Day 12 ($1.5M per aircraft daily penalty).",
-    "evidenceBase": "Everett structural logs indicate a tight 4-day buffer on titanium structural spars before line shutdown.",
+    "slaRisk": "CRITICAL: Contractual liquidated damages trigger at Day 12 ($1.5M per aircraft daily penalty) on the B777/B767 widebody line.",
+    "evidenceBase": "Everett structural logs indicate a tight 4-day buffer on titanium structural spars before a widebody line shutdown.",
     "options": [
-      { "id": "air", "label": "Air Charter Expedite", "cost": 650000, "daysSaved": 4, "desc": "Bypass standard freight rails; charter 3x Antonov An-124 flights." },
+      { "id": "air", "label": "Air Charter Expedite", "cost": 650000, "daysSaved": 4, "desc": "Bypass standard freight rails; charter 3x Antonov An-124 flights to Paine Field." },
       { "id": "permit", "label": "Fast-Track DOT Permits", "cost": 75000, "daysSaved": 2, "desc": "Engage Washington DOT for expedited heavy-haul corridor permissions." },
-      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": 280000, "daysSaved": 2, "desc": "Authorize overtime shifts in structural integration section." }
+      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": 280000, "daysSaved": 2, "desc": "Authorize overtime shifts in the structural integration section." }
     ],
     "strategicPhases": {
-      "immediate": "Reallocate titanium structural spars from reserve logistics stocks at the Wichita depot (Wichita reserves are currently at 84% capacity).",
-      "tactical": "Deploy a secondary material-handling shift to expedite composite unboxing and pre-assembly inspections, verifying micro-fracture thresholds.",
-      "structural": "Shift 777 fuselage wiring and insulation tracks to parallel assembly bays to absorb line idle time and maintain assembly cadence."
+      "respond": {
+        "objective": "Contain the widebody spar shortfall and hold Everett line cadence.",
+        "actions": [
+          { "lever": "Inventory", "action": "Release reserve titanium structural spars from the Wichita depot (currently 84% capacity) to the Everett widebody line and confirm buffer extension.", "owner": "Everett Materials Lead", "trigger": "Spar buffer < 4 days of coverage", "timeline": "0–24h", "cost": 0, "daysSaved": 2, "kpi": "Days-of-coverage restored to >= 6" },
+          { "lever": "Comms", "action": "Issue a stop-risk advisory to the Everett widebody value stream and brief CFO/COO on the $14.5M/day exposure and Day-12 liquidated-damages trigger.", "owner": "SCRM Control Tower", "trigger": "Net buffer gap < 0 days", "timeline": "0–12h", "cost": 0, "daysSaved": 0, "kpi": "Executive advisory acknowledged < 2h" }
+        ]
+      },
+      "recover": {
+        "objective": "Restore the inbound spar pipeline via premium logistics and pre-approved alternate machining.",
+        "actions": [
+          { "lever": "Logistics", "action": "Charter 3x Antonov An-124 heavy-lift flights to move composite wing skins and titanium spars directly to Paine Field (PAE), bypassing congested ocean lanes.", "owner": "Global Logistics Lead", "trigger": "Sea-freight ETA > Time-to-Survive", "timeline": "48h–1wk", "cost": 650000, "daysSaved": 4, "kpi": "TTR cut >= 4 days; PAE runway slots confirmed" },
+          { "lever": "Alternate", "action": "Shift structural spar machining to the Portland secondary facility (active on ASL) and open FAI dossier FAI-EVT-777-COMP — no Type-Certificate deviation.", "owner": "Supplier Quality & Procurement", "trigger": "Primary recovery slips past Day 8", "timeline": "5–10 days", "cost": 280000, "daysSaved": 3, "kpi": "Portland FAI cleared; ASL compliance verified" }
+        ]
+      },
+      "thrive": {
+        "objective": "Lock in a permanent widebody spar resiliency gain.",
+        "actions": [
+          { "lever": "Inventory", "action": "Re-baseline widebody spar safety-stock targets and codify a dual-source policy (primary + Portland) in the SAP material master.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "30–60 days", "cost": 0, "daysSaved": 0, "kpi": "Dual-source share >= 30%; buffer rule updated" }
+        ]
+      }
     }
   },
   "SUP-001A": {
@@ -21,64 +38,166 @@
     "baseTimelineDays": 15,
     "baseWorkaroundCost": 320000,
     "slaRisk": "HIGH: Renton assembly line halts on Day 10. Direct delivery delay penalties of $850K per day active.",
-    "evidenceBase": "Midwest rail union negotiations are locked; cooling-off period expires in 72 hours with no resolution in sight.",
+    "evidenceBase": "Midwest rail union negotiations are locked; the cooling-off period expires in 72 hours with no resolution in sight.",
     "options": [
       { "id": "road", "label": "Over-the-road Flatbeds", "cost": 420000, "daysSaved": 6, "desc": "Initiate oversized flatbed road transport with police escorts." },
       { "id": "permits", "label": "KDOT Fast-Track Permits", "cost": 50000, "daysSaved": 3, "desc": "Pre-file permits in Kansas, Missouri, Illinois, and Washington." },
       { "id": "depot", "label": "Pre-Stage at Renton Depot", "cost": 120000, "daysSaved": 2, "desc": "Lease temporary logistics space near Renton receiving bays." }
     ],
     "strategicPhases": {
-      "immediate": "Initiate oversize flatbed road transport workarounds under Priority-A emergency aerospace clearance (utilizing contract carriers).",
-      "tactical": "Contact the Kansas Department of Transportation (KDOT) to fast-track oversized road freight permits for structural components.",
-      "structural": "Coordinate split-arrival scheduling with Renton receiving bays to stay within local storage space and gantry crane constraints."
+      "respond": {
+        "objective": "Confirm the rail exposure and protect the Renton fuselage buffer.",
+        "actions": [
+          { "lever": "Comms", "action": "Open a 4-hour RFC to Spirit AeroSystems (Wichita) global sourcing to confirm heavy-flatbed loading availability and fuselage shell readiness.", "owner": "SCRM Duty Officer", "trigger": "Rail cooling-off period expires < 72h", "timeline": "0–4h", "cost": 0, "daysSaved": 0, "kpi": "Spirit confirmation returned < 4h" },
+          { "lever": "Inventory", "action": "Validate the Renton fuselage shell buffer (8-day survival window) and prioritize sequencing of in-transit shells already past the strike zone.", "owner": "Renton Materials Lead", "trigger": "Shell buffer < 10 days", "timeline": "0–24h", "cost": 0, "daysSaved": 1, "kpi": "Buffer days-of-coverage validated" }
+        ]
+      },
+      "recover": {
+        "objective": "Move fuselage shells by road and stand up a contingency sub-assembly source.",
+        "actions": [
+          { "lever": "Logistics", "action": "Mobilize 6 oversized heavy-haul road convoys (Wichita to Renton) with police escorts, bypassing the struck rail yards entirely.", "owner": "Regional Logistics Lead", "trigger": "Rail stoppage confirmed active", "timeline": "48h–2wk", "cost": 420000, "daysSaved": 6, "kpi": "TTR cut >= 6 days; shells delivered on split schedule" },
+          { "lever": "Alternate", "action": "Engage Spirit's Tulsa facility to pre-kit secondary fuselage sub-assemblies as a contingency, queuing FAI where work transfers between sites.", "owner": "Supplier Quality & Procurement", "trigger": "Primary Wichita output slips past Day 8", "timeline": "5–10 days", "cost": 120000, "daysSaved": 2, "kpi": "Tulsa contingency line validated; FAI cleared" }
+        ]
+      },
+      "thrive": {
+        "objective": "Make Renton fuselage flow resilient to single-mode rail risk.",
+        "actions": [
+          { "lever": "Inventory", "action": "Establish a Renton-proximate fuselage buffer depot and codify a multimodal rail/road contingency routing policy in the ERP.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "30–90 days", "cost": 0, "daysSaved": 0, "kpi": "Buffer depot live; multimodal routing policy approved" }
+        ]
+      }
     }
   },
   "SUP-701X": {
-    "baseDailyExposure": 32000000,
-    "baseTimelineDays": 3,
-    "baseWorkaroundCost": 1500000,
-    "slaRisk": "EXTREME: SLA breaches across 14 global OEMs. Direct delivery delays could trigger $5M/day contract penalties.",
-    "evidenceBase": "Lithography EUV sensors recorded a peak seismic acceleration of 0.12g. Automatic shutdown calibrated correctly; structural integrity verified.",
+    "baseDailyExposure": 21000000,
+    "baseTimelineDays": 8,
+    "baseWorkaroundCost": 900000,
+    "slaRisk": "SEVERE: GEnx engine shortfall threatens 787 Charleston deliveries; ~$2.1M/day deferred-revenue and engine-swap penalties accrue from Day 8.",
+    "evidenceBase": "Howmet single-crystal HPT blade castings scrapped after a vacuum-furnace fault; GEnx hot-section build paused with ~3-week casting recovery.",
     "options": [
-      { "id": "calib", "label": "EUV Auto-Calibration", "cost": 250000, "daysSaved": 1, "desc": "Deploy digital twins and automated calibration scripts developed with ASML." },
-      { "id": "divert", "label": "Divert Packaging to Fab 15", "cost": 800000, "daysSaved": 1, "desc": "Pre-allocate packaging and testing slots at Taichung (Fab 15) to save transit queue time." }
+      { "id": "howmet", "label": "Backup Casting Furnace (Howmet)", "cost": 300000, "daysSaved": 5, "desc": "Transfer HPT blade molds to Howmet backup furnace #5 and replace vacuum flange seals." },
+      { "id": "buffer", "label": "GEnx Engine Buffer Release", "cost": 150000, "daysSaved": 3, "desc": "Release pooled spare GEnx engines from the Charleston flight-line buffer." },
+      { "id": "airlift", "label": "Engine Airlift to Charleston", "cost": 450000, "daysSaved": 2, "desc": "Charter heavy freight to move finished engines from Ohio to Charleston." }
     ],
     "strategicPhases": {
-      "immediate": "Initiate safety recalibration protocols on extreme ultraviolet (EUV) lithography systems utilizing internal engineering squads.",
-      "tactical": "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand and wafer backlogs.",
-      "structural": "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems to prevent wafer contamination."
+      "respond": {
+        "objective": "Protect 787 final assembly from the GEnx hot-section pause.",
+        "actions": [
+          { "lever": "Inventory", "action": "Release pooled spare GEnx engines from the Charleston flight-line buffer to protect 787 final assembly cadence.", "owner": "Charleston Powerplant Lead", "trigger": "Engine buffer < 8 days", "timeline": "0–24h", "cost": 150000, "daysSaved": 3, "kpi": ">= 6 engines staged; line cadence held" },
+          { "lever": "Comms", "action": "Issue an RFC to the GE Aerospace program desk for a revised HPT blade casting recovery date and a GEnx engine delivery re-plan.", "owner": "SCRM Duty Officer", "trigger": "Hot-section build paused > 24h", "timeline": "0–48h", "cost": 0, "daysSaved": 0, "kpi": "GE recovery ETA confirmed < 24h" }
+        ]
+      },
+      "recover": {
+        "objective": "Recover blade castings via a pre-qualified furnace and compress engine transit.",
+        "actions": [
+          { "lever": "Alternate", "action": "Transfer single-crystal HPT blade molds to the pre-qualified Howmet backup furnace #5 and queue FAI for the alternate casting cell — no recipe deviation.", "owner": "Supplier Quality & Procurement", "trigger": "Primary furnace recovery > 2 weeks", "timeline": "5–14 days", "cost": 300000, "daysSaved": 5, "kpi": "Howmet castings pass CT/NDT; FAI cleared" },
+          { "lever": "Logistics", "action": "Airlift finished GEnx engines from the Ohio plant to Charleston via dedicated heavy freight to compress transit time.", "owner": "Regional Logistics Lead", "trigger": "Surface transit > Time-to-Survive", "timeline": "48h–1wk", "cost": 450000, "daysSaved": 2, "kpi": "TTR cut >= 2 days" }
+        ]
+      },
+      "thrive": {
+        "objective": "Harden engine hot-section supply against single-furnace risk.",
+        "actions": [
+          { "lever": "Inventory", "action": "Raise GEnx engine and HPT blade safety-stock targets and formalize a dual-furnace casting policy (PCC + Howmet) in the ERP.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "30–90 days", "cost": 0, "daysSaved": 0, "kpi": "Dual-furnace policy live; engine buffer target +20%" }
+        ]
+      }
     }
   },
-  "SUP-401A": {
-    "baseDailyExposure": 11000000,
-    "baseTimelineDays": 4,
-    "baseWorkaroundCost": 220000,
-    "slaRisk": "HIGH: Vaccine distribution commitments in 3 EU nations are at risk. Potential regulatory warning letter exposure if validation fails.",
-    "evidenceBase": "Emerson valve SCADA logs showed a pressure spike of 4.2 bar leading to the mechanical fatigue rupture.",
+  "SUP-302B": {
+    "baseDailyExposure": 9500000,
+    "baseTimelineDays": 20,
+    "baseWorkaroundCost": 380000,
+    "slaRisk": "ELEVATED: Titanium structural forging lead-times stretching; 737/787 spar and landing-gear builds at risk if sponge imports stay delayed past Day 20.",
+    "evidenceBase": "Titanium sponge import held at customs; PCC forging feedstock coverage ~18 days; VSMPO and domestic alternates hold qualified spot capacity.",
     "options": [
-      { "id": "oem", "label": "OEM Premium Support SLA", "cost": 180000, "daysSaved": 2, "desc": "Activate emergency 4-hour on-site OEM response contract with Emerson Belgium." },
-      { "id": "audit", "label": "Pre-Audit Sterility Loops", "cost": 60000, "daysSaved": 1, "desc": "Pre-run sterilization wash cycles and continuous air particulate audits." }
+      { "id": "vsmpo", "label": "Qualified Alternate Allocation", "cost": 260000, "daysSaved": 6, "desc": "Activate pre-qualified VSMPO / domestic sponge allocation under ASL." },
+      { "id": "customs", "label": "Customs Fast-Track", "cost": 40000, "daysSaved": 4, "desc": "Expedite import clearance via licensed broker and bonded warehouse." }
     ],
     "strategicPhases": {
-      "immediate": "Divert liquid bulk formulation queues to parallel autoclave lines #5 and #6 inside the Puurs facility.",
-      "tactical": "Dispatch critical service team from OEM partner (Emerson Controls) with custom replacement valves from their Brussels warehouse.",
-      "structural": "Perform double sterility check loops to comply with European Medicines Agency (EMA) and FDA sterile product regulations."
+      "respond": {
+        "objective": "Ring-fence titanium feedstock for flight-critical forgings.",
+        "actions": [
+          { "lever": "Inventory", "action": "Confirm PCC titanium sponge and forging feedstock coverage (~18 days) and ring-fence allocation for flight-critical spar and landing-gear forgings.", "owner": "Materials Lead", "trigger": "Feedstock coverage < 20 days", "timeline": "0–48h", "cost": 0, "daysSaved": 1, "kpi": "Flight-critical allocation ring-fenced" },
+          { "lever": "Comms", "action": "Notify procurement and the impacted 737/787 value streams of the forging lead-time risk and request demand re-prioritization.", "owner": "SCRM Duty Officer", "trigger": "Sponge import hold > 48h", "timeline": "0–48h", "cost": 0, "daysSaved": 0, "kpi": "Demand re-priority list issued" }
+        ]
+      },
+      "recover": {
+        "objective": "Open an alternate sponge source and clear the held shipment.",
+        "actions": [
+          { "lever": "Alternate", "action": "Activate the pre-qualified VSMPO / domestic sponge allocation under ASL and queue FAI for any new forging source.", "owner": "Supplier Quality & Procurement", "trigger": "Sponge import delay > 1 week", "timeline": "5–14 days", "cost": 260000, "daysSaved": 6, "kpi": "Alternate sponge flowing; FAI cleared" },
+          { "lever": "Logistics", "action": "Expedite customs clearance via a licensed broker and bonded warehouse to release the held sponge shipments.", "owner": "Trade & Logistics Lead", "trigger": "Customs hold confirmed", "timeline": "48h–1wk", "cost": 40000, "daysSaved": 4, "kpi": "Shipment released; demurrage avoided" }
+        ]
+      },
+      "thrive": {
+        "objective": "Reduce structural exposure to single-origin titanium.",
+        "actions": [
+          { "lever": "Inventory", "action": "Increase the titanium sponge strategic buffer and codify a dual-origin sourcing policy (domestic + allied) in the ERP.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "30–90 days", "cost": 0, "daysSaved": 0, "kpi": "Dual-origin policy live; sponge buffer +30 days" }
+        ]
+      }
     }
   },
-  "SUP-109B": {
-    "baseDailyExposure": 18500000,
-    "baseTimelineDays": 7,
-    "baseWorkaroundCost": 600000,
-    "slaRisk": "SEVERE: Delay ripples down to next-gen fab tools. $2.2M per module per day in delayed delivery penalties.",
-    "evidenceBase": "Schiphol cargo backlog has reached 840 metric tons of temperature-controlled pharmaceutical and precision cargo.",
+  "SUP-883T": {
+    "baseDailyExposure": 12000000,
+    "baseTimelineDays": 25,
+    "baseWorkaroundCost": 500000,
+    "slaRisk": "ELEVATED: Export controls on nickel superalloy precursors threaten engine hot-section parts; lead-time slip risks GEnx/LEAP build schedules beyond Day 25.",
+    "evidenceBase": "Export-license restriction on nickel/cobalt precursors; ATI melt-shop coverage ~22 days; Carpenter Technology holds qualified alternate heat lots.",
     "options": [
-      { "id": "air", "label": "Transatlantic Charter Option", "cost": 450000, "daysSaved": 3, "desc": "Bypass Schiphol backlog entirely by chartering dedicated CargoLux flight to Brussels." },
-      { "id": "courier", "label": "Expedited Dedicated Trucking", "cost": 85000, "daysSaved": 2, "desc": "Dispatch hot-shot courier vehicles directly to Schiphol tarmac buffer grids." }
+      { "id": "carpenter", "label": "Carpenter Alternate Heats", "cost": 340000, "daysSaved": 7, "desc": "Pull qualified superalloy heat lots from Carpenter Technology under ASL." },
+      { "id": "license", "label": "Export-License Expedite", "cost": 60000, "daysSaved": 3, "desc": "Engage trade-compliance counsel to expedite end-use licensing." }
     ],
     "strategicPhases": {
-      "immediate": "Deploy temperature-controlled custom courier trucks from ASML Veldhoven to expedite Schiphol tarmac collections.",
-      "tactical": "Reroute subsequent optics shipments through Brussels Airport (BRU) using dedicated priority air-charter allocations.",
-      "structural": "Revise cleanroom system-integration schedules, postponing EUV laser-chamber alignments to match optics arrivals."
+      "respond": {
+        "objective": "Secure superalloy billet for flight-critical engine forgings.",
+        "actions": [
+          { "lever": "Inventory", "action": "Ring-fence ATI nickel superalloy billet coverage (~22 days) for flight-critical turbine and disk forgings.", "owner": "Materials Lead", "trigger": "Billet coverage < 25 days", "timeline": "0–48h", "cost": 0, "daysSaved": 1, "kpi": "Critical billet allocation secured" },
+          { "lever": "Comms", "action": "Brief procurement, trade compliance, and the engine programs on the export-restriction exposure and convene a risk review.", "owner": "SCRM Duty Officer", "trigger": "Export restriction confirmed", "timeline": "0–48h", "cost": 0, "daysSaved": 0, "kpi": "Risk review convened < 24h" }
+        ]
+      },
+      "recover": {
+        "objective": "Qualify an alternate melt source and clear restricted precursors.",
+        "actions": [
+          { "lever": "Alternate", "action": "Activate qualified Carpenter Technology heat lots under ASL and queue FAI for the alternate melt source — no chemistry deviation.", "owner": "Supplier Quality & Procurement", "trigger": "ATI supply slips > 1 week", "timeline": "7–14 days", "cost": 340000, "daysSaved": 7, "kpi": "Carpenter heats accepted; FAI cleared" },
+          { "lever": "Logistics", "action": "Expedite end-use export licensing via trade-compliance counsel to release the restricted precursor shipments.", "owner": "Trade & Compliance Lead", "trigger": "License pending > 5 days", "timeline": "5–10 days", "cost": 60000, "daysSaved": 3, "kpi": "License granted; shipments cleared" }
+        ]
+      },
+      "thrive": {
+        "objective": "Build a durable superalloy reserve and dual-melt policy.",
+        "actions": [
+          { "lever": "Inventory", "action": "Establish a strategic superalloy reserve and a dual-melt-source policy (ATI + Carpenter), registered in the ERP.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "60–90 days", "cost": 0, "daysSaved": 0, "kpi": "Dual-melt policy live; superalloy reserve +30 days" }
+        ]
+      }
+    }
+  },
+  "SUP-447H": {
+    "baseDailyExposure": 7200000,
+    "baseTimelineDays": 12,
+    "baseWorkaroundCost": 180000,
+    "slaRisk": "HIGH: Air-cargo capacity crunch is delaying FADEC / engine-controller deliveries; engine dress-up build is at risk from Day 12.",
+    "evidenceBase": "Honeywell FADEC modules stranded by a belly-cargo capacity shortage; ~10-day line coverage; Collins holds a form-fit-function alternate under ASL.",
+    "options": [
+      { "id": "charter", "label": "Dedicated Air Charter", "cost": 120000, "daysSaved": 4, "desc": "Book dedicated freighter capacity for FADEC modules, bypassing the belly-cargo shortage." },
+      { "id": "collins", "label": "Collins Alternate Module", "cost": 90000, "daysSaved": 3, "desc": "Activate the Collins form-fit-function alternate controller under ASL." }
+    ],
+    "strategicPhases": {
+      "respond": {
+        "objective": "Protect the engine dress-up sequence from the controller shortfall.",
+        "actions": [
+          { "lever": "Inventory", "action": "Confirm the FADEC / engine-controller buffer (~10 days) and prioritize modules for the near-term engine dress-up sequence.", "owner": "Avionics Materials Lead", "trigger": "Controller buffer < 12 days", "timeline": "0–24h", "cost": 0, "daysSaved": 1, "kpi": "Controller buffer days validated" },
+          { "lever": "Comms", "action": "Issue an RFC to Honeywell logistics for committed freighter slots and a revised controller delivery ETA.", "owner": "SCRM Duty Officer", "trigger": "Cargo capacity shortfall confirmed", "timeline": "0–48h", "cost": 0, "daysSaved": 0, "kpi": "Honeywell ETA confirmed < 4h" }
+        ]
+      },
+      "recover": {
+        "objective": "Secure dedicated freight and qualify an alternate controller.",
+        "actions": [
+          { "lever": "Logistics", "action": "Book dedicated freighter capacity for FADEC modules to bypass the belly-cargo shortage.", "owner": "Regional Logistics Lead", "trigger": "Scheduled cargo ETA > Time-to-Survive", "timeline": "48h–1wk", "cost": 120000, "daysSaved": 4, "kpi": "TTR cut >= 4 days; modules delivered" },
+          { "lever": "Alternate", "action": "Activate the Collins form-fit-function controller alternate under ASL and queue FAI / airworthiness sign-off.", "owner": "Supplier Quality & Procurement", "trigger": "Honeywell delivery slips past Day 8", "timeline": "5–10 days", "cost": 90000, "daysSaved": 3, "kpi": "Collins alternate qualified; FAI cleared" }
+        ]
+      },
+      "thrive": {
+        "objective": "Make propulsion-electronics supply dual-sourced and freight-resilient.",
+        "actions": [
+          { "lever": "Inventory", "action": "Raise controller safety stock and codify a dual-source policy (Honeywell + Collins) plus pre-booked freight lanes in the ERP.", "owner": "S&OP / Resilience Council", "trigger": "Post-incident governance review", "timeline": "30–90 days", "cost": 0, "daysSaved": 0, "kpi": "Dual-source policy live; controller buffer +15 days" }
+        ]
+      }
     }
   }
 }
