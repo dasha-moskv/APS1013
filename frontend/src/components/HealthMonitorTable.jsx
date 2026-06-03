@@ -227,7 +227,7 @@ export default function HealthMonitorTable({
         agentInsight: row.playbook?.mitigationPlan?.steps?.[0]
           ? `Parsed real-time telemetry from ${row.facility}. Projected hit time is ${row.timeToHit ? row.timeToHit + ' days' : 'immediate'}.`
           : `Monitored active signal streams and initialized automatedSCR playbooks.`,
-        timestamp: new Date(Date.now() - 3600000).toISOString(),
+        timestamp: row.detectedAt || "2026-06-03T08:00:00Z",
         confidence: `${(92.0 + row.severity).toFixed(1)}%`,
         latency: `${Math.floor(120 + row.severity * 15)}ms`,
         dataSize: `${(row.severity * 6.4).toFixed(1)} KB`,
@@ -890,27 +890,90 @@ export default function HealthMonitorTable({
                 {/* Full Risk Description & Executive Briefing */}
                 <div className={`border p-4 flex flex-col gap-3.5 ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-slate-50"}`}>
                   <div>
-                    <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
-                      <MessageSquare className="h-3.5 w-3.5" />
-                      Executive Governance & Risk Briefing
-                    </h3>
+                    <div className="flex items-center justify-between select-none">
+                      <h3 className="text-[10px] font-bold uppercase tracking-wider text-[#86BC25] font-mono mb-1.5 flex items-center gap-1.5">
+                        <MessageSquare className="h-3.5 w-3.5" />
+                        Executive Governance & Risk Briefing
+                      </h3>
+                      <div className="relative group cursor-help inline-block leading-none">
+                        <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                        <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-72 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                          isDark 
+                            ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                            : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                        }`}>
+                          <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                            <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Risk Briefing Generation</span>
+                          </div>
+                          <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                            <strong>What it is:</strong> A synthesized natural-language overview summarizing the active supply chain threat and affected nodes.
+                          </p>
+                          <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                            <strong>How it is generated:</strong> Gathered via Public Signal Collectors (Global News/Social/Industry feeds) during Ingestion, parsed through the Ingestion & Taxonomy pipeline, filtered for noise by the Processing Engine, and finally validated as a genuine anomaly by the AI Judge (Phase 1: MVP - Core Detection).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                     <p className={`text-xs leading-relaxed font-sans ${isDark ? "text-slate-200" : "text-slate-700"}`}>{inspectedRow.fullDescription}</p>
                   </div>
 
                   {/* C-Suite Strategic Insights Overlay */}
                   <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 border-t pt-3.5 font-sans text-[11px] ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
                     <div className="flex flex-col gap-1">
-                      <span className="font-mono text-[9px] font-bold text-amber-500 uppercase tracking-wider">
-                        Downstream Business Impact
-                      </span>
+                      <div className="flex items-center justify-between select-none">
+                        <span className="font-mono text-[9px] font-bold text-amber-500 uppercase tracking-wider">
+                          Downstream Business Impact
+                        </span>
+                        <div className="relative group cursor-help inline-block leading-none">
+                          <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                          <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-72 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                            isDark 
+                              ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                              : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                          }`}>
+                            <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                              <span className="h-2 w-2 bg-amber-500 rounded-none" />
+                              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-500">Business Impact Analysis</span>
+                            </div>
+                            <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                              <strong>What it is:</strong> Projected operational/financial schedule disruption to Boeing's downstream assembly facilities.
+                            </p>
+                            <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                              <strong>How it is generated:</strong> Formulated by the Processing Engine's scoring model (Likelihood, Impact, Time-to-Hit) mapping the validated anomaly's affected parts against the N-tier dependency linkages in the Knowledge Graph (Phase 1: MVP - Core Detection).
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
                         {inspectedRow.downstreamBusinessImpact || inspectedRow.mapPosition?.downstreamBusinessImpact || "Threatens core SLA commitments and operational run-rates at primary integration hubs."}
                       </p>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="font-mono text-[9px] font-bold text-sky-500 uppercase tracking-wider">
-                        Mitigation Objective
-                      </span>
+                      <div className="flex items-center justify-between select-none">
+                        <span className="font-mono text-[9px] font-bold text-sky-500 uppercase tracking-wider">
+                          Mitigation Objective
+                        </span>
+                        <div className="relative group cursor-help inline-block leading-none">
+                          <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                          <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-72 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                            isDark 
+                              ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                              : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                          }`}>
+                            <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                              <span className="h-2 w-2 bg-sky-500 rounded-none" />
+                              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-sky-500">Mitigation Objective Formulation</span>
+                            </div>
+                            <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                              <strong>What it is:</strong> The primary target goal for stabilizing operations and securing the supply node.
+                            </p>
+                            <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                              <strong>How it is generated:</strong> Formulated by the Mitigation & Decision Support Engine (Phase 2: Playbook & Scenarios) by analyzing supplier profile status, logistics/transit corridor delays, and industrial alternatives.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       <p className={`${isDark ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
                         {inspectedRow.mitigationObjective || inspectedRow.mapPosition?.mitigationObjective || "Establish immediate redundant routing profiles and secure certified secondary supplies."}
                       </p>

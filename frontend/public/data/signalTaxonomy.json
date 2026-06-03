@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "name": "Logistics & Transit",
+      "color": "bg-red-500",
+      "textColor": "text-red-500",
+      "borderColor": "border-red-500/20",
+      "icon": "Truck",
+      "description": "Risks related to the transportation of goods, shipping delays, customs clearance, carrier availability, and routing disruptions.",
+      "idPrefixes": ["SUP-001A", "SUP-109B", "FAC-010", "SUP-302B"]
+    },
+    {
+      "name": "Operations & Capacity",
+      "color": "bg-amber-500",
+      "textColor": "text-amber-500",
+      "borderColor": "border-amber-500/20",
+      "icon": "Layers",
+      "description": "Risks related to internal facility operations, manufacturing throughput, workforce constraints, and supplier capacity bottlenecks.",
+      "idPrefixes": ["FAC-001", "FAC-003", "SUP-771A"]
+    },
+    {
+      "name": "Regulatory & Quality",
+      "color": "bg-sky-500",
+      "textColor": "text-sky-500",
+      "borderColor": "border-sky-500/20",
+      "icon": "ShieldCheck",
+      "description": "Risks arising from compliance requirements, quality audits, safety standards, product defects, and legal or trade restrictions.",
+      "idPrefixes": ["SUP-401A", "SUP-502A", "SUP-404R", "SUP-512S", "SUP-212H"]
+    },
+    {
+      "name": "External Infrastructure",
+      "color": "bg-[#86BC25]",
+      "textColor": "text-[#86BC25]",
+      "borderColor": "border-[#86BC25]/20",
+      "icon": "Activity",
+      "description": "Risks linked to external services like power grids, telecommunication networks, utilities, public infrastructure, and natural events.",
+      "idPrefixes": []
+    }
+  ]
+}

@@ -57,10 +57,25 @@ export function formatTimeToHit(days) {
   return `${months} months`;
 }
 
+let taxonomyMapping = null;
+
+export function setTaxonomyData(data) {
+  taxonomyMapping = data;
+}
+
 export function getTaxonomy(id) {
+  if (taxonomyMapping && taxonomyMapping.categories) {
+    const match = taxonomyMapping.categories.find(cat => 
+      cat.idPrefixes && cat.idPrefixes.some(prefix => id.startsWith(prefix))
+    );
+    if (match) return match.name;
+  }
+
+  // Fallback to static mapping before JSON is loaded or for unrecognized IDs
   if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Operations & Capacity";
   if (id.startsWith("SUP-001A") || id.startsWith("SUP-109B") || id.startsWith("FAC-010") || id.startsWith("SUP-302B")) return "Logistics & Transit";
   if (id.startsWith("SUP-401A") || id.startsWith("SUP-502A") || id.startsWith("SUP-404R") || id.startsWith("SUP-512S") || id.startsWith("SUP-212H")) return "Regulatory & Quality";
   return "External Infrastructure";
 }
+
 
