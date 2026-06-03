@@ -16941,12 +16941,12 @@
     "id": "SUP-5CEEB",
     "facility": "Safran Landing Systems Bidos",
     "location": "Bidos, FR",
-    "disruption": "Safran, Figeac Aero, Lat\u00e9co\u00e8re... La crise de Boeing secoue la supply chain (1 articles)",
+    "disruption": "Safran, La crise de Boeing secoue la supply chain (1 articles)",
     "severity": 2.5,
     "likelihood": 80,
     "timeToHit": 7,
     "tier": 1,
-    "fullDescription": "[Clustered Event - 1 Sources Reporting] Safran, Figeac Aero, Lat\u00e9co\u00e8re... La crise de Boeing secoue la supply chain\u00a0\u00a0La Tribune",
+    "fullDescription": "[Clustered Event - 1 Sources Reporting] Safran, La crise de Boeing secoue la supply chain\u00a0\u00a0La Tribune",
     "sourceData": "Google News RSS Ingest: La Tribune (France (FR))",
     "mapPosition": {
       "coordinates": [
@@ -16979,9 +16979,9 @@
     "ingestedAt": 1780413669716,
     "sources": [
       {
-        "title": "Safran, Figeac Aero, Lat\u00e9co\u00e8re... La crise de Boeing secoue la supply chain",
+        "title": "Safran, La crise de Boeing secoue la supply chain",
         "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPMk5oQW5aTC1fWDAydnJPUUVyOVA5YXgxRW5xQjJEM3hJV1QzczJCeEh4TkRaWUM4TzlKUnUyd20tMVFzWFpxQWl4S3lkOUpneGR0LXFMYUllYktXMTQzZkdfbWNKRDN3UF9vcWVIcVlDSGpJY2x0NWhzS2dHSWpadndRRHlqbU5MQy1ITXZSdlNQeklHdUZrSGdsRHRNV1ZNcVRQTzVqcFc4amUtc1JFbktUdTNJVFloeTN6VWRvN0o1MDh6Z2dUQVFoR2k3OFdFSi0zMXpUM1RKWWpRdXZsQXU2MmpPdXkwVzViMnJVTXM?oc=5",
-        "summary": "Safran, Figeac Aero, Lat\u00e9co\u00e8re... La crise de Boeing secoue la supply chain\u00a0\u00a0La Tribune"
+        "summary": "Safran, La crise de Boeing secoue la supply chain\u00a0\u00a0La Tribune"
       }
     ]
   },

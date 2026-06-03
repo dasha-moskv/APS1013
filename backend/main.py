@@ -209,7 +209,7 @@ MOCK_POOL = [
                 "timeline": "2 business days of thermal validation"
             }
         },
-        "downstreamImpact": "Threatens SLA commitments at primary integration hubs; potential Widebody line halts.",
+        "downstreamBusinessImpact": "Threatens SLA commitments at primary integration hubs; potential Widebody line halts.",
         "mitigationObjective": "Bypass production downtime via backup molding dies and safety buffer releases."
     },
     {
@@ -246,7 +246,7 @@ MOCK_POOL = [
                 "timeline": "5 days of continuous operations quality tracking"
             }
         },
-        "downstreamImpact": "Alloy supply delays for wing skin extrusions; secondary procurement overhead.",
+        "downstreamBusinessImpact": "Alloy supply delays for wing skin extrusions; secondary procurement overhead.",
         "mitigationObjective": "Bypass Icelandic smelter freeze by activating secondary Trondheim raw supply contract."
     },
     {
@@ -283,7 +283,7 @@ MOCK_POOL = [
                 "timeline": "2 days of composite curing void inspections"
             }
         },
-        "downstreamImpact": "Composite wing structure assembly halts at final assembly line.",
+        "downstreamBusinessImpact": "Composite wing structure assembly halts at final assembly line.",
         "mitigationObjective": "Maintain fuselage/wing structural prepreg flow by activating Nagoya production bridges."
     },
     {
@@ -320,7 +320,7 @@ MOCK_POOL = [
                 "timeline": "24 hours of ambient safety verification"
             }
         },
-        "downstreamImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
+        "downstreamBusinessImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
         "mitigationObjective": "Bypass Phoenix cleanroom downtime by routing avionics sensor lines to pre-certified Penang facility."
     },
     {
@@ -357,7 +357,7 @@ MOCK_POOL = [
                 "timeline": "2 days of rigorous dimensional micro-auditing"
             }
         },
-        "downstreamImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
+        "downstreamBusinessImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
         "mitigationObjective": "Prevent critical actuator delivery slippage by clearing dimensional micro-anomalies."
     },
     {
@@ -394,7 +394,7 @@ MOCK_POOL = [
                 "timeline": "36 hours of robotic safety and squeeze verification"
             }
         },
-        "downstreamImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
+        "downstreamBusinessImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
         "mitigationObjective": "Bypass robotic end-effector failure using manual riveting overlays and safety audits."
     },
     {
@@ -431,7 +431,7 @@ MOCK_POOL = [
                 "timeline": "3 days of advanced metallurgy testing"
             }
         },
-        "downstreamImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
+        "downstreamBusinessImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
         "mitigationObjective": "Bypass 3D printing nozzle clogs by activating Sweden's redundant forging tooling channels."
     },
     {
@@ -468,7 +468,7 @@ MOCK_POOL = [
                 "timeline": "2 business days for vacuum certification and quality sign-off"
             }
         },
-        "downstreamImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+        "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
         "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals."
     }
 ]
