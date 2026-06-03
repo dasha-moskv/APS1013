@@ -480,7 +480,7 @@ def make_signal_truly_unique(base_signal):
     signal["id"] = f"SUP-{incident_seq}{random.choice(['A', 'B', 'C', 'X', 'Y', 'Z', 'S', 'T'])}"
     
     # 35% chance to make it a completely new unique facility so it doesn't cluster and adds a new row
-    if random.random() < 0.35:
+    if random.random() < 0:
         new_facilities = [
             ("Tokyo Precision Parts", "Tokyo, JP", "Tier-2 / Actuation"),
             ("Munich Castings GmbH", "Munich, DE", "Tier-1 / Casting"),
