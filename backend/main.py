@@ -45,6 +45,56 @@ def jaccard_similarity(set1, set2):
         return 0.0
     return len(set1.intersection(set2)) / len(set1.union(set2))
 
+def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
+    text = (disruption + " " + facility + " " + full_desc).lower()
+    
+    # 1. Check for Regulatory & Quality keywords
+    quality_keywords = [
+        "quality", "regulation", "regulatory", "audit", "defect", "defects",
+        "compliance", "inspection", "checks", "paperwork", "forgeries",
+        "documentation", "sanctions", "ban", "legal", "certificate", "traceability"
+    ]
+    if any(k in text for k in quality_keywords):
+        return "Regulatory & Quality"
+        
+    # 2. Check for Logistics & Transit keywords
+    logistics_keywords = [
+        "logistics", "transit", "shipping", "delays", "delay", "transport",
+        "freight", "cargo", "routing", "rail", "port", "customs", "border",
+        "carrier", "import", "delivery", "deliveries", "stalled", "freighter"
+    ]
+    if any(k in text for k in logistics_keywords):
+        return "Logistics & Transit"
+        
+    # 3. Check for Operations & Capacity keywords
+    ops_keywords = [
+        "strike", "labor", "union", "workforce", "capacity", "shortage",
+        "shortages", "yield", "production", "constrain", "starvation",
+        "manufacturing", "kiln", "shutdown", "furnace", "mold", "autoclave",
+        "honing", "riveting", "outage", "spindle", "die", "billet", "smelting"
+    ]
+    if any(k in text for k in ops_keywords):
+        return "Operations & Capacity"
+        
+    # 4. Check for External Infrastructure keywords
+    infra_keywords = [
+        "power", "grid", "telemetry", "scada", "telecommunication", "utilities",
+        "weather", "freeze", "storm", "natural", "internet", "surge", "outage"
+    ]
+    if any(k in text for k in infra_keywords):
+        return "External Infrastructure"
+        
+    # Fallback based on original prefix rules
+    if signal_id:
+        if signal_id.startswith("FAC-001") or signal_id.startswith("FAC-003") or signal_id.startswith("SUP-771A"):
+            return "Operations & Capacity"
+        if signal_id.startswith("SUP-001A") or signal_id.startswith("SUP-109B") or signal_id.startswith("FAC-010") or signal_id.startswith("SUP-302B"):
+            return "Logistics & Transit"
+        if signal_id.startswith("SUP-401A") or signal_id.startswith("SUP-502A") or signal_id.startswith("SUP-404R") or signal_id.startswith("SUP-512S") or signal_id.startswith("SUP-212H"):
+            return "Regulatory & Quality"
+            
+    return "External Infrastructure"
+
 def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     """
     Tries to cluster the selected_signal into an existing threat in threatRegistry.json.
@@ -52,6 +102,12 @@ def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     If not, prepends selected_signal as a new threat.
     Returns the final committed threat dictionary.
     """
+    selected_signal["category"] = get_taxonomy_by_id(
+        selected_signal.get("id"),
+        selected_signal.get("disruption", ""),
+        selected_signal.get("facility", ""),
+        selected_signal.get("fullDescription", "")
+    )
     try:
         with open(threat_registry_path, "r", encoding="utf-8") as f:
             data = json.load(f)

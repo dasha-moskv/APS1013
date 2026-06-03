@@ -111,7 +111,7 @@ export default function HealthMonitorTable({
 
   // Apply C-Suite category taxonomy filtering if active (multi-select)!
   const taxonomyFilteredRows = selectedCategories && selectedCategories.length > 0 
-    ? filteredRows.filter(row => selectedCategories.includes(getTaxonomy(row.id)))
+    ? filteredRows.filter(row => selectedCategories.includes(getTaxonomy(row)))
     : filteredRows;
 
   // Sorting algorithms for dynamic, interactive columns
@@ -741,15 +741,15 @@ export default function HealthMonitorTable({
                   <td className={`py-1.5 px-3 align-middle max-w-[400px] overflow-hidden font-sans ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     <div className="flex items-center gap-1.5 min-w-0 w-full overflow-hidden whitespace-nowrap">
                       <span className={`inline-block shrink-0 font-mono text-[8px] px-1.5 py-0.5 border select-none leading-none rounded-none uppercase font-bold tracking-wider ${
-                        getTaxonomy(row.id) === "Logistics & Transit" 
+                        getTaxonomy(row) === "Logistics & Transit" 
                           ? isDark ? "bg-red-950/40 text-red-400 border-red-900/50" : "bg-red-50 text-red-600 border-red-200"
-                          : getTaxonomy(row.id) === "Operations & Capacity" 
+                          : getTaxonomy(row) === "Operations & Capacity" 
                             ? isDark ? "bg-amber-950/40 text-amber-400 border-amber-900/50" : "bg-amber-50 text-amber-600 border-amber-200"
-                            : getTaxonomy(row.id) === "Regulatory & Quality" 
+                            : getTaxonomy(row) === "Regulatory & Quality" 
                               ? isDark ? "bg-sky-950/40 text-sky-400 border-sky-900/50" : "bg-sky-50 text-sky-600 border-sky-200"
                               : isDark ? "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/30" : "bg-[#86BC25]/10 text-[#86BC25] border-[#86BC25]/20"
                       }`}>
-                        {getTaxonomy(row.id)}
+                        {getTaxonomy(row)}
                       </span>
                       <span className="truncate min-w-0 font-medium" title={row.disruption}>{row.disruption}</span>
                     </div>
@@ -880,7 +880,7 @@ export default function HealthMonitorTable({
               </div>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                 <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
-                <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow.id)}</span>
+                <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow)}</span>
               </div>
             </div>
 

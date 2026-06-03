@@ -10,7 +10,6 @@ import SignalTaxonomy from "./components/SignalTaxonomy";
 import BaseIngest from "./components/BaseIngest";
 import MitigationPlaybooks from "./components/MitigationPlaybooks";
 import AIJudgeGovernance from "./components/AIJudgeGovernance";
-import { setTaxonomyData } from "./utils/riskHeuristics";
 
 
 
@@ -28,7 +27,6 @@ export default function App() {
   const [playbookData, setPlaybookData] = useState(null);
   const [cSuiteData, setCSuiteData] = useState({});
   const [pipelineData, setPipelineData] = useState({});
-  const [taxonomyData, setTaxonomyDataState] = useState(null);
 
   // Phase 2/3 States
   const [, setApprovedPlaybooks] = useState({});
@@ -114,16 +112,10 @@ export default function App() {
       fetch("/data/pipelineData.json").then((res) => {
         if (!res.ok) throw new Error("Failed to fetch pipeline telemetry");
         return res.json();
-      }),
-      fetch("/data/signalTaxonomy.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch signal taxonomy");
-        return res.json();
       })
     ])
-      .then(([threats, kpis, graph, signal, droppedSig, playbooks, csuite, pipeline, taxonomy]) => {
+      .then(([threats, kpis, graph, signal, droppedSig, playbooks, csuite, pipeline]) => {
         const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
-        setTaxonomyData(taxonomy);
-        setTaxonomyDataState(taxonomy);
         setThreatRows(mappedThreats);
         setKpiData(kpis);
         setKnowledgeGraph(graph);
@@ -392,7 +384,6 @@ export default function App() {
                     selectedCategories={selectedCategories} 
                     onSelectCategories={setSelectedCategories}
                     isDark={isDark}
-                    categories={taxonomyData?.categories}
                   />
                 </div>
               </div>

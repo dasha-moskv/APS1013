@@ -9,10 +9,10 @@ By combining advanced agentic AI pipelines with an interactive, highly responsiv
 ## 🎥 Application Visuals & Architecture
 
 ### 📊 System-Wide Process Flow (Phases 1–3)
-![System-Wide Process Flow](docs/uml-process.png)
+![System-Wide Process Flow](docs/uml-process-mvp.png)
 
 ### 🗺️ System Use Case Map
-![Use Case Map](docs/uml-use-case.png)
+![Use Case Map](docs/uml-use-case-mvp.png)
 
 ### 💻 High-Fidelity Interface Preview
 ![High-Fidelity Interface Preview](docs/demo.gif)
@@ -68,16 +68,12 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 │   │   └── main.jsx            # Application mount point
 │   ├── public/                 # Static files & local databases
 │   │   └── data/               # Decoupled mock database sets (JSON format)
-│   │       ├── threatRegistry.json         # Central active threats database
 │   │       ├── knowledgeGraph.json         # N-tier structural node dependencies
-│   │       ├── historicalPrecedents.json   # Vector-style cosine similarity records
-│   │       ├── erpSystems.json             # SAP-aligned Material Masters, BOMs & pre-qualified ASLs
-│   │       ├── kpiData.json               # Corporate scoreboard metric configurations
-│   │       ├── mockSignals.json            # Demo live-ingest satellite signal payloads
+│   │       ├── kpiData.json                # Corporate scoreboard metric configurations
 │   │       ├── droppedSignals.json         # AI-filtered low-risk signal records
 │   │       ├── playbookRecommendations.json # Structured mitigation playbook data
-│   │       ├── ingestedPresets.json        # GeoJSON supply-base preset definitions
-│   │       └── erpSystems.json            # ERP system configuration targets
+│   │       ├── cSuiteData.json             # C-Suite scenario analysis parameters
+│   │       └── pipelineData.json           # Live ingestion pipeline metrics
 │   ├── package.json            # Node package configurations & developer scripts
 │   ├── vite.config.js          # Vite build pack bundler configurations
 │   └── eslint.config.js        # Linter code quality boundaries
@@ -170,16 +166,12 @@ To ensure the system is completely ready for enterprise backend API integrations
 
 | File | Purpose |
 |------|---------|
-| `threatRegistry.json` | Central active threat records with severity & status |
 | `knowledgeGraph.json` | N-tier node dependency linkages & geographic coordinates |
-| `historicalPrecedents.json` | Cosine-similarity records of historic supply interventions |
-| `erpSystems.json` | SAP BOMs, Material Masters & pre-qualified ASL alternates |
 | `kpiData.json` | Corporate boardroom scorecard configuration |
-| `mockSignals.json` | Demo live-ingest satellite signal payloads |
 | `droppedSignals.json` | AI-filtered low-risk signal records for governance view |
 | `playbookRecommendations.json` | Structured mitigation playbook scenarios & comms templates |
-| `ingestedPresets.json` | GeoJSON supply-base preset definitions |
-| `erpSystems.json` | ERP system configuration targets |
+| `cSuiteData.json` | C-Suite scenario analysis parameters |
+| `pipelineData.json` | Live ingestion pipeline metrics |
 
 ---
 

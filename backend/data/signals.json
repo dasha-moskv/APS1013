@@ -1,5 +1,89 @@
 [
   {
+    "id": "SUP-284C",
+    "facility": "Honeywell Aerospace Systems",
+    "location": "Phoenix, AZ, US",
+    "disruption": "[Inc #284] Cleanroom HEPA filtration contamination during sensor assembly (vibration delta of +16% detected)",
+    "severity": 7.0,
+    "likelihood": 71,
+    "timeToHit": 7,
+    "tier": 1,
+    "fullDescription": "[Incident #284] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load.",
+    "sourceData": "Cleanroom Environmental Stream: PHX-CLEAN-SEC4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -112.074,
+        33.4484
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Avionics",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Isolate contaminated batch assemblies and place in quarantine hold.",
+          "Initiate deep cleanroom chemical scrub and replace all HEPA primary elements.",
+          "Divert priority pressure-transducer assembly runs to Penang facility."
+        ],
+        "timeline": "3 to 4 days for cleanroom scrub and certified air recertification"
+      },
+      "validationPlan": {
+        "steps": [
+          "Monitor continuous particle counts over a 24-hour baseline cycle.",
+          "Audit micro-sensor microchip contacts under scanning electron microscope."
+        ],
+        "timeline": "24 hours of ambient safety verification"
+      }
+    },
+    "downstreamBusinessImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
+    "mitigationObjective": "Bypass Phoenix cleanroom downtime by routing avionics sensor lines to pre-certified Penang facility.",
+    "ingestedAt": 1780499854901,
+    "category": "Regulatory & Quality"
+  },
+  {
+    "id": "SUP-327C",
+    "facility": "Howmet Engine Products",
+    "location": "Cleveland, OH, US",
+    "disruption": "[Inc #327] Single-crystal turbine blade mold vacuum pressure loss (pressure delta of -7% detected)",
+    "severity": 8.6,
+    "likelihood": 93,
+    "timeToHit": 17,
+    "tier": 2,
+    "fullDescription": "[Incident #327] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4.",
+    "sourceData": "Vacuum SCADA Feed: CLEV-VAC-CH4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -81.6944,
+        41.4993
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-2 / Castings",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer molds and priority dies to backup casting furnace #5.",
+          "Deploy maintenance crews to inspect and replace vacuum flange seals.",
+          "Re-route high-temperature superalloy precursor supplies to operational bays."
+        ],
+        "timeline": "5 business days for vacuum flange replacement and safety test"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs during trial melt cycles to verify insulation.",
+          "Conduct non-destructive micro-focus CT scans on replacement blade castings."
+        ],
+        "timeline": "2 business days for vacuum certification and quality sign-off"
+      }
+    },
+    "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+    "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals.",
+    "ingestedAt": 1780499847889,
+    "category": "Operations & Capacity"
+  },
+  {
     "id": "SUP-F467R",
     "facility": "Boeing Defense St. Louis-area facilities",
     "location": "St. Louis, MO, US",
@@ -56,7 +140,8 @@
         "url": "https://www.theintelligencer.com/news/article/boeing-st-louis-machinists-contract-21171470.php",
         "summary": "Regional coverage reported that St. Louis-area Boeing machinists accepted a new contract and returned to work after the strike."
       }
-    ]
+    ],
+    "category": "Operations & Capacity"
   },
   {
     "id": "SUP-C123D",
@@ -115,7 +200,8 @@
         "url": "https://www.reuters.com/business/world-at-work/ge-aerospace-reaches-five-year-labor-deal-with-600-striking-uaw-workers-2025-09-19/",
         "summary": "Reuters reported that GE Aerospace reached a five-year labor deal ending the strike."
       }
-    ]
+    ],
+    "category": "Operations & Capacity"
   },
   {
     "id": "AIR-E456F",
@@ -173,7 +259,8 @@
         "url": "https://www.cfmaeroengines.com/engines/leap/",
         "summary": "Official information on the LEAP engine program used across Airbus and Boeing narrowbody fleets."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-G789H",
@@ -231,7 +318,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/china-has-agreed-address-us-concerns-over-rare-earth-shortages-says-white-house-2026-05-18/",
         "summary": "Reuters reported U.S. concerns over critical mineral shortages including yttrium, scandium, indium, and neodymium."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-J012K",
@@ -289,7 +377,8 @@
         "url": "https://www.iata.org/en/programs/ops-infra/techops/aviation-supply-chain/",
         "summary": "IATA summarized operational impacts from aviation supply-chain challenges, including delayed growth and higher maintenance costs."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-L345M",
@@ -347,7 +436,8 @@
         "url": "https://www.supplychaindive.com/news/spirit-boeing-manufacturing-issue-fuselage-production-delay-737-max/692148/",
         "summary": "Supply Chain Dive reported Spirit AeroSystems production snags tied to Boeing aircraft delivery delays."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-N678P",
@@ -405,7 +495,8 @@
         "url": "https://www.unitedlens.com/material-forgeries-a-problem-for-aerospace-industry/",
         "summary": "United Lens discussed the broader aerospace material-forgery concern using the Boeing titanium documentation issue as an example."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-Q901R",
@@ -449,7 +540,7 @@
     },
     "sources": [
       {
-        "title": "EUV lithography systems – Products",
+        "title": "EUV lithography systems \u2013 Products",
         "url": "https://www.asml.com/products/euv-lithography-systems",
         "summary": "ASML describes EUV lithography systems used for high-volume manufacturing of advanced chip layers."
       },
@@ -463,6 +554,7 @@
         "url": "https://www.aircargonews.net/cargo-airport/2021/11/cargo-congestion-at-schiphol-shows-signs-of-easing/",
         "summary": "Air Cargo News reported cargo congestion at Schiphol and operational steps to reduce delays."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   }
 ]

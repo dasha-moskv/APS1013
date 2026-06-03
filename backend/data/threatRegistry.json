@@ -1,14 +1,501 @@
 [
   {
+    "id": "SUP-676B",
+    "facility": "Derby Foundry Ltd",
+    "location": "Derby, UK",
+    "disruption": "Turbine blade casting kiln shutdown due to refractory brick failure (3 articles)",
+    "severity": 8.7,
+    "likelihood": 91,
+    "timeToHit": 11,
+    "tier": 1,
+    "fullDescription": "[Clustered Event - 3 Sources Reporting] Kiln #3 suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
+    "sourceData": "Factory IoT Kiln Status Feed: DERBY-KILN-03-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -1.4552,
+        52.8931
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Casting",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer priority molding dies to backup casting facility in Munich.",
+          "Authorize overtime pay for engineering teams repairing Kiln #3.",
+          "Utilize reserve turbine blade safety stock held at Schiphol hub."
+        ],
+        "timeline": "6 to 8 business days for kiln repair"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs of Kiln #3 during heat-up cycles.",
+          "Perform non-destructive stress testing on replacement castings."
+        ],
+        "timeline": "2 business days of thermal validation"
+      }
+    },
+    "downstreamBusinessImpact": "Threatens SLA commitments at primary integration hubs; potential Widebody line halts.",
+    "mitigationObjective": "Bypass production downtime via backup molding dies and safety buffer releases.",
+    "ingestedAt": 1780500370658,
+    "category": "Operations & Capacity",
+    "sources": [
+      {
+        "title": "[Inc #676] Turbine blade casting kiln shutdown due to refractory brick failure (micro-indicator Ref #1680 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-676B",
+        "summary": "[Incident #676] Kiln #3 suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #470] Turbine blade casting kiln shutdown due to refractory brick failure (Shift-B telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-470X",
+        "summary": "[Incident #470] Kiln #3 suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      },
+      {
+        "title": "[Inc #609] Turbine blade casting kiln shutdown due to refractory brick failure (critical micro-anomaly #62 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-609Z",
+        "summary": "[Incident #609] Kiln #3 suffered a structural collapse of its high-temperature refractory lining. Turbine blade casting runs are suspended indefinitely, risking supply gaps for widebody programs. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      }
+    ]
+  },
+  {
+    "id": "SUP-309A",
+    "facility": "Toray Composite Materials",
+    "location": "Tacoma, WA, US",
+    "disruption": "Carbon fiber autoclave pressure regulator seal rupture (2 articles)",
+    "severity": 7.3,
+    "likelihood": 77,
+    "timeToHit": 12,
+    "tier": 2,
+    "fullDescription": "[Clustered Event - 2 Sources Reporting] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4.",
+    "sourceData": "Autoclave Telemetry Webhook: TAC-AUTO-819-PRESS",
+    "mapPosition": {
+      "coordinates": [
+        -122.4443,
+        47.2529
+      ],
+      "color": "#FFB300",
+      "role": "Tier-2 / Composites",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Shift wing spar composite layup loads to secondary prepreg lines in Nagoya.",
+          "Authorize priority technician dispatch to replace autoclave hydraulic seals.",
+          "Accelerate custom clearance procedures for reserve prepreg shipments."
+        ],
+        "timeline": "5 to 7 days for seal replacement and autoclave recalibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Audit pressure profile logs over three consecutive test cycles.",
+          "Perform ultrasonic void-detection tests on the first post-repair layups."
+        ],
+        "timeline": "2 days of composite curing void inspections"
+      }
+    },
+    "downstreamBusinessImpact": "Composite wing structure assembly halts at final assembly line.",
+    "mitigationObjective": "Maintain fuselage/wing structural prepreg flow by activating Nagoya production bridges.",
+    "ingestedAt": 1780500359069,
+    "category": "Operations & Capacity",
+    "sources": [
+      {
+        "title": "[Inc #309] Carbon fiber autoclave pressure regulator seal rupture (Shift-B telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-309A",
+        "summary": "[Incident #309] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4."
+      },
+      {
+        "title": "[Inc #328] Carbon fiber autoclave pressure regulator seal rupture (Shift-C telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-328B",
+        "summary": "[Incident #328] High-pressure autoclave seals failed during cure cycle #819. Raw composite layup batches for widebody wing spars must be scrapped due to decompression porosity. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      }
+    ]
+  },
+  {
+    "id": "SUP-284C",
+    "facility": "Honeywell Aerospace Systems",
+    "location": "Phoenix, AZ, US",
+    "disruption": "Cleanroom HEPA filtration contamination during sensor assembly (6 articles)",
+    "severity": 7.0,
+    "likelihood": 71,
+    "timeToHit": 7,
+    "tier": 1,
+    "fullDescription": "[Clustered Event - 6 Sources Reporting] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load.",
+    "sourceData": "Cleanroom Environmental Stream: PHX-CLEAN-SEC4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -112.074,
+        33.4484
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Avionics",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Isolate contaminated batch assemblies and place in quarantine hold.",
+          "Initiate deep cleanroom chemical scrub and replace all HEPA primary elements.",
+          "Divert priority pressure-transducer assembly runs to Penang facility."
+        ],
+        "timeline": "3 to 4 days for cleanroom scrub and certified air recertification"
+      },
+      "validationPlan": {
+        "steps": [
+          "Monitor continuous particle counts over a 24-hour baseline cycle.",
+          "Audit micro-sensor microchip contacts under scanning electron microscope."
+        ],
+        "timeline": "24 hours of ambient safety verification"
+      }
+    },
+    "downstreamBusinessImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
+    "mitigationObjective": "Bypass Phoenix cleanroom downtime by routing avionics sensor lines to pre-certified Penang facility.",
+    "ingestedAt": 1780500374487,
+    "sources": [
+      {
+        "title": "[Inc #284] Cleanroom HEPA filtration contamination during sensor assembly (vibration delta of +16% detected)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-284C",
+        "summary": "[Incident #284] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      },
+      {
+        "title": "[Inc #436] Cleanroom HEPA filtration contamination during sensor assembly (critical micro-anomaly #70 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-436Y",
+        "summary": "[Incident #436] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #788] Cleanroom HEPA filtration contamination during sensor assembly (micro-indicator Ref #9212 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-788A",
+        "summary": "[Incident #788] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      },
+      {
+        "title": "[Inc #159] Cleanroom HEPA filtration contamination during sensor assembly (critical micro-anomaly #61 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-159A",
+        "summary": "[Incident #159] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      },
+      {
+        "title": "[Inc #710] Cleanroom HEPA filtration contamination during sensor assembly (critical micro-anomaly #10 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-710Z",
+        "summary": "[Incident #710] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4."
+      },
+      {
+        "title": "[Inc #239] Cleanroom HEPA filtration contamination during sensor assembly (critical micro-anomaly #52 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-239B",
+        "summary": "[Incident #239] Sensor assembly cleanroom atmospheric logs recorded a breach of Class 100 particle thresholds. Micro-sensor production lines are suspended for deep decontamination. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      }
+    ],
+    "category": "Regulatory & Quality"
+  },
+  {
+    "id": "SUP-689B",
+    "facility": "GKN Aerospace Structures",
+    "location": "Filton, UK",
+    "disruption": "Titanium laser-deposition additive nozzle blockage during casing print (4 articles)",
+    "severity": 7.7,
+    "likelihood": 78,
+    "timeToHit": 10,
+    "tier": 1,
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
+    "sourceData": "Additive Sensor Telemetry: FILT-DED-NOZ-CRIT",
+    "mapPosition": {
+      "coordinates": [
+        -2.5936,
+        51.5222
+      ],
+      "color": "#FFB300",
+      "role": "Tier-1 / Engine Structures",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Quarantine the incomplete casing print and perform microstructure heat scans.",
+          "Replace laser-deposition nozzle assembly and clean titanium powder conduits.",
+          "Activate conventional forging production lines in Sweden as secondary routing."
+        ],
+        "timeline": "6 days for 3D printer print head rebuilding and powder flush"
+      },
+      "validationPlan": {
+        "steps": [
+          "Conduct automated CT scans on post-repair prints to inspect internal cavities.",
+          "Verify material grain structure and tensile properties on co-printed test bars."
+        ],
+        "timeline": "3 days of advanced metallurgy testing"
+      }
+    },
+    "downstreamBusinessImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
+    "mitigationObjective": "Bypass 3D printing nozzle clogs by activating Sweden's redundant forging tooling channels.",
+    "ingestedAt": 1780500372176,
+    "sources": [
+      {
+        "title": "[Inc #689] Titanium laser-deposition additive nozzle blockage during casing print due to section 6 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-689B",
+        "summary": "[Incident #689] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #191] Titanium laser-deposition additive nozzle blockage during casing print due to section 1 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-191B",
+        "summary": "[Incident #191] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #831] Titanium laser-deposition additive nozzle blockage during casing print (Shift-Night telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-831X",
+        "summary": "[Incident #831] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #691] Titanium laser-deposition additive nozzle blockage during casing print due to section 2 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-691S",
+        "summary": "[Incident #691] The titanium powder feed nozzle suffered a severe thermal feedback melt, halting the direct energy deposition of the compressor housing assembly. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      }
+    ],
+    "category": "External Infrastructure"
+  },
+  {
+    "id": "SUP-809B",
+    "facility": "Moog Actuation Systems",
+    "location": "East Aurora, NY, US",
+    "disruption": "Precision CNC micro-honing machine spindle calibration drift (4 articles)",
+    "severity": 7.4,
+    "likelihood": 82,
+    "timeToHit": 10,
+    "tier": 2,
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load.",
+    "sourceData": "CNC Metrology Alarm: EA-CNC-HON-04",
+    "mapPosition": {
+      "coordinates": [
+        -78.6147,
+        42.7667
+      ],
+      "color": "#FFB300",
+      "role": "Tier-2 / Actuation",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy OEM laser interferometer calibration specialist team to reset honing spindle.",
+          "Pull pre-inspected servovalve sleeve safety stock from European logistics hub.",
+          "Engage parallel manufacturing lines #1 and #2 to run overtime shifts."
+        ],
+        "timeline": "4 days for laser realignment and calibration recertification"
+      },
+      "validationPlan": {
+        "steps": [
+          "Conduct air-gauge dimensional checks on first 50 sleeve samples post-repair.",
+          "Verify functional flow and pressure drop specs on automated hydraulic test benches."
+        ],
+        "timeline": "2 days of rigorous dimensional micro-auditing"
+      }
+    },
+    "downstreamBusinessImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
+    "mitigationObjective": "Prevent critical actuator delivery slippage by clearing dimensional micro-anomalies.",
+    "ingestedAt": 1780500377306,
+    "sources": [
+      {
+        "title": "[Inc #809] Precision CNC micro-honing machine spindle calibration drift due to section 5 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-809B",
+        "summary": "[Incident #809] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      },
+      {
+        "title": "[Inc #157] Precision CNC micro-honing machine spindle calibration drift (critical micro-anomaly #26 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-157S",
+        "summary": "[Incident #157] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      },
+      {
+        "title": "[Inc #940] Precision CNC micro-honing machine spindle calibration drift due to section 9 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-940X",
+        "summary": "[Incident #940] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      },
+      {
+        "title": "[Inc #888] Precision CNC micro-honing machine spindle calibration drift (temperature delta of +14% detected)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-888Z",
+        "summary": "[Incident #888] Precision honing spindles experienced a 12-micron calibration drift. Servovalve sleeve inventories produced on line #4 have been quarantined due to critical dimensional tolerances. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      }
+    ],
+    "category": "Regulatory & Quality"
+  },
+  {
+    "id": "SUP-800B",
+    "facility": "Alcoa Smelting",
+    "location": "Reykjavik, IS",
+    "disruption": "Geothermal power grid surge triggers electrolytic cell freeze (2 articles)",
+    "severity": 7.9,
+    "likelihood": 80,
+    "timeToHit": 33,
+    "tier": 2,
+    "fullDescription": "[Clustered Event - 2 Sources Reporting] A severe geothermal grid surge caused a localized power outage, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol.",
+    "sourceData": "Power Grid SCADA Alert: REYK-SMELT-PWR",
+    "mapPosition": {
+      "coordinates": [
+        -21.8277,
+        64.1265
+      ],
+      "color": "#FFB300",
+      "role": "Tier-2 / Raw Materials",
+      "status": "Elevated Risk"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Procure raw refined ingots from secondary smelter in Trondheim, Norway.",
+          "Initiate heavy machinery clearing of frozen electrolytic cells.",
+          "Re-route incoming bauxite shipments to operational Baltic processors."
+        ],
+        "timeline": "3 to 4 weeks for complete cell cleaning"
+      },
+      "validationPlan": {
+        "steps": [
+          "Verify power supply stability and install surge protective relays.",
+          "Inspect restarted cells for lining degradation or cracks."
+        ],
+        "timeline": "5 days of continuous operations quality tracking"
+      }
+    },
+    "downstreamBusinessImpact": "Alloy supply delays for wing skin extrusions; secondary procurement overhead.",
+    "mitigationObjective": "Bypass Icelandic smelter freeze by activating secondary Trondheim raw supply contract.",
+    "ingestedAt": 1780500368318,
+    "sources": [
+      {
+        "title": "[Inc #800] Geothermal power grid surge triggers electrolytic cell freeze (Shift-C telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-800B",
+        "summary": "[Incident #800] A severe geothermal grid surge caused a localized power outage, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      },
+      {
+        "title": "[Inc #420] Geothermal power grid surge triggers electrolytic cell freeze (vibration delta of +18% detected)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-420A",
+        "summary": "[Incident #420] A severe geothermal grid surge caused a localized power outage, resulting in the cooling and solidifying of raw aluminum within 12 electrolytic cells. Visual inspection confirmed micro-scale degradation on primary structural components. Secondary systems are handling the baseline load."
+      }
+    ],
+    "category": "Operations & Capacity"
+  },
+  {
+    "id": "SUP-274X",
+    "facility": "Howmet Engine Products",
+    "location": "Cleveland, OH, US",
+    "disruption": "Single-crystal turbine blade mold vacuum pressure loss (2 articles)",
+    "severity": 8.6,
+    "likelihood": 89,
+    "timeToHit": 12,
+    "tier": 2,
+    "fullDescription": "[Clustered Event - 2 Sources Reporting] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5.",
+    "sourceData": "Vacuum SCADA Feed: CLEV-VAC-CH4-ERR",
+    "mapPosition": {
+      "coordinates": [
+        -81.6944,
+        41.4993
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-2 / Castings",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Transfer molds and priority dies to backup casting furnace #5.",
+          "Deploy maintenance crews to inspect and replace vacuum flange seals.",
+          "Re-route high-temperature superalloy precursor supplies to operational bays."
+        ],
+        "timeline": "5 business days for vacuum flange replacement and safety test"
+      },
+      "validationPlan": {
+        "steps": [
+          "Inspect thermal imaging logs during trial melt cycles to verify insulation.",
+          "Conduct non-destructive micro-focus CT scans on replacement blade castings."
+        ],
+        "timeline": "2 business days for vacuum certification and quality sign-off"
+      }
+    },
+    "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+    "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals.",
+    "ingestedAt": 1780499847892,
+    "sources": [
+      {
+        "title": "[Inc #274] Single-crystal turbine blade mold vacuum pressure loss due to section 9 calibration drift",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-274X",
+        "summary": "[Incident #274] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      },
+      {
+        "title": "[Inc #327] Single-crystal turbine blade mold vacuum pressure loss (pressure delta of -7% detected)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-327C",
+        "summary": "[Incident #327] Vacuum chambers lost hermetic containment during investment casting melt cycle #14. The entire casting batch of high-pressure turbine blades is scrapped. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4."
+      }
+    ],
+    "category": "Logistics & Transit"
+  },
+  {
+    "id": "SUP-603T",
+    "facility": "Spirit AeroSystems",
+    "location": "Wichita, KS, US",
+    "disruption": "Automated fuselage riveting head mechanical synchronization failure (4 articles)",
+    "severity": 8.8,
+    "likelihood": 88,
+    "timeToHit": 7,
+    "tier": 1,
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
+    "sourceData": "Robotic PLC Diagnostics Feed: WIC-ROB-RIVET-01",
+    "mapPosition": {
+      "coordinates": [
+        -97.2798,
+        37.6436
+      ],
+      "color": "#D32F2F",
+      "role": "Tier-1 / Fuselages",
+      "status": "Critical threat"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "Deploy specialized manual riveting crews to override robotic assembly line.",
+          "Secure replacement end-effector assembly from manufacturing backup center.",
+          "Adjust downstream Renton assembly intake timeline to match delayed shell delivery."
+        ],
+        "timeline": "3 business days for robotic head swap and calibration"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform non-destructive x-ray testing on stringer rivets in the affected zone.",
+          "Verify fastener squeeze force telemetry via manual torque audits."
+        ],
+        "timeline": "36 hours of robotic safety and squeeze verification"
+      }
+    },
+    "downstreamBusinessImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
+    "mitigationObjective": "Bypass robotic end-effector failure using manual riveting overlays and safety audits.",
+    "ingestedAt": 1780500362538,
+    "sources": [
+      {
+        "title": "[Inc #603] Automated fuselage riveting head mechanical synchronization failure (critical micro-anomaly #16 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-603T",
+        "summary": "[Incident #603] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway."
+      },
+      {
+        "title": "[Inc #946] Automated fuselage riveting head mechanical synchronization failure (micro-indicator Ref #4253 tripped)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-946B",
+        "summary": "[Incident #946] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 5."
+      },
+      {
+        "title": "[Inc #534] Automated fuselage riveting head mechanical synchronization failure (Shift-A telemetry anomaly)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-534A",
+        "summary": "[Incident #534] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 4."
+      },
+      {
+        "title": "[Inc #187] Automated fuselage riveting head mechanical synchronization failure (critical micro-anomaly #73 logged)",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-187T",
+        "summary": "[Incident #187] The primary robotic riveting end-effector suffered a sudden mechanical binding, damaging two skin panel stringers. Wichita line #1 final assembly halts. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol."
+      }
+    ],
+    "category": "Operations & Capacity"
+  },
+  {
     "id": "SUP-A018B",
     "facility": "ASML EUV logistics network",
     "location": "Veldhoven, NL",
-    "disruption": "Schiphol cargo disruption creates risk for high-value EUV logistics",
+    "disruption": "Schiphol cargo disruption creates risk for high-value EUV logistics (4 articles)",
     "severity": 6.9,
     "likelihood": 62,
     "timeToHit": 10,
     "tier": 2,
-    "fullDescription": "Weather and cargo congestion at Amsterdam Schiphol have previously disrupted freighter operations and air-cargo flows. Because ASML's EUV systems depend on high-value precision components and controlled logistics, cargo disruption at Schiphol can create schedule risk for semiconductor equipment integration and downstream chip capacity expansion.",
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] Weather and cargo congestion at Amsterdam Schiphol have previously disrupted freighter operations and air-cargo flows. Because ASML's EUV systems depend on high-value precision components and controlled logistics, cargo disruption at Schiphol can create schedule risk for semiconductor equipment integration and downstream chip capacity expansion.",
     "sourceData": "ASML product context and Schiphol cargo disruption reporting",
     "mapPosition": {
       "coordinates": [
@@ -54,20 +541,26 @@
         "title": "Cargo congestion at Schiphol shows signs of easing",
         "url": "https://www.aircargonews.net/cargo-airport/2021/11/cargo-congestion-at-schiphol-shows-signs-of-easing/",
         "summary": "Air Cargo News reported cargo congestion at Schiphol and operational steps to reduce delays."
+      },
+      {
+        "title": "Schiphol cargo disruption creates risk for high-value EUV logistics",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-Q901R",
+        "summary": "Weather and cargo congestion at Amsterdam Schiphol have previously disrupted freighter operations and air-cargo flows. Because ASML's EUV systems depend on high-value precision components and controlled logistics, cargo disruption at Schiphol can create schedule risk for semiconductor equipment integration and downstream chip capacity expansion."
       }
     ],
-    "ingestedAt": 1780496958817
+    "ingestedAt": 1780499834450,
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-C293D",
     "facility": "Spirit AeroSystems Wichita Plant",
     "location": "Wichita, KS, US",
-    "disruption": "Spirit AeroSystems 737 MAX fuselage quality issue delayed Boeing deliveries",
+    "disruption": "Spirit AeroSystems 737 MAX fuselage quality issue delayed Boeing deliveries (4 articles)",
     "severity": 8.1,
     "likelihood": 78,
     "timeToHit": 7,
     "tier": 1,
-    "fullDescription": "Boeing and Spirit AeroSystems identified a 737 MAX quality issue involving improperly drilled holes in aft pressure bulkhead assemblies. The issue required inspections and rework, delaying near-term aircraft deliveries and adding pressure to Boeing's production recovery plan.",
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] Boeing and Spirit AeroSystems identified a 737 MAX quality issue involving improperly drilled holes in aft pressure bulkhead assemblies. The issue required inspections and rework, delaying near-term aircraft deliveries and adding pressure to Boeing's production recovery plan.",
     "sourceData": "Reuters, AP, and Supply Chain Dive reporting on Spirit AeroSystems quality issue",
     "mapPosition": {
       "coordinates": [
@@ -113,9 +606,15 @@
         "title": "Spirit AeroSystems production snags cause Boeing aircraft delivery delays",
         "url": "https://www.supplychaindive.com/news/spirit-boeing-manufacturing-issue-fuselage-production-delay-737-max/692148/",
         "summary": "Supply Chain Dive reported Spirit AeroSystems production snags tied to Boeing aircraft delivery delays."
+      },
+      {
+        "title": "Spirit AeroSystems 737 MAX fuselage quality issue delayed Boeing deliveries",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-L345M",
+        "summary": "Boeing and Spirit AeroSystems identified a 737 MAX quality issue involving improperly drilled holes in aft pressure bulkhead assemblies. The issue required inspections and rework, delaying near-term aircraft deliveries and adding pressure to Boeing's production recovery plan."
       }
     ],
-    "ingestedAt": 1780496956538
+    "ingestedAt": 1780499832968,
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-E994F",
@@ -179,7 +678,8 @@
         "summary": "Boeing asked suppliers for decade-long titanium purchase records as it widened checks into false documentation used to authenticate metal in commercial jets. Although aircraft safety was not reported as compromised, expanded traceability checks can create supplier workload, inspection delays, and material-release bottlenecks."
       }
     ],
-    "ingestedAt": 1780497389434
+    "ingestedAt": 1780497389434,
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-G065H",
@@ -190,7 +690,7 @@
     "likelihood": 88,
     "timeToHit": 0,
     "tier": 1,
-    "fullDescription": "Industry reporting found that aircraft and engine supply-chain bottlenecks continue to constrain airline capacity, with production recovery expected to lag demand. The mismatch increases operational costs, keeps older aircraft flying longer, and raises demand for spare engines and parts.",
+    "fullDescription": "[Clustered Event - 4 Sources Reporting] Industry reporting found that aircraft and engine supply-chain bottlenecks continue to constrain airline capacity, with production recovery expected to lag demand. The mismatch increases operational costs, keeps older aircraft flying longer, and raises demand for spare engines and parts.",
     "sourceData": "IATA and Oliver Wyman aerospace supply-chain analysis",
     "mapPosition": {
       "coordinates": [
@@ -236,9 +736,15 @@
         "title": "Aviation Supply Chain",
         "url": "https://www.iata.org/en/programs/ops-infra/techops/aviation-supply-chain/",
         "summary": "IATA summarized operational impacts from aviation supply-chain challenges, including delayed growth and higher maintenance costs."
+      },
+      {
+        "title": "Aircraft and engine supply-chain bottlenecks continue to constrain airline capacity",
+        "url": "http://localhost:8000/api/signals/simulate?inc=SUP-J012K",
+        "summary": "Industry reporting found that aircraft and engine supply-chain bottlenecks continue to constrain airline capacity, with production recovery expected to lag demand. The mismatch increases operational costs, keeps older aircraft flying longer, and raises demand for spare engines and parts."
       }
     ],
-    "ingestedAt": 1780497340020
+    "ingestedAt": 1780499832005,
+    "category": "Logistics & Transit"
   },
   {
     "id": "AIR-I552J",
@@ -302,7 +808,8 @@
         "summary": "Ongoing supply-chain constraints affecting LEAP engine production have continued to limit engine availability for commercial aircraft programs. Manufacturers and airlines have reported delivery schedule impacts due to shortages of critical engine components and maintenance-related bottlenecks. The issue affects both new aircraft deliveries and fleet availability across multiple operators."
       }
     ],
-    "ingestedAt": 1780497334085
+    "ingestedAt": 1780497334085,
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-K189L",
@@ -366,7 +873,8 @@
         "summary": "Rare earth export controls and shortages, including yttrium and other critical minerals, created supply risk for aerospace and semiconductor manufacturers. The shortages could affect high-temperature materials, electronics, coatings, and other critical components used across aviation supply chains."
       }
     ],
-    "ingestedAt": 1780497337410
+    "ingestedAt": 1780497337410,
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-M220N",
@@ -430,7 +938,8 @@
         "url": "http://localhost:8000/api/signals/simulate?inc=SUP-C123D",
         "summary": "More than 600 UAW workers at GE Aerospace's Evendale, Ohio plant and Erlanger, Kentucky distribution facility went on strike after failing to reach a contract agreement. The strike ended after a five-year labor deal was reached, reducing near-term risk to engine-related production and parts distribution."
       }
-    ]
+    ],
+    "category": "Operations & Capacity"
   },
   {
     "id": "SUP-A606B",
@@ -494,7 +1003,8 @@
         "url": "http://localhost:8000/api/signals/simulate?inc=SUP-F467R",
         "summary": "Striking Boeing Defense workers in the St. Louis area approved a new labor deal after a 101-day walkout that had hampered fighter-jet and defense-program production. The event represented a significant labor disruption and recovery point for Boeing's defense manufacturing network."
       }
-    ]
+    ],
+    "category": "Operations & Capacity"
   },
   {
     "id": "SUP-C412Y",
@@ -553,7 +1063,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/faa-audit-boeings-737-max-production-found-dozens-issues-nyt-reports-2024-03-12/",
         "summary": "Reuters summarized FAA audit findings involving Boeing and Spirit production-quality issues."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-R832T",
@@ -612,7 +1123,8 @@
         "url": "https://www.wsj.com/business/airlines/air-new-zealand-pauses-chicago-flights-due-to-engine-shortage-8c5c33a9",
         "summary": "WSJ reported Air New Zealand paused a long-haul route because of Boeing 787 engine shortages."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-650C",
@@ -671,7 +1183,8 @@
         "url": "https://aluminiumtoday.com/news/alcoas-spanish-smelter-remains-shut-but-long-term-prospects-look-good",
         "summary": "Aluminium International Today reported Alcoa's San Cipri\u00e1n smelter remained shut after the power outage."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-H506C",
@@ -730,7 +1243,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/howmet-needs-ramp-engine-parts-production-jet-output-rises-ceo-says-2025-05-30/",
         "summary": "Reuters reported Howmet needed to increase engine-parts output as jet production rises."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-H135B",
@@ -789,7 +1303,8 @@
         "url": "https://www.honeywellaerospace.com/",
         "summary": "Honeywell Aerospace describes its aircraft systems, avionics, engines, and services."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-DB25B",
@@ -848,7 +1363,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/supply-disruptions-cloud-aerospace-outlook-after-solid-first-half-2022-07-28/",
         "summary": "Reuters reported aerospace suppliers faced widespread shortages across materials, castings, semiconductors, and labor."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-C68DB",
@@ -907,7 +1423,8 @@
         "url": "https://uk.investing.com/news/stock-market-news/rollsroyce-sees-further-delay-in-trent-1000-engine-overhaul-1966514",
         "summary": "Investing.com republished Reuters reporting on further delays to Trent 1000 engine fixes."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-N831P",
@@ -965,7 +1482,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/boeing-asks-suppliers-decade-long-titanium-paper-trail-check-forgeries-widens-2024-07-26/",
         "summary": "Reuters reported Boeing expanded checks of titanium documentation amid tight aerospace-grade titanium supply and traceability concerns."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "FAC-H101I",
@@ -1018,7 +1536,8 @@
         "url": "https://flightplan.forecastinternational.com/2025/08/04/airbus-and-boeing-july-2025-production-rates-and-unofficial-deliveries/",
         "summary": "Forecast International discussed Boeing 767 and 777 production rates and delivery outlooks, including limited production increases."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-J736K",
@@ -1071,7 +1590,8 @@
         "url": "https://acmanet.org/boeing-starts-final-assembly-787-10-dreamliner/",
         "summary": "The article notes Spirit AeroSystems in Wichita as a source of major Boeing fuselage sections, supporting the supplier-location relationship."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-L665M",
@@ -1129,7 +1649,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/boeing-increasing-737-production-after-consulting-faa-2026-05-27/",
         "summary": "Reuters reported Boeing expected higher 787 output only if engine deliveries remain timely, tying engine availability to Boeing production."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-S384T",
@@ -1182,7 +1703,8 @@
         "url": "https://www.scmp.com/tech/big-tech/article/3161190/samsungs-memory-plants-china-face-uncertainty-xian-lockdown-adds",
         "summary": "SCMP reported that Xi\u2019an lockdown measures created logistical uncertainty for Samsung memory operations and shipments."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "FAC-U401V",
@@ -1235,7 +1757,8 @@
         "url": "https://wach.com/news/economy/giant-autoclave-curing-parts-at-boeing-sc-research-center",
         "summary": "WACH reported on a large autoclave curing composite parts at Boeing\u2019s North Charleston research and technology center."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   },
   {
     "id": "SUP-W826X",
@@ -1293,7 +1816,8 @@
         "url": "https://www.reuters.com/business/aerospace-defense/new-rare-earth-crisis-is-brewing-yttrium-shortages-spread-2025-11-14/",
         "summary": "Reuters reported export restrictions affecting critical materials used in aerospace, semiconductor, and energy industries, illustrating raw-material restriction risks."
       }
-    ]
+    ],
+    "category": "Logistics & Transit"
   },
   {
     "id": "SUP-A553M",
@@ -1346,7 +1870,8 @@
         "url": "https://report.basf.com/2025/en/_assets/downloads/strategy-basf-ar25.pdf",
         "summary": "BASF discusses ramping up renewable, recycled, and low-emission feedstocks across existing plants."
       }
-    ]
+    ],
+    "category": "External Infrastructure"
   },
   {
     "id": "SUP-C736P",
@@ -1399,6 +1924,7 @@
         "url": "https://www.toray.com/news/article.html?contentId=z5t2cvmy",
         "summary": "Toray described investment to ensure stable TORAYCA prepreg supply for Boeing 787 aircraft."
       }
-    ]
+    ],
+    "category": "Regulatory & Quality"
   }
 ]

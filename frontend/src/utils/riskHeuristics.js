@@ -63,7 +63,58 @@ export function setTaxonomyData(data) {
   taxonomyMapping = data;
 }
 
-export function getTaxonomy(id) {
+export function getTaxonomy(idOrObj) {
+  if (!idOrObj) return "External Infrastructure";
+  let id = "";
+  let text = "";
+  if (typeof idOrObj === "object") {
+    if (idOrObj.category) return idOrObj.category;
+    id = idOrObj.id || "";
+    text = ((idOrObj.disruption || "") + " " + (idOrObj.facility || "") + " " + (idOrObj.fullDescription || "")).toLowerCase();
+  } else {
+    id = idOrObj;
+  }
+
+  // 1. Check for Regulatory & Quality keywords
+  const qualityKeywords = [
+    "quality", "regulation", "regulatory", "audit", "defect", "defects",
+    "compliance", "inspection", "checks", "paperwork", "forgeries",
+    "documentation", "sanctions", "ban", "legal", "certificate", "traceability"
+  ];
+  if (qualityKeywords.some(k => text.includes(k))) {
+    return "Regulatory & Quality";
+  }
+
+  // 2. Check for Logistics & Transit keywords
+  const logisticsKeywords = [
+    "logistics", "transit", "shipping", "delays", "delay", "transport",
+    "freight", "cargo", "routing", "rail", "port", "customs", "border",
+    "carrier", "import", "delivery", "deliveries", "stalled", "freighter"
+  ];
+  if (logisticsKeywords.some(k => text.includes(k))) {
+    return "Logistics & Transit";
+  }
+
+  // 3. Check for Operations & Capacity keywords
+  const opsKeywords = [
+    "strike", "labor", "union", "workforce", "capacity", "shortage",
+    "shortages", "yield", "production", "constrain", "starvation",
+    "manufacturing", "kiln", "shutdown", "furnace", "mold", "autoclave",
+    "honing", "riveting", "outage", "spindle", "die", "billet", "smelting"
+  ];
+  if (opsKeywords.some(k => text.includes(k))) {
+    return "Operations & Capacity";
+  }
+
+  // 4. Check for External Infrastructure keywords
+  const infraKeywords = [
+    "power", "grid", "telemetry", "scada", "telecommunication", "utilities",
+    "weather", "freeze", "storm", "natural", "internet", "surge", "outage"
+  ];
+  if (infraKeywords.some(k => text.includes(k))) {
+    return "External Infrastructure";
+  }
+
   if (taxonomyMapping && taxonomyMapping.categories) {
     const match = taxonomyMapping.categories.find(cat => 
       cat.idPrefixes && cat.idPrefixes.some(prefix => id.startsWith(prefix))

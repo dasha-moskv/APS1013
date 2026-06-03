@@ -53,7 +53,7 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategories = [
   })) : DEFAULT_CATEGORIES;
 
   const categoryStats = activeCategories.map(cat => {
-    const count = threatRows.filter(row => getTaxonomy(row.id) === cat.name).length;
+    const count = threatRows.filter(row => getTaxonomy(row) === cat.name).length;
     const percentage = total > 0 ? ((count / total) * 100).toFixed(0) : 0;
     return { ...cat, count, percentage: parseInt(percentage) };
   });
@@ -82,7 +82,7 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategories = [
       <div className="p-3 flex flex-col gap-2 flex-1 justify-between">
         <div className="grid grid-cols-2 gap-2">
           {categoryStats.map((cat, idx) => {
-            const Icon = cat.icon;
+            const Icon = cat.icon || Activity;
             const isSelected = selectedCategories.includes(cat.name);
             const tooltipAlign = idx % 2 === 0 ? "left-0" : "right-0";
             const tooltipPosition = idx < 2 ? "top-full mt-2" : "bottom-full mb-2";
@@ -100,30 +100,32 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategories = [
                   isSelected
                     ? "bg-slate-900 border-slate-900 text-white"
                     : isDark
-                      ? "bg-[#0F1520] border-[#1E293B] hover:bg-[#151C2C] text-slate-300"
-                      : "bg-white border-slate-200 hover:bg-slate-50 text-slate-800"
+                      ? `bg-[#0F1520] ${cat.borderColor || "border-[#1E293B]"} hover:bg-[#151C2C] text-slate-300`
+                      : `bg-white ${cat.borderColor || "border-slate-200"} hover:bg-slate-50 text-slate-800`
                 }`}
               >
                 {/* Tooltip Overlay */}
-                <div className={`pointer-events-none absolute ${tooltipPosition} ${tooltipAlign} z-[100] w-64 max-w-[calc(100vw-32px)] p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
-                  isDark
-                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md"
-                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
-                }`}>
-                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
-                    <span className={`h-2 w-2 rounded-none ${cat.color}`} />
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${cat.textColor}`}>{cat.name}</span>
+                {cat.description && (
+                  <div className={`pointer-events-none absolute ${tooltipPosition} ${tooltipAlign} z-[100] w-64 max-w-[calc(100vw-32px)] p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md"
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      {cat.color && <span className={`h-2 w-2 rounded-none ${cat.color}`} />}
+                      <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${cat.textColor || ""}`}>{cat.name}</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      {cat.description}
+                    </p>
                   </div>
-                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                    {cat.description}
-                  </p>
-                </div>
+                )}
 
                 <div className="flex items-center justify-between gap-1">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <Icon className={`h-3.5 w-3.5 shrink-0 ${isSelected ? "text-white" : cat.textColor}`} />
+                    <Icon className={`h-3.5 w-3.5 shrink-0 ${isSelected ? "text-white" : cat.textColor || ""}`} />
                     <span className="text-[9.5px] font-bold font-sans tracking-tight leading-tight truncate">
-                      {cat.name.split(" & ")[0]}
+                      {cat.name ? cat.name.split(" & ")[0] : ""}
                     </span>
                   </div>
                   <span className={`font-mono text-[9px] font-bold shrink-0 ${isSelected ? "text-white" : isDark ? "text-slate-400" : "text-slate-700"}`}>
@@ -134,7 +136,7 @@ export default function SignalTaxonomy({ threatRows = [], selectedCategories = [
                 <div className={`w-full h-1 rounded-none overflow-hidden mt-1.5 ${progressTrack}`}>
                   <div
                     style={{ width: `${cat.percentage}%` }}
-                    className={`h-full transition-all duration-500 rounded-none ${isSelected ? "bg-[#86BC25]" : cat.color}`}
+                    className={`h-full transition-all duration-500 rounded-none ${isSelected ? "bg-[#86BC25]" : cat.color || "bg-[#86BC25]"}`}
                   />
                 </div>
               </div>
