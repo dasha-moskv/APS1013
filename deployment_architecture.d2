@@ -1,0 +1,263 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+ClientWorkstation: "User Workstation (Boeing Network)" {
+  tooltip: "«device»"
+  style.fill: "#F8FAFC"
+  style.stroke: "#64748B"
+  style.border-radius: 8
+
+  WebBrowser: "Web Browser" {
+    tooltip: "«execution environment»"
+    style.fill: "#F1F5F9"
+    style.stroke: "#475569"
+    
+    ReactSPA: "React + Vite SPA\n(Supply Chain Cockpit)" {
+      tooltip: "«artifact»"
+      style.fill: "#EFF6FF"
+      style.stroke: "#3B82F6"
+    }
+  }
+}
+
+SecureCloud: "Boeing Secure Cloud Environment (VPC)" {
+  tooltip: "«infrastructure»"
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+
+  CDN: "Web Distribution Node / CDN\n(Nginx / CloudFront)" {
+    tooltip: "«infrastructure»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+
+    StaticAssets: "Compiled Static UI Assets\n(HTML, JS, CSS, JSON DBs)" {
+      tooltip: "«artifact»"
+      style.fill: "#EFF6FF"
+      style.stroke: "#3B82F6"
+    }
+  }
+
+  ALB: "Application Load Balancer (ALB)" {
+    tooltip: "«infrastructure»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  AppCluster: "Backend App Service Cluster\n(Elastic Container Service - ECS)" {
+    tooltip: "«execution environment»"
+    style.fill: "#F0FDF4"
+    style.stroke: "#15803D"
+    style.border-radius: 6
+
+    FastAPIContainer: "FastAPI Web Container" {
+      tooltip: "«container»"
+      style.fill: "#F8FAFC"
+      style.stroke: "#64748B"
+
+      API_Gateway: "FastAPI Gateway & Orchestrator\n(main.py / Uvicorn)" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+      Ingest_Controller: "Ingestion Pipeline Controller" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+    }
+
+    AIAgentContainer: "AI Processing Container" {
+      tooltip: "«container»"
+      style.fill: "#F8FAFC"
+      style.stroke: "#64748B"
+
+      Agent_Orchestrator: "Multi-Agent Orchestrator" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+      Threat_Agent: "Threat Validator AI\n(verify_supply_base.py)" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+      Impact_Agent: "Impact Analyzer AI\n(analyze_signals.py)" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+      Playbook_Agent: "Playbook Gen AI\n(generate_mitigation_and_validation.py)" {
+        tooltip: "«component»"
+        style.fill: "#F0FDF4"
+        style.stroke: "#15803D"
+      }
+    }
+  }
+
+  DBSubnet: "Database Subnet (Isolated VPC Private Subnet)" {
+    tooltip: "«subnet»"
+    style.fill: "#FEFBF0"
+    style.stroke: "#F59E0B"
+    style.border-radius: 6
+
+    PostgresDB: "PostgreSQL Instance (Amazon RDS)\nSupplier Profiles\nDisruption Logs\nMitigation Playbooks" {
+      shape: cylinder
+      tooltip: "«database»"
+      style.fill: "#FEFBF0"
+      style.stroke: "#F59E0B"
+    }
+
+    Neo4jDB: "Neo4j Instance (Graph Database)\nN-Tier Supply Web\nBill of Materials (BOM)" {
+      shape: cylinder
+      tooltip: "«database»"
+      style.fill: "#FEFBF0"
+      style.stroke: "#F59E0B"
+    }
+
+    VectorDB: "Vector Database (pgvector / Qdrant)\nHistorical Precedents\nSLAs & Contracts" {
+      shape: cylinder
+      tooltip: "«database»"
+      style.fill: "#FEFBF0"
+      style.stroke: "#F59E0B"
+    }
+  }
+}
+
+ExtCloud: "External APIs & Public Services" {
+  tooltip: "«infrastructure»"
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+
+  OpenAIAPI: "OpenAI Platform (SaaS)" {
+    tooltip: "«infrastructure»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+
+    GPT: "GPT-4o API\n(RAG Reasoning)" {
+      tooltip: "«component»"
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+    }
+  }
+
+  OSINTAPI: "OSINT Data Feeds" {
+    tooltip: "«infrastructure»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+
+    NewsFeed: "News & Weather API\nRSS & Public Streams" {
+      tooltip: "«component»"
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+    }
+  }
+}
+
+EnterpriseNetwork: "Boeing Enterprise Network (Secure Intranet)" {
+  tooltip: "«infrastructure»"
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+
+  ERPGateway: "ERP/MRP Gateway" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+
+    ERPSystem: "SAP / Oracle ERP\n(Materials & Logistics)" {
+      tooltip: "«component»"
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+    }
+  }
+}
+
+SupplierCloud: "Supplier Systems" {
+  tooltip: "«infrastructure»"
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+
+  SupplierSystems: "Supplier Communications" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+
+    SupplierPortal: "Supplier Portal / Email\n(Interactive Outreach)" {
+      tooltip: "«component»"
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+    }
+  }
+}
+
+# --- Connections & Flow Labels ---
+
+ClientWorkstation.WebBrowser.ReactSPA -> SecureCloud.CDN.StaticAssets: "1. Download UI Assets\n(HTTP/HTTPS: 80/443)" {
+  style.stroke: "#475569"
+}
+
+ClientWorkstation.WebBrowser.ReactSPA -> SecureCloud.ALB: "2. User Input & Requests\n(HTTPS / SSE: 443)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.ALB -> SecureCloud.AppCluster.FastAPIContainer.API_Gateway: "3. Proxy Requests\n(HTTP: 8000)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.FastAPIContainer.API_Gateway <-> SecureCloud.DBSubnet.PostgresDB: "Read/Write Logs & Metadata\n(PostgreSQL / TCP: 5432)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.FastAPIContainer.API_Gateway -> SecureCloud.AppCluster.AIAgentContainer.Agent_Orchestrator: "Delegate Processing\n(Internal Python Execution)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Agent_Orchestrator -> SecureCloud.AppCluster.AIAgentContainer.Threat_Agent: "internal call" {
+  style.stroke: "#475569"
+}
+SecureCloud.AppCluster.AIAgentContainer.Agent_Orchestrator -> SecureCloud.AppCluster.AIAgentContainer.Impact_Agent: "internal call" {
+  style.stroke: "#475569"
+}
+SecureCloud.AppCluster.AIAgentContainer.Agent_Orchestrator -> SecureCloud.AppCluster.AIAgentContainer.Playbook_Agent: "internal call" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Threat_Agent -> ExtCloud.OSINTAPI.NewsFeed: "Ingest Signals\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Impact_Agent <-> SecureCloud.DBSubnet.Neo4jDB: "Traverse N-Tier Supply Graph\n(Bolt Protocol / TCP: 7687)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Playbook_Agent <-> SecureCloud.DBSubnet.VectorDB: "Query Precedent RAG Embeddings\n(Vector Query / TCP: 5432/6333)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Playbook_Agent <-> ExtCloud.OpenAIAPI.GPT: "Generate Strategy & Text\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.AIAgentContainer.Impact_Agent -> EnterpriseNetwork.ERPGateway.ERPSystem: "Pull Live Lead Times / Inventory\n(HTTPS / RFC API)" {
+  style.stroke: "#475569"
+  style.stroke-dash: 5
+}
+
+SecureCloud.AppCluster.FastAPIContainer.API_Gateway -> EnterpriseNetwork.ERPGateway.ERPSystem: "Dispatch Approved Purchase Orders\n(HTTPS / RFC API)" {
+  style.stroke: "#475569"
+}
+
+SecureCloud.AppCluster.FastAPIContainer.API_Gateway -> SupplierCloud.SupplierSystems.SupplierPortal: "Send Automatic Supplier Outreach\n(HTTPS / SMTP)" {
+  style.stroke: "#475569"
+}
+
+SupplierCloud.SupplierSystems.SupplierPortal -> SecureCloud.AppCluster.FastAPIContainer.API_Gateway: "Supplier Response Callback\n(HTTPS Webhook / Port 443)" {
+  style.stroke: "#475569"
+  style.stroke-dash: 5
+}

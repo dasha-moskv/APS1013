@@ -1,0 +1,189 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+ClientLayer: "Presentation Layer" {
+  style.fill: "#F8FAFC"
+  style.stroke: "#64748B"
+  style.border-radius: 8
+
+  WebBrowser: "Web Browser" {
+    tooltip: "«execution environment»"
+    style.fill: "#F1F5F9"
+    style.stroke: "#475569"
+    
+    ReactSPA: "React SPA\n(Supply Chain Cockpit)" {
+      tooltip: "«artifact»"
+      style.fill: "#EFF6FF"
+      style.stroke: "#3B82F6"
+    }
+  }
+}
+
+AppLayer: "FastAPI Core Application Services" {
+  tooltip: "«execution environment»"
+  style.fill: "#F0FDF4"
+  style.stroke: "#15803D"
+  style.border-radius: 8
+
+  API_Gateway: "FastAPI Gateway & Orchestrator\n(main.py / Uvicorn)" {
+    tooltip: "«component»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  Ingest_Controller: "Ingestion Pipeline Controller\n(Real-Time Ingestion Engine)" {
+    tooltip: "«component»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+}
+
+AgenticCluster: "Multi-Agent Processing Cluster (LangGraph)" {
+  tooltip: "«execution environment»"
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+
+  Agent_Orchestrator: "Multi-Agent Orchestrator\n(LangGraph State Controller)" {
+    tooltip: "«component»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  Threat_Agent: "Threat Validator AI\n(verify_supply_base.py)" {
+    tooltip: "«component»"
+    style.fill: "#F0FDF4"
+    style.stroke: "#15803D"
+  }
+
+  Impact_Agent: "Impact Analyzer AI\n(analyze_signals.py)" {
+    tooltip: "«component»"
+    style.fill: "#F0FDF4"
+    style.stroke: "#15803D"
+  }
+
+  Playbook_Agent: "Playbook Gen AI\n(generate_mitigation_and_validation.py)" {
+    tooltip: "«component»"
+    style.fill: "#F0FDF4"
+    style.stroke: "#15803D"
+  }
+}
+
+DBLayer: "Data & Storage Layer" {
+  style.fill: "#FEFBF0"
+  style.stroke: "#F59E0B"
+  style.border-radius: 8
+
+  PostgresDB: "PostgreSQL Database\n- Relational Metadata\n- Audit Trails & Logs\n- Active Disruption Cards" {
+    shape: cylinder
+    tooltip: "«database»"
+    style.fill: "#FEFBF0"
+    style.stroke: "#F59E0B"
+  }
+
+  Neo4jDB: "Neo4j Graph Database\n- N-Tier Supply Web\n- Bill of Materials (BOM)\n- Supplier Linkages" {
+    shape: cylinder
+    tooltip: "«database»"
+    style.fill: "#FEFBF0"
+    style.stroke: "#F59E0B"
+  }
+
+  VectorDB: "Vector Database (Qdrant/pgvector)\n- Historical Playbooks\n- SLAs & Contracts\n- RAG Embeddings" {
+    shape: cylinder
+    tooltip: "«database»"
+    style.fill: "#FEFBF0"
+    style.stroke: "#F59E0B"
+  }
+}
+
+ExtSystems: "External Systems & Integrations" {
+  style.fill: "#F8FAFC"
+  style.stroke: "#475569"
+  style.border-radius: 8
+
+  OSINTAPI: "OSINT Data Feeds\n- News & Weather APIs\n- Port Authority Streams\n- RSS Feeds" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  OpenAIAPI: "OpenAI Platform (SaaS)\n- GPT-4o RAG Reasoning" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  BoeingERP: "Boeing ERP/MRP Gateway\n- SAP / Oracle\n- Live Lead Times & Inventory\n- ASL Verification" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+
+  SupplierPortal: "Supplier Communications\n- Email (SMTP)\n- Supplier Portal Response" {
+    tooltip: "«system»"
+    style.fill: "#F8FAFC"
+    style.stroke: "#64748B"
+  }
+}
+
+# --- Connections & Flows ---
+
+ClientLayer.WebBrowser.ReactSPA -> AppLayer.API_Gateway: "User Commands & REST/SSE Requests\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+}
+
+# Ingestion Pipeline
+ExtSystems.OSINTAPI -> AppLayer.Ingest_Controller: "Poll & Stream Disruption Signals\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+}
+
+AppLayer.Ingest_Controller -> AppLayer.API_Gateway: "Forward Raw Signals" {
+  style.stroke: "#475569"
+}
+
+AppLayer.API_Gateway -> AgenticCluster.Agent_Orchestrator: "Trigger Analysis & Run Agents" {
+  style.stroke: "#475569"
+}
+
+# Databases
+AppLayer.API_Gateway <-> DBLayer.PostgresDB: "Persist Disruption Metadata & Playbooks\n(SQL / TCP: 5432)" {
+  style.stroke: "#475569"
+}
+
+# Agent processing flows
+AgenticCluster.Agent_Orchestrator -> AgenticCluster.Threat_Agent: "Verify Signal"
+AgenticCluster.Agent_Orchestrator -> AgenticCluster.Impact_Agent: "Assess Downstream Impact"
+AgenticCluster.Agent_Orchestrator -> AgenticCluster.Playbook_Agent: "Construct Playbook"
+
+AgenticCluster.Threat_Agent -> ExtSystems.OSINTAPI: "Cross-Reference Source Signal\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+  style.stroke-dash: 5
+}
+
+AgenticCluster.Impact_Agent <-> DBLayer.Neo4jDB: "Traverse N-Tier Supply Graph / BOM\n(Bolt Protocol / TCP: 7687)" {
+  style.stroke: "#475569"
+}
+
+AgenticCluster.Impact_Agent <-> ExtSystems.BoeingERP: "Pull Lead Times & Inventory Buffers\n(RFC API / HTTPS)" {
+  style.stroke: "#475569"
+}
+
+AgenticCluster.Playbook_Agent <-> DBLayer.VectorDB: "Search Historical Precedents & SLAs\n(Vector Search / TCP: 6333)" {
+  style.stroke: "#475569"
+}
+
+AgenticCluster.Playbook_Agent <-> ExtSystems.OpenAIAPI: "Draft RAG Mitigation & Validation\n(HTTPS: 443)" {
+  style.stroke: "#475569"
+}
+
+# Playbook dispatch
+AppLayer.API_Gateway -> ExtSystems.BoeingERP: "Dispatch Approved PO Adjustments" {
+  style.stroke: "#475569"
+}
+
+AppLayer.API_Gateway <-> ExtSystems.SupplierPortal: "Automated Supplier Outreach & Response\n(SMTP / Webhooks)" {
+  style.stroke: "#475569"
+}

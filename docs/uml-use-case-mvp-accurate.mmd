@@ -1,0 +1,63 @@
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'fontFamily': 'Inter, system-ui, -apple-system, sans-serif',
+    'fontSize': '14px',
+    'background': '#ffffff',
+    'primaryColor': '#F8FAFC',
+    'primaryTextColor': '#0F172A',
+    'primaryBorderColor': '#E2E8F0',
+    'lineColor': '#64748B',
+    'secondaryColor': '#F1F5F9',
+    'tertiaryColor': '#FFFFFF',
+    'nodeBorder': '#CBD5E1'
+  },
+  'flowchart': {
+    'defaultRenderer': 'dagre'
+  }
+}}%%
+flowchart LR
+ subgraph Phase1["Phase 1: Ingestion & Detection"]
+    direction TB
+        UC_Ingest(["Ingest & Normalize Signals"])
+        UC_Triage(["Triage Threat & Score Risk"])
+        UC_Alert(["Trigger Disruption Alert"])
+        UC_Monitor(["Monitor Global Dashboard"])
+  end
+ subgraph Phase2["Phase 2: Impact & Strategy"]
+    direction TB
+        UC_ReqScenario(["Request Mitigation Scenarios"])
+        UC_AssessBOM(["Assess Financial Impact"])
+        UC_DraftPlaybook(["Draft Mitigation Playbook"])
+  end
+ subgraph SCRM["🛡️ SCRM AI Platform"]
+    direction TB
+        Phase1
+        Phase2
+  end
+    Manager("Supply Chain Manager") --- UC_Monitor & UC_ReqScenario
+    Crawler("News Feeds") --- UC_Ingest
+    UC_Triage --- AIAgents("🤖 AI Agents")
+    UC_AssessBOM --- AIAgents
+    UC_DraftPlaybook --- AIAgents
+    UC_Ingest -. "<<include>>" .-> UC_Triage
+    UC_Triage -. "<<extend>> <br>(If score > threshold)" .-> UC_Alert
+    UC_ReqScenario -. "<<include>>" .-> UC_AssessBOM & UC_DraftPlaybook
+
+     UC_Ingest:::phase1
+     UC_Triage:::phase1
+     UC_Alert:::phase1
+     UC_Monitor:::phase1
+     UC_ReqScenario:::phase2
+     UC_AssessBOM:::phase2
+     UC_DraftPlaybook:::phase2
+     Manager:::actor
+     Crawler:::actor
+     AIAgents:::aiActor
+    classDef actor fill:#EFF6FF,stroke:#3B82F6,stroke-width:2px,color:#1E3A8A,font-weight:bold
+    classDef aiActor fill:#F5F3FF,stroke:#8B5CF6,stroke-width:2px,color:#4C1D95,font-weight:bold
+    classDef phase1 fill:#ECFDF5,stroke:#10B981,stroke-width:2px,color:#064E3B,font-weight:bold
+    classDef phase2 fill:#FFFBEB,stroke:#F59E0B,stroke-width:2px,color:#78350F,font-weight:bold
+    style Phase1 fill:#F6FDF9,stroke:#A7F3D0,stroke-width:1px
+    style Phase2 fill:#FFFDF5,stroke:#FDE68A,stroke-width:1px
+    style SCRM fill:#FFFFFF,stroke:#94A3B8,stroke-width:2.5px

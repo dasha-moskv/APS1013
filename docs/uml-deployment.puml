@@ -1,0 +1,172 @@
+@startuml Boeing_Supplier_Disruption_Radar_Deployment
+!theme plain
+skinparam BackgroundColor #FFFFFF
+skinparam RoundCorner 8
+skinparam Shadowing false
+skinparam DefaultFontName "Inter, system-ui, -apple-system, sans-serif"
+skinparam DefaultFontSize 12
+
+' Custom element styling
+skinparam node {
+    BackgroundColor #F8FAFC
+    BorderColor #64748B
+    FontColor #0F172A
+    FontSize 12
+    FontStyle bold
+}
+
+skinparam database {
+    BackgroundColor #FEFBF0
+    BorderColor #F59E0B
+    FontColor #78350F
+    FontSize 12
+    FontStyle bold
+}
+
+skinparam artifact {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #1E3A8A
+    FontSize 11
+}
+
+skinparam component {
+    BackgroundColor #F0FDF4
+    BorderColor #15803D
+    FontColor #14532D
+    FontSize 11
+}
+
+skinparam cloud {
+    BackgroundColor #FAF5FF
+    BorderColor #7C3AED
+    FontColor #4C1D95
+    FontSize 12
+    FontStyle bold
+}
+
+' Connection line styles
+skinparam ArrowColor #475569
+skinparam ArrowThickness 1.5
+skinparam ArrowFontSize 10
+skinparam ArrowFontName "JetBrains Mono, system-ui, monospace"
+
+header Project Radar - Deployment Architecture Diagram
+footer Boeing SCRM AI Platform | Confidential & Proprietary
+
+title Boeing Supplier Disruption Radar (Project Radar)\nDeployment Architecture (MVP vs. Enterprise Target)
+
+' --- CLIENT LAYER ---
+
+node "User Workstation (Boeing Network)" <<device>> as ClientWorkstation {
+    node "Web Browser" <<execution environment>> as WebBrowser {
+        artifact "React + Vite SPA\n(Supply Chain Cockpit)" as ReactSPA
+    }
+}
+
+' --- AWS / BOEING SECURE PRIVATE CLOUD ---
+
+cloud "Boeing Secure Cloud Environment (VPC)" as SecureCloud {
+    
+    node "Web Distribution Node / CDN\n(Nginx / CloudFront)" <<infrastructure>> as CDN {
+        artifact "Compiled Static UI Assets\n(HTML, JS, CSS, JSON DBs)" as StaticAssets
+    }
+
+    node "Application Load Balancer\n(ALB)" <<infrastructure>> as ALB {
+    }
+
+    node "Backend App Service Cluster\n(Elastic Container Service - ECS)" <<execution environment>> as AppCluster {
+        node "FastAPI Web Container" <<container>> as FastAPIContainer {
+            component "FastAPI Gateway & Orchestrator\n(main.py / Uvicorn)" as API_Gateway
+            component "Ingestion Pipeline Controller" as Ingest_Controller
+        }
+        
+        node "AI Processing Container" <<container>> as AIAgentContainer {
+            component "Multi-Agent Orchestrator" as Agent_Orchestrator
+            component "Threat Validator AI\n(verify_supply_base.py / collect_signals.py)" as Threat_Agent
+            component "Impact Analyzer AI\n(analyze_signals.py / BOM mapping)" as Impact_Agent
+            component "Playbook Gen AI\n(generate_mitigation_and_validation.py)" as Playbook_Agent
+        }
+    }
+
+    node "Database Subnet (Isolated VPC Private Subnet)" <<subnet>> as DBSubnet {
+        database "PostgreSQL Instance\n(Amazon RDS)" <<database>> as PostgresDB {
+            label "Supplier Profiles\nDisruption Logs\nMitigation Playbooks"
+        }
+        
+        database "Neo4j Instance\n(Graph Database)" <<database>> as Neo4jDB {
+            label "N-Tier Supply Web\nBill of Materials (BOM)"
+        }
+        
+        database "Vector Database\n(pgvector / Qdrant)" <<database>> as VectorDB {
+            label "Historical Precedents\nSLAs & Contracts"
+        }
+    }
+}
+
+' --- EXTERNAL SERVICES & LEGACY SYSTEMS ---
+
+cloud "External APIs & Public Services" as ExtCloud {
+    node "OpenAI Platform (SaaS)" as OpenAIAPI {
+        component "GPT-4o API\n(RAG Reasoning)" as GPT
+    }
+    
+    node "OSINT Data Feeds" as OSINTAPI {
+        component "News & Weather API\nRSS & Public Streams" as NewsFeed
+    }
+}
+
+cloud "Boeing Enterprise Network (Secure Intranet)" as EnterpriseNetwork {
+    node "ERP/MRP Gateway" <<system>> as ERPGateway {
+        component "SAP / Oracle ERP\n(Materials & Logistics)" as ERPSystem
+    }
+}
+
+cloud "Supplier Systems" as SupplierCloud {
+    node "Supplier Communications" <<system>> as SupplierSystems {
+        component "Supplier Portal / Email\n(Interactive Outreach)" as SupplierPortal
+    }
+}
+
+' --- DEVELOPMENT AND MVP HYBRID NOTES ---
+
+note left of DBSubnet
+  **MVP Database Configuration:**
+  Currently decoupled as static JSON
+  files located in:
+  * `/frontend/src/data/`
+  * `/frontend/public/data/`
+  (e.g., `threatRegistry.json`, `knowledgeGraph.json`)
+end note
+
+note left of AppCluster
+  **Local MVP Dev Environment:**
+  - Frontend: Vite Dev Server on port 5173
+  - Backend: FastAPI/Uvicorn on port 8000
+  - Python scripts running locally in venv
+end note
+
+' --- NETWORK RELATIONSHIPS & PROTOCOLS ---
+
+ReactSPA -down-> StaticAssets : 1. Download UI Assets\n(HTTP/HTTPS: 80/443)
+ReactSPA -right-> ALB : 2. User Input & Requests\n(HTTPS / SSE: 443)
+ALB -right-> API_Gateway : 3. Proxy Requests\n(HTTP: 8000)
+
+API_Gateway <--> PostgresDB : Read/Write Logs & Metadata\n(PostgreSQL / TCP: 5432)
+API_Gateway -down-> Agent_Orchestrator : Delegate Processing\n(Internal Python Execution)
+
+Agent_Orchestrator -down-> Threat_Agent
+Agent_Orchestrator -down-> Impact_Agent
+Agent_Orchestrator -down-> Playbook_Agent
+
+Threat_Agent -up-> OSINTAPI : Ingest Signals\n(HTTPS: 443)
+Impact_Agent <--> Neo4jDB : Traverse N-Tier Supply Graph\n(Bolt Protocol / TCP: 7687)
+Playbook_Agent <--> VectorDB : Query Precedent RAG Embeddings\n(Vector Query / TCP: 5432 / 6333)
+Playbook_Agent <--> OpenAIAPI : Generate Strategy & Text\n(HTTPS: 443)
+
+Impact_Agent -.-> ERPSystem : Pull Live Lead Times / Inventory\n(HTTPS / RFC API)
+API_Gateway ===> ERPSystem : Dispatch Approved Purchase Orders\n(HTTPS / RFC API)
+API_Gateway ===> SupplierSystems : Send Automatic Supplier Outreach\n(HTTPS / SMTP)
+SupplierSystems -.-> API_Gateway : Supplier Response Callback\n(HTTPS Webhook / Port 443)
+
+@enduml
