@@ -221,13 +221,14 @@ DATA_DIR.mkdir(exist_ok=True)
 THREAT_REGISTRY_PATH = DATA_DIR / "threatRegistry.json"
 SIGNALS_PATH = DATA_DIR / "signals.json"
 
-# Copy baseline JSON databases from frontend assets folder if not present
-FRONTEND_DATA_DIR = BACKEND_ROOT / ".." / "frontend" / "public" / "data"
+# Copy baseline JSON databases from frontend assets folder on startup to ensure a clean starting state
+FRONTEND_DATA_DIR = BACKEND_ROOT / ".." / "frontend" / "src" / "data"
 if FRONTEND_DATA_DIR.exists():
-    if not THREAT_REGISTRY_PATH.exists() and (FRONTEND_DATA_DIR / "threatRegistry.json").exists():
+    if (FRONTEND_DATA_DIR / "threatRegistry.json").exists():
         shutil.copy(FRONTEND_DATA_DIR / "threatRegistry.json", THREAT_REGISTRY_PATH)
-    if not SIGNALS_PATH.exists() and (FRONTEND_DATA_DIR / "signals.json").exists():
+    if (FRONTEND_DATA_DIR / "signals.json").exists():
         shutil.copy(FRONTEND_DATA_DIR / "signals.json", SIGNALS_PATH)
+
 
 # Highly realistic fallback supply base signals when OpenAI is not configured
 MOCK_POOL = [
@@ -649,11 +650,13 @@ def simulate_signal():
         unloaded_signals = [s for s in real_signals if s["id"] not in registry_ids]
 
         if not unloaded_signals:
-            logger.info("SIMULATOR PIPELINE: No new signals left in signals.json to ingest.")
-            raise HTTPException(status_code=404, detail="No more new signals available in the database.")
-
-        selected_signal = random.choice(unloaded_signals).copy()
-        logger.info(f"SIMULATOR PIPELINE: Selecting signal {selected_signal['id']} from signals.json pool.")
+            logger.info("SIMULATOR PIPELINE: No new signals left in signals.json pool. Generating a procedurally unique variation.")
+            # Select a random signal from the base pool and generate a unique variation
+            base_sig = random.choice(real_signals)
+            selected_signal = make_signal_truly_unique(base_sig)
+        else:
+            selected_signal = random.choice(unloaded_signals).copy()
+            logger.info(f"SIMULATOR PIPELINE: Selecting signal {selected_signal['id']} from signals.json pool.")
 
         selected_signal["ingestedAt"] = int(time.time() * 1000)
         selected_signal["category"] = get_taxonomy_by_id(
