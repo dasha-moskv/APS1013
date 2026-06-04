@@ -204,17 +204,8 @@ To ensure the system is completely ready for enterprise backend API integrations
     uvicorn main:app --host 127.0.0.1 --port 8000
     ```
 
-### 🛰️ Background Scraper Daemon
-To run the automated background scraper loop that feeds data continuously to the portal database:
-1. Navigate into the `scripts` folder and run the scheduler:
-    ```bash
-    cd scripts
-    python run_scheduler.py
-    ```
-2. Watch the logs outputted to `scripts/scheduler.log`:
-    ```bash
-    tail -f scheduler.log
-    ```
+### 🛰️ Background Scraper Daemon (Archived)
+The 7-second background scraper daemon (`run_scheduler.py`) has been moved to the `archive/` folder. Background scraping is no longer active by default, as the portal utilizes the on-demand **Fetch Real News** feed in the Topbar and live transient signal simulations.
 
 ### 🛰️ Transient Live News Ingestion & Simulation
 Starting data is fully hardcoded inside the frontend bundles under `frontend/src/data/` to guarantee instant load times and deterministic state. Dynamic operations use the following transient patterns:
