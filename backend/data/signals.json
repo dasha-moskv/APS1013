@@ -1,7 +1,7 @@
 [
   {
     "id": "SUP-F467R",
-    "facility": "Boeing Defense St. Louis-area facilities",
+    "facility": "Boeing Defense St. Louis-area Facilities",
     "location": "St. Louis, MO, US",
     "disruption": "Boeing Defense St. Louis strike ended after union approved new contract",
     "severity": 5.0,
@@ -186,7 +186,7 @@
   },
   {
     "id": "SUP-G789H",
-    "facility": "Aerospace critical mineral supplier base",
+    "facility": "Aerospace Critical Mineral Supplier Base",
     "location": "Global / China-linked supply routes",
     "disruption": "Rare earth shortages threaten aerospace, semiconductor, and energy supply chains",
     "severity": 8.6,
@@ -247,7 +247,7 @@
   },
   {
     "id": "SUP-J012K",
-    "facility": "Commercial aircraft engine and parts supplier base",
+    "facility": "Commercial Aircraft Engine and Parts Supplier Base",
     "location": "Global",
     "disruption": "Aircraft and engine supply-chain bottlenecks continue to constrain airline capacity",
     "severity": 8.0,
@@ -369,7 +369,7 @@
   },
   {
     "id": "SUP-N678P",
-    "facility": "Aerospace titanium supplier network",
+    "facility": "Aerospace Titanium Supplier Network",
     "location": "US / Global",
     "disruption": "Boeing widened titanium documentation checks after false paperwork concerns",
     "severity": 7.6,
@@ -430,7 +430,7 @@
   },
   {
     "id": "SUP-Q901R",
-    "facility": "ASML EUV logistics network",
+    "facility": "ASML EUV Logistics Network",
     "location": "Veldhoven, NL",
     "disruption": "Schiphol cargo disruption creates risk for high-value EUV logistics",
     "severity": 6.9,
