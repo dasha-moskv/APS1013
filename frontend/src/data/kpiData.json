@@ -1,0 +1,21 @@
+[
+  {
+    "id": "monitored-nodes",
+    "label": "Total Revenue Exposure",
+    "value": 238.4,
+    "subtext": "Direct financial impact at risk"
+  },
+  {
+    "id": "active-risks",
+    "label": "Disrupted Nodes",
+    "value": 12,
+    "criticalCount": 3,
+    "elevatedCount": 9
+  },
+  {
+    "id": "network-health",
+    "label": "Network SLA Stability",
+    "value": 82.4,
+    "subtext": "-2.1% drop vs last week"
+  }
+]

@@ -227,8 +227,8 @@ export default function HealthMonitorTable({
         agentInsight: row.playbook?.mitigationPlan?.steps?.[0]
           ? `Parsed real-time telemetry from ${row.facility}. Projected hit time is ${row.timeToHit ? row.timeToHit + ' days' : 'immediate'}.`
           : `Monitored active signal streams and initialized automatedSCR playbooks.`,
-        timestamp: new Date(Date.now() - 3600000).toISOString(),
-        confidence: `${(92.0 + row.severity).toFixed(1)}%`,
+        timestamp: new Date(now - 3600000).toISOString(),
+        confidence: `${(80.0 + row.severity * 0.9).toFixed(1)}%`,
         latency: `${Math.floor(120 + row.severity * 15)}ms`,
         dataSize: `${(row.severity * 6.4).toFixed(1)} KB`,
         events: [

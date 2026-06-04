@@ -11,22 +11,32 @@ import BaseIngest from "./components/BaseIngest";
 import MitigationPlaybooks from "./components/MitigationPlaybooks";
 import AIJudgeGovernance from "./components/AIJudgeGovernance";
 
+// Hardcoded Initial Baseline Datasets
+import initialThreatRegistry from "./data/threatRegistry.json";
+import initialKpiData from "./data/kpiData.json";
+import initialKnowledgeGraph from "./data/knowledgeGraph.json";
+import initialSignals from "./data/signals.json";
+import initialDroppedSignals from "./data/droppedSignals.json";
+import initialPlaybookRecommendations from "./data/playbookRecommendations.json";
+import initialCSuiteData from "./data/cSuiteData.json";
+import initialPipelineData from "./data/pipelineData.json";
 
+const mappedInitialThreats = initialThreatRegistry.map(t => ({ ...t, ingestedAt: 0 }));
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("radar");
-  const [threatRows, setThreatRows] = useState([]);
-  const [kpiData, setKpiData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [threatRows, setThreatRows] = useState(mappedInitialThreats);
+  const [kpiData, setKpiData] = useState(initialKpiData);
+  const loading = false;
   const [isDark, setIsDark] = useState(false);
   
   // Decoupled Decoded API States
-  const [knowledgeGraph, setKnowledgeGraph] = useState(null);
-  const [signals, setsignals] = useState([]);
-  const [droppedSignals, setDroppedSignals] = useState([]);
-  const [playbookData, setPlaybookData] = useState(null);
-  const [cSuiteData, setCSuiteData] = useState({});
-  const [pipelineData, setPipelineData] = useState({});
+  const [knowledgeGraph] = useState(initialKnowledgeGraph);
+  const [signals] = useState(initialSignals);
+  const [droppedSignals] = useState(initialDroppedSignals);
+  const [playbookData] = useState(initialPlaybookRecommendations);
+  const [cSuiteData] = useState(initialCSuiteData);
+  const [pipelineData] = useState(initialPipelineData);
 
   // Phase 2/3 States
   const [, setApprovedPlaybooks] = useState({});
@@ -78,59 +88,59 @@ export default function App() {
     };
   }, [isStreaming]);
 
-  // Parallel Ingestion of all 9 decoupled databases
-  useEffect(() => {
-    Promise.all([
-      fetch("http://localhost:8000/api/threat-registry").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch threat telemetry");
-        return res.json();
-      }),
-      fetch("/data/kpiData.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch KPI telemetry");
-        return res.json();
-      }),
-      fetch("/data/knowledgeGraph.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch knowledge graph");
-        return res.json();
-      }),
-      fetch("http://localhost:8000/api/signals").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch signals");
-        return res.json();
-      }),
-      fetch("/data/droppedSignals.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch dropped signals");
-        return res.json();
-      }),
-      fetch("/data/playbookRecommendations.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch playbook recommendations");
-        return res.json();
-      }),
-      fetch("/data/cSuiteData.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch C-Suite telemetry");
-        return res.json();
-      }),
-      fetch("/data/pipelineData.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch pipeline telemetry");
+  const [isFetchingRealNews, setIsFetchingRealNews] = useState(false);
+
+  const handleFetchRealNews = () => {
+    setIsFetchingRealNews(true);
+    fetch("http://localhost:8000/api/real-news")
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch real news");
         return res.json();
       })
-    ])
-      .then(([threats, kpis, graph, signal, droppedSig, playbooks, csuite, pipeline]) => {
-        const mappedThreats = threats.map(t => ({ ...t, ingestedAt: 0 }));
-        setThreatRows(mappedThreats);
-        setKpiData(kpis);
-        setKnowledgeGraph(graph);
-        setsignals(signal);
-        setDroppedSignals(droppedSig);
-        setPlaybookData(playbooks);
-        setCSuiteData(csuite);
-        setPipelineData(pipeline);
-        setLoading(false);
+      .then(newSignals => {
+        setIsFetchingRealNews(false);
+        if (newSignals && newSignals.length > 0) {
+          setThreatRows(prev => {
+            const newIds = new Set(newSignals.map(s => s.id));
+            const filtered = prev.filter(t => !newIds.has(t.id));
+            
+            const mappedNew = newSignals.map(s => ({
+              ...s,
+              ingestedAt: Date.now()
+            }));
+            
+            return [...mappedNew, ...filtered];
+          });
+          
+          setToast({
+            id: "REAL_NEWS_FETCHED",
+            title: "REAL NEWS INGESTED:",
+            msg: `Successfully pulled ${newSignals.length} real-time supply chain disruptions.`,
+            color: "#10B981"
+          });
+          setTimeout(() => setToast(null), 5000);
+        } else {
+          setToast({
+            id: "REAL_NEWS_EMPTY",
+            title: "NO NEW DISRUPTIONS:",
+            msg: "No new critical supply chain events detected in recent feeds.",
+            color: "#6B7280"
+          });
+          setTimeout(() => setToast(null), 4000);
+        }
       })
-      .catch((err) => {
-        console.error("Error loading unified telemetry databases from API:", err);
-        setLoading(false);
+      .catch(err => {
+        setIsFetchingRealNews(false);
+        console.error("Error fetching real news:", err);
+        setToast({
+          id: "REAL_NEWS_ERROR",
+          title: "FETCH FAILED:",
+          msg: "Could not connect to news feed scraper. Please verify backend.",
+          color: "#EF4444"
+        });
+        setTimeout(() => setToast(null), 5000);
       });
-  }, []);
+  };
 
   // Callback from Phase 1 GeoJSON Ingest to populate new sub-tier threat logs
   const handleSupplyBaseInitialized = (programName, _nodeCount) => {
@@ -361,6 +371,8 @@ export default function App() {
           isDark={isDark}
           isStreaming={isStreaming}
           onToggleStreaming={() => setIsStreaming(!isStreaming)}
+          onFetchRealNews={handleFetchRealNews}
+          isFetchingRealNews={isFetchingRealNews}
         />
 
         {/* ── High-density Dashboard content ── */}

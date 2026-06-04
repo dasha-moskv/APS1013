@@ -1,0 +1,84 @@
+{
+  "FAC-001": {
+    "baseDailyExposure": 14500000,
+    "baseTimelineDays": 10,
+    "baseWorkaroundCost": 450000,
+    "slaRisk": "CRITICAL: Contractual liquidated damages trigger at Day 12 ($1.5M per aircraft daily penalty).",
+    "evidenceBase": "Everett structural logs indicate a tight 4-day buffer on titanium structural spars before line shutdown.",
+    "options": [
+      { "id": "air", "label": "Air Charter Expedite", "cost": 650000, "daysSaved": 4, "desc": "Bypass standard freight rails; charter 3x Antonov An-124 flights." },
+      { "id": "permit", "label": "Fast-Track DOT Permits", "cost": 75000, "daysSaved": 2, "desc": "Engage Washington DOT for expedited heavy-haul corridor permissions." },
+      { "id": "shifts", "label": "Double Shift Assembly Bays", "cost": 280000, "daysSaved": 2, "desc": "Authorize overtime shifts in structural integration section." }
+    ],
+    "strategicPhases": {
+      "immediate": "Reallocate titanium structural spars from reserve logistics stocks at the Wichita depot (Wichita reserves are currently at 84% capacity).",
+      "tactical": "Deploy a secondary material-handling shift to expedite composite unboxing and pre-assembly inspections, verifying micro-fracture thresholds.",
+      "structural": "Shift 777 fuselage wiring and insulation tracks to parallel assembly bays to absorb line idle time and maintain assembly cadence."
+    }
+  },
+  "SUP-001A": {
+    "baseDailyExposure": 8800000,
+    "baseTimelineDays": 15,
+    "baseWorkaroundCost": 320000,
+    "slaRisk": "HIGH: Renton assembly line halts on Day 10. Direct delivery delay penalties of $850K per day active.",
+    "evidenceBase": "Midwest rail union negotiations are locked; cooling-off period expires in 72 hours with no resolution in sight.",
+    "options": [
+      { "id": "road", "label": "Over-the-road Flatbeds", "cost": 420000, "daysSaved": 6, "desc": "Initiate oversized flatbed road transport with police escorts." },
+      { "id": "permits", "label": "KDOT Fast-Track Permits", "cost": 50000, "daysSaved": 3, "desc": "Pre-file permits in Kansas, Missouri, Illinois, and Washington." },
+      { "id": "depot", "label": "Pre-Stage at Renton Depot", "cost": 120000, "daysSaved": 2, "desc": "Lease temporary logistics space near Renton receiving bays." }
+    ],
+    "strategicPhases": {
+      "immediate": "Initiate oversize flatbed road transport workarounds under Priority-A emergency aerospace clearance (utilizing contract carriers).",
+      "tactical": "Contact the Kansas Department of Transportation (KDOT) to fast-track oversized road freight permits for structural components.",
+      "structural": "Coordinate split-arrival scheduling with Renton receiving bays to stay within local storage space and gantry crane constraints."
+    }
+  },
+  "SUP-701X": {
+    "baseDailyExposure": 32000000,
+    "baseTimelineDays": 3,
+    "baseWorkaroundCost": 1500000,
+    "slaRisk": "EXTREME: SLA breaches across 14 global OEMs. Direct delivery delays could trigger $5M/day contract penalties.",
+    "evidenceBase": "Lithography EUV sensors recorded a peak seismic acceleration of 0.12g. Automatic shutdown calibrated correctly; structural integrity verified.",
+    "options": [
+      { "id": "calib", "label": "EUV Auto-Calibration", "cost": 250000, "daysSaved": 1, "desc": "Deploy digital twins and automated calibration scripts developed with ASML." },
+      { "id": "divert", "label": "Divert Packaging to Fab 15", "cost": 800000, "daysSaved": 1, "desc": "Pre-allocate packaging and testing slots at Taichung (Fab 15) to save transit queue time." }
+    ],
+    "strategicPhases": {
+      "immediate": "Initiate safety recalibration protocols on extreme ultraviolet (EUV) lithography systems utilizing internal engineering squads.",
+      "tactical": "Divert critical semiconductor packaging queues to TSMC Fab 15 (Taichung) to absorb manufacturing demand and wafer backlogs.",
+      "structural": "Mobilize emergency backup generator checks and cleanroom particulate monitoring systems to prevent wafer contamination."
+    }
+  },
+  "SUP-401A": {
+    "baseDailyExposure": 11000000,
+    "baseTimelineDays": 4,
+    "baseWorkaroundCost": 220000,
+    "slaRisk": "HIGH: Vaccine distribution commitments in 3 EU nations are at risk. Potential regulatory warning letter exposure if validation fails.",
+    "evidenceBase": "Emerson valve SCADA logs showed a pressure spike of 4.2 bar leading to the mechanical fatigue rupture.",
+    "options": [
+      { "id": "oem", "label": "OEM Premium Support SLA", "cost": 180000, "daysSaved": 2, "desc": "Activate emergency 4-hour on-site OEM response contract with Emerson Belgium." },
+      { "id": "audit", "label": "Pre-Audit Sterility Loops", "cost": 60000, "daysSaved": 1, "desc": "Pre-run sterilization wash cycles and continuous air particulate audits." }
+    ],
+    "strategicPhases": {
+      "immediate": "Divert liquid bulk formulation queues to parallel autoclave lines #5 and #6 inside the Puurs facility.",
+      "tactical": "Dispatch critical service team from OEM partner (Emerson Controls) with custom replacement valves from their Brussels warehouse.",
+      "structural": "Perform double sterility check loops to comply with European Medicines Agency (EMA) and FDA sterile product regulations."
+    }
+  },
+  "SUP-109B": {
+    "baseDailyExposure": 18500000,
+    "baseTimelineDays": 7,
+    "baseWorkaroundCost": 600000,
+    "slaRisk": "SEVERE: Delay ripples down to next-gen fab tools. $2.2M per module per day in delayed delivery penalties.",
+    "evidenceBase": "Schiphol cargo backlog has reached 840 metric tons of temperature-controlled pharmaceutical and precision cargo.",
+    "options": [
+      { "id": "air", "label": "Transatlantic Charter Option", "cost": 450000, "daysSaved": 3, "desc": "Bypass Schiphol backlog entirely by chartering dedicated CargoLux flight to Brussels." },
+      { "id": "courier", "label": "Expedited Dedicated Trucking", "cost": 85000, "daysSaved": 2, "desc": "Dispatch hot-shot courier vehicles directly to Schiphol tarmac buffer grids." }
+    ],
+    "strategicPhases": {
+      "immediate": "Deploy temperature-controlled custom courier trucks from ASML Veldhoven to expedite Schiphol tarmac collections.",
+      "tactical": "Reroute subsequent optics shipments through Brussels Airport (BRU) using dedicated priority air-charter allocations.",
+      "structural": "Revise cleanroom system-integration schedules, postponing EUV laser-chamber alignments to match optics arrivals."
+    }
+  }
+}

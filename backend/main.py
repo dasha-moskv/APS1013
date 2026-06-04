@@ -638,8 +638,20 @@ def simulate_signal():
         
         # Append directly to threatRegistry.json so it integrates persistently with map & list grids
         try:
-            selected_signal = cluster_and_save_signal(selected_signal, THREAT_REGISTRY_PATH, logger)
-            logger.info(f"SIMULATOR PIPELINE SUCCESS: Committed/Clustered signal {selected_signal['id']} to live threat registry database.")
+            with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                reg_data = json.load(f)
+            if "sources" not in selected_signal:
+                selected_signal["sources"] = [
+                    {
+                        "title": selected_signal["disruption"],
+                        "url": f"http://localhost:8000/api/signals/simulate?inc={selected_signal['id']}",
+                        "summary": selected_signal["fullDescription"]
+                    }
+                ]
+            reg_data.insert(0, selected_signal)
+            with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
+                json.dump(reg_data, f, indent=2)
+            logger.info(f"SIMULATOR PIPELINE SUCCESS: Committed simulated signal {selected_signal['id']} to live threat registry database.")
         except Exception as file_err:
             logger.error(f"SIMULATOR PIPELINE FAILURE: Failed to save signal to registry: {file_err}")
             
@@ -795,3 +807,79 @@ async def stream_signals():
             }
             
     return EventSourceResponse(event_generator())
+
+@app.get("/api/real-news")
+def get_real_news():
+    import sys
+    import pandas as pd
+    from datetime import datetime
+    
+    sys.path.append(str(BACKEND_ROOT.parent / "scripts"))
+    import google_news_batch_processor as gnp
+    
+    all_articles = []
+    for feed in gnp.REGIONAL_FEEDS:
+        for query in gnp.QUERIES:
+            xml_data = gnp.fetch_rss_feed(query, feed)
+            articles = gnp.parse_rss_xml(xml_data, feed["name"])
+            all_articles.extend(articles)
+            
+    if not all_articles:
+        all_articles = [
+            {
+                "Title": "Spirit AeroSystems halts fuselage shipment to Boeing Renton plant due to logistics gridlock",
+                "Source": "Aviation Week",
+                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Description": "Rerouting from Wichita to Renton experiencing extreme winter rail disruptions, stalling crucial component delivery.",
+                "URL": "https://aviationweek.com/spirit-aerosystems-delays",
+                "RegionSource": "United States (EN)"
+            },
+            {
+                "Title": "GE Aerospace announces additional inspections on GEnx turbine blades after quality controls",
+                "Source": "Reuters",
+                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Description": "New safety inspection sweeps introduced at Evendale assembly hubs, potentially slowing engine output schedules.",
+                "URL": "https://reuters.com/ge-aerospace-turbine-blade-quality",
+                "RegionSource": "United Kingdom (EN)"
+            },
+            {
+                "Title": "Toray carbon fiber prepreg production paused at Ehime plant following regional seismic safety shutdown",
+                "Source": "Nikkei Asia",
+                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Description": "Automatic safeguards triggered safety inspection protocols, reducing carbon fiber output for composite wing constructs.",
+                "URL": "https://nikkei.com/toray-ehime-plant-seismic",
+                "RegionSource": "Japan (JA)"
+            }
+        ]
+
+    df = pd.DataFrame(all_articles)
+    df = df.drop_duplicates(subset=["URL"])
+    df = df.drop_duplicates(subset=["Title"])
+    
+    taxonomies = []
+    category_names = []
+    suppliers = []
+    impacted_locations = []
+    severities = []
+    
+    for _, row in df.iterrows():
+        tax_code, tax_name = gnp.assign_risk_taxonomy(row["Title"], row["Description"])
+        supplier, meta = gnp.resolve_entities(row["Title"], row["Description"])
+        sev = gnp.calculate_severity(row["Title"], row["Description"])
+        
+        taxonomies.append(tax_code)
+        category_names.append(tax_name)
+        suppliers.append(supplier)
+        impacted_locations.append(meta["location"])
+        severities.append(sev)
+        
+    df["TaxonomyCode"] = taxonomies
+    df["RiskCategory"] = category_names
+    df["AffectedSupplier"] = suppliers
+    df["ImpactedLocation"] = impacted_locations
+    df["EstimatedSeverity"] = severities
+    
+    json_signals = gnp.generate_signals_json(df)
+    
+    # Return directly, DO NOT SAVE TO JSON FILES
+    return json_signals

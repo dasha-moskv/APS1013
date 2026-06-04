@@ -1,6 +1,14 @@
 import { Search, Bell, Play, Pause } from "lucide-react";
 
-export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark, isStreaming, onToggleStreaming }) {
+export default function Topbar({ 
+  onTriggerDemoSignal, 
+  signalsLeft, 
+  isDark, 
+  isStreaming, 
+  onToggleStreaming,
+  onFetchRealNews,
+  isFetchingRealNews
+}) {
   return (
     <header
       id="topbar"
@@ -39,6 +47,23 @@ export default function Topbar({ onTriggerDemoSignal, signalsLeft, isDark, isStr
 
       {/* ── Spacer ── */}
       <div className="flex-1" />
+
+      {/* ── Real Ingestion Trigger Button ── */}
+      <button
+        onClick={onFetchRealNews}
+        disabled={isFetchingRealNews}
+        className={`flex cursor-pointer items-center gap-1.5 border px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-wider rounded-none transition-colors duration-150 select-none
+                   ${isDark
+                     ? "border-emerald-500 bg-[#10B981]/10 text-emerald-500 hover:bg-emerald-500 hover:text-black"
+                     : "border-emerald-600 bg-emerald-600/10 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                   } ${isFetchingRealNews ? "opacity-50 cursor-not-allowed" : ""}`}
+      >
+        <span className="relative flex h-1.5 w-1.5 mr-0.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        </span>
+        {isFetchingRealNews ? "Fetching..." : "Fetch Real News"}
+      </button>
 
       {/* ── Live Streaming Control Button ── */}
       <button
