@@ -867,19 +867,82 @@ export default function HealthMonitorTable({
             {/* Quick-Glance Risk KPIs — always visible */}
             <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> An estimate of how damaging the disruption could be to operations, delivery timelines, costs, or supply continuity.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this rating using a severity rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity, isDark).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> An estimate of how probable it is that the disruption will materially affect the supply chain.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this rating using a likelihood rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood, isDark).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> The estimated number of days before the disruption begins affecting operations or downstream supply availability.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this estimate using a timing rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{formatTimeToHit(inspectedRow.timeToHit)}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> The disruption category used to classify the type of supply chain risk represented by the signal.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The backend assigns this category using a taxonomy rubric, matching the signal text against disruption patterns.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow)}</span>
               </div>
             </div>
