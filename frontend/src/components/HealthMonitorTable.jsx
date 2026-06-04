@@ -3,7 +3,117 @@ import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, 
 import { getTaxonomy, getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
 import { LinkIcon } from "lucide-react";
 
-export default function HealthMonitorTable({ 
+// Deloitte mitigation-lever taxonomy. Every action in the Strategic Action Plan
+// is tagged to one of the four levers named in the engagement brief
+// (alternates / inventory / logistics / comms) for direct traceability.
+const LEVER_META = {
+  Alternate: { label: "ALTERNATE", cls: "text-sky-500 border-sky-500/40 bg-sky-500/10" },
+  Inventory: { label: "INVENTORY", cls: "text-amber-500 border-amber-500/40 bg-amber-500/10" },
+  Logistics: { label: "LOGISTICS", cls: "text-indigo-400 border-indigo-400/40 bg-indigo-400/10" },
+  Comms: { label: "COMMS", cls: "text-[#86BC25] border-[#86BC25]/40 bg-[#86BC25]/10" }
+};
+
+// Infers an on-domain (Boeing aircraft-propulsion) part profile + pre-qualified
+// ASL from a threat row, so synthesized action plans stay credible per card
+// instead of emitting generic, identical boilerplate.
+function derivePartProfile(row) {
+  const hay = `${row?.facility || ""} ${row?.disruption || ""} ${row?.mapPosition?.role || ""}`.toLowerCase();
+  if (/turbine|blade|engine|genx|leap|combust|nozzle/.test(hay)) return { part: "high-pressure turbine blades", asl: "Howmet / PCC turbine-casting ASL" };
+  if (/nickel|superalloy/.test(hay)) return { part: "nickel superalloy billet", asl: "ATI / Carpenter superalloy ASL" };
+  if (/titanium|forging|castpart|spar|sponge/.test(hay)) return { part: "titanium structural forgings", asl: "PCC / VSMPO titanium ASL" };
+  if (/composite|carbon|prepreg|autoclave|toray|fiber/.test(hay)) return { part: "composite prepreg layups", asl: "Toray / Hexcel prepreg ASL" };
+  if (/avionic|electronic|sensor|honeywell|controller|fadec|propulsion electronics/.test(hay)) return { part: "propulsion control electronics (FADEC)", asl: "Honeywell / Collins avionics ASL" };
+  if (/actuat|servovalve|moog|hydraul/.test(hay)) return { part: "flight-control actuation assemblies", asl: "Moog / Parker actuation ASL" };
+  if (/fuselage|spirit|rivet|shell/.test(hay)) return { part: "fuselage shell assemblies", asl: "Spirit AeroSystems secondary ASL" };
+  if (/casing|compressor|fan|nacelle/.test(hay)) return { part: "compressor casing assemblies", asl: "GKN / Spirit nacelle ASL" };
+  return { part: "critical propulsion components", asl: "pre-qualified secondary ASL" };
+}
+
+// Synthesizes a Deloitte-conformant Respond / Recover / Thrive action plan for any
+// threat that lacks a curated entry. Each phase carries prioritized, lever-tagged
+// actions with owner, trigger, timeline, cost, days-saved and a success KPI.
+function buildStrategicPhases(row) {
+  const tierNum = typeof row?.tier === "number" ? row.tier : 1;
+  const tth = row?.timeToHit ? (parseInt(row.timeToHit) || 0) : 0;
+  const sev = row?.severity || 5;
+  const city = ((row?.location || "").split(",")[0] || "").trim() || "regional";
+  const fac = row?.facility || "the supplier";
+  const { part, asl } = derivePartProfile(row);
+  const steps = row?.playbook?.mitigationPlan?.steps || [];
+  const wc = Math.round(sev * 50000) || 250000;
+  const ttrCut = Math.max(2, Math.floor(tth * 0.4)) || 3;
+  const altCut = Math.max(2, Math.floor(tth * 0.3)) || 2;
+  return {
+    respond: {
+      objective: "Contain the disruption and protect final-assembly line velocity.",
+      actions: [
+        {
+          lever: "Inventory",
+          action: steps[0] || `Release certified safety stock of ${part} from the ${city} consolidation hub and confirm remaining days-of-coverage against burn rate.`,
+          owner: `${city} Materials Lead`,
+          trigger: `Buffer coverage < ${tth || 5} days`,
+          timeline: "0–24h",
+          cost: 0,
+          daysSaved: 1,
+          kpi: "Days-of-coverage restored ≥ buffer target"
+        },
+        {
+          lever: "Comms",
+          action: `Issue a Tier-${tierNum} supplier RFC to ${fac} confirming operational status, residual capacity, and recovery ETA; brief the SCRM control tower.`,
+          owner: "SCRM Duty Officer",
+          trigger: "Severity ≥ 7 sustained for 24h",
+          timeline: "0–48h",
+          cost: 5000,
+          daysSaved: 0,
+          kpi: "Supplier confirmation returned < 4h"
+        }
+      ]
+    },
+    recover: {
+      objective: "Restore supply continuity via expedited logistics and pre-approved alternate sourcing.",
+      actions: [
+        {
+          lever: "Logistics",
+          action: steps[1] || `Activate premium expedited freight to bypass the ${fac} bottleneck and protect the inbound ${part} pipeline.`,
+          owner: "Regional Logistics Lead",
+          trigger: "Primary recovery ETA > Time-to-Survive",
+          timeline: "48h–2wk",
+          cost: wc,
+          daysSaved: ttrCut,
+          kpi: `Time-to-Recovery cut by ≥ ${ttrCut} days`
+        },
+        {
+          lever: "Alternate",
+          action: `Activate the pre-approved ${asl} as a secondary source and queue First Article Inspection (FAI) where a tooling or site shift is required — no unapproved substitutions.`,
+          owner: "Supplier Quality & Procurement",
+          trigger: "Primary recovery slips beyond SLA window",
+          timeline: "3–10 days",
+          cost: Math.round(wc * 1.4),
+          daysSaved: altCut,
+          kpi: "Secondary source live; FAI dossier cleared"
+        }
+      ]
+    },
+    thrive: {
+      objective: "Convert the incident into a durable resiliency gain.",
+      actions: [
+        {
+          lever: "Inventory",
+          action: steps[2] || `Re-baseline safety-stock rules and formalize a dual-source policy for ${part} in the ERP material master.`,
+          owner: "S&OP / Resilience Council",
+          trigger: "Post-incident governance review",
+          timeline: "30–90 days",
+          cost: 0,
+          daysSaved: 0,
+          kpi: "Dual-source share ≥ 30%; buffer policy updated"
+        }
+      ]
+    }
+  };
+}
+
+
+export default function HealthMonitorTable({
   rowData = [], 
   loading = true, 
   selectedCategories = [], 
@@ -191,11 +301,7 @@ export default function HealthMonitorTable({
         { id: "expedite", label: "Premium Sourcing & Express Logistics", cost: workaround * 1.5, daysSaved: Math.max(1, Math.floor(timeline * 0.3)), desc: "Bypass standard channels by utilizing fast-tracked logistics and certified backup suppliers." },
         { id: "overtime", label: "Overtime & Shift Adjustments", cost: workaround * 0.6, daysSaved: Math.max(1, Math.floor(timeline * 0.15)), desc: "Authorize emergency overtime shifts for key technicians to accelerate recovery." }
       ],
-      strategicPhases: {
-        immediate: inspectedRow.playbook?.mitigationPlan?.steps?.[0] || "Initiate immediate redundant routing and alternative supplier contacts.",
-        tactical: inspectedRow.playbook?.mitigationPlan?.steps?.[1] || "Verify customs clearance status and coordinate with regional logistics leads.",
-        structural: inspectedRow.playbook?.mitigationPlan?.steps?.[2] || "Update system inventory buffers and pre-stage backup stock levels."
-      }
+      strategicPhases: buildStrategicPhases(inspectedRow)
     };
   }
 
@@ -1425,71 +1531,72 @@ export default function HealthMonitorTable({
                             Prioritized Strategic Action Plan
                           </h4>
                           <p className={`text-xs mt-0.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-                            Standard Operating Procedures (SOP) mapped across time horizons to secure the node.
+                            Respond → Recover → Thrive playbook. Each action is prioritized and tagged to a mitigation lever (Alternate / Inventory / Logistics / Comms) with owner, trigger, and success KPI.
                           </p>
                         </div>
 
                         {cSuiteEnrichment && (
                           <div className="flex flex-col gap-4 font-sans text-xs">
-                            {/* Phase 1 */}
-                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
-                              <div className="flex-1 flex flex-col gap-2">
-                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                                  PHASE 1 &bull; IMMEDIATE CONTAINMENT (0 - 48 HOURS)
-                                </span>
-                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
-                                  {cSuiteEnrichment.strategicPhases.immediate}
-                                </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
-                                  <span className="font-bold uppercase text-slate-500">Immediate Tasks & Protocols:</span>
-                                  <ul className="list-disc pl-4 flex flex-col gap-1">
-                                    <li>Flag internal quality inspectors to trace affected batch footprints.</li>
-                                    <li>Assess safety stock levels held in regional storage warehouses.</li>
-                                    <li>Notify on-call engineering supervisors to start physical line checks.</li>
-                                  </ul>
+                            {[
+                              { key: "respond", tag: "PHASE 1 · RESPOND", horizon: "0–48 HOURS" },
+                              { key: "recover", tag: "PHASE 2 · RECOVER", horizon: "48 HOURS – 2 WEEKS" },
+                              { key: "thrive", tag: "PHASE 3 · THRIVE", horizon: "STRUCTURAL · 30–90 DAYS" }
+                            ].map((phase) => {
+                              const pdata = cSuiteEnrichment.strategicPhases?.[phase.key];
+                              const actions = Array.isArray(pdata?.actions) ? pdata.actions : [];
+                              if (!actions.length) return null;
+                              return (
+                                <div key={phase.key} className="flex flex-col gap-2 border-l-2 border-slate-700 pl-3 py-1">
+                                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                                    <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                                      {phase.tag}
+                                    </span>
+                                    <span className={`text-[8px] font-mono px-1.5 py-0.5 border select-none ${isDark ? "text-slate-400 bg-slate-950 border-[#1E293B]" : "text-slate-500 bg-white border-slate-200"}`}>
+                                      {phase.horizon}
+                                    </span>
+                                  </div>
+                                  {pdata?.objective && (
+                                    <p className={`leading-relaxed font-sans text-[11px] italic ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                                      {pdata.objective}
+                                    </p>
+                                  )}
+                                  <div className="flex flex-col gap-2">
+                                    {actions.map((a, idx) => {
+                                      const lm = LEVER_META[a.lever] || LEVER_META.Alternate;
+                                      return (
+                                        <div key={idx} className={`p-3 border flex flex-col gap-2 ${isDark ? "bg-slate-950/40 border-[#1E293B]" : "bg-slate-100/50 border-slate-200"}`}>
+                                          <div className="flex items-center gap-2 flex-wrap">
+                                            <span className={`text-[8px] font-mono font-bold px-1.5 py-0.5 border ${lm.cls}`}>
+                                              {lm.label}
+                                            </span>
+                                            <span className={`text-[8px] font-mono px-1.5 py-0.5 border select-none ${isDark ? "text-slate-400 bg-slate-950 border-[#1E293B]" : "text-slate-500 bg-white border-slate-200"}`}>
+                                              {a.timeline}
+                                            </span>
+                                            {a.daysSaved > 0 && (
+                                              <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 border border-[#86BC25]/30 bg-[#86BC25]/10 text-[#86BC25] select-none">
+                                                −{a.daysSaved}d TTR
+                                              </span>
+                                            )}
+                                            <span className={`ml-auto text-[8px] font-mono select-none ${isDark ? "text-slate-500" : "text-slate-400"}`}>
+                                              P{idx + 1}
+                                            </span>
+                                          </div>
+                                          <p className={`leading-relaxed font-sans text-[11px] ${isDark ? "text-slate-200" : "text-slate-700"}`}>
+                                            {a.action}
+                                          </p>
+                                          <div className={`grid grid-cols-2 gap-x-3 gap-y-1 font-mono text-[9px] pt-1.5 border-t ${isDark ? "border-[#1E293B] text-slate-400" : "border-slate-200 text-slate-500"}`}>
+                                            <div><span className="uppercase text-slate-500">Owner: </span><span className={isDark ? "text-slate-300" : "text-slate-700"}>{a.owner}</span></div>
+                                            <div><span className="uppercase text-slate-500">Cost: </span><span className={isDark ? "text-slate-300" : "text-slate-700"}>{a.cost > 0 ? `$${a.cost.toLocaleString()}` : "—"}</span></div>
+                                            <div><span className="uppercase text-slate-500">Trigger: </span><span className={isDark ? "text-slate-300" : "text-slate-700"}>{a.trigger}</span></div>
+                                            <div><span className="uppercase text-slate-500">KPI: </span><span className={isDark ? "text-slate-300" : "text-slate-700"}>{a.kpi}</span></div>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-
-                            {/* Phase 2 */}
-                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
-                              <div className="flex-1 flex flex-col gap-2">
-                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                                  PHASE 2 &bull; ALTERNATE ROUTING & RE-SOURCING (48H - 2 WEEKS)
-                                </span>
-                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-200" : "text-slate-700"}`}>
-                                  {cSuiteEnrichment.strategicPhases.tactical}
-                                </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
-                                  <span className="font-bold uppercase text-slate-500">Alternate Logistics Protocols:</span>
-                                  <ul className="list-disc pl-4 flex flex-col gap-1">
-                                    <li>Deploy dedicated flatbed courier fleets under pre-file DOT permits.</li>
-                                    <li>Re-allocate inbound shipments to pre-approved secondary sea-port bays.</li>
-                                    <li>Coordinate receiving crane and storage bay schedules with regional leads.</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Phase 3 */}
-                            <div className="flex gap-3 border-l-2 border-slate-700 pl-3 py-1">
-                              <div className="flex-1 flex flex-col gap-2">
-                                <span className={`font-mono text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                                  PHASE 3 &bull; CAPITAL POLICY & RESILIENCY ADJUSTMENT
-                                </span>
-                                <p className={`leading-relaxed font-sans text-xs ${isDark ? "text-slate-400" : "text-slate-650"}`}>
-                                  {cSuiteEnrichment.strategicPhases.structural}
-                                </p>
-                                <div className={`p-3 border flex flex-col gap-1.5 font-mono text-[10px] leading-relaxed ${isDark ? "bg-slate-950/40 border-[#1E293B] text-slate-400" : "bg-slate-100/50 border-slate-200 text-slate-500"}`}>
-                                  <span className="font-bold uppercase text-slate-500">Resiliency Policy Adjustments:</span>
-                                  <ul className="list-disc pl-4 flex flex-col gap-1">
-                                    <li>Re-balance process workloads to alternate autoclaves or lines.</li>
-                                    <li>Postpone secondary general maintenance runs to maximize capacity limits.</li>
-                                    <li>Update inventory buffer safety stock rules in ERP tracking databases.</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
