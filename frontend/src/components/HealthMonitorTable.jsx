@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, RefreshCw, DollarSign, FileText, AlertTriangle, Users, Award, Globe, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, AlertCircle, ArrowRight, Info } from "lucide-react";
 import { getTaxonomy, getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
-
+import { LinkIcon } from "lucide-react";
 
 export default function HealthMonitorTable({ 
   rowData = [], 
@@ -1040,6 +1040,91 @@ export default function HealthMonitorTable({
                 </div>
               )}
             </div>
+            {/* Evidence Sources Dropdown */}
+            <div className={`mb-5 border ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-white"}`}>
+              <button
+                type="button"
+                onClick={() => setShowEvidenceSources(prev => !prev)}
+                className={`w-full px-4 py-3 flex items-center justify-between text-left transition-colors ${
+                  isDark ? "hover:bg-[#0F1520]" : "hover:bg-slate-50"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <LinkIcon className="h-3.5 w-3.5 text-[#86BC25]" />
+                  <span className={`font-mono text-[10px] font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-200" : "text-slate-800"
+                  }`}>
+                    Evidence Sources
+                  </span>
+                </div>
+
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    showEvidenceSources ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {showEvidenceSources && (
+                <div className={`border-t px-4 py-4 ${
+                  isDark ? "border-[#1E293B]" : "border-slate-200"
+                }`}>
+                  <div className="space-y-3">
+                    {(inspectedRow.sources || []).map((source, index) => (
+                      <div
+                        key={`${source.title}-${index}`}
+                        className={`border p-3 ${
+                          isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                              Source {index + 1}
+                            </p>
+
+                            <p className={`text-[11px] font-bold leading-snug ${
+                              isDark ? "text-slate-200" : "text-slate-800"
+                            }`}>
+                              {source.title}
+                            </p>
+                          </div>
+
+                          {source.url && (
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`shrink-0 font-mono text-[9px] uppercase tracking-wider underline underline-offset-2 ${
+                                isDark ? "text-slate-400 hover:text-[#86BC25]" : "text-slate-600 hover:text-[#86BC25]"
+                              }`}
+                            >
+                              Open
+                            </a>
+                          )}
+                        </div>
+
+                        <p className={`mt-2 text-[10px] leading-relaxed ${
+                          isDark ? "text-slate-350" : "text-slate-650"
+                        }`}>
+                          {source.summary}
+                        </p>
+                      </div>
+                    ))}
+
+                    {(!inspectedRow.sources || inspectedRow.sources.length === 0) && (
+                      <div className={`border p-3 ${
+                        isDark ? "border-[#1E293B] bg-[#0F1520] text-slate-400" : "border-slate-200 bg-slate-50 text-slate-600"
+                      }`}>
+                        <p className="font-sans text-[11px]">
+                          No source evidence has been attached to this signal yet.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
             {/* ── PRE-PLAYBOOK VIEW ── */}
             {!playbookGenerated && (
               <div className="flex flex-col gap-5">
@@ -1136,7 +1221,6 @@ export default function HealthMonitorTable({
                     </div>
                   </div>
                 </div>
-      
                 {/* Signal Pipeline */}
                 {renderPipeline(inspectedRow)}
 
