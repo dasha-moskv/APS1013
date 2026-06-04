@@ -7,7 +7,8 @@ import {
   Globe, 
   Terminal, 
   Layers, 
-  AlertTriangle
+  AlertTriangle,
+  Info
 } from "lucide-react";
 
 const PRESETS = {
@@ -202,12 +203,30 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <Globe className="h-4 w-4 text-[#86BC25]" />
-              Select Boeing Program Baseline Preset
-            </h2>
+            <div className="flex items-center justify-between mb-3 select-none">
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Globe className="h-4 w-4 text-[#86BC25]" />
+                Select Boeing Program Baseline Preset
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Program Presets</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Pre-defined supply chain baselines representing distinct production assembly lines (Renton, Everett, Charleston) and their multi-tier supplier coordinates.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col gap-2.5">
               {Object.entries(activePresets).map(([key, p]) => (
                 <div 
@@ -290,12 +309,30 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
           }`}>
-            <h2 className={`text-xs font-mono font-bold uppercase tracking-wider mb-4 flex items-center gap-1.5 ${
-              isDark ? "text-slate-300" : "text-slate-700"
-            }`}>
-              <Map className="h-4 w-4 text-[#86BC25]" />
-              Supply Base Validation Pipeline
-            </h2>
+            <div className="flex items-center justify-between mb-4 select-none">
+              <h2 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-slate-300" : "text-slate-700"
+              }`}>
+                <Map className="h-4 w-4 text-[#86BC25]" />
+                Supply Base Validation Pipeline
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Validation Pipeline</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Triggers syntactic schema checks, registers production plants in the mapping database, and hooks up the news scrapers.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {activeStep === 0 ? (
               <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500 select-none">
@@ -406,7 +443,25 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
                 <Terminal className="h-3.5 w-3.5 text-[#86BC25]" />
                 RADAR INGEST CONSOLE FEED
               </span>
-              <span className="text-slate-600 font-bold">115200 BAUD</span>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-600 font-bold">115200 BAUD</span>
+                <div className="relative group cursor-help inline-block leading-none">
+                  <Info className="h-3.5 w-3.5 text-slate-500 hover:text-slate-300" />
+                  <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    isDark 
+                      ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                      : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                  }`}>
+                    <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                      <span className="h-2 w-2 bg-[#86BC25] rounded-none" />
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#86BC25]">Console Feed</span>
+                    </div>
+                    <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Live server telemetry feed outputting raw ingestion, geo-coordinate translation, and system compiler logs.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
             
             {consoleLogs.length === 0 ? (

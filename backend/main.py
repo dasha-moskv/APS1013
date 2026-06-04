@@ -45,6 +45,56 @@ def jaccard_similarity(set1, set2):
         return 0.0
     return len(set1.intersection(set2)) / len(set1.union(set2))
 
+def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
+    text = (disruption + " " + facility + " " + full_desc).lower()
+    
+    # 1. Check for Regulatory & Quality keywords
+    quality_keywords = [
+        "quality", "regulation", "regulatory", "audit", "defect", "defects",
+        "compliance", "inspection", "checks", "paperwork", "forgeries",
+        "documentation", "sanctions", "ban", "legal", "certificate", "traceability"
+    ]
+    if any(k in text for k in quality_keywords):
+        return "Regulatory & Quality"
+        
+    # 2. Check for Logistics & Transit keywords
+    logistics_keywords = [
+        "logistics", "transit", "shipping", "delays", "delay", "transport",
+        "freight", "cargo", "routing", "rail", "port", "customs", "border",
+        "carrier", "import", "delivery", "deliveries", "stalled", "freighter"
+    ]
+    if any(k in text for k in logistics_keywords):
+        return "Logistics & Transit"
+        
+    # 3. Check for Operations & Capacity keywords
+    ops_keywords = [
+        "strike", "labor", "union", "workforce", "capacity", "shortage",
+        "shortages", "yield", "production", "constrain", "starvation",
+        "manufacturing", "kiln", "shutdown", "furnace", "mold", "autoclave",
+        "honing", "riveting", "outage", "spindle", "die", "billet", "smelting"
+    ]
+    if any(k in text for k in ops_keywords):
+        return "Operations & Capacity"
+        
+    # 4. Check for External Infrastructure keywords
+    infra_keywords = [
+        "power", "grid", "telemetry", "scada", "telecommunication", "utilities",
+        "weather", "freeze", "storm", "natural", "internet", "surge", "outage"
+    ]
+    if any(k in text for k in infra_keywords):
+        return "External Infrastructure"
+        
+    # Fallback based on original prefix rules
+    if signal_id:
+        if signal_id.startswith("FAC-001") or signal_id.startswith("FAC-003") or signal_id.startswith("SUP-771A"):
+            return "Operations & Capacity"
+        if signal_id.startswith("SUP-001A") or signal_id.startswith("SUP-109B") or signal_id.startswith("FAC-010") or signal_id.startswith("SUP-302B"):
+            return "Logistics & Transit"
+        if signal_id.startswith("SUP-401A") or signal_id.startswith("SUP-502A") or signal_id.startswith("SUP-404R") or signal_id.startswith("SUP-512S") or signal_id.startswith("SUP-212H"):
+            return "Regulatory & Quality"
+            
+    return "External Infrastructure"
+
 def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     """
     Tries to cluster the selected_signal into an existing threat in threatRegistry.json.
@@ -52,6 +102,12 @@ def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     If not, prepends selected_signal as a new threat.
     Returns the final committed threat dictionary.
     """
+    selected_signal["category"] = get_taxonomy_by_id(
+        selected_signal.get("id"),
+        selected_signal.get("disruption", ""),
+        selected_signal.get("facility", ""),
+        selected_signal.get("fullDescription", "")
+    )
     try:
         with open(threat_registry_path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -209,7 +265,7 @@ MOCK_POOL = [
                 "timeline": "2 business days of thermal validation"
             }
         },
-        "downstreamImpact": "Threatens SLA commitments at primary integration hubs; potential Widebody line halts.",
+        "downstreamBusinessImpact": "Threatens SLA commitments at primary integration hubs; potential Widebody line halts.",
         "mitigationObjective": "Bypass production downtime via backup molding dies and safety buffer releases."
     },
     {
@@ -246,7 +302,7 @@ MOCK_POOL = [
                 "timeline": "5 days of continuous operations quality tracking"
             }
         },
-        "downstreamImpact": "Alloy supply delays for wing skin extrusions; secondary procurement overhead.",
+        "downstreamBusinessImpact": "Alloy supply delays for wing skin extrusions; secondary procurement overhead.",
         "mitigationObjective": "Bypass Icelandic smelter freeze by activating secondary Trondheim raw supply contract."
     },
     {
@@ -283,7 +339,7 @@ MOCK_POOL = [
                 "timeline": "2 days of composite curing void inspections"
             }
         },
-        "downstreamImpact": "Composite wing structure assembly halts at final assembly line.",
+        "downstreamBusinessImpact": "Composite wing structure assembly halts at final assembly line.",
         "mitigationObjective": "Maintain fuselage/wing structural prepreg flow by activating Nagoya production bridges."
     },
     {
@@ -320,7 +376,7 @@ MOCK_POOL = [
                 "timeline": "24 hours of ambient safety verification"
             }
         },
-        "downstreamImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
+        "downstreamBusinessImpact": "Flight deck pressure transducer shortages; delayed cockpit modular avionics integration.",
         "mitigationObjective": "Bypass Phoenix cleanroom downtime by routing avionics sensor lines to pre-certified Penang facility."
     },
     {
@@ -357,7 +413,7 @@ MOCK_POOL = [
                 "timeline": "2 days of rigorous dimensional micro-auditing"
             }
         },
-        "downstreamImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
+        "downstreamBusinessImpact": "Flight control hydraulic actuator assembly bottlenecks; delayed flap/slat control deliveries.",
         "mitigationObjective": "Prevent critical actuator delivery slippage by clearing dimensional micro-anomalies."
     },
     {
@@ -394,7 +450,7 @@ MOCK_POOL = [
                 "timeline": "36 hours of robotic safety and squeeze verification"
             }
         },
-        "downstreamImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
+        "downstreamBusinessImpact": "Direct fuselage delivery delays to Renton final assembly line; high risk of line stop.",
         "mitigationObjective": "Bypass robotic end-effector failure using manual riveting overlays and safety audits."
     },
     {
@@ -431,7 +487,7 @@ MOCK_POOL = [
                 "timeline": "3 days of advanced metallurgy testing"
             }
         },
-        "downstreamImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
+        "downstreamBusinessImpact": "Low-pressure compressor engine casing delays; risks assembly integration timeline.",
         "mitigationObjective": "Bypass 3D printing nozzle clogs by activating Sweden's redundant forging tooling channels."
     },
     {
@@ -468,7 +524,7 @@ MOCK_POOL = [
                 "timeline": "2 business days for vacuum certification and quality sign-off"
             }
         },
-        "downstreamImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
+        "downstreamBusinessImpact": "Critical engine hot-section blade shortages; delayed engine delivery schedules.",
         "mitigationObjective": "Divert casting resources to secondary clean furnaces and replace failed vacuum flange seals."
     }
 ]
@@ -480,7 +536,7 @@ def make_signal_truly_unique(base_signal):
     signal["id"] = f"SUP-{incident_seq}{random.choice(['A', 'B', 'C', 'X', 'Y', 'Z', 'S', 'T'])}"
     
     # 35% chance to make it a completely new unique facility so it doesn't cluster and adds a new row
-    if random.random() < 0.35:
+    if random.random() < 0:
         new_facilities = [
             ("Tokyo Precision Parts", "Tokyo, JP", "Tier-2 / Actuation"),
             ("Munich Castings GmbH", "Munich, DE", "Tier-1 / Casting"),
@@ -572,88 +628,53 @@ def simulate_signal():
             with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
                 real_signals = json.load(f)
         except Exception as e:
-            logger.warning(f"Failed to read signals.json pool: {e}. Falling back to mocks.")
-            
-        # Load baseline threat registry rows to detect overlap
+            logger.error(f"Failed to read signals.json: {e}")
+            raise HTTPException(status_code=500, detail="Signals database missing or unreadable.")
+
+        # Identify which signals are already in the threat registry or clustered
         registry_ids = set()
         try:
             with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
                 reg_data = json.load(f)
                 for item in reg_data:
-                    if "id" in item:
-                        registry_ids.add(item["id"])
+                    registry_ids.add(item.get("id"))
                     if "sources" in item and isinstance(item["sources"], list):
                         for src in item["sources"]:
-                            url = src.get("url", "")
-                            match = re.search(r'inc=([^&]+)', url)
+                            match = re.search(r'inc=([^&]+)', src.get("url", ""))
                             if match:
                                 registry_ids.add(match.group(1))
-        except Exception as e:
-            logger.warning(f"Failed to read threatRegistry.json: {e}")
+        except Exception:
+            pass
 
-        # Filter out already active threat signals
-        unloaded_signals = [
-            s for s in real_signals 
-            if s["id"] not in registry_ids
-        ]
-        
-        selected_signal = None
-        is_mock_fallback = False
-        base_mock = None
-        
-        if unloaded_signals:
-            selected_signal = unloaded_signals[0].copy()
-            logger.info("SIMULATOR PIPELINE HEALTH: Selecting un-ingested real geocoded signal from registry pool.")
-        else:
-            # Fallback to premium mocks if pool is fully drained
-            logger.warning("SIMULATOR PIPELINE HEALTH: No un-ingested signals in pool. Generating a unique mock fallback.")
-            is_mock_fallback = True
-            
-            # Load active threat keys across both files
-            active_keys = set()
-            for path in [THREAT_REGISTRY_PATH, SIGNALS_PATH]:
-                try:
-                    with open(path, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                        for item in data:
-                            facility = item.get("facility", "")
-                            disruption = item.get("disruption", "")
-                            disruption_clean = disruption.split("] ")[-1] if "] " in disruption else disruption.split(" (Secondary Incident")[0]
-                            disruption_clean = disruption_clean.split(" (Shift-")[0]
-                            disruption_clean = disruption_clean.split(" (")[0]
-                            active_keys.add((facility, disruption_clean))
-                except Exception:
-                    pass
-                
-            unloaded_mocks = [m for m in MOCK_POOL if (m.get("facility", ""), m.get("disruption", "")) not in active_keys]
-            
-            if unloaded_mocks:
-                base_mock = random.choice(unloaded_mocks)
-            else:
-                base_mock = random.choice(MOCK_POOL)
-                
-            selected_signal = make_signal_truly_unique(base_mock)
-            
+        unloaded_signals = [s for s in real_signals if s["id"] not in registry_ids]
+
+        if not unloaded_signals:
+            logger.info("SIMULATOR PIPELINE: No new signals left in signals.json to ingest.")
+            raise HTTPException(status_code=404, detail="No more new signals available in the database.")
+
+        selected_signal = random.choice(unloaded_signals).copy()
+        logger.info(f"SIMULATOR PIPELINE: Selecting signal {selected_signal['id']} from signals.json pool.")
+
         selected_signal["ingestedAt"] = int(time.time() * 1000)
+        selected_signal["category"] = get_taxonomy_by_id(
+            selected_signal.get("id"),
+            selected_signal.get("disruption", ""),
+            selected_signal.get("facility", ""),
+            selected_signal.get("fullDescription", "")
+        )
         
-        # Append directly to threatRegistry.json so it integrates persistently with map & list grids
+        # Save directly to threatRegistry.json
         try:
             with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
-                reg_data = json.load(f)
-            if "sources" not in selected_signal:
-                selected_signal["sources"] = [
-                    {
-                        "title": selected_signal["disruption"],
-                        "url": f"http://localhost:8000/api/signals/simulate?inc={selected_signal['id']}",
-                        "summary": selected_signal["fullDescription"]
-                    }
-                ]
-            reg_data.insert(0, selected_signal)
-            with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
-                json.dump(reg_data, f, indent=2)
-            logger.info(f"SIMULATOR PIPELINE SUCCESS: Committed simulated signal {selected_signal['id']} to live threat registry database.")
-        except Exception as file_err:
-            logger.error(f"SIMULATOR PIPELINE FAILURE: Failed to save signal to registry: {file_err}")
+                registry_data = json.load(f)
+            
+            if not any(item.get("id") == selected_signal["id"] for item in registry_data):
+                registry_data.insert(0, selected_signal)
+                with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
+                    json.dump(registry_data, f, indent=2)
+                logger.info(f"SIMULATOR PIPELINE: Saved signal {selected_signal['id']} to registry.")
+        except Exception as e:
+            logger.error(f"SIMULATOR PIPELINE: Registry update failed: {e}")
             
         return selected_signal
     except Exception as e:
@@ -714,12 +735,10 @@ async def stream_signals():
                 with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
                     reg_data = json.load(f)
                     for item in reg_data:
-                        if "id" in item:
-                            registry_ids.add(item["id"])
+                        registry_ids.add(item.get("id"))
                         if "sources" in item and isinstance(item["sources"], list):
                             for src in item["sources"]:
-                                url = src.get("url", "")
-                                match = re.search(r'inc=([^&]+)', url)
+                                match = re.search(r'inc=([^&]+)', src.get("url", ""))
                                 if match:
                                     registry_ids.add(match.group(1))
             except Exception as e:
@@ -732,74 +751,35 @@ async def stream_signals():
             except Exception as e:
                 logger.warning(f"STREAM PIPELINE: Failed to load signals pool: {e}")
                 
-            # Filter signals with zero overlap (not in threat registry, and not already streamed)
-            unstreamed = [
-                s for s in real_signals 
-                if s["id"] not in registry_ids 
-                and s["id"] not in streamed_ids
-            ]
-            
-            selected_signal = None
-            is_mock_fallback = False
-            base_mock = None
-            
-            if unstreamed:
-                # Pick the highest-priority signal (by severity)
-                sorted_unstreamed = sorted(unstreamed, key=lambda x: x.get("severity", 0), reverse=True)
-                selected_signal = sorted_unstreamed[0].copy()
-                streamed_ids.add(selected_signal["id"])
-                logger.info(f"STREAM PIPELINE ACTIVE: Dispatching real news alert. ID={selected_signal['id']} | Facility={selected_signal['facility']} | Severity={selected_signal['severity']}")
-            else:
-                # Fallback generator if pool is exhausted
-                logger.warning("STREAM PIPELINE DRAINED: All pool signals active. Generating unique mock alert.")
-                is_mock_fallback = True
-                
-                # Load active threat keys across both files
-                active_keys = set()
-                for path in [THREAT_REGISTRY_PATH, SIGNALS_PATH]:
-                    try:
-                        with open(path, "r", encoding="utf-8") as f:
-                            data = json.load(f)
-                            for item in data:
-                                facility = item.get("facility", "")
-                                disruption = item.get("disruption", "")
-                                disruption_clean = disruption.split("] ")[-1] if "] " in disruption else disruption.split(" (Secondary Incident")[0]
-                                disruption_clean = disruption_clean.split(" (Shift-")[0]
-                                disruption_clean = disruption_clean.split(" (")[0]
-                                active_keys.add((facility, disruption_clean))
-                    except Exception:
-                        pass
-                        
-                unstreamed_mocks = [m for m in MOCK_POOL if (m.get("facility", ""), m.get("disruption", "")) not in active_keys]
-                
-                if unstreamed_mocks:
-                    base_mock = random.choice(unstreamed_mocks)
-                else:
-                    base_mock = random.choice(MOCK_POOL)
-                    
-                selected_signal = make_signal_truly_unique(base_mock)
-                
+            unstreamed = [s for s in real_signals if s["id"] not in registry_ids and s["id"] not in streamed_ids]
+
+            if not unstreamed:
+                logger.info("STREAM PIPELINE: All signals from signals.json have been streamed.")
+                break
+
+            selected_signal = random.choice(unstreamed).copy()
+            streamed_ids.add(selected_signal["id"])
+            logger.info(f"STREAM PIPELINE: Dispatching signal {selected_signal['id']} from pool.")
+
             selected_signal["ingestedAt"] = int(time.time() * 1000)
+            selected_signal["category"] = get_taxonomy_by_id(
+                selected_signal.get("id"),
+                selected_signal.get("disruption", ""),
+                selected_signal.get("facility", ""),
+                selected_signal.get("fullDescription", "")
+            )
             
-            # Save it to signals database so it becomes queryable/persistent
+            # Save to threatRegistry.json
             try:
-                with open(SIGNALS_PATH, "r+", encoding="utf-8") as f:
-                    data = json.load(f)
-                    if not any(item["id"] == selected_signal["id"] for item in data):
-                        data.insert(0, selected_signal)
-                        f.seek(0)
-                        json.dump(data, f, indent=2)
-                        f.truncate()
-                logger.info(f"STREAM DATABASE UPDATE: Saved streamed signal {selected_signal['id']} to live threat registry database.")
+                with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                    reg_data = json.load(f)
+                if not any(item.get("id") == selected_signal["id"] for item in reg_data):
+                    reg_data.insert(0, selected_signal)
+                    with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
+                        json.dump(reg_data, f, indent=2)
+                logger.info(f"STREAM PIPELINE: Saved signal {selected_signal['id']} to registry.")
             except Exception as e:
-                logger.error(f"Failed to save streamed signal: {e}")
-                
-            # Also save to threatRegistry.json so it integrates persistently with active threat table!
-            try:
-                selected_signal = cluster_and_save_signal(selected_signal, THREAT_REGISTRY_PATH, logger)
-                logger.info(f"STREAM DATABASE UPDATE: Saved streamed signal {selected_signal['id']} to live threat registry database.")
-            except Exception as e:
-                logger.error(f"STREAM DATABASE FAILURE: Failed to save streamed signal to threatRegistry.json: {e}")
+                logger.error(f"STREAM PIPELINE: Registry update failed: {e}")
                 
             yield {
                 "event": "new_signal",
