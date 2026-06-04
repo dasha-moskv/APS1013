@@ -620,8 +620,11 @@ def get_signals():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading signals: {e}")
 
+simulated_ids = set()
+
 @app.post("/api/signals/simulate")
 def simulate_signal():
+    global simulated_ids
     try:
         # Load the real processed signals
         real_signals = []
@@ -632,31 +635,19 @@ def simulate_signal():
             logger.error(f"Failed to read signals.json: {e}")
             raise HTTPException(status_code=500, detail="Signals database missing or unreadable.")
 
-        # Identify which signals are already in the threat registry or clustered
-        registry_ids = set()
-        try:
-            with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
-                reg_data = json.load(f)
-                for item in reg_data:
-                    registry_ids.add(item.get("id"))
-                    if "sources" in item and isinstance(item["sources"], list):
-                        for src in item["sources"]:
-                            match = re.search(r'inc=([^&]+)', src.get("url", ""))
-                            if match:
-                                registry_ids.add(match.group(1))
-        except Exception:
-            pass
-
-        unloaded_signals = [s for s in real_signals if s["id"] not in registry_ids]
+        # Filter out signals that have already been simulated in the current session
+        unloaded_signals = [s for s in real_signals if s["id"] not in simulated_ids]
 
         if not unloaded_signals:
-            logger.info("SIMULATOR PIPELINE: No new signals left in signals.json pool. Generating a procedurally unique variation.")
-            # Select a random signal from the base pool and generate a unique variation
-            base_sig = random.choice(real_signals)
-            selected_signal = make_signal_truly_unique(base_sig)
-        else:
-            selected_signal = random.choice(unloaded_signals).copy()
-            logger.info(f"SIMULATOR PIPELINE: Selecting signal {selected_signal['id']} from signals.json pool.")
+            simulated_ids.clear()
+            unloaded_signals = real_signals.copy()
+
+        if not unloaded_signals:
+            raise HTTPException(status_code=404, detail="No curated signals available.")
+
+        selected_signal = random.choice(unloaded_signals).copy()
+        simulated_ids.add(selected_signal["id"])
+        logger.info(f"SIMULATOR PIPELINE: Selecting curated signal {selected_signal['id']} from signals.json pool.")
 
         selected_signal["ingestedAt"] = int(time.time() * 1000)
         selected_signal["category"] = get_taxonomy_by_id(
@@ -666,19 +657,6 @@ def simulate_signal():
             selected_signal.get("fullDescription", "")
         )
         
-        # Save directly to threatRegistry.json
-        try:
-            with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
-                registry_data = json.load(f)
-            
-            if not any(item.get("id") == selected_signal["id"] for item in registry_data):
-                registry_data.insert(0, selected_signal)
-                with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
-                    json.dump(registry_data, f, indent=2)
-                logger.info(f"SIMULATOR PIPELINE: Saved signal {selected_signal['id']} to registry.")
-        except Exception as e:
-            logger.error(f"SIMULATOR PIPELINE: Registry update failed: {e}")
-            
         return selected_signal
     except Exception as e:
         logger.error(f"SIMULATOR PIPELINE CRITICAL ERROR: {e}")
@@ -732,21 +710,6 @@ async def stream_signals():
             # Sleep 4 to 8 seconds between streams
             await asyncio.sleep(random.randint(4, 8))
             
-            # Load active registry rows and signals pool
-            registry_ids = set()
-            try:
-                with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
-                    reg_data = json.load(f)
-                    for item in reg_data:
-                        registry_ids.add(item.get("id"))
-                        if "sources" in item and isinstance(item["sources"], list):
-                            for src in item["sources"]:
-                                match = re.search(r'inc=([^&]+)', src.get("url", ""))
-                                if match:
-                                    registry_ids.add(match.group(1))
-            except Exception as e:
-                logger.warning(f"STREAM PIPELINE: Failed to read threatRegistry.json: {e}")
-                
             real_signals = []
             try:
                 with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
@@ -754,7 +717,7 @@ async def stream_signals():
             except Exception as e:
                 logger.warning(f"STREAM PIPELINE: Failed to load signals pool: {e}")
                 
-            unstreamed = [s for s in real_signals if s["id"] not in registry_ids and s["id"] not in streamed_ids]
+            unstreamed = [s for s in real_signals if s["id"] not in streamed_ids]
 
             if not unstreamed:
                 logger.info("STREAM PIPELINE: All signals from signals.json have been streamed.")
@@ -772,18 +735,6 @@ async def stream_signals():
                 selected_signal.get("fullDescription", "")
             )
             
-            # Save to threatRegistry.json
-            try:
-                with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
-                    reg_data = json.load(f)
-                if not any(item.get("id") == selected_signal["id"] for item in reg_data):
-                    reg_data.insert(0, selected_signal)
-                    with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
-                        json.dump(reg_data, f, indent=2)
-                logger.info(f"STREAM PIPELINE: Saved signal {selected_signal['id']} to registry.")
-            except Exception as e:
-                logger.error(f"STREAM PIPELINE: Registry update failed: {e}")
-                
             yield {
                 "event": "new_signal",
                 "data": json.dumps(selected_signal)
