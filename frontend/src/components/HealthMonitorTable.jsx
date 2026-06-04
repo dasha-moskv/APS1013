@@ -985,10 +985,7 @@ export default function HealthMonitorTable({
                         Severity Score
                       </p>
                       <p>
-                        The LLM assigned a severity of <strong>{inspectedRow.severity}</strong> because the signal suggests a meaningful operational disruption at a relevant supply node.
-                      </p>
-                      <p className="mt-1 text-[10px] opacity-80">
-                        Rubric factors: operational impact, affected facility criticality, downstream dependency, and recovery complexity.
+                        The LLM assigned a severity of <strong>{inspectedRow.severity}</strong>: {inspectedRow.severity_justification}
                       </p>
                     </div>
 
@@ -997,10 +994,7 @@ export default function HealthMonitorTable({
                         Likelihood Score
                       </p>
                       <p>
-                        The LLM assigned a likelihood of <strong>{inspectedRow.likelihood}%</strong> based on the strength and credibility of the disruption signal.
-                      </p>
-                      <p className="mt-1 text-[10px] opacity-80">
-                        Rubric factors: source credibility, signal frequency, supporting evidence, and proximity to the mapped supply base.
+                        The LLM assigned a likelihood of <strong>{inspectedRow.likelihood}%</strong>: {inspectedRow.likelihood_justification}
                       </p>
                     </div>
 
@@ -1009,33 +1003,17 @@ export default function HealthMonitorTable({
                         Time-to-Hit Estimate
                       </p>
                       <p>
-                        The LLM estimated <strong>{formatTimeToHit(inspectedRow.timeToHit)}</strong> before the disruption materially affects downstream operations.
-                      </p>
-                      <p className="mt-1 text-[10px] opacity-80">
-                        Rubric factors: disruption urgency, logistics exposure, inventory buffer assumptions, and propagation speed through the supplier network.
+                        The LLM estimated <strong>{formatTimeToHit(inspectedRow.timeToHit)}</strong>: {inspectedRow.timeToHit_justification}
                       </p>
                     </div>
-
                     <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                       <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
                         Taxonomy Classification
                       </p>
                       <p>
-                        The LLM classified this signal as <strong>{getTaxonomy(inspectedRow)}</strong> based on the dominant disruption pattern in the source text.
-                      </p>
-                      <p className="mt-1 text-[10px] opacity-80">
-                        Rubric factors: keyword evidence, contextual meaning, affected process area, and similarity to known disruption categories.
+                        Our backend classification engine performed a keyword-based taxonomy analysis on the signal content and assigned it to <strong>{getTaxonomy(inspectedRow)}</strong>, the category with the highest keyword match frequency.
                       </p>
                     </div>
-                  </div>
-
-                  <div className={`mt-3 border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                    <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-amber-500 mb-1">
-                      Mock LLM Reasoning Summary
-                    </p>
-                    <p>
-                      The model reviewed the disruption description, facility role, location, and downstream impact. It then mapped the signal against the scoring rubric to assign a severity level, likelihood percentage, estimated time-to-hit, and taxonomy category.
-                    </p>
                   </div>
                 </div>
               )}
