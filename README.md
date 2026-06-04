@@ -25,6 +25,11 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 
 ```text
 / (Repository Root)
+├── archive/                    # Archived files not needed at runtime (historical analyses, large CSV lists, and offline processors)
+│   ├── root/                   # Original setup and planning scratchpads
+│   ├── scratch/                # Codebase generation/cleanup scripts
+│   └── scripts/                # Original supplier lists, data parsers, and scheduler logic
+│
 ├── backend/                    # Python AI Agent Core Service
 │   ├── agents/                 # Agentic AI Processing Pipeline
 │   │   ├── verify_supply_base.py                # Step 1: Supply base scope validation
@@ -35,9 +40,7 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 │   │   ├── display.py                          # Colorized console print helpers
 │   │   └── save_output.py                      # Execution log storage handlers
 │   ├── runs/                   # Directory containing archived backend session logs
-│   ├── main.py                 # Core CLI entry point for the interactive agent
-│   ├── newsapi.py              # Public intelligence gathering connector
-│   ├── data-schema.json        # Data-contract JSON validation schemas
+│   ├── main.py                 # Core CLI entry point and FastAPI server endpoints
 │   ├── requirements.txt        # Python dependency manifest
 │   └── .env                    # System-level API keys (OpenAI, NewsAPI)
 │
@@ -50,42 +53,27 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 │
 ├── frontend/                   # React + Vite Production-Ready UI
 │   ├── src/
-│   │   ├── components/         # Highly decoupled modular components
-│   │   │   ├── Sidebar.jsx           # Fixed-side tab navigation rail
-│   │   │   ├── Topbar.jsx            # User credentials & global active status bar
-│   │   │   ├── KpiCards.jsx          # Live financial & threat scoreboard KPIs
-│   │   │   ├── MapPlaceholder.jsx    # Interactive SVG geographic node mapper
-│   │   │   ├── HealthMonitorTable.jsx # Threat Registry data grid with analyst override & drawer
-│   │   │   ├── BaseIngest.jsx        # Phase 1: GeoJSON validation & parser console
-│   │   │   ├── MitigationPlaybooks.jsx # Mitigation Playbook workbench (scenarios, ERP, mail)
-│   │   │   ├── ActionOrchestration.jsx # Phase 3: Portal outreach simulator & SAP audit logger
-│   │   │   ├── AIJudgeGovernance.jsx # Governance: TPR/FPR charts & dynamic weight sliders
-│   │   │   └── SignalTaxonomy.jsx    # Taxonomic distribution and risk profile matrix
-│   │   ├── utils/              # Shared utility functions
-│   │   │   └── riskHeuristics.js     # Taxonomy, severity, likelihood & format helpers
-│   │   ├── App.jsx             # Shell framework, global states, & async DB loaders
-│   │   ├── index.css           # Vanilla CSS variables & styling definitions
-│   │   └── main.jsx            # Application mount point
-│   ├── public/                 # Static files & local databases
-│   │   └── data/               # Decoupled mock database sets (JSON format)
-│   │       ├── threatRegistry.json         # Central active threats database
-│   │       ├── knowledgeGraph.json         # N-tier structural node dependencies
-│   │       ├── historicalPrecedents.json   # Vector-style cosine similarity records
-│   │       ├── erpSystems.json             # SAP-aligned Material Masters, BOMs & pre-qualified ASLs
-│   │       ├── kpiData.json               # Corporate scoreboard metric configurations
-│   │       ├── mockSignals.json            # Demo live-ingest satellite signal payloads
-│   │       ├── droppedSignals.json         # AI-filtered low-risk signal records
-│   │       ├── playbookRecommendations.json # Structured mitigation playbook data
-│   │       ├── ingestedPresets.json        # GeoJSON supply-base preset definitions
-│   │       └── erpSystems.json            # ERP system configuration targets
-│   ├── package.json            # Node package configurations & developer scripts
-│   ├── vite.config.js          # Vite build pack bundler configurations
-│   └── eslint.config.js        # Linter code quality boundaries
+│   │   ├── components/         # Decoupled UI components (Sidebar, Topbar, HealthMonitorTable, etc.)
+│   │   ├── data/               # Hardcoded static starting databases imported on load
+│   │   │   ├── threatRegistry.json           # Central active threats (30 signals baseline)
+│   │   │   ├── knowledgeGraph.json           # N-tier structural node dependencies
+│   │   │   ├── historicalPrecedents.json     # Historic similarity records
+│   │   │   ├── erpSystems.json               # SAP pre-qualified alternates & BOMs
+│   │   │   ├── kpiData.json                  # Scorecard metrics configuration
+│   │   │   ├── mockSignals.json              # Live-ingest satellite signals
+│   │   │   ├── droppedSignals.json           # AI-filtered low-risk signals
+│   │   │   └── playbookRecommendations.json   # Structured playbooks and email templates
+│   │   ├── utils/              # Risk evaluation heuristics
+│   │   ├── App.jsx             # React layout framework, states & fetch/SSE hook listeners
+│   │   ├── index.css           # Custom Vanilla CSS visual tokens & glassmorphic styles
+│   │   └── main.jsx            # Application entry mount point
+│   ├── package.json            # Vite package dependencies
+│   ├── vite.config.js          # Vite build environment configuration
+│   └── eslint.config.js        # Strict React Hook quality check rules
 │
 ├── scripts/                    # Operational utility scripts
 │   ├── generate_knowledge_graph.py # Knowledge graph data generation helper
 │   ├── google_news_batch_processor.py # Google News RSS Batch Processor & Translator
-│   ├── run_scheduler.py        # 7-second automatic background news scraper runner
 │   └── validate_schemas.py     # JSON schema validation helper
 │
 ├── .gitignore                  # Git tracking exclusion list
@@ -224,17 +212,10 @@ To ensure the system is completely ready for enterprise backend API integrations
     python main.py
     ```
 
-### 🛰️ Background Scraper Daemon
-To run the automated background scraper loop that feeds data continuously to the portal database:
-1. Navigate into the `scripts` folder and run the scheduler:
-    ```bash
-    cd scripts
-    python run_scheduler.py
-    ```
-2. Watch the logs outputted to `scripts/scheduler.log`:
-    ```bash
-    tail -f scheduler.log
-    ```
+### 🛰️ Transient Live News Ingestion & Simulation
+Starting data is fully hardcoded inside the frontend bundles under `frontend/src/data/` to guarantee instant load times and deterministic state. Dynamic operations use the following transient patterns:
+1. **Real-time News Feed**: Clicking the Deloitte-green **Fetch Real News** button in the Topbar calls the backend `@app.get("/api/real-news")` endpoint. This fetches, processes, and formats live news on-demand and returns them directly to the frontend state without modifying local JSON database files on disk.
+2. **Signal Simulation**: Clicking the **Simulate Live Signal** button in the overview panel invokes `POST /api/signals/simulate`, which bypasses Jaccard clustering to dynamically inject unique alerts as new rows into the active interface context.
 
 ---
 
