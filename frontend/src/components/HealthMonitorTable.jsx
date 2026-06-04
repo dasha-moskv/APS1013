@@ -613,7 +613,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
@@ -641,7 +641,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
@@ -669,7 +669,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
