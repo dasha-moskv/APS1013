@@ -44,9 +44,8 @@ def validate_threat_schema():
         "sourceData": str,
         "mapPosition": dict,
         "playbook": dict,
-        "downstreamImpact": str,
+        "downstreamBusinessImpact": str,
         "mitigationObjective": str,
-        "ingestedAt": int,
         "sources": list
     }
     
