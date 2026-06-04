@@ -46,54 +46,101 @@ def jaccard_similarity(set1, set2):
     return len(set1.intersection(set2)) / len(set1.union(set2))
 
 def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
-    text = (disruption + " " + facility + " " + full_desc).lower()
-    
-    # 1. Check for Regulatory & Quality keywords
-    quality_keywords = [
-        "quality", "regulation", "regulatory", "audit", "defect", "defects",
-        "compliance", "inspection", "checks", "paperwork", "forgeries",
-        "documentation", "sanctions", "ban", "legal", "certificate", "traceability"
+    text = f"{disruption} {facility} {full_desc}".lower()
+
+    taxonomy_keywords = {
+        "Regulatory & Quality": [
+            "quality", "defect", "defects", "inspection", "inspections",
+            "audit", "compliance", "certificate", "certification",
+            "paperwork", "documentation", "traceability", "forgeries",
+            "regulatory", "regulation", "sanctions", "ban", "legal",
+            "faa", "airworthiness", "approval", "rework"
+        ],
+
+        "Logistics & Transit": [
+            "logistics", "transit", "shipping", "shipment", "shipments",
+            "transport", "freight", "cargo", "routing", "rail", "port",
+            "customs", "border", "carrier", "import", "imports",
+            "warehouse", "dock", "route", "freighter", "convoy",
+            "delivery", "deliveries"
+        ],
+
+        "Operations & Capacity": [
+            "strike", "labor", "union", "workforce", "staffing",
+            "capacity", "shortage", "shortages", "bottleneck", "bottlenecks",
+            "yield", "production", "manufacturing", "throughput",
+            "assembly", "plant", "facility", "factory", "shutdown",
+            "restart", "outage", "maintenance", "autoclave", "smelter",
+            "smelting", "furnace", "engine", "parts", "supply chain",
+            "constrain", "constraints", "availability"
+        ],
+
+        "External Infrastructure": [
+            "power", "grid", "telemetry", "scada", "utilities",
+            "weather", "freeze", "storm", "natural disaster",
+            "earthquake", "seismic", "lockdown", "internet",
+            "telecommunication", "infrastructure"
+        ]
+    }
+
+    scores = {category: 0 for category in taxonomy_keywords}
+
+    for category, keywords in taxonomy_keywords.items():
+        for keyword in keywords:
+            if keyword in text:
+                scores[category] += 1
+
+    # Extra weighting for strong category indicators
+    strong_signals = {
+        "Regulatory & Quality": [
+            "quality issue", "defect", "inspection", "documentation",
+            "traceability", "certificate", "rework"
+        ],
+        "Logistics & Transit": [
+            "rail", "port", "customs", "cargo", "freight",
+            "shipping", "transport", "shipment"
+        ],
+        "Operations & Capacity": [
+            "strike", "labor", "shortage", "bottleneck", "production",
+            "capacity", "yield", "throughput", "assembly", "restart"
+        ],
+        "External Infrastructure": [
+            "power outage", "grid", "weather", "storm", "seismic",
+            "lockdown", "telemetry", "scada"
+        ]
+    }
+
+    for category, phrases in strong_signals.items():
+        for phrase in phrases:
+            if phrase in text:
+                scores[category] += 3
+
+    # Avoid over-classifying generic delay language as logistics
+    generic_delay_terms = ["delay", "delays", "delayed", "delivery", "deliveries"]
+    if any(term in text for term in generic_delay_terms):
+        scores["Logistics & Transit"] -= 1
+
+    # Tie-break priority for this project context
+    priority = [
+        "Operations & Capacity",
+        "Regulatory & Quality",
+        "Logistics & Transit",
+        "External Infrastructure"
     ]
-    if any(k in text for k in quality_keywords):
-        return "Regulatory & Quality"
-        
-    # 2. Check for Logistics & Transit keywords
-    logistics_keywords = [
-        "logistics", "transit", "shipping", "delays", "delay", "transport",
-        "freight", "cargo", "routing", "rail", "port", "customs", "border",
-        "carrier", "import", "delivery", "deliveries", "stalled", "freighter"
-    ]
-    if any(k in text for k in logistics_keywords):
-        return "Logistics & Transit"
-        
-    # 3. Check for Operations & Capacity keywords
-    ops_keywords = [
-        "strike", "labor", "union", "workforce", "capacity", "shortage",
-        "shortages", "yield", "production", "constrain", "starvation",
-        "manufacturing", "kiln", "shutdown", "furnace", "mold", "autoclave",
-        "honing", "riveting", "outage", "spindle", "die", "billet", "smelting"
-    ]
-    if any(k in text for k in ops_keywords):
-        return "Operations & Capacity"
-        
-    # 4. Check for External Infrastructure keywords
-    infra_keywords = [
-        "power", "grid", "telemetry", "scada", "telecommunication", "utilities",
-        "weather", "freeze", "storm", "natural", "internet", "surge", "outage"
-    ]
-    if any(k in text for k in infra_keywords):
+
+    best_score = max(scores.values())
+
+    if best_score <= 0:
         return "External Infrastructure"
-        
-    # Fallback based on original prefix rules
-    if signal_id:
-        if signal_id.startswith("FAC-001") or signal_id.startswith("FAC-003") or signal_id.startswith("SUP-771A"):
-            return "Operations & Capacity"
-        if signal_id.startswith("SUP-001A") or signal_id.startswith("SUP-109B") or signal_id.startswith("FAC-010") or signal_id.startswith("SUP-302B"):
-            return "Logistics & Transit"
-        if signal_id.startswith("SUP-401A") or signal_id.startswith("SUP-502A") or signal_id.startswith("SUP-404R") or signal_id.startswith("SUP-512S") or signal_id.startswith("SUP-212H"):
-            return "Regulatory & Quality"
-            
-    return "External Infrastructure"
+
+    tied_categories = [
+        category for category, score in scores.items()
+        if score == best_score
+    ]
+
+    for category in priority:
+        if category in tied_categories:
+            return category
 
 def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     """

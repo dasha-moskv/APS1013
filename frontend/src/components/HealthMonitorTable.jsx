@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, Calendar, X, CheckCircle, Clock, MessageSquare, Terminal, RefreshCw, DollarSign, FileText, AlertTriangle, Users, Award, Globe, Cpu, Radio, ThumbsUp, ThumbsDown, Star, Sparkles, AlertCircle, ArrowRight, Info } from "lucide-react";
 import { getTaxonomy, getSeverityLabel, getSeverityColor, getLikelihoodLabel, getLikelihoodColor, formatTimeToHit } from "../utils/riskHeuristics";
-
+import { LinkIcon } from "lucide-react";
 
 export default function HealthMonitorTable({ 
   rowData = [], 
@@ -29,6 +29,10 @@ export default function HealthMonitorTable({
   const [feedbackOption, setFeedbackOption] = useState(null);
   const [feedbackComment, setFeedbackComment] = useState("");
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  //Drop downs
+  const [showRubricAssessment, setShowRubricAssessment] = useState(false);
+  const [showEvidenceSources, setShowEvidenceSources] = useState(false);
 
   const handleSignOffToggle = (nodeId, role) => {
     setSignOffs(prev => {
@@ -613,7 +617,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
@@ -641,7 +645,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
@@ -669,7 +673,7 @@ export default function HealthMonitorTable({
                 <div className="flex items-center justify-end gap-1">
                   <div className="relative group cursor-help inline-block leading-none mr-1">
                     <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
-                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                    <div className={`pointer-events-none absolute top-6 right-0 z-[100] w-80 p-3.5 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans normal-case ${
                       isDark 
                         ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
                         : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
@@ -867,23 +871,238 @@ export default function HealthMonitorTable({
             {/* Quick-Glance Risk KPIs — always visible */}
             <div className={`grid grid-cols-4 gap-2 mb-5 select-none font-mono text-[10px] border-b pb-5 ${isDark ? "border-[#1E293B]" : "border-slate-200"}`}>
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>SEVERITY</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> An estimate of how damaging the disruption could be to operations, delivery timelines, costs, or supply continuity.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this rating using a severity rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${getSeverityColor(inspectedRow.severity, isDark).split(' ')[0]}`}>{getSeverityLabel(inspectedRow.severity).split(" ")[0]}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>LIKELIHOOD</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> An estimate of how probable it is that the disruption will materially affect the supply chain.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this rating using a likelihood rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${getLikelihoodColor(inspectedRow.likelihood, isDark).split(' ')[0]}`}>{getLikelihoodLabel(inspectedRow.likelihood).split(" ")[0]}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TIME TO HIT</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> The estimated number of days before the disruption begins affecting operations or downstream supply availability.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The LLM agent assigns this estimate using a timing rubric.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className={`font-bold text-[11px] mt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{formatTimeToHit(inspectedRow.timeToHit)}</span>
               </div>
+
               <div className={`border p-2.5 flex flex-col justify-between ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
-                <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
+                <div className="flex items-center justify-between">
+                  <span className={`font-bold uppercase tracking-wider text-[8px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>TAXONOMY</span>
+                  <div className="relative group cursor-help inline-block leading-none">
+                    <Info className="h-3 w-3 text-slate-400 hover:text-slate-250 cursor-pointer" />
+                    <div className={`pointer-events-none absolute bottom-full right-0 mb-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                      isDark ? "bg-[#0A0D14]/98 border-[#1E293B] text-slate-200 backdrop-blur-md" : "bg-white/98 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                    }`}>
+                      <p className={`text-[10px] leading-relaxed font-medium mb-1.5 ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>What it is:</strong> The disruption category used to classify the type of supply chain risk represented by the signal.
+                      </p>
+                      <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-350" : "text-slate-650"}`}>
+                        <strong>How it is generated:</strong> The backend assigns this category using a taxonomy rubric, matching the signal text against disruption patterns.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow)}</span>
               </div>
             </div>
+            {/* Detailed Rubric Assessment Dropdown */}
+            <div className={`mb-5 border ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-white"}`}>
+              <button
+                type="button"
+                onClick={() => setShowRubricAssessment(prev => !prev)}
+                className={`w-full px-4 py-3 flex items-center justify-between text-left transition-colors ${
+                  isDark ? "hover:bg-[#0F1520]" : "hover:bg-slate-50"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-3.5 w-3.5 text-[#86BC25]" />
+                  <span className={`font-mono text-[10px] font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-200" : "text-slate-800"
+                  }`}>
+                    Detailed Rubric Assessment
+                  </span>
+                </div>
 
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    showRubricAssessment ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {showRubricAssessment && (
+                <div className={`border-t px-4 py-4 font-sans text-[11px] ${
+                  isDark ? "border-[#1E293B] text-slate-300" : "border-slate-200 text-slate-700"
+                }`}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Severity Score
+                      </p>
+                      <p>
+                        The LLM assigned a severity of <strong>{inspectedRow.severity}</strong>: {inspectedRow.severity_justification}
+                      </p>
+                    </div>
+
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Likelihood Score
+                      </p>
+                      <p>
+                        The LLM assigned a likelihood of <strong>{inspectedRow.likelihood}%</strong>: {inspectedRow.likelihood_justification}
+                      </p>
+                    </div>
+
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Time-to-Hit Estimate
+                      </p>
+                      <p>
+                        The LLM estimated <strong>{formatTimeToHit(inspectedRow.timeToHit)}</strong>: {inspectedRow.timeToHit_justification}
+                      </p>
+                    </div>
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Taxonomy Classification
+                      </p>
+                      <p>
+                        Our backend classification engine performed a keyword-based taxonomy analysis on the signal content and assigned it to <strong>{getTaxonomy(inspectedRow)}</strong>, the category with the highest keyword match frequency.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Evidence Sources Dropdown */}
+            <div className={`mb-5 border ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-white"}`}>
+              <button
+                type="button"
+                onClick={() => setShowEvidenceSources(prev => !prev)}
+                className={`w-full px-4 py-3 flex items-center justify-between text-left transition-colors ${
+                  isDark ? "hover:bg-[#0F1520]" : "hover:bg-slate-50"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <LinkIcon className="h-3.5 w-3.5 text-[#86BC25]" />
+                  <span className={`font-mono text-[10px] font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-200" : "text-slate-800"
+                  }`}>
+                    Evidence Sources
+                  </span>
+                </div>
+
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    showEvidenceSources ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {showEvidenceSources && (
+                <div className={`border-t px-4 py-4 ${
+                  isDark ? "border-[#1E293B]" : "border-slate-200"
+                }`}>
+                  <div className="space-y-3">
+                    {(inspectedRow.sources || []).map((source, index) => (
+                      <div
+                        key={`${source.title}-${index}`}
+                        className={`border p-3 ${
+                          isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                              Source {index + 1}
+                            </p>
+
+                            <p className={`text-[11px] font-bold leading-snug ${
+                              isDark ? "text-slate-200" : "text-slate-800"
+                            }`}>
+                              {source.title}
+                            </p>
+                          </div>
+
+                          {source.url && (
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`shrink-0 font-mono text-[9px] uppercase tracking-wider underline underline-offset-2 ${
+                                isDark ? "text-slate-400 hover:text-[#86BC25]" : "text-slate-600 hover:text-[#86BC25]"
+                              }`}
+                            >
+                              Open
+                            </a>
+                          )}
+                        </div>
+
+                        <p className={`mt-2 text-[10px] leading-relaxed ${
+                          isDark ? "text-slate-350" : "text-slate-650"
+                        }`}>
+                          {source.summary}
+                        </p>
+                      </div>
+                    ))}
+
+                    {(!inspectedRow.sources || inspectedRow.sources.length === 0) && (
+                      <div className={`border p-3 ${
+                        isDark ? "border-[#1E293B] bg-[#0F1520] text-slate-400" : "border-slate-200 bg-slate-50 text-slate-600"
+                      }`}>
+                        <p className="font-sans text-[11px]">
+                          No source evidence has been attached to this signal yet.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
             {/* ── PRE-PLAYBOOK VIEW ── */}
             {!playbookGenerated && (
               <div className="flex flex-col gap-5">
@@ -980,7 +1199,6 @@ export default function HealthMonitorTable({
                     </div>
                   </div>
                 </div>
-
                 {/* Signal Pipeline */}
                 {renderPipeline(inspectedRow)}
 
@@ -1023,7 +1241,7 @@ export default function HealthMonitorTable({
                 </div>
               </div>
             )}
-
+            
             {playbookGenerated && (
               <div className={`w-full flex flex-col gap-6 animate-fade-in ${isDark ? "text-slate-200" : "text-slate-700"}`}>
 

@@ -33,22 +33,25 @@ The new card must:
 - Be relevant to Boeing's Aircraft Propulsion Systems Supply Base
 - Be realistic for aerospace manufacturing and supply chain monitoring
 - Use a new unique id that does not already appear in the existing JSON
-- Include realistic severity, likelihood, timeToHit, tier, location, coordinates, role, and status
+- Include realistic severity, severity_justification, likelihood, likelihood_justification, timeToHit, timeToHit_justification, tier, location, coordinates, role, and status
 - Include a mitigationPlan with exactly 3 steps and 1 timeline
 - Include a validationPlan with exactly 3 steps and 1 timeline
 - Keep the sources section exactly as TODO placeholders
 
 SCORING GUIDANCE:
 - severity: number from 1.0 to 10.0
+- severity_justification: explain why the severity score is appropriate based on operational, delivery, material, revenue, or production impact
 - likelihood: integer from 0 to 100
+- likelihood_justification: explain why the likelihood score is appropriate based on whether the disruption is active, recurring, confirmed, emerging, or uncertain
 - timeToHit: integer number of days until Boeing may feel the impact
+- timeToHit_justification: explain why the impact is expected within that number of days based on inventory buffers, production cadence, logistics timing, or supplier recovery windows
 - tier:
   - 0 = Boeing internal facility
   - 1 = direct supplier
   - 2 = supplier to supplier
   - 3 = upstream raw material or logistics dependency
 
-THREAT CLASSIFICATION GUIDANCE
+THREAT CLASSIFICATION GUIDANCE:
 Critical threat
 - color: "#D32F2F"
 - status: "Critical threat"
@@ -72,6 +75,13 @@ Nominal
 - No significant near-term impact expected.
 - Typical severity: 0.0 - 4.9
 
+JUSTIFICATION STYLE GUIDANCE:
+- severity_justification should focus on the magnitude of downstream business or production impact.
+- likelihood_justification should focus on how active, confirmed, recurring, or uncertain the disruption is.
+- timeToHit_justification should focus on how quickly the disruption propagates into Boeing operations.
+- Keep each justification to one clear sentence.
+- Do not mention that an LLM generated the justification.
+
 OUTPUT REQUIREMENTS:
 - Return ONLY valid JSON
 - Return exactly ONE JSON object
@@ -88,8 +98,11 @@ The output must follow this general shape:
   "location": "City/Region, Country",
   "disruption": "Short disruption title",
   "severity": 0.0,
+  "severity_justification": "One sentence explaining the severity score.",
   "likelihood": 0,
+  "likelihood_justification": "One sentence explaining the likelihood score.",
   "timeToHit": 0,
+  "timeToHit_justification": "One sentence explaining the time-to-hit score.",
   "tier": 1,
   "fullDescription": "Detailed explanation of the disruption and why it matters to Boeing.",
   "downstreamBusinessImpact": "Brief summary of how this affects downstream production or revenue.",
