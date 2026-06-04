@@ -30,6 +30,10 @@ export default function HealthMonitorTable({
   const [feedbackComment, setFeedbackComment] = useState("");
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
+  //Drop downs
+  const [showRubricAssessment, setShowRubricAssessment] = useState(false);
+  const [showEvidenceSources, setShowEvidenceSources] = useState(false);
+
   const handleSignOffToggle = (nodeId, role) => {
     setSignOffs(prev => {
       const nodeSignOffs = prev[nodeId] || { cfo: false, coo: false, board: false };
@@ -946,7 +950,96 @@ export default function HealthMonitorTable({
                 <span className="text-[#86BC25] font-bold text-[9px] mt-1 leading-tight">{getTaxonomy(inspectedRow)}</span>
               </div>
             </div>
+            {/* Detailed Rubric Assessment Dropdown */}
+            <div className={`mb-5 border ${isDark ? "border-[#1E293B] bg-[#0A0D14]" : "border-slate-200 bg-white"}`}>
+              <button
+                type="button"
+                onClick={() => setShowRubricAssessment(prev => !prev)}
+                className={`w-full px-4 py-3 flex items-center justify-between text-left transition-colors ${
+                  isDark ? "hover:bg-[#0F1520]" : "hover:bg-slate-50"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-3.5 w-3.5 text-[#86BC25]" />
+                  <span className={`font-mono text-[10px] font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-200" : "text-slate-800"
+                  }`}>
+                    Detailed Rubric Assessment
+                  </span>
+                </div>
 
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    showRubricAssessment ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {showRubricAssessment && (
+                <div className={`border-t px-4 py-4 font-sans text-[11px] ${
+                  isDark ? "border-[#1E293B] text-slate-300" : "border-slate-200 text-slate-700"
+                }`}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Severity Score
+                      </p>
+                      <p>
+                        The LLM assigned a severity of <strong>{inspectedRow.severity}</strong> because the signal suggests a meaningful operational disruption at a relevant supply node.
+                      </p>
+                      <p className="mt-1 text-[10px] opacity-80">
+                        Rubric factors: operational impact, affected facility criticality, downstream dependency, and recovery complexity.
+                      </p>
+                    </div>
+
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Likelihood Score
+                      </p>
+                      <p>
+                        The LLM assigned a likelihood of <strong>{inspectedRow.likelihood}%</strong> based on the strength and credibility of the disruption signal.
+                      </p>
+                      <p className="mt-1 text-[10px] opacity-80">
+                        Rubric factors: source credibility, signal frequency, supporting evidence, and proximity to the mapped supply base.
+                      </p>
+                    </div>
+
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Time-to-Hit Estimate
+                      </p>
+                      <p>
+                        The LLM estimated <strong>{formatTimeToHit(inspectedRow.timeToHit)}</strong> before the disruption materially affects downstream operations.
+                      </p>
+                      <p className="mt-1 text-[10px] opacity-80">
+                        Rubric factors: disruption urgency, logistics exposure, inventory buffer assumptions, and propagation speed through the supplier network.
+                      </p>
+                    </div>
+
+                    <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                      <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">
+                        Taxonomy Classification
+                      </p>
+                      <p>
+                        The LLM classified this signal as <strong>{getTaxonomy(inspectedRow)}</strong> based on the dominant disruption pattern in the source text.
+                      </p>
+                      <p className="mt-1 text-[10px] opacity-80">
+                        Rubric factors: keyword evidence, contextual meaning, affected process area, and similarity to known disruption categories.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={`mt-3 border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
+                    <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-amber-500 mb-1">
+                      Mock LLM Reasoning Summary
+                    </p>
+                    <p>
+                      The model reviewed the disruption description, facility role, location, and downstream impact. It then mapped the signal against the scoring rubric to assign a severity level, likelihood percentage, estimated time-to-hit, and taxonomy category.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
             {/* ── PRE-PLAYBOOK VIEW ── */}
             {!playbookGenerated && (
               <div className="flex flex-col gap-5">
@@ -1043,7 +1136,7 @@ export default function HealthMonitorTable({
                     </div>
                   </div>
                 </div>
-
+      
                 {/* Signal Pipeline */}
                 {renderPipeline(inspectedRow)}
 
@@ -1086,7 +1179,7 @@ export default function HealthMonitorTable({
                 </div>
               </div>
             )}
-
+            
             {playbookGenerated && (
               <div className={`w-full flex flex-col gap-6 animate-fade-in ${isDark ? "text-slate-200" : "text-slate-700"}`}>
 
