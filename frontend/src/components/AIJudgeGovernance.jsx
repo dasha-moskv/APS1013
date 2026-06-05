@@ -1,14 +1,20 @@
-// No React state needed in this purely presentational component.
 import { 
   ShieldAlert, 
   BarChart3, 
   Activity, 
   Star,
   UserCheck,
-  Info
+  Info,
+  CheckSquare
 } from "lucide-react";
 
-export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppedSignals }) {
+export default function AIJudgeGovernance({ 
+  isDark, 
+  feedbackHistory = [], 
+  droppedSignals = [],
+  threatRows = [],
+  setThreatRows
+}) {
   const activeDroppedSignals = droppedSignals || [];
   
   // Dynamic calculations based on live review history submitted by risk managers
@@ -22,8 +28,41 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
   const dynamicTpr = Math.min(99.8, 97.4 + (accurateFeedbackCount * 0.2) - (needsAuditCount * 0.4)).toFixed(1);
   const dynamicFpr = Math.max(0.2, 2.6 - (accurateFeedbackCount * 0.1) + (needsAuditCount * 0.3)).toFixed(1);
 
+  // Filter threats for compliance breaches intercepted by the AI Judge
+  const complianceBreaches = threatRows.filter(t => t.mapPosition?.status === "Compliance Breach");
+
+  const handleOverrideBreach = (id) => {
+    if (setThreatRows) {
+      setThreatRows(prev => prev.map(t => {
+        if (t.id === id) {
+          // Revert to Elevated Risk status and apply pre-certified ASL supplier details
+          return {
+            ...t,
+            mapPosition: {
+              ...t.mapPosition,
+              status: "Elevated Risk",
+              color: "#FFB300"
+            },
+            playbook: {
+              ...t.playbook,
+              mitigationPlan: {
+                steps: [
+                  "SOURCING NUDGE: Reallocate 30% capacity to CFM International (Paris, FR). Target Activation: 15 days. FAI Documentation: FAA Form 8130-3 required. Shift allocations to pre-certified alternate vendor to stabilize production flow.",
+                  "Execute dual-sourcing allocation checks and confirm capacity availability at backup facility."
+                ],
+                timeline: "15 days"
+              }
+            }
+          };
+        }
+        return t;
+      }));
+      alert(`FAA REGULATORY OVERRIDE: Disruption card ${id} has been manually certified under emergency human-in-the-loop override.`);
+    }
+  };
+
   return (
-    <div className="flex flex-1 flex-col gap-3 p-3 animate-fade-in">
+    <div className="flex flex-1 flex-col gap-3 p-3 animate-fade-in text-xs">
       {/* Page Header */}
       <div className="flex flex-col gap-1 border-b pb-2 select-none border-slate-700/50">
         <h1 className="text-base font-bold uppercase tracking-wider text-[#86BC25] font-mono flex items-center gap-1.5">
@@ -36,7 +75,7 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
       </div>
 
       <div className="grid grid-cols-12 gap-3">
-        {/* Left Column: Metrics & Analyst Reviews (6 columns) */}
+        {/* Left Column: Metrics, Compliance Alerts, and Analyst Reviews (6 columns) */}
         <div className="col-span-12 lg:col-span-6 flex flex-col gap-3">
           
           {/* AI Judge Validation Metrics */}
@@ -97,6 +136,77 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
             </div>
           </div>
 
+          {/* Agentic Compliance Alerts & Guardrails (ASL Check Logs) */}
+          <div className={`border p-4 rounded-none transition-colors duration-300 ${
+            isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
+          }`}>
+            <div className="flex items-center justify-between mb-3 select-none">
+              <h2 className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 text-red-500">
+                <ShieldAlert className="h-4 w-4 text-red-500" />
+                Agentic Compliance Alerts & Guardrails
+              </h2>
+              <div className="relative group cursor-help inline-block leading-none">
+                <Info className="h-3.5 w-3.5 text-slate-400 hover:text-slate-200" />
+                <div className={`pointer-events-none absolute top-full right-0 mt-2 z-[100] w-64 p-3 border text-left shadow-2xl opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 rounded-none font-sans ${
+                  isDark 
+                    ? "bg-[#0A0D14]/95 border-[#1E293B] text-slate-200 backdrop-blur-md" 
+                    : "bg-white/95 border-slate-200 text-slate-800 shadow-slate-200/50 backdrop-blur-md"
+                }`}>
+                  <div className="flex items-center gap-1.5 border-b pb-1.5 mb-2 border-slate-700/30">
+                    <span className="h-2 w-2 bg-red-500 rounded-none" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-500">Compliance Check</span>
+                  </div>
+                  <p className={`text-[10px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Lists active alternate supplier recommendations that were blocked or flagged by the FAA ASL validation middleware.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {complianceBreaches.length === 0 ? (
+              <div className={`border border-dashed p-5 text-center select-none ${
+                isDark ? "border-slate-800 text-slate-500" : "border-slate-300 text-slate-400"
+              }`}>
+                <p className="text-xs font-sans font-bold text-[#86BC25] flex items-center justify-center gap-1">
+                  <CheckSquare className="h-4 w-4" />
+                  0 Active Compliance Breaches Intercepted
+                </p>
+                <p className="text-[9px] font-mono mt-1 leading-normal uppercase text-slate-500">
+                  FAA airworthiness validation checks are 100% compliant. Sourcing nudges match certified ASL suppliers.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2.5 font-mono text-[9px] max-h-[220px] overflow-y-auto pr-1">
+                {complianceBreaches.map((cb, idx) => (
+                  <div key={idx} className="border-l-4 border-red-500 p-3 bg-red-950/5 border-y-slate-800 border-r-slate-800 border flex flex-col gap-1.5">
+                    <div className="flex justify-between items-center select-none">
+                      <span className="font-bold text-red-500 uppercase tracking-wide">
+                        [COMPLIANCE-BREACH] {cb.facility}
+                      </span>
+                      <span className="px-1.5 py-0.5 border text-[7px] font-bold text-red-500 border-red-500/20 bg-red-950/10">
+                        BLOCKED BY AI JUDGE
+                      </span>
+                    </div>
+                    <p className={`text-[9.5px] leading-relaxed font-sans ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      {cb.playbook?.mitigationPlan?.steps?.[1] || "The playbook generated a non-compliant alternate supplier recommendation."}
+                    </p>
+                    <div className="flex justify-between items-center border-t border-slate-800/10 pt-1.5 mt-1 select-none">
+                      <span className="text-slate-500 text-[8px]">
+                        Severity: {cb.severity} | Location: {cb.location}
+                      </span>
+                      <button 
+                        onClick={() => handleOverrideBreach(cb.id)}
+                        className="border border-red-500/30 hover:border-red-500 text-red-400 hover:bg-red-500/10 px-2 py-0.5 text-[8px] font-bold uppercase rounded-none cursor-pointer"
+                      >
+                        Manually Override & Certify
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* Human-in-the-Loop Analyst Reviews Log */}
           <div className={`border p-4 rounded-none transition-colors duration-300 ${
             isDark ? "bg-[#0D111A] border-[#1E293B]" : "bg-white border-slate-200"
@@ -131,7 +241,7 @@ export default function AIJudgeGovernance({ isDark, feedbackHistory = [], droppe
                 isDark ? "border-slate-800 text-slate-500" : "border-slate-300 text-slate-400"
               }`}>
                 <p className="text-xs font-sans font-bold">No active analyst overrides logged</p>
-                <p className="text-[9px] font-mono mt-1 leading-normal max-w-sm mx-auto uppercase">
+                <p className="text-[9px] font-mono mt-1 leading-normal max-w-sm mx-auto uppercase text-slate-500">
                   To log overrides, navigate to the Risk Radar tab, inspect a disruption card, and submit a boardroom review override.
                 </p>
               </div>

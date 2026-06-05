@@ -91,57 +91,128 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
   const [fileName, setFileName] = useState("");
   const fileInputRef = useRef(null);
 
-  const simulateIngestion = (presetKey, displayName) => {
-    const config = activePresets[presetKey] || {
-      name: displayName,
-      file: displayName,
-      nodesCount: 15,
-      coordinates: [-122.27, 47.92],
-      logOutput: [
-        `⚡ INGESTION COMMAND RECEIVED: LOAD CUSTOM FILE [${displayName}]`,
-        "🔍 SCANNING GEOJSON SCHEMAS...",
-        "📊 PARSING 15 FEATURE FIELDS...",
-        "✅ SYNTACTIC INTEGRITY: 100% VALID",
-        "🌐 INITIALIZING TARGET SUPPLY BASE NETWORK...",
-        "📡 RUNNING SIGNAL CRAWLERS...",
-        "🎉 SYSTEM BASELINE INGESTED AND MONITORING RUNNING NOW."
-      ]
-    };
-
-    setFileName(config.file);
+  const simulateIngestion = (presetKey, displayName, fileObj = null) => {
+    setFileName(displayName);
     setActiveStep(1);
     setConsoleLogs([]);
+    addLog(`⚡ INGESTION CORE: Initializing data ingestion pipeline for ${displayName}`);
 
-    // Step 1: Parse & Validate
-    addLog(config.logOutput[0]);
-    addLog(config.logOutput[1]);
-    addLog(config.logOutput[2]);
-    addLog(config.logOutput[3]);
-
-    setTimeout(() => {
-      setActiveStep(2);
-      addLog(config.logOutput[4]);
-      addLog(config.logOutput[5]);
-      addLog(config.logOutput[6]);
-      if (config.logOutput[7]) addLog(config.logOutput[7]);
-      if (config.logOutput[8]) addLog(config.logOutput[8]);
-      if (config.logOutput[9]) addLog(config.logOutput[9]);
-    }, 1200);
-
-    setTimeout(() => {
-      setActiveStep(3);
-      addLog(config.logOutput[10] || "📡 CONNECTING SIGNAL COLLECTORS...");
-      addLog(config.logOutput[11] || "📊 SPINNING UP NEWS SCRAPERS...");
-    }, 2400);
-
-    setTimeout(() => {
-      setActiveStep(4);
-      addLog(config.logOutput[12] || "🎉 SUCCESS!");
-      if (config.logOutput[13]) addLog(config.logOutput[13]);
-      if (onSupplyBaseInitialized) {
-        onSupplyBaseInitialized(config.name, config.nodesCount);
+    const presetsGeoJSON = {
+      "renton": {
+        "type": "FeatureCollection",
+        "name": "B737 MAX Renton Program Network",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [-97.2798, 37.6436] },
+            "properties": { "name": "Spirit AeroSystems", "facility": "Spirit AeroSystems Wichita Plant", "location": "Wichita, KS, US", "tier": 1, "role": "Tier-1 / Fuselages & Wings" }
+          },
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [115.875, -32.628] },
+            "properties": { "name": "Alcoa", "facility": "Alcoa Raw Bauxite Refining", "location": "Pinjarra, AU", "tier": 3, "role": "Tier-3 / Raw Bauxite" }
+          },
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [-122.5694, 45.4243] },
+            "properties": { "name": "Precision Castparts", "facility": "Precision Forging Mills", "location": "Portland, OR, US", "tier": 2, "role": "Tier-2 / Titanium Forgings" }
+          }
+        ]
+      },
+      "everett": {
+        "type": "FeatureCollection",
+        "name": "B777/B767 Everett Widebody Network",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [-1.4552, 52.8931] },
+            "properties": { "name": "Rolls-Royce", "facility": "Rolls-Royce Derby Plant", "location": "Derby, UK", "tier": 1, "role": "Tier-1 / Aircraft Engines" }
+          },
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [-112.000, 33.435] },
+            "properties": { "name": "Honeywell Aerospace", "facility": "Honeywell APU Integration Assemblies", "location": "Phoenix, AZ, US", "tier": 1, "role": "Tier-1 / Avionics & APUs" }
+          },
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [133.0906, 33.8569] },
+            "properties": { "name": "Toray Industries", "facility": "Toray Ehime Plant", "location": "Ehime, JP", "tier": 2, "role": "Tier-2 / Carbon Fiber" }
+          }
+        ]
+      },
+      "charleston": {
+        "type": "FeatureCollection",
+        "name": "B787 Charleston Integration Network",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [-0.605, 43.181] },
+            "properties": { "name": "Safran", "facility": "Safran Landing Gear Assemblies", "location": "Bidos, FR", "tier": 1, "role": "Tier-1 / Landing Gear" }
+          },
+          {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [5.3700, 51.4200] },
+            "properties": { "name": "ASML", "facility": "ASML High-Precision Optics", "location": "Veldhoven, NL", "tier": 2, "role": "Tier-2 / Precision Parts" }
+          }
+        ]
       }
-    }, 3600);
+    };
+
+    if (presetKey !== "custom") {
+      const geojson = presetsGeoJSON[presetKey];
+      performIngestion(geojson, displayName);
+    } else if (fileObj) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const geojson = JSON.parse(e.target.result);
+          performIngestion(geojson, displayName);
+        } catch (err) {
+          setActiveStep(0);
+          addLog(`❌ JSON PARSING ERROR: ${err.message}`);
+        }
+      };
+      reader.readAsText(fileObj);
+    }
+  };
+
+  const performIngestion = (geojson, _displayName) => {
+    fetch("http://localhost:8000/api/ingest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(geojson)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Validation pipeline rejected the file.");
+        return res.json();
+      })
+      .then(result => {
+        if (result.valid) {
+          let stepIndex = 0;
+          const interval = setInterval(() => {
+            if (stepIndex < result.logs.length) {
+              addLog(result.logs[stepIndex]);
+              if (stepIndex === 4) setActiveStep(2);
+              if (stepIndex === 8) setActiveStep(3);
+              stepIndex++;
+            } else {
+              clearInterval(interval);
+              setActiveStep(4);
+              if (onSupplyBaseInitialized) {
+                onSupplyBaseInitialized(result.name, result.nodes_count);
+              }
+            }
+          }, 150);
+        } else {
+          setActiveStep(0);
+          addLog("❌ SCHEMATIC ERRORS ENCOUNTERED DURING PARSING:");
+          result.errors.forEach(err => addLog(`   -> ERROR: ${err}`));
+        }
+      })
+      .catch(err => {
+        setActiveStep(0);
+        addLog(`❌ PIPELINE EXCEPTION: ${err.message}`);
+      });
   };
 
   const addLog = (msg) => {
@@ -166,7 +237,7 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       if (file.name.endsWith(".geojson") || file.name.endsWith(".json")) {
-        simulateIngestion("custom", file.name);
+        simulateIngestion("custom", file.name, file);
       } else {
         alert("Invalid file format. Please upload a GeoJSON file (.geojson).");
       }
@@ -179,7 +250,7 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      simulateIngestion("custom", e.target.files[0].name);
+      simulateIngestion("custom", e.target.files[0].name, e.target.files[0]);
     }
   };
 

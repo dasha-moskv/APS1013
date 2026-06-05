@@ -1,663 +1,72 @@
 [
   {
-    "id": "SUP-362Z",
-    "facility": "Boeing Defense St. Louis-area facilities",
-    "location": "St. Louis, MO, US",
-    "disruption": "[Inc #362] Boeing Defense St. Louis strike ended after union approved new contract (micro-indicator Ref #3422 tripped)",
-    "severity": 5.2,
-    "likelihood": 92,
-    "timeToHit": 14,
-    "tier": 1,
-    "fullDescription": "[Incident #362] Striking Boeing Defense workers in the St. Louis area approved a new labor deal after a 101-day walkout that had hampered fighter-jet and defense-program production. The event represented a significant labor disruption and recovery point for Boeing's defense manufacturing network. Anomalous telemetry readouts forced safety interlocks to engage. Shift supervisors have initiated the rollback protocol.",
-    "sourceData": "Public labor news coverage from Reuters, AP, and regional reporting",
-    "mapPosition": {
-      "coordinates": [
-        -90.37,
-        38.75
-      ],
-      "color": "#FFB300",
-      "role": "Tier-1 / Defense Aircraft Manufacturing",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Temporary production disruption and schedule pressure for Boeing defense programs supplied from St. Louis-area facilities.",
-    "mitigationObjective": "Restore production cadence after strike resolution while validating staffing, backlog recovery, and supplier schedule impacts.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Re-baseline production schedules against the confirmed return-to-work date.",
-          "Prioritize work-in-process items with the highest customer delivery impact.",
-          "Coordinate with suppliers and logistics teams to restart inbound material flow without creating excess dock congestion."
-        ],
-        "timeline": "5 to 15 operational days for production restart and backlog triage"
-      },
-      "validationPlan": {
-        "steps": [
-          "Track daily output against pre-strike baseline rates.",
-          "Confirm return-to-work staffing coverage by production cell.",
-          "Review late-order recovery commitments with affected customers and suppliers."
-        ],
-        "timeline": "3 to 7 operational days for restart validation"
-      }
-    },
-    "ingestedAt": 1780549523639,
-    "sources": [
-      {
-        "title": "Striking Boeing workers approve labor deal, ending 101-day-long walkout",
-        "url": "https://www.reuters.com/business/world-at-work/striking-boeing-workers-approve-labor-deal-ending-over-three-month-walkout-2025-11-13/",
-        "summary": "Reuters reported that Boeing Defense workers in the St. Louis area approved a contract offer, ending a 101-day strike that affected fighter jet and other programs."
-      },
-      {
-        "title": "Boeing's fighter jet workers in the St. Louis area reject a contract offer",
-        "url": "https://apnews.com/article/60670fdfd1bbed54eb3e91ed682cc2c8",
-        "summary": "AP reported that more than 3,200 Boeing union workers in the St. Louis area had rejected a contract offer and were expected to strike."
-      },
-      {
-        "title": "Boeing St. Louis machinists accept contract, end 100-day strike",
-        "url": "https://www.theintelligencer.com/news/article/boeing-st-louis-machinists-contract-21171470.php",
-        "summary": "Regional coverage reported that St. Louis-area Boeing machinists accepted a new contract and returned to work after the strike."
-      }
+    "id": "SUP-BREACH",
+    "facility": "Non-ASL Forging & Casting Facility",
+    "location": "Beijing, CN",
+    "disruption": "Uncertified forging deployment violates FAA airworthiness regulations",
+    "severity": 9.5,
+    "severity_justification": "Critical compliance violation due to uncertified aerospace forging usage.",
+    "severity_factors": [
+      "FAA Safety Violation",
+      "Unapproved Supplier",
+      "Airworthiness Risk"
     ],
-    "category": "Operations & Capacity"
-  },
-  {
-    "id": "SUP-100X",
-    "facility": "ASML EUV logistics network",
-    "location": "Veldhoven, NL",
-    "disruption": "[Inc #100] Schiphol cargo disruption creates risk for high-value EUV logistics (micro-indicator Ref #8302 tripped)",
-    "severity": 6.8,
-    "likelihood": 59,
-    "timeToHit": 7,
-    "tier": 2,
-    "fullDescription": "[Incident #100] Weather and cargo congestion at Amsterdam Schiphol have previously disrupted freighter operations and air-cargo flows. Because ASML's EUV systems depend on high-value precision components and controlled logistics, cargo disruption at Schiphol can create schedule risk for semiconductor equipment integration and downstream chip capacity expansion. Telemetry logs registered a sudden fluctuation. Maintenance crew has been dispatched to containment area 3.",
-    "sourceData": "ASML product context and Schiphol cargo disruption reporting",
-    "mapPosition": {
-      "coordinates": [
-        5.4697,
-        51.4416
-      ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Semiconductor Equipment Logistics",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Delayed EUV component movement can slow semiconductor equipment integration and downstream electronics capacity additions.",
-    "mitigationObjective": "Protect EUV logistics flow using alternate air-cargo routes, controlled road transport, and chain-of-custody monitoring.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Pre-book alternate cargo capacity through Brussels or Frankfurt for high-priority EUV components.",
-          "Use temperature- and vibration-controlled road transport for regional recovery moves.",
-          "Prioritize customs and chain-of-custody documentation for delayed precision shipments."
-        ],
-        "timeline": "3 to 10 business days for logistics rerouting"
-      },
-      "validationPlan": {
-        "steps": [
-          "Verify temperature, shock, and vibration records for delayed shipments.",
-          "Confirm customs clearance and chain-of-custody documentation before cleanroom release.",
-          "Review integration schedule impacts with semiconductor equipment planners."
-        ],
-        "timeline": "1 to 3 business days for shipment validation"
-      }
-    },
-    "sources": [
-      {
-        "title": "EUV lithography systems \u2013 Products",
-        "url": "https://www.asml.com/products/euv-lithography-systems",
-        "summary": "ASML describes EUV lithography systems used for high-volume manufacturing of advanced chip layers."
-      },
-      {
-        "title": "Freighters grounded at Schiphol as airport fails to cope with snow",
-        "url": "https://theloadstar.com/freighters-grounded-at-schiphol-as-airport-fails-to-cope-with-snow/",
-        "summary": "The Loadstar reported Schiphol cargo and freighter disruption during severe winter operating conditions."
-      },
-      {
-        "title": "Cargo congestion at Schiphol shows signs of easing",
-        "url": "https://www.aircargonews.net/cargo-airport/2021/11/cargo-congestion-at-schiphol-shows-signs-of-easing/",
-        "summary": "Air Cargo News reported cargo congestion at Schiphol and operational steps to reduce delays."
-      }
+    "likelihood": 100,
+    "likelihood_justification": "Active supply chain audit flagged non-ASL vendor activity.",
+    "likelihood_factors": [
+      "Audit Finding",
+      "Supplier Non-Compliance"
     ],
-    "ingestedAt": 1780549522282,
-    "category": "Logistics & Transit"
-  },
-  {
-    "id": "SUP-811T",
-    "facility": "Aerospace titanium supplier network",
-    "location": "US / Global",
-    "disruption": "[Inc #811] Boeing widened titanium documentation checks after false paperwork concerns (temperature delta of -15% detected)",
-    "severity": 7.8,
-    "likelihood": 72,
-    "timeToHit": 14,
-    "tier": 2,
-    "fullDescription": "[Incident #811] Boeing asked suppliers for decade-long titanium purchase records as it widened checks into false documentation used to authenticate metal in commercial jets. Although aircraft safety was not reported as compromised, expanded traceability checks can create supplier workload, inspection delays, and material-release bottlenecks. Real-time sensor logs recorded a transient calibration drift. Standard repair procedures are currently underway.",
-    "sourceData": "Reuters titanium traceability reporting and aerospace material-control context",
-    "mapPosition": {
-      "coordinates": [
-        -95.7129,
-        37.0902
-      ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Titanium Materials",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Titanium traceability reviews may delay release of affected lots and increase documentation workload across aerostructure suppliers.",
-    "mitigationObjective": "Confirm titanium provenance and release compliant material without unnecessary disruption to production schedules.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Map all open work orders using titanium lots under documentation review.",
-          "Request certificates, mill test reports, and purchase records from affected suppliers.",
-          "Create a risk-based release process for lots with complete traceability."
-        ],
-        "timeline": "10 to 30 operational days for documentation review"
-      },
-      "validationPlan": {
-        "steps": [
-          "Validate supplier documentation against purchase and receiving records.",
-          "Confirm material identity through approved testing when paperwork is incomplete.",
-          "Review open nonconformance reports and containment decisions weekly."
-        ],
-        "timeline": "1 to 3 weeks for lot-level traceability validation"
-      }
-    },
-    "sources": [
-      {
-        "title": "Boeing asks suppliers for decade-long titanium paper trail as check for forgeries widens",
-        "url": "https://www.reuters.com/business/aerospace-defense/boeing-asks-suppliers-decade-long-titanium-paper-trail-check-forgeries-widens-2024-07-26/",
-        "summary": "Reuters reported Boeing asked suppliers for titanium records going back to 2014 as false-documentation checks widened."
-      },
-      {
-        "title": "Boeing asks suppliers for decade-long titanium records",
-        "url": "https://www.tbsnews.net/worldbiz/usa/boeing-asks-suppliers-decade-long-titanium-paper-trail-check-forgeries-widens-904286",
-        "summary": "The Business Standard republished Reuters reporting on Boeing's titanium documentation review."
-      },
-      {
-        "title": "Material Forgeries a Problem for Aerospace Industry",
-        "url": "https://www.unitedlens.com/material-forgeries-a-problem-for-aerospace-industry/",
-        "summary": "United Lens discussed the broader aerospace material-forgery concern using the Boeing titanium documentation issue as an example."
-      }
-    ],
-    "ingestedAt": 1780549521371,
-    "category": "Regulatory & Quality"
-  },
-  {
-    "id": "SUP-C123D",
-    "facility": "GE Aerospace Evendale Facility",
-    "location": "Evendale, OH, US",
-    "disruption": "GE Aerospace UAW strike disrupted Evendale and Erlanger operations before labor deal",
-    "severity": 5.0,
-    "likelihood": 90,
-    "timeToHit": 14,
-    "tier": 1,
-    "fullDescription": "More than 600 UAW workers at GE Aerospace's Evendale, Ohio plant and Erlanger, Kentucky distribution facility went on strike after failing to reach a contract agreement. The strike ended after a five-year labor deal was reached, reducing near-term risk to engine-related production and parts distribution.",
-    "sourceData": "Public labor news coverage from Reuters and regional reporting",
-    "mapPosition": {
-      "coordinates": [
-        -84.2619,
-        39.2573
-      ],
-      "color": "#FFB300",
-      "role": "Tier-1 / Aircraft Engines",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Risk of delivery schedule slips for engine-related components and parts distribution during strike activity.",
-    "mitigationObjective": "Stabilize GE Aerospace production and parts distribution after labor disruption resolution.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Prioritize parts distribution for active engine production lines.",
-          "Re-sequence delayed work orders based on customer delivery criticality.",
-          "Coordinate overtime and staffing coverage during post-strike ramp-up."
-        ],
-        "timeline": "5 to 10 operational days for recovery scheduling"
-      },
-      "validationPlan": {
-        "steps": [
-          "Compare parts shipment volume against pre-strike baseline.",
-          "Confirm staffing levels at Evendale and Erlanger are sufficient for planned output.",
-          "Audit late orders and expediting costs to validate recovery progress."
-        ],
-        "timeline": "3 to 7 operational days for shipment and staffing validation"
-      }
-    },
-    "ingestedAt": 1780549518591,
-    "sources": [
-      {
-        "title": "Over 600 UAW workers at two GE Aerospace facilities go on strike",
-        "url": "https://www.reuters.com/business/world-at-work/over-600-uaw-workers-two-ge-aerospace-facilities-go-strike-2025-08-28/",
-        "summary": "Reuters reported that more than 600 UAW workers at GE Aerospace's Evendale and Erlanger facilities went on strike."
-      },
-      {
-        "title": "UAW workers reach tentative deal with GE Aerospace at Ohio, Kentucky plants",
-        "url": "https://www.reuters.com/business/world-at-work/uaw-workers-reach-tentative-deal-with-ge-aerospace-ohio-kentucky-plants-2025-09-12/",
-        "summary": "Reuters reported that UAW workers reached a tentative agreement with GE Aerospace after the strike."
-      },
-      {
-        "title": "GE Aerospace reaches five-year labor deal with 600 striking UAW workers",
-        "url": "https://www.reuters.com/business/world-at-work/ge-aerospace-reaches-five-year-labor-deal-with-600-striking-uaw-workers-2025-09-19/",
-        "summary": "Reuters reported that GE Aerospace reached a five-year labor deal ending the strike."
-      }
-    ],
-    "category": "Operations & Capacity"
-  },
-  {
-    "id": "AIR-E456F",
-    "facility": "CFM International Engine Supply Chain",
-    "location": "Multiple Sites (US / France)",
-    "disruption": "LEAP engine supply constraints continue to pressure aircraft delivery schedules",
-    "severity": 7.8,
-    "likelihood": 82,
-    "timeToHit": 45,
-    "tier": 1,
-    "fullDescription": "Ongoing supply-chain constraints affecting LEAP engine production have continued to limit engine availability for commercial aircraft programs. Manufacturers and airlines have reported delivery schedule impacts due to shortages of critical engine components and maintenance-related bottlenecks. The issue affects both new aircraft deliveries and fleet availability across multiple operators.",
-    "sourceData": "Reuters aviation supply chain reporting",
-    "mapPosition": {
-      "coordinates": [
-        2.3522,
-        48.8566
-      ],
-      "color": "#FFB300",
-      "role": "Tier-1 / Aircraft Engines",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Aircraft delivery schedules may slip due to engine availability constraints, creating production backlog and revenue recognition delays.",
-    "mitigationObjective": "Maintain engine allocation visibility and prioritize deliveries for high-criticality aircraft programs.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Coordinate weekly engine allocation reviews with OEM partners.",
-          "Prioritize available engine inventory toward near-term customer delivery commitments.",
-          "Increase safety stock of critical engine subcomponents where feasible."
-        ],
-        "timeline": "30 to 90 days for allocation stabilization"
-      },
-      "validationPlan": {
-        "steps": [
-          "Track engine delivery performance against monthly production targets.",
-          "Review supplier recovery metrics for constrained engine components.",
-          "Monitor aircraft completion rates awaiting engine installation."
-        ],
-        "timeline": "Monthly supply-chain review cycle"
-      }
-    },
-    "sources": [
-      {
-        "title": "Engine shortages continue to disrupt aircraft deliveries",
-        "url": "https://www.reuters.com/world/europe/airbus-warns-engine-shortages-remain-major-industry-challenge-2025-02-20/",
-        "summary": "Reuters reported that engine shortages remain a major constraint on aircraft production and delivery schedules."
-      },
-      {
-        "title": "Airlines face continued Pratt & Whitney and LEAP engine challenges",
-        "url": "https://www.reuters.com/business/aerospace-defense/",
-        "summary": "Industry reporting highlights ongoing engine availability and maintenance bottlenecks affecting fleet operations."
-      },
-      {
-        "title": "CFM International LEAP Program",
-        "url": "https://www.cfmaeroengines.com/engines/leap/",
-        "summary": "Official information on the LEAP engine program used across Airbus and Boeing narrowbody fleets."
-      }
-    ],
-    "ingestedAt": 1780549512873,
-    "category": "Logistics & Transit"
-  },
-  {
-    "id": "SUP-J012K",
-    "facility": "Commercial aircraft engine and parts supplier base",
-    "location": "Global",
-    "disruption": "Aircraft and engine supply-chain bottlenecks continue to constrain airline capacity",
-    "severity": 8.0,
-    "likelihood": 88,
     "timeToHit": 0,
-    "tier": 1,
-    "fullDescription": "Industry reporting found that aircraft and engine supply-chain bottlenecks continue to constrain airline capacity, with production recovery expected to lag demand. The mismatch increases operational costs, keeps older aircraft flying longer, and raises demand for spare engines and parts.",
-    "sourceData": "IATA and Oliver Wyman aerospace supply-chain analysis",
-    "mapPosition": {
-      "coordinates": [
-        0,
-        20
-      ],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Engines & Major Systems",
-      "status": "Critical threat"
-    },
-    "downstreamBusinessImpact": "Delayed aircraft and engine availability can increase airline costs, slow fleet growth, and pressure spares inventories.",
-    "mitigationObjective": "Prioritize engine availability, spares allocation, and production slots for the highest-impact airline and OEM commitments.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Rank engine and spares demand by aircraft delivery date and operational criticality.",
-          "Expand repair-pool visibility for leased engines and high-demand line-replaceable units.",
-          "Coordinate OEM delivery forecasts with airline maintenance planning."
-        ],
-        "timeline": "30 to 120 days for capacity recovery planning"
-      },
-      "validationPlan": {
-        "steps": [
-          "Track aircraft-on-ground exposure and spare-engine availability.",
-          "Review monthly OEM delivery forecasts against airline fleet plans.",
-          "Audit spares allocation decisions for critical-route coverage."
-        ],
-        "timeline": "Monthly validation through the delivery recovery window"
-      }
-    },
-    "sources": [
-      {
-        "title": "Aerospace Supply Chain Bottlenecks Continue to Constrain Airlines",
-        "url": "https://www.iata.org/en/pressroom/2025-releases/2025-12-09-02/",
-        "summary": "IATA reported continuing aircraft and engine bottlenecks and a structural mismatch between airline demand and production capacity."
-      },
-      {
-        "title": "Supply Chain Challenges Could Cost Airlines More than $11 Billion in 2025",
-        "url": "https://www.iata.org/en/pressroom/2025-releases/2025-10-13-01/",
-        "summary": "IATA reported that supply-chain challenges could cost airlines more than $11 billion in 2025."
-      },
-      {
-        "title": "Aviation Supply Chain",
-        "url": "https://www.iata.org/en/programs/ops-infra/techops/aviation-supply-chain/",
-        "summary": "IATA summarized operational impacts from aviation supply-chain challenges, including delayed growth and higher maintenance costs."
-      }
+    "timeToHit_justification": "Regulatory block is immediate upon detection.",
+    "timeToHit_factors": [
+      "Regulatory Intercept",
+      "FAA Stop-Work"
     ],
-    "ingestedAt": 1780549512296,
-    "category": "Logistics & Transit"
-  },
-  {
-    "id": "SUP-F467R",
-    "facility": "Boeing Defense St. Louis-area facilities",
-    "location": "St. Louis, MO, US",
-    "disruption": "Boeing Defense St. Louis strike ended after union approved new contract",
-    "severity": 5.0,
-    "likelihood": 90,
-    "timeToHit": 14,
-    "tier": 1,
-    "fullDescription": "Striking Boeing Defense workers in the St. Louis area approved a new labor deal after a 101-day walkout that had hampered fighter-jet and defense-program production. The event represented a significant labor disruption and recovery point for Boeing's defense manufacturing network.",
-    "sourceData": "Public labor news coverage from Reuters, AP, and regional reporting",
-    "mapPosition": {
-      "coordinates": [
-        -90.37,
-        38.75
-      ],
-      "color": "#FFB300",
-      "role": "Tier-1 / Defense Aircraft Manufacturing",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Temporary production disruption and schedule pressure for Boeing defense programs supplied from St. Louis-area facilities.",
-    "mitigationObjective": "Restore production cadence after strike resolution while validating staffing, backlog recovery, and supplier schedule impacts.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Re-baseline production schedules against the confirmed return-to-work date.",
-          "Prioritize work-in-process items with the highest customer delivery impact.",
-          "Coordinate with suppliers and logistics teams to restart inbound material flow without creating excess dock congestion."
-        ],
-        "timeline": "5 to 15 operational days for production restart and backlog triage"
-      },
-      "validationPlan": {
-        "steps": [
-          "Track daily output against pre-strike baseline rates.",
-          "Confirm return-to-work staffing coverage by production cell.",
-          "Review late-order recovery commitments with affected customers and suppliers."
-        ],
-        "timeline": "3 to 7 operational days for restart validation"
-      }
-    },
-    "ingestedAt": 1780549511599,
-    "sources": [
-      {
-        "title": "Striking Boeing workers approve labor deal, ending 101-day-long walkout",
-        "url": "https://www.reuters.com/business/world-at-work/striking-boeing-workers-approve-labor-deal-ending-over-three-month-walkout-2025-11-13/",
-        "summary": "Reuters reported that Boeing Defense workers in the St. Louis area approved a contract offer, ending a 101-day strike that affected fighter jet and other programs."
-      },
-      {
-        "title": "Boeing's fighter jet workers in the St. Louis area reject a contract offer",
-        "url": "https://apnews.com/article/60670fdfd1bbed54eb3e91ed682cc2c8",
-        "summary": "AP reported that more than 3,200 Boeing union workers in the St. Louis area had rejected a contract offer and were expected to strike."
-      },
-      {
-        "title": "Boeing St. Louis machinists accept contract, end 100-day strike",
-        "url": "https://www.theintelligencer.com/news/article/boeing-st-louis-machinists-contract-21171470.php",
-        "summary": "Regional coverage reported that St. Louis-area Boeing machinists accepted a new contract and returned to work after the strike."
-      }
-    ],
-    "category": "Operations & Capacity"
-  },
-  {
-    "id": "SUP-N678P",
-    "facility": "Aerospace titanium supplier network",
-    "location": "US / Global",
-    "disruption": "Boeing widened titanium documentation checks after false paperwork concerns",
-    "severity": 7.6,
-    "likelihood": 70,
-    "timeToHit": 14,
     "tier": 2,
-    "fullDescription": "Boeing asked suppliers for decade-long titanium purchase records as it widened checks into false documentation used to authenticate metal in commercial jets. Although aircraft safety was not reported as compromised, expanded traceability checks can create supplier workload, inspection delays, and material-release bottlenecks.",
-    "sourceData": "Reuters titanium traceability reporting and aerospace material-control context",
-    "mapPosition": {
-      "coordinates": [
-        -95.7129,
-        37.0902
-      ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Titanium Materials",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Titanium traceability reviews may delay release of affected lots and increase documentation workload across aerostructure suppliers.",
-    "mitigationObjective": "Confirm titanium provenance and release compliant material without unnecessary disruption to production schedules.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Map all open work orders using titanium lots under documentation review.",
-          "Request certificates, mill test reports, and purchase records from affected suppliers.",
-          "Create a risk-based release process for lots with complete traceability."
-        ],
-        "timeline": "10 to 30 operational days for documentation review"
-      },
-      "validationPlan": {
-        "steps": [
-          "Validate supplier documentation against purchase and receiving records.",
-          "Confirm material identity through approved testing when paperwork is incomplete.",
-          "Review open nonconformance reports and containment decisions weekly."
-        ],
-        "timeline": "1 to 3 weeks for lot-level traceability validation"
-      }
-    },
-    "sources": [
-      {
-        "title": "Boeing asks suppliers for decade-long titanium paper trail as check for forgeries widens",
-        "url": "https://www.reuters.com/business/aerospace-defense/boeing-asks-suppliers-decade-long-titanium-paper-trail-check-forgeries-widens-2024-07-26/",
-        "summary": "Reuters reported Boeing asked suppliers for titanium records going back to 2014 as false-documentation checks widened."
-      },
-      {
-        "title": "Boeing asks suppliers for decade-long titanium records",
-        "url": "https://www.tbsnews.net/worldbiz/usa/boeing-asks-suppliers-decade-long-titanium-paper-trail-check-forgeries-widens-904286",
-        "summary": "The Business Standard republished Reuters reporting on Boeing's titanium documentation review."
-      },
-      {
-        "title": "Material Forgeries a Problem for Aerospace Industry",
-        "url": "https://www.unitedlens.com/material-forgeries-a-problem-for-aerospace-industry/",
-        "summary": "United Lens discussed the broader aerospace material-forgery concern using the Boeing titanium documentation issue as an example."
-      }
-    ],
-    "ingestedAt": 1780549510513,
-    "category": "Regulatory & Quality"
-  },
-  {
-    "id": "SUP-G789H",
-    "facility": "Aerospace critical mineral supplier base",
-    "location": "Global / China-linked supply routes",
-    "disruption": "Rare earth shortages threaten aerospace, semiconductor, and energy supply chains",
-    "severity": 8.6,
-    "likelihood": 82,
-    "timeToHit": 21,
-    "tier": 2,
-    "fullDescription": "Rare earth export controls and shortages, including yttrium and other critical minerals, created supply risk for aerospace and semiconductor manufacturers. The shortages could affect high-temperature materials, electronics, coatings, and other critical components used across aviation supply chains.",
-    "sourceData": "Reuters rare earth export-control and shortage reporting",
+    "fullDescription": "The AI Playbook Agent proposed sourcing from Mega Casting Corp, which is not listed on the Boeing Approved Supplier List (ASL). The AI Judge intercepted this payload to prevent an FAA compliance breach, flagging the record and blocking downstream SAP PO generation.",
+    "downstreamBusinessImpact": "Immediate regulatory halt on affected engine assemblies if uncertified castings are integrated.",
+    "mitigationObjective": "Manually override or certify sourcing path through official FAA/Boeing channels, or reallocate to a certified ASL vendor.",
+    "sourceData": "AI Judge Governance Interceptor",
     "mapPosition": {
       "coordinates": [
         116.4074,
         39.9042
       ],
-      "color": "#D32F2F",
-      "role": "Tier-2 / Critical Minerals",
-      "status": "Critical threat"
+      "color": "#EF4444",
+      "role": "Tier-2 / Uncertified Forgings",
+      "status": "Compliance Breach"
     },
-    "downstreamBusinessImpact": "Material shortages may extend lead times for aerospace components, electronics, coatings, and high-performance materials.",
-    "mitigationObjective": "Reduce critical-mineral dependency risk through alternate sourcing, inventory protection, and qualification of substitutes where permitted.",
     "playbook": {
       "mitigationPlan": {
         "steps": [
-          "Identify components with yttrium, scandium, neodymium, indium, or rare-earth magnet exposure.",
-          "Prioritize available inventory for flight-critical and certification-constrained parts.",
-          "Start qualification reviews for approved alternate suppliers and substitute materials."
+          "\u26a0\ufe0f COMPLIANCE BREACH INTERCEPTED: Playbook blocked by AI Judge.",
+          "Proposed non-ASL vendor 'Mega Casting Corp' fails FAA airworthiness safety certification.",
+          "Reallocated capacity changes rejected. Reverting to manual override queue."
         ],
-        "timeline": "14 to 45 operational days for exposure mapping and allocation control"
+        "timeline": "BLOCKED"
       },
       "validationPlan": {
         "steps": [
-          "Verify alternate materials meet certification and traceability requirements.",
-          "Monitor supplier allocation notices and export-license approvals weekly.",
-          "Review inventory burn-down against protected program demand."
+          "Perform manual vendor audit on FAA certification files.",
+          "Escalate to Sourcing Director for Human-in-the-Loop review."
         ],
-        "timeline": "1 to 3 weeks for material exposure validation"
+        "timeline": "IMMEDIATE"
       }
     },
     "sources": [
       {
-        "title": "A new rare earth crisis is brewing as yttrium shortages spread",
-        "url": "https://www.reuters.com/business/aerospace-defense/new-rare-earth-crisis-is-brewing-yttrium-shortages-spread-2025-11-14/",
-        "summary": "Reuters reported that yttrium shortages from Chinese export restrictions could affect aerospace, energy, and semiconductor production."
-      },
-      {
-        "title": "Rare earth shortages worsen in US aerospace, chips despite trade truce, sources say",
-        "url": "https://www.reuters.com/business/aerospace-defense/rare-earth-shortages-worsen-us-aerospace-chips-despite-trade-truce-sources-say-2026-02-26/",
-        "summary": "Reuters reported worsening rare earth shortages among suppliers to U.S. aerospace and semiconductor firms."
-      },
-      {
-        "title": "White House gets small rare earth win, but China's export controls remain",
-        "url": "https://www.reuters.com/business/aerospace-defense/china-has-agreed-address-us-concerns-over-rare-earth-shortages-says-white-house-2026-05-18/",
-        "summary": "Reuters reported U.S. concerns over critical mineral shortages including yttrium, scandium, indium, and neodymium."
+        "title": "FAA Approved Supplier List Rules",
+        "url": "https://www.faa.gov/aircraft/safety/programs/sups/",
+        "summary": "FAA regulations dictate that all safety-critical aerospace components must originate from certified ASL vendors."
       }
     ],
-    "ingestedAt": 1780549497875,
-    "category": "Logistics & Transit"
-  },
-  {
-    "id": "SUP-L345M",
-    "facility": "Spirit AeroSystems Wichita Plant",
-    "location": "Wichita, KS, US",
-    "disruption": "Spirit AeroSystems 737 MAX fuselage quality issue delayed Boeing deliveries",
-    "severity": 8.1,
-    "likelihood": 78,
-    "timeToHit": 7,
-    "tier": 1,
-    "fullDescription": "Boeing and Spirit AeroSystems identified a 737 MAX quality issue involving improperly drilled holes in aft pressure bulkhead assemblies. The issue required inspections and rework, delaying near-term aircraft deliveries and adding pressure to Boeing's production recovery plan.",
-    "sourceData": "Reuters, AP, and Supply Chain Dive reporting on Spirit AeroSystems quality issue",
-    "mapPosition": {
-      "coordinates": [
-        -97.2798,
-        37.6436
-      ],
-      "color": "#D32F2F",
-      "role": "Tier-1 / Fuselage Structures",
-      "status": "Critical threat"
-    },
-    "downstreamBusinessImpact": "Near-term 737 MAX deliveries can slip due to fuselage inspection, rework, and traveled-work backlogs.",
-    "mitigationObjective": "Contain fuselage quality defects, recover delivery cadence, and prevent recurrence in Spirit-to-Boeing handoffs.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Quarantine affected fuselage lots pending inspection and rework disposition.",
-          "Deploy Boeing engineering support to Spirit production and quality teams.",
-          "Prioritize rework for aircraft closest to delivery and customer handover."
-        ],
-        "timeline": "7 to 30 operational days for affected-lot containment and rework"
-      },
-      "validationPlan": {
-        "steps": [
-          "Verify completed rework against engineering disposition records.",
-          "Track defect recurrence rate and first-pass quality by fuselage section.",
-          "Review production travelers to ensure no inspection gates were bypassed."
-        ],
-        "timeline": "1 to 2 weeks for quality validation"
-      }
-    },
-    "sources": [
-      {
-        "title": "New Boeing 737 MAX supplier defect to delay aircraft deliveries",
-        "url": "https://www.reuters.com/business/aerospace-defense/new-boeing-737-max-supplier-defect-delay-aircraft-deliveries-2023-08-23/",
-        "summary": "Reuters reported a 737 MAX supplier quality problem involving Spirit AeroSystems and improperly drilled holes that delayed deliveries."
-      },
-      {
-        "title": "Boeing and a key supplier find a new manufacturing issue that affects the 737 Max airliner",
-        "url": "https://apnews.com/article/28bceec61cef878005b965a016fa8787",
-        "summary": "AP reported that Boeing and Spirit AeroSystems identified a manufacturing flaw affecting certain 737 MAX fuselages."
-      },
-      {
-        "title": "Spirit AeroSystems production snags cause Boeing aircraft delivery delays",
-        "url": "https://www.supplychaindive.com/news/spirit-boeing-manufacturing-issue-fuselage-production-delay-737-max/692148/",
-        "summary": "Supply Chain Dive reported Spirit AeroSystems production snags tied to Boeing aircraft delivery delays."
-      }
-    ],
-    "ingestedAt": 1780549496567,
-    "category": "Regulatory & Quality"
-  },
-  {
-    "id": "SUP-Q901R",
-    "facility": "ASML EUV logistics network",
-    "location": "Veldhoven, NL",
-    "disruption": "Schiphol cargo disruption creates risk for high-value EUV logistics",
-    "severity": 6.9,
-    "likelihood": 62,
-    "timeToHit": 10,
-    "tier": 2,
-    "fullDescription": "Weather and cargo congestion at Amsterdam Schiphol have previously disrupted freighter operations and air-cargo flows. Because ASML's EUV systems depend on high-value precision components and controlled logistics, cargo disruption at Schiphol can create schedule risk for semiconductor equipment integration and downstream chip capacity expansion.",
-    "sourceData": "ASML product context and Schiphol cargo disruption reporting",
-    "mapPosition": {
-      "coordinates": [
-        5.4697,
-        51.4416
-      ],
-      "color": "#FFB300",
-      "role": "Tier-2 / Semiconductor Equipment Logistics",
-      "status": "Elevated Risk"
-    },
-    "downstreamBusinessImpact": "Delayed EUV component movement can slow semiconductor equipment integration and downstream electronics capacity additions.",
-    "mitigationObjective": "Protect EUV logistics flow using alternate air-cargo routes, controlled road transport, and chain-of-custody monitoring.",
-    "playbook": {
-      "mitigationPlan": {
-        "steps": [
-          "Pre-book alternate cargo capacity through Brussels or Frankfurt for high-priority EUV components.",
-          "Use temperature- and vibration-controlled road transport for regional recovery moves.",
-          "Prioritize customs and chain-of-custody documentation for delayed precision shipments."
-        ],
-        "timeline": "3 to 10 business days for logistics rerouting"
-      },
-      "validationPlan": {
-        "steps": [
-          "Verify temperature, shock, and vibration records for delayed shipments.",
-          "Confirm customs clearance and chain-of-custody documentation before cleanroom release.",
-          "Review integration schedule impacts with semiconductor equipment planners."
-        ],
-        "timeline": "1 to 3 business days for shipment validation"
-      }
-    },
-    "sources": [
-      {
-        "title": "EUV lithography systems \u2013 Products",
-        "url": "https://www.asml.com/products/euv-lithography-systems",
-        "summary": "ASML describes EUV lithography systems used for high-volume manufacturing of advanced chip layers."
-      },
-      {
-        "title": "Freighters grounded at Schiphol as airport fails to cope with snow",
-        "url": "https://theloadstar.com/freighters-grounded-at-schiphol-as-airport-fails-to-cope-with-snow/",
-        "summary": "The Loadstar reported Schiphol cargo and freighter disruption during severe winter operating conditions."
-      },
-      {
-        "title": "Cargo congestion at Schiphol shows signs of easing",
-        "url": "https://www.aircargonews.net/cargo-airport/2021/11/cargo-congestion-at-schiphol-shows-signs-of-easing/",
-        "summary": "Air Cargo News reported cargo congestion at Schiphol and operational steps to reduce delays."
-      }
-    ],
-    "ingestedAt": 1780549495024,
-    "category": "Logistics & Transit"
+    "dailyExposure": 14500000,
+    "slaThresholdDays": 12,
+    "bufferInventoryLevel": "0 days",
+    "downstreamDependencies": [
+      "Boeing Renton Factory"
+    ]
   },
   {
     "id": "SUP-R832T",
@@ -665,11 +74,8 @@
     "location": "Derby, UK",
     "disruption": "Trent 1000 engine parts delays disrupt Boeing 787 operators",
     "severity": 8.2,
-    "severity_justification": "Trent 1000 engine and spare-part shortages directly reduce Boeing 787 fleet availability and force airlines to alter schedules, creating significant operational and financial impacts.",
     "likelihood": 82,
-    "likelihood_justification": "Parts shortages and engine availability constraints have persisted across multiple operators and reporting periods, indicating an ongoing supply-chain challenge.",
     "timeToHit": 5,
-    "timeToHit_justification": "Aircraft schedules can be affected almost immediately when replacement engines or critical parts are unavailable.",
     "tier": 1,
     "fullDescription": "Rolls-Royce Trent 1000 engine and parts delays continued to affect Boeing 787 operators, with British Airways adjusting schedules because replacement engines and parts were not arriving quickly enough. The issue demonstrates how engine-part bottlenecks can translate directly into aircraft availability and delivery risk.",
     "sourceData": "Reuters airline operations and Rolls-Royce engine-parts reporting",
@@ -727,11 +133,8 @@
     "location": "San Cipri\u00e1n, ES",
     "disruption": "Power outage disrupts Alcoa smelter restart",
     "severity": 7.7,
-    "severity_justification": "The power outage disrupted a major European aluminum producer, increasing risk to primary aluminum supply used in aerospace alloys and downstream manufacturing.",
     "likelihood": 74,
-    "likelihood_justification": "The facility experienced a real disruption and restart delays, making continued production instability reasonably likely until full operations are restored.",
     "timeToHit": 14,
-    "timeToHit_justification": "Material availability impacts would typically emerge within weeks as inventories are consumed and restart schedules are reassessed.",
     "tier": 2,
     "fullDescription": "Alcoa's San Cipri\u00e1n aluminum complex was affected by the April 2025 nationwide power outage in Spain, disrupting the refinery and smelter and delaying restart plans. The interruption increased risk around European primary aluminum availability and operating stability.",
     "sourceData": "Alcoa company release; Reuters and aluminum industry coverage",
@@ -789,11 +192,8 @@
     "location": "Cleveland, OH, US",
     "disruption": "High-pressure turbine blade yield issues constrain engine supply",
     "severity": 8.7,
-    "severity_justification": "High-pressure turbine blades are critical engine components, and reduced production yield directly constrains engine output and aircraft delivery schedules.",
     "likelihood": 84,
-    "likelihood_justification": "The yield issue has already been identified by major engine manufacturers and is actively affecting production performance.",
     "timeToHit": 7,
-    "timeToHit_justification": "Reduced blade availability can quickly translate into engine assembly bottlenecks and delayed deliveries within days.",
     "tier": 2,
     "fullDescription": "Howmet Aerospace came under scrutiny after Safran identified Howmet-supplied parts as central to LEAP engine production issues. Reuters reported the problem involved reduced production yield of high-pressure turbine blades, creating pressure on engine deliveries for aircraft programs.",
     "sourceData": "Reuters aerospace supplier and engine-parts reporting",
@@ -851,11 +251,8 @@
     "location": "Phoenix, AZ, US",
     "disruption": "Aerospace parts shortages pressure Honeywell production and deliveries",
     "severity": 7.4,
-    "severity_justification": "Honeywell supplies critical aerospace systems and avionics, making persistent parts shortages capable of disrupting multiple aircraft programs.",
     "likelihood": 73,
-    "likelihood_justification": "The company has publicly cited ongoing supply-chain constraints, suggesting continued delivery pressure remains likely.",
     "timeToHit": 10,
-    "timeToHit_justification": "Parts shortages can begin affecting shipment schedules and customer deliveries within a few production cycles.",
     "tier": 1,
     "fullDescription": "Honeywell reported weaker sales expectations and revenue pressure tied to supply-chain disruptions and constrained parts availability. Its aerospace business supplies avionics, engines, and aircraft systems, so delays can affect downstream aircraft and engine programs.",
     "sourceData": "Reuters Honeywell supply-chain coverage; Honeywell Aerospace product context",
@@ -913,11 +310,8 @@
     "location": "Bidos, FR",
     "disruption": "Boeing production crisis and strike pressure Safran supply chain planning",
     "severity": 6.2,
-    "severity_justification": "The disruption primarily introduces planning uncertainty and supplier-rate volatility rather than an immediate production stoppage, resulting in moderate impact.",
     "likelihood": 70,
-    "likelihood_justification": "Boeing production instability and strike recovery continue to create uncertainty for suppliers managing production rates and inventory levels.",
     "timeToHit": 14,
-    "timeToHit_justification": "Supplier planning disruptions and inventory imbalances typically become visible within several weeks of changing production forecasts.",
     "tier": 1,
     "fullDescription": "Boeing's production crisis and labor strike created planning uncertainty across aerospace suppliers. Safran stated it was taking action to soften the impact on its own supply chain, while supplier-delivery timing and production-rate volatility remained a concern for aircraft systems and landing-gear programs.",
     "sourceData": "Aviation Week Safran supply-chain coverage; Reuters Boeing production recovery coverage",
@@ -975,11 +369,8 @@
     "location": "Derby, UK",
     "disruption": "Rolls-Royce Trent 1000 parts delays disrupt Boeing 787 operations",
     "severity": 8.0,
-    "severity_justification": "Delayed Trent 1000 parts and spare engines directly affect Boeing 787 operations, reducing aircraft availability and increasing operational disruption.",
     "likelihood": 78,
-    "likelihood_justification": "Multiple operators continue reporting Trent 1000 support challenges, indicating the issue remains active across the fleet.",
     "timeToHit": 7,
-    "timeToHit_justification": "Aircraft availability can be impacted within days when replacement engines or required parts are delayed.",
     "tier": 1,
     "fullDescription": "Airlines operating Boeing 787 aircraft with Rolls-Royce Trent 1000 engines faced schedule disruption because engine parts and spare engines were delayed. The issue is directly relevant to Derby-based Rolls-Royce engine support and aircraft availability.",
     "sourceData": "Reuters and IATA Trent 1000 engine reliability and parts-delay coverage",
@@ -1037,11 +428,8 @@
     "location": "Portland, OR, US",
     "disruption": "Titanium sponge import delays reducing aerospace forging capacity",
     "severity": 8.7,
-    "severity_justification": "Titanium sponge is a strategic aerospace material, and reduced forging throughput directly threatens production of critical engine and structural components.",
     "likelihood": 82,
-    "likelihood_justification": "Import delays and port congestion are already affecting material availability, making continued forging constraints highly probable.",
     "timeToHit": 14,
-    "timeToHit_justification": "Production impacts typically emerge within weeks as available titanium inventory is depleted and replenishment remains delayed.",
     "tier": 2,
     "fullDescription": "Inbound shipments of aerospace-grade titanium sponge have been delayed due to customs processing backlogs and congestion at multiple West Coast ports. Precision Castparts has reported reduced forging throughput for engine discs and structural propulsion components, creating potential downstream impacts for aircraft engine manufacturers.",
     "downstreamBusinessImpact": "Tier-1 engine manufacturers unable to complete module builds, impacting engine delivery lead times.",
@@ -1098,11 +486,8 @@
     "location": "WA, US",
     "disruption": "Capacity bottlenecks on widebody assembly lines",
     "severity": 9.2,
-    "severity_justification": "Assembly bottlenecks at Boeing's Everett facility directly threaten delivery schedules for major widebody aircraft programs and have significant revenue implications.",
     "likelihood": 94,
-    "likelihood_justification": "Backlogs are already accumulating and structural-component delivery delays are actively constraining production throughput.",
     "timeToHit": 0,
-    "timeToHit_justification": "The disruption is currently affecting assembly operations and delivery schedules, making the impact immediate.",
     "tier": 0,
     "fullDescription": "Operational bottlenecks on widebody (777, 767) assembly lines are expanding due to raw structural composite shipping delays from Tier-1 suppliers. Heavy backlogs are accumulating at Everett, threatening delivery schedules by 12+ operational days.",
     "downstreamBusinessImpact": "Delayed delivery of 777/767 widebody aircraft, impacting quarterly revenue targets.",
@@ -1154,11 +539,8 @@
     "location": "KS, US",
     "disruption": "Fuselage assemblies transport logistics delay",
     "severity": 8.5,
-    "severity_justification": "Suspended fuselage deliveries threaten Boeing 737 MAX production continuity and could create costly assembly-line interruptions.",
     "likelihood": 85,
-    "likelihood_justification": "Rail shipment disruptions are already occurring and directly affecting movement of critical fuselage assemblies.",
     "timeToHit": 10,
-    "timeToHit_justification": "Inventory buffers may absorb some disruption initially, but production impacts are likely to emerge within days to weeks.",
     "tier": 1,
     "fullDescription": "Wichita fuselage assembly rail shipments are temporarily halted due to localized freight rail transport strikes within the central midwest logistics corridor. Delivery of critical B737 MAX fuselage shells is currently suspended.",
     "downstreamBusinessImpact": "Potential stop-line at Renton for 737 MAX; daily stop-line cost estimated at $8.8M.",
@@ -1210,11 +592,8 @@
     "location": "Evendale, OH, US",
     "disruption": "GEnx engine assembly delays following turbine blade quality inspection findings",
     "severity": 9.4,
-    "severity_justification": "GEnx engine delivery delays can halt aircraft completion and create glider inventory, making this one of the most severe disruptions in the supply chain.",
     "likelihood": 90,
-    "likelihood_justification": "Additional inspections are already reducing throughput, and quality-control requirements make continued short-term disruption highly likely.",
     "timeToHit": 0,
-    "timeToHit_justification": "Engine production throughput is already being affected, creating immediate risk to aircraft assembly schedules.",
     "tier": 1,
     "fullDescription": "Additional quality inspections have been introduced for a production batch of high-pressure turbine blades used in GEnx engine assembly programs. The increased inspection workload has temporarily reduced engine production throughput, creating a risk of delayed engine deliveries to Boeing 787 assembly operations.",
     "downstreamBusinessImpact": "Shortage of GEnx engines for 787 assembly, potentially leading to 'glider' storage.",
@@ -1271,11 +650,8 @@
     "location": "Xi'an, CN",
     "disruption": "Etch gas supply lines chemical logistics lockdown",
     "severity": 7.2,
-    "severity_justification": "Chemical logistics constraints threaten NAND Flash production, which can impact availability of memory components used across aerospace and electronics applications.",
     "likelihood": 65,
-    "likelihood_justification": "Regional logistics controls are slowing inbound chemical shipments, but mitigation options such as buffer inventory and alternate transport remain available.",
     "timeToHit": 21,
-    "timeToHit_justification": "Manufacturing impacts typically emerge after existing chemical inventories are depleted over several weeks.",
     "tier": 1,
     "fullDescription": "Inbound regional logistics controls in Shaanxi province slowing down the chemical feedstock shipping lines of high-purity etching gases for NAND Flash manufacturing lines.",
     "downstreamBusinessImpact": "NAND Flash supply chain disruption, impacting storage component availability for flight computers.",
@@ -1327,11 +703,8 @@
     "location": "SC, US",
     "disruption": "Autoclave curing oven maintenance downtime",
     "severity": 6.8,
-    "severity_justification": "The loss of a major autoclave reduces composite curing capacity and could affect aircraft delivery schedules, though alternate capacity remains available.",
     "likelihood": 62,
-    "likelihood_justification": "The issue is limited to a single autoclave undergoing calibration and is expected to be temporary, reducing the probability of prolonged disruption.",
     "timeToHit": 21,
-    "timeToHit_justification": "Production scheduling impacts would gradually emerge if reduced curing capacity persists beyond planned maintenance windows.",
     "tier": 0,
     "fullDescription": "Composite autoclave curing oven #4 returned critical temperature sensor discrepancy during a quality test run. The oven is offline for preventive calibration, reducing overall widebody fuselage curing volume by 33%.",
     "downstreamBusinessImpact": "33% reduction in fuselage curing volume, risking delivery dates for Charleston-built aircraft.",
@@ -1383,11 +756,8 @@
     "location": "Monroe, NC, US",
     "disruption": "Nickel superalloy shortages following export restrictions on critical raw materials",
     "severity": 8.5,
-    "severity_justification": "Nickel-based superalloys are essential for high-temperature engine components, and shortages can significantly increase lead times across aerospace propulsion programs.",
     "likelihood": 72,
-    "likelihood_justification": "Export restrictions and raw-material constraints are already affecting supply availability, though alternative sourcing options exist.",
     "timeToHit": 30,
-    "timeToHit_justification": "Material shortages typically propagate through aerospace supply chains over several inventory and production cycles.",
     "tier": 2,
     "fullDescription": "New export restrictions affecting several major nickel-producing regions have reduced the availability of critical raw materials used in aerospace-grade superalloy production. ATI Specialty Materials has reported increasing lead times for nickel-based alloys used in turbine blades, combustor assemblies, and other high-temperature propulsion components.",
     "downstreamBusinessImpact": "Long-term lead time increases for critical high-temperature engine components.",
@@ -1444,11 +814,8 @@
     "location": "Ludwigshafen, DE",
     "disruption": "Pipeline pressure feedstock fluctuations",
     "severity": 5.2,
-    "severity_justification": "Pipeline pressure fluctuations create operational inefficiencies and potential feedstock shortages but do not currently represent a major production shutdown.",
     "likelihood": 50,
-    "likelihood_justification": "Automatic controls have stabilized operations, making further disruption possible but not highly probable.",
     "timeToHit": 21,
-    "timeToHit_justification": "Feedstock-related shortages would likely take several weeks to affect downstream resin and composite-material production.",
     "tier": 2,
     "fullDescription": "Inbound natural gas feedstock supply pipelines to Ludwigshafen chemical park experiencing pressure fluctuations. Automatic reduction in high-heat chemical synthesis units activated to preserve catalyst beds.",
     "downstreamBusinessImpact": "Potential shortage of chemical precursors for aerospace composites and resins.",
@@ -1500,11 +867,8 @@
     "location": "Ehime, JP",
     "disruption": "Raw carbon fiber pre-cursor shortage",
     "severity": 4.2,
-    "severity_justification": "The facility experienced a precautionary shutdown with no reported structural damage, limiting the expected impact on carbon-fiber production.",
     "likelihood": 30,
-    "likelihood_justification": "Plant systems remain healthy and restart activities are already underway, making a prolonged disruption relatively unlikely.",
     "timeToHit": 45,
-    "timeToHit_justification": "Any meaningful supply shortage would only emerge after extended downtime because existing prepreg inventories and buffers are expected to absorb short-term impacts.",
     "tier": 2,
     "fullDescription": "Acrylonitrile precursor chemical synthesis plant in Masaki-cho, Ehime experienced a brief downtime sequence following an automatic seismic safety shutdown. Plant structural components remain healthy, awaiting standard inspections before restart.",
     "downstreamBusinessImpact": "Possible shortage of carbon fiber prepreg, the primary material for 787 structures.",

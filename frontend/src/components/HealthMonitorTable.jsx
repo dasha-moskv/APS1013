@@ -1093,6 +1093,11 @@ export default function HealthMonitorTable({
                       <p>
                         The LLM assigned a severity of <strong>{inspectedRow.severity}</strong>: {inspectedRow.severity_justification}
                       </p>
+                      {inspectedRow.severity_factors && inspectedRow.severity_factors.length > 0 && (
+                        <ul className="mt-2 list-disc list-inside text-[10px] text-slate-400 space-y-0.5">
+                          {inspectedRow.severity_factors.map((f, fi) => <li key={fi}>{f}</li>)}
+                        </ul>
+                      )}
                     </div>
 
                     <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
@@ -1102,6 +1107,11 @@ export default function HealthMonitorTable({
                       <p>
                         The LLM assigned a likelihood of <strong>{inspectedRow.likelihood}%</strong>: {inspectedRow.likelihood_justification}
                       </p>
+                      {inspectedRow.likelihood_factors && inspectedRow.likelihood_factors.length > 0 && (
+                        <ul className="mt-2 list-disc list-inside text-[10px] text-slate-400 space-y-0.5">
+                          {inspectedRow.likelihood_factors.map((f, fi) => <li key={fi}>{f}</li>)}
+                        </ul>
+                      )}
                     </div>
 
                     <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
@@ -1111,6 +1121,11 @@ export default function HealthMonitorTable({
                       <p>
                         The LLM estimated <strong>{formatTimeToHit(inspectedRow.timeToHit)}</strong>: {inspectedRow.timeToHit_justification}
                       </p>
+                      {inspectedRow.timeToHit_factors && inspectedRow.timeToHit_factors.length > 0 && (
+                        <ul className="mt-2 list-disc list-inside text-[10px] text-slate-400 space-y-0.5">
+                          {inspectedRow.timeToHit_factors.map((f, fi) => <li key={fi}>{f}</li>)}
+                        </ul>
+                      )}
                     </div>
                     <div className={`border p-3 ${isDark ? "border-[#1E293B] bg-[#0F1520]" : "border-slate-200 bg-slate-50"}`}>
                       <p className="font-mono text-[9px] font-bold uppercase tracking-wider text-[#86BC25] mb-1">

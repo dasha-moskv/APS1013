@@ -1,5 +1,74 @@
 [
   {
+    "id": "SUP-BREACH",
+    "facility": "Non-ASL Forging & Casting Facility",
+    "location": "Beijing, CN",
+    "disruption": "Uncertified forging deployment violates FAA airworthiness regulations",
+    "severity": 9.5,
+    "severity_justification": "Critical compliance violation due to uncertified aerospace forging usage.",
+    "severity_factors": [
+      "FAA Safety Violation",
+      "Unapproved Supplier",
+      "Airworthiness Risk"
+    ],
+    "likelihood": 100,
+    "likelihood_justification": "Active supply chain audit flagged non-ASL vendor activity.",
+    "likelihood_factors": [
+      "Audit Finding",
+      "Supplier Non-Compliance"
+    ],
+    "timeToHit": 0,
+    "timeToHit_justification": "Regulatory block is immediate upon detection.",
+    "timeToHit_factors": [
+      "Regulatory Intercept",
+      "FAA Stop-Work"
+    ],
+    "tier": 2,
+    "fullDescription": "The AI Playbook Agent proposed sourcing from Mega Casting Corp, which is not listed on the Boeing Approved Supplier List (ASL). The AI Judge intercepted this payload to prevent an FAA compliance breach, flagging the record and blocking downstream SAP PO generation.",
+    "downstreamBusinessImpact": "Immediate regulatory halt on affected engine assemblies if uncertified castings are integrated.",
+    "mitigationObjective": "Manually override or certify sourcing path through official FAA/Boeing channels, or reallocate to a certified ASL vendor.",
+    "sourceData": "AI Judge Governance Interceptor",
+    "mapPosition": {
+      "coordinates": [
+        116.4074,
+        39.9042
+      ],
+      "color": "#EF4444",
+      "role": "Tier-2 / Uncertified Forgings",
+      "status": "Compliance Breach"
+    },
+    "playbook": {
+      "mitigationPlan": {
+        "steps": [
+          "\u26a0\ufe0f COMPLIANCE BREACH INTERCEPTED: Playbook blocked by AI Judge.",
+          "Proposed non-ASL vendor 'Mega Casting Corp' fails FAA airworthiness safety certification.",
+          "Reallocated capacity changes rejected. Reverting to manual override queue."
+        ],
+        "timeline": "BLOCKED"
+      },
+      "validationPlan": {
+        "steps": [
+          "Perform manual vendor audit on FAA certification files.",
+          "Escalate to Sourcing Director for Human-in-the-Loop review."
+        ],
+        "timeline": "IMMEDIATE"
+      }
+    },
+    "sources": [
+      {
+        "title": "FAA Approved Supplier List Rules",
+        "url": "https://www.faa.gov/aircraft/safety/programs/sups/",
+        "summary": "FAA regulations dictate that all safety-critical aerospace components must originate from certified ASL vendors."
+      }
+    ],
+    "dailyExposure": 14500000,
+    "slaThresholdDays": 12,
+    "bufferInventoryLevel": "0 days",
+    "downstreamDependencies": [
+      "Boeing Renton Factory"
+    ]
+  },
+  {
     "id": "SUP-R832T",
     "facility": "Rolls-Royce Trent 1000 Supply Chain",
     "location": "Derby, UK",

@@ -1,48 +1,132 @@
-import { Activity, ShieldCheck, Truck, Layers } from "lucide-react";
+import { 
+  Scale, 
+  Factory, 
+  EyeOff, 
+  Globe, 
+  ShieldAlert, 
+  DollarSign, 
+  TrendingUp, 
+  CheckSquare, 
+  Users, 
+  Truck, 
+  CloudLightning, 
+  Activity 
+} from "lucide-react";
 import { getTaxonomy } from "../utils/riskHeuristics";
-
-
-const ICON_MAP = {
-  Truck,
-  Layers,
-  ShieldCheck,
-  Activity
-};
 
 const DEFAULT_CATEGORIES = [
   { 
-    name: "Logistics & Transit", 
-    color: "bg-red-500", 
-    textColor: "text-red-500", 
-    borderColor: "border-red-500/20", 
-    icon: Truck,
-    description: "Risks related to the transportation of goods, shipping delays, customs clearance, carrier availability, and routing disruptions."
+    name: "Regulatory & Compliance", 
+    color: "bg-blue-500", 
+    textColor: "text-blue-500", 
+    borderColor: "border-blue-500/20", 
+    icon: Scale,
+    description: "Risks arising from import/export controls, compliance standards, legal rulings, sanctions, and FAA regulations."
   },
   { 
-    name: "Operations & Capacity", 
+    name: "Manufacturing & Supply", 
     color: "bg-amber-500", 
     textColor: "text-amber-500", 
     borderColor: "border-amber-500/20", 
-    icon: Layers,
-    description: "Risks related to internal facility operations, manufacturing throughput, workforce constraints, and supplier capacity bottlenecks."
+    icon: Factory,
+    description: "Capacity constraints, single points of failure, material shortages, and production facility shutdowns."
   },
   { 
-    name: "Regulatory & Quality", 
+    name: "Foreign Ownership, Control, or Influence (FOCI)", 
+    color: "bg-indigo-500", 
+    textColor: "text-indigo-500", 
+    borderColor: "border-indigo-500/20", 
+    icon: EyeOff,
+    description: "Adversarial ownership, unauthorized tech transfer, corporate espionage, or geopolitical control risk."
+  },
+  { 
+    name: "Political", 
+    color: "bg-purple-500", 
+    textColor: "text-purple-500", 
+    borderColor: "border-purple-500/20", 
+    icon: Globe,
+    description: "Geopolitical trade disputes, localized civil unrest, regional conflicts, and governmental instability."
+  },
+  { 
+    name: "Technology & Cybersecurity", 
+    color: "bg-red-500", 
+    textColor: "text-red-500", 
+    borderColor: "border-red-500/20", 
+    icon: ShieldAlert,
+    description: "Malware, ransomware campaigns, software vulnerabilities, and compromised IT/OT vendor networks."
+  },
+  { 
+    name: "Financial", 
+    color: "bg-emerald-500", 
+    textColor: "text-emerald-500", 
+    borderColor: "border-emerald-500/20", 
+    icon: DollarSign,
+    description: "Supplier bankruptcy, liquidity shortfalls, capital shortages, and severe cost escalations."
+  },
+  { 
+    name: "Economic", 
+    color: "bg-teal-500", 
+    textColor: "text-teal-500", 
+    borderColor: "border-teal-500/20", 
+    icon: TrendingUp,
+    description: "Macroeconomic pressures, inflation surges, currency swings, and shifting market demand."
+  },
+  { 
+    name: "Product Quality & Design", 
+    color: "bg-cyan-500", 
+    textColor: "text-cyan-500", 
+    borderColor: "border-cyan-500/20", 
+    icon: CheckSquare,
+    description: "Component defects, material inspection failures, component recall notices, and testing backlogs."
+  },
+  { 
+    name: "Human Capital", 
+    color: "bg-orange-500", 
+    textColor: "text-orange-500", 
+    borderColor: "border-orange-500/20", 
+    icon: Users,
+    description: "Labor strikes, safety walkouts, staffing deficits, and technical talent constraints."
+  },
+  { 
+    name: "Transportation & Distribution", 
+    color: "bg-rose-500", 
+    textColor: "text-rose-500", 
+    borderColor: "border-rose-500/20", 
+    icon: Truck,
+    description: "Logistics route delays, shipping bottlenecks, customs blockades, and port congestion."
+  },
+  { 
+    name: "Environmental", 
     color: "bg-sky-500", 
     textColor: "text-sky-500", 
     borderColor: "border-sky-500/20", 
-    icon: ShieldCheck,
-    description: "Risks arising from compliance requirements, quality audits, safety standards, product defects, and legal or trade restrictions."
+    icon: CloudLightning,
+    description: "Natural disasters, extreme weather events, earthquakes, and resource scarcity."
   },
   { 
-    name: "External Infrastructure", 
+    name: "Infrastructure", 
     color: "bg-[#86BC25]", 
     textColor: "text-[#86BC25]", 
     borderColor: "border-[#86BC25]/20", 
     icon: Activity,
-    description: "Risks linked to external services like power grids, telecommunication networks, utilities, public infrastructure, and natural events."
+    description: "Utility grid outages, SCADA system alerts, physical equipment maintenance, and factory tool damage."
   }
 ];
+
+const ICON_MAP = {
+  Scale, 
+  Factory, 
+  EyeOff, 
+  Globe, 
+  ShieldAlert, 
+  DollarSign, 
+  TrendingUp, 
+  CheckSquare, 
+  Users, 
+  Truck, 
+  CloudLightning, 
+  Activity 
+};
 
 export default function SignalTaxonomy({ threatRows = [], selectedCategories = [], onSelectCategories, isDark, categories }) {
   const total = threatRows.length;

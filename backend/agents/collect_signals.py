@@ -2,12 +2,17 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import sys
+import json
+import random
 
 load_dotenv(override=True)
 api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    api_key = "dummy-key"
-client = OpenAI(api_key=api_key)
+is_dummy = not api_key or api_key == "dummy-key" or len(api_key.strip()) == 0
+
+if not is_dummy:
+    client = OpenAI(api_key=api_key)
+else:
+    client = None
 
 def construct_prompt(supply_base, current_json_data):
     prompt = f"""
@@ -64,8 +69,47 @@ Return ONLY the disruption signal.
 """
     return prompt
 
+def dynamic_fallback_collect():
+    # Load knowledge graph to generate realistic supplier-specific signals dynamically
+    kg_path = os.path.join(os.path.dirname(__file__), "..", "data", "knowledgeGraph.json")
+    nodes = []
+    if os.path.exists(kg_path):
+        try:
+            with open(kg_path, "r", encoding="utf-8") as f:
+                nodes = json.load(f).get("nodes", [])
+        except Exception:
+            pass
+            
+    # Filter nodes that are suppliers (Tiers 1, 2, 3)
+    suppliers = [n for n in nodes if n.get("tier", 0) > 0]
+    if not suppliers:
+        suppliers = [
+            {"label": "Precision Castparts Corp.", "location": "Portland, OR", "type": "Forgings"},
+            {"label": "Toray Industries, Inc.", "location": "Ehime, JP", "type": "Composites"},
+            {"label": "Spirit AeroSystems", "location": "Wichita, KS", "type": "Structures"}
+        ]
+        
+    sup = random.choice(suppliers)
+    label = sup.get("label", "Supplier")
+    loc = sup.get("location", "Global Region")
+    parts_type = sup.get("type", "Component").lower()
+    
+    templates = [
+        f"Labor walkout threats at {label} ({loc}) spark concerns over upcoming deliveries of aerospace-grade {parts_type} components.",
+        f"Severe weather conditions near the {label} plant in {loc} disrupt logistics corridors for critical {parts_type} parts.",
+        f"Export restrictions on key raw materials disrupt production of high-performance {parts_type} sub-assemblies at {label}.",
+        f"Cybersecurity breach at {label} ({loc}) temporarily halts SCADA assembly networks for safety-critical {parts_type} hardware.",
+        f"Equipment failure and kiln shutdown at {label} facility restricts monthly capacity for aerospace {parts_type} materials."
+    ]
+    return [random.choice(templates)]
 
 def collect_public_signals(supply_base, current_json_data):
+    global client, is_dummy
+    
+    # Fallback immediately if client is not configured
+    if is_dummy or client is None:
+        return dynamic_fallback_collect()
+        
     prompt_string = construct_prompt(supply_base, current_json_data) 
 
     try:
@@ -87,10 +131,6 @@ def collect_public_signals(supply_base, current_json_data):
 
         result = response.output_text.strip()
 
-        #print("===DEBUG===")
-        #print(result)
-        #print("===DEBUG===")
-
         # Convert response into list
         signals = [
             line.strip("- ").strip()
@@ -98,9 +138,11 @@ def collect_public_signals(supply_base, current_json_data):
             if line.strip()
         ]
 
+        if not signals:
+            return dynamic_fallback_collect()
+            
         return signals
         
     except Exception as e:
-        print(f"[ERROR] OpenAI API call failed at supply_base_prompt: {e}")
-        sys.exit(1) # Kill the program if an API call fails.
-
+        print(f"[WARNING] OpenAI API call failed at collect_public_signals: {e}. Falling back to dynamic generator.")
+        return dynamic_fallback_collect()

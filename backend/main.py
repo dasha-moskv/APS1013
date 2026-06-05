@@ -49,37 +49,63 @@ def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
     text = f"{disruption} {facility} {full_desc}".lower()
 
     taxonomy_keywords = {
-        "Regulatory & Quality": [
-            "quality", "defect", "defects", "inspection", "inspections",
-            "audit", "compliance", "certificate", "certification",
-            "paperwork", "documentation", "traceability", "forgeries",
-            "regulatory", "regulation", "sanctions", "ban", "legal",
-            "faa", "airworthiness", "approval", "rework"
+        "Regulatory & Compliance": [
+            "compliance", "regulatory", "regulation", "sanctions", "ban", "legal", 
+            "faa", "airworthiness", "approval", "audit", "policy", "tariffs", 
+            "customs", "export control"
         ],
-
-        "Logistics & Transit": [
-            "logistics", "transit", "shipping", "shipment", "shipments",
-            "transport", "freight", "cargo", "routing", "rail", "port",
-            "customs", "border", "carrier", "import", "imports",
-            "warehouse", "dock", "route", "freighter", "convoy",
-            "delivery", "deliveries"
+        "Manufacturing & Supply": [
+            "capacity", "shortage", "shortages", "bottleneck", "bottlenecks", 
+            "production", "manufacturing", "throughput", "assembly", "plant", 
+            "facility", "factory", "shutdown", "restart", "maintenance", "parts", 
+            "supply chain", "constrain", "constraints", "availability"
         ],
-
-        "Operations & Capacity": [
-            "strike", "labor", "union", "workforce", "staffing",
-            "capacity", "shortage", "shortages", "bottleneck", "bottlenecks",
-            "yield", "production", "manufacturing", "throughput",
-            "assembly", "plant", "facility", "factory", "shutdown",
-            "restart", "outage", "maintenance", "autoclave", "smelter",
-            "smelting", "furnace", "engine", "parts", "supply chain",
-            "constrain", "constraints", "availability"
+        "Foreign Ownership, Control, or Influence (FOCI)": [
+            "foci", "foreign ownership", "foreign control", "influence", "adversary", 
+            "intel", "spy", "espionage", "foreign intelligence", "ownership control"
         ],
-
-        "External Infrastructure": [
-            "power", "grid", "telemetry", "scada", "utilities",
-            "weather", "freeze", "storm", "natural disaster",
-            "earthquake", "seismic", "lockdown", "internet",
-            "telecommunication", "infrastructure"
+        "Political": [
+            "political", "instability", "civil unrest", "territorial", "dispute", 
+            "corruption", "terrorism", "geopolitical", "protest", "protests", 
+            "riot", "war", "conflict", "sanction"
+        ],
+        "Technology & Cybersecurity": [
+            "cybersecurity", "cyberattack", "hack", "ransomware", "security breach", 
+            "malware", "phishing", "cryptographic", "software supply", "sbom", 
+            "telecommunication", "internet", "downtime"
+        ],
+        "Financial": [
+            "financial", "revenue", "liquidity", "bankruptcy", "bankrupt", "insolvent", 
+            "insolvency", "cash-to-cash", "credit", "profit", "margins", "debt"
+        ],
+        "Economic": [
+            "economic", "inflation", "macroeconomic", "tariff", "trade war", 
+            "employment", "market demand", "price spike", "volatility"
+        ],
+        "Product Quality & Design": [
+            "quality", "defect", "defects", "inspection", "inspections", "paperwork", 
+            "documentation", "traceability", "forgeries", "rework", "recall", 
+            "recalls", "yield", "containment", "airworthiness notification"
+        ],
+        "Human Capital": [
+            "strike", "strikes", "labor", "union", "workforce", "staffing", 
+            "recruitment", "labor dispute", "walkout", "personnel"
+        ],
+        "Transportation & Distribution": [
+            "logistics", "transit", "shipping", "shipment", "shipments", "transport", 
+            "freight", "cargo", "routing", "rail", "port", "customs", "border", 
+            "carrier", "import", "imports", "warehouse", "dock", "route", "freighter", 
+            "convoy", "delivery", "deliveries", "stalled", "freight rail"
+        ],
+        "Environmental": [
+            "weather", "freeze", "storm", "natural disaster", "earthquake", 
+            "seismic", "climate", "flood", "hurricane", "tornado", "typhoon", 
+            "wildfire", "emissions"
+        ],
+        "Infrastructure": [
+            "power", "grid", "telemetry", "scada", "utilities", "lockdown", 
+            "infrastructure", "outage", "kiln", "furnace", "autoclave", "spindle", 
+            "valve", "machinery", "equipment"
         ]
     }
 
@@ -92,22 +118,16 @@ def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
 
     # Extra weighting for strong category indicators
     strong_signals = {
-        "Regulatory & Quality": [
-            "quality issue", "defect", "inspection", "documentation",
-            "traceability", "certificate", "rework"
-        ],
-        "Logistics & Transit": [
-            "rail", "port", "customs", "cargo", "freight",
-            "shipping", "transport", "shipment"
-        ],
-        "Operations & Capacity": [
-            "strike", "labor", "shortage", "bottleneck", "production",
-            "capacity", "yield", "throughput", "assembly", "restart"
-        ],
-        "External Infrastructure": [
-            "power outage", "grid", "weather", "storm", "seismic",
-            "lockdown", "telemetry", "scada"
-        ]
+        "Regulatory & Compliance": ["export restriction", "sanctions list", "regulatory ban", "airworthiness notification"],
+        "Manufacturing & Supply": ["production halt", "shortage bottleneck", "capacity constraint", "supply chain disruption"],
+        "Technology & Cybersecurity": ["cyberattack hack", "ransomware breach", "malware injection", "security breach"],
+        "Financial": ["chapter 11", "bankruptcy protection", "liquidity crisis", "insolvent supplier"],
+        "Economic": ["trade tariffs", "inflation spike", "market demand drop"],
+        "Product Quality & Design": ["defect recall", "traceability forgery", "metallurgical inspection", "dimensional tolerance"],
+        "Human Capital": ["freight strike", "labor union walkout", "workforce deficit"],
+        "Transportation & Distribution": ["logistics bridge", "freight rail stop", "shipping container shortage", "port congestion"],
+        "Environmental": ["geothermal freeze", "seismic safety shutdown", "extreme weather storm", "natural disaster"],
+        "Infrastructure": ["power grid surge", "scada telemetry fail", "autoclave seal rupture", "machinery downtime"]
     }
 
     for category, phrases in strong_signals.items():
@@ -118,20 +138,28 @@ def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
     # Avoid over-classifying generic delay language as logistics
     generic_delay_terms = ["delay", "delays", "delayed", "delivery", "deliveries"]
     if any(term in text for term in generic_delay_terms):
-        scores["Logistics & Transit"] -= 1
+        scores["Transportation & Distribution"] -= 1
 
     # Tie-break priority for this project context
     priority = [
-        "Operations & Capacity",
-        "Regulatory & Quality",
-        "Logistics & Transit",
-        "External Infrastructure"
+        "Manufacturing & Supply",
+        "Product Quality & Design",
+        "Regulatory & Compliance",
+        "Transportation & Distribution",
+        "Technology & Cybersecurity",
+        "Human Capital",
+        "Infrastructure",
+        "Financial",
+        "Political",
+        "Economic",
+        "Environmental",
+        "Foreign Ownership, Control, or Influence (FOCI)"
     ]
 
     best_score = max(scores.values())
 
     if best_score <= 0:
-        return "External Infrastructure"
+        return "Infrastructure"
 
     tied_categories = [
         category for category, score in scores.items()
@@ -141,6 +169,30 @@ def get_taxonomy_by_id(signal_id, disruption="", facility="", full_desc=""):
     for category in priority:
         if category in tied_categories:
             return category
+
+def enrich_with_operational_data(selected_signal):
+    """
+    Looks up the supplier in the Supply Chain Knowledge Graph and enriches the
+    threat record with operational parameters (e.g. daily exposure, safety stock levels).
+    """
+    facility = selected_signal.get("facility", "")
+    node = resolve_supplier_node(facility)
+    if node:
+        selected_signal["dailyExposure"] = selected_signal.get("dailyExposure", node.get("dailyExposure", 0))
+        selected_signal["slaThresholdDays"] = selected_signal.get("slaThresholdDays", node.get("slaThresholdDays", 10))
+        selected_signal["bufferInventoryLevel"] = selected_signal.get("bufferInventoryLevel", node.get("bufferInventoryLevel", "5 days"))
+        
+        downstream_ids = get_downstream_dependencies(node["id"])
+        if downstream_ids:
+            graph = load_knowledge_graph()
+            nodes_map = {n["id"]: n["label"] for n in graph.get("nodes", [])}
+            dep_labels = [nodes_map[did] for did in downstream_ids if did in nodes_map]
+            selected_signal["downstreamDependencies"] = dep_labels
+            selected_signal["downstreamBusinessImpact"] = (
+                f"Disruption at {facility} directly propagates downstream, threatening operations at "
+                f"{', '.join(dep_labels[:3])}."
+            )
+    return selected_signal
 
 def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
     """
@@ -155,6 +207,7 @@ def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
         selected_signal.get("facility", ""),
         selected_signal.get("fullDescription", "")
     )
+    selected_signal = enrich_with_operational_data(selected_signal)
     try:
         with open(threat_registry_path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -233,11 +286,18 @@ def cluster_and_save_signal(selected_signal, threat_registry_path, logger=None):
 from agents import (
     supply_base_prompt,
     collect_public_signals,
-    analyze_signals
+    analyze_signals,
+    generate_mitigation_playbook_and_validation_plan
 )
 from utils import (
     read_from_json,
     send_to_json
+)
+from utils.validate_geojson import validate_geojson_data
+from utils.knowledge_graph_builder import (
+    resolve_supplier_node,
+    get_downstream_dependencies,
+    load_knowledge_graph
 )
 
 # Setup specialized supply chain radar pipeline logs
@@ -275,6 +335,8 @@ if FRONTEND_DATA_DIR.exists():
         shutil.copy(FRONTEND_DATA_DIR / "threatRegistry.json", THREAT_REGISTRY_PATH)
     if (FRONTEND_DATA_DIR / "signals.json").exists():
         shutil.copy(FRONTEND_DATA_DIR / "signals.json", SIGNALS_PATH)
+    if (FRONTEND_DATA_DIR / "knowledgeGraph.json").exists():
+        shutil.copy(FRONTEND_DATA_DIR / "knowledgeGraph.json", DATA_DIR / "knowledgeGraph.json")
 
 
 # Highly realistic fallback supply base signals when OpenAI is not configured
@@ -651,6 +713,104 @@ def make_signal_truly_unique(base_signal):
         
     return signal
 
+@app.post("/api/ingest")
+def ingest_supply_base(geojson: dict):
+    try:
+        result = validate_geojson_data(geojson)
+        return result
+    except Exception as e:
+        logger.error(f"Ingestion error: {e}")
+        raise HTTPException(status_code=400, detail=f"GeoJSON validation failed: {str(e)}")
+
+@app.post("/api/threats/{id}/playbook")
+def generate_threat_playbook(id: str):
+    logger.info(f"PLAYBOOK GENERATION: Requesting dynamic response plan for threat {id}")
+    try:
+        try:
+            with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                registry = json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to read registry: {e}")
+            raise HTTPException(status_code=500, detail="Threat registry missing or unreadable.")
+
+        target_threat = None
+        for threat in registry:
+            if threat["id"] == id:
+                target_threat = threat
+                break
+
+        if not target_threat:
+            raise HTTPException(status_code=404, detail=f"Threat ID {id} not found in registry.")
+
+        try:
+            supply_base = supply_base_prompt()
+            mitigation_playbook, validation_plan = generate_mitigation_playbook_and_validation_plan(
+                [target_threat], supply_base
+            )
+            
+            # Day 6: Compliance Interceptor Check
+            from backend.utils.governance_guardrails import check_playbook_compliance
+            is_compliant, violated_supplier, error_msg = check_playbook_compliance(mitigation_playbook)
+            
+            if not is_compliant:
+                # Intercept the playbook, flag it as a compliance breach
+                target_threat["mapPosition"]["status"] = "Compliance Breach"
+                target_threat["mapPosition"]["color"] = "#EF4444"  # Red warning color
+                target_threat["playbook"] = {
+                    "mitigationPlan": {
+                        "steps": [
+                            "⚠️ COMPLIANCE BREACH INTERCEPTED: Playbook blocked by AI Judge.",
+                            f"Proposed non-ASL vendor '{violated_supplier}' fails FAA airworthiness safety certification.",
+                            "Reallocated capacity changes rejected. Reverting to manual override queue."
+                        ],
+                        "timeline": "BLOCKED"
+                    },
+                    "validationPlan": {
+                        "steps": [
+                            "Perform manual vendor audit on FAA certification files.",
+                            "Escalate to Sourcing Director for Human-in-the-Loop review."
+                        ],
+                        "timeline": "IMMEDIATE"
+                    }
+                }
+                with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
+                    json.dump(registry, f, indent=2)
+                logger.warning(f"Governance Interceptor blocked playbook for threat {id}: {error_msg}")
+                return target_threat
+
+            target_threat["playbook"] = {
+                "mitigationPlan": {
+                    "steps": mitigation_playbook.get("alternate_supplier_actions", []) + \
+                               mitigation_playbook.get("inventory_actions", []) + \
+                               mitigation_playbook.get("logistics_actions", []) + \
+                               mitigation_playbook.get("communication_actions", []),
+                    "timeline": mitigation_playbook.get("alternate_supplier_actions", ["3-5 days"])[0] if mitigation_playbook.get("alternate_supplier_actions") else "3-5 days"
+                },
+                "validationPlan": {
+                    "steps": validation_plan.get("source_validation", []) + \
+                               validation_plan.get("supplier_validation", []) + \
+                               validation_plan.get("risk_review", []) + \
+                               validation_plan.get("ongoing_monitoring", []),
+                    "timeline": validation_plan.get("source_validation", ["24 hours"])[0] if validation_plan.get("source_validation") else "24 hours"
+                }
+            }
+            
+            with open(THREAT_REGISTRY_PATH, "w", encoding="utf-8") as f:
+                json.dump(registry, f, indent=2)
+                
+            logger.info(f"Successfully generated dynamic playbook for threat {id}")
+            return target_threat
+            
+        except Exception as agent_err:
+            logger.error(f"AI Playbook Agent failed: {agent_err}")
+            raise HTTPException(status_code=502, detail=f"AI Playbook generation failed: {agent_err}")
+
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        logger.error(f"Error in generate_threat_playbook: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/api/threat-registry")
 def get_threat_registry():
     try:
@@ -696,14 +856,30 @@ def simulate_signal():
         simulated_ids.add(selected_signal["id"])
         logger.info(f"SIMULATOR PIPELINE: Selecting curated signal {selected_signal['id']} from signals.json pool.")
 
+        # Trigger analyze_signals agent to dynamically structure the signal
+        try:
+            logger.info("Triggering analyze_signals agent to evaluate the simulated signal.")
+            supply_base = supply_base_prompt()
+            try:
+                with open(THREAT_REGISTRY_PATH, "r", encoding="utf-8") as f:
+                    reg_data = json.load(f)
+            except Exception:
+                reg_data = []
+            
+            raw_text = f"{selected_signal.get('disruption')} — {selected_signal.get('fullDescription')}"
+            analyzed_card = analyze_signals(supply_base, json.dumps(reg_data[:5]), raw_text)
+            
+            # Merge fields from analyzed_card
+            for k, v in analyzed_card.items():
+                if v != "TODO" and v is not None:
+                    selected_signal[k] = v
+            logger.info(f"Successfully analyzed signal {selected_signal.get('id')} using AI agent.")
+        except Exception as e:
+            logger.warning(f"AI signal analysis failed: {e}. Falling back to default heuristics.")
+            selected_signal = make_signal_truly_unique(selected_signal)
+
         selected_signal["ingestedAt"] = int(time.time() * 1000)
-        selected_signal["category"] = get_taxonomy_by_id(
-            selected_signal.get("id"),
-            selected_signal.get("disruption", ""),
-            selected_signal.get("facility", ""),
-            selected_signal.get("fullDescription", "")
-        )
-        
+        selected_signal = cluster_and_save_signal(selected_signal, THREAT_REGISTRY_PATH, logger=logger)
         return selected_signal
     except Exception as e:
         logger.error(f"SIMULATOR PIPELINE CRITICAL ERROR: {e}")
@@ -806,32 +982,55 @@ def get_real_news():
             all_articles.extend(articles)
             
     if not all_articles:
-        all_articles = [
-            {
-                "Title": "Spirit AeroSystems halts fuselage shipment to Boeing Renton plant due to logistics gridlock",
-                "Source": "Aviation Week",
-                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Description": "Rerouting from Wichita to Renton experiencing extreme winter rail disruptions, stalling crucial component delivery.",
-                "URL": "https://aviationweek.com/spirit-aerosystems-delays",
-                "RegionSource": "United States (EN)"
-            },
-            {
-                "Title": "GE Aerospace announces additional inspections on GEnx turbine blades after quality controls",
-                "Source": "Reuters",
-                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Description": "New safety inspection sweeps introduced at Evendale assembly hubs, potentially slowing engine output schedules.",
-                "URL": "https://reuters.com/ge-aerospace-turbine-blade-quality",
-                "RegionSource": "United Kingdom (EN)"
-            },
-            {
-                "Title": "Toray carbon fiber prepreg production paused at Ehime plant following regional seismic safety shutdown",
-                "Source": "Nikkei Asia",
-                "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Description": "Automatic safeguards triggered safety inspection protocols, reducing carbon fiber output for composite wing constructs.",
-                "URL": "https://nikkei.com/toray-ehime-plant-seismic",
-                "RegionSource": "Japan (JA)"
-            }
-        ]
+        logger.info("RSS feed empty or offline. Attempting to trigger collect_public_signals agent.")
+        try:
+            try:
+                with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
+                    current_signals_str = f.read()
+            except Exception:
+                current_signals_str = "[]"
+                
+            supply_base = supply_base_prompt()
+            generated_headlines = collect_public_signals(supply_base, current_signals_str)
+            
+            for headline in generated_headlines:
+                all_articles.append({
+                    "Title": headline,
+                    "Source": "AI OSINT Collector",
+                    "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Description": f"Emerging propulsion supply chain alert: {headline}",
+                    "URL": f"https://ai-intel-hub.report/signals/{hashlib.md5(headline.encode('utf-8')).hexdigest()[:8]}",
+                    "RegionSource": "Global (AI)"
+                })
+            logger.info(f"AI OSINT Collector generated {len(all_articles)} dynamic headlines.")
+        except Exception as e:
+            logger.warning(f"AI signal collection failed: {e}. Falling back to static mock articles.")
+            all_articles = [
+                {
+                    "Title": "Spirit AeroSystems halts fuselage shipment to Boeing Renton plant due to logistics gridlock",
+                    "Source": "Aviation Week",
+                    "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Description": "Rerouting from Wichita to Renton experiencing extreme winter rail disruptions, stalling crucial component delivery.",
+                    "URL": "https://aviationweek.com/spirit-aerosystems-delays",
+                    "RegionSource": "United States (EN)"
+                },
+                {
+                    "Title": "GE Aerospace announces additional inspections on GEnx turbine blades after quality controls",
+                    "Source": "Reuters",
+                    "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Description": "New safety inspection sweeps introduced at Evendale assembly hubs, potentially slowing engine output schedules.",
+                    "URL": "https://reuters.com/ge-aerospace-turbine-blade-quality",
+                    "RegionSource": "United Kingdom (EN)"
+                },
+                {
+                    "Title": "Toray carbon fiber prepreg production paused at Ehime plant following regional seismic safety shutdown",
+                    "Source": "Nikkei Asia",
+                    "PublishedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Description": "Automatic safeguards triggered safety inspection protocols, reducing carbon fiber output for composite wing constructs.",
+                    "URL": "https://nikkei.com/toray-ehime-plant-seismic",
+                    "RegionSource": "Japan (JA)"
+                }
+            ]
 
     df = pd.DataFrame(all_articles)
     df = df.drop_duplicates(subset=["URL"])
@@ -862,5 +1061,33 @@ def get_real_news():
     
     json_signals = gnp.generate_signals_json(df)
     
-    # Return directly, DO NOT SAVE TO JSON FILES
-    return json_signals
+    # Save directly to signals.json pool on disk
+    try:
+        try:
+            with open(SIGNALS_PATH, "r", encoding="utf-8") as f:
+                existing_signals = json.load(f)
+        except Exception:
+            existing_signals = []
+        
+        existing_urls = {s.get("sources", [{}])[0].get("url", "") for s in existing_signals if s.get("sources")}
+        for sig in json_signals:
+            sig_url = sig.get("sources", [{}])[0].get("url", "") if sig.get("sources") else ""
+            if sig_url not in existing_urls:
+                existing_signals.insert(0, sig)
+                
+        with open(SIGNALS_PATH, "w", encoding="utf-8") as f:
+            json.dump(existing_signals, f, indent=2)
+    except Exception as e:
+        logger.error(f"Failed to update signals.json in real-news route: {e}")
+
+    # Cluster and save into active threatRegistry.json
+    saved_signals = []
+    for sig in json_signals:
+        try:
+            saved_sig = cluster_and_save_signal(sig, THREAT_REGISTRY_PATH, logger=logger)
+            saved_signals.append(saved_sig)
+        except Exception as e:
+            logger.error(f"Failed to cluster signal {sig.get('id')} in real-news: {e}")
+            saved_signals.append(sig)
+            
+    return saved_signals

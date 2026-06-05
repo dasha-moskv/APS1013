@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supplier Disruption Radar – Development Sprint Gantt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /*
+      Timeline: Jun 5–11 = 7 days
+      unit = 100/7 ≈ 14.2857%
+      Jun 5 = col 0 =  0.000%
+      Jun 6 = col 1 = 14.286%
+      Jun 7 = col 2 = 28.571%
+      Jun 8 = col 3 = 42.857%
+      Jun 9 = col 4 = 57.143%
+      Jun10 = col 5 = 71.429%  (last dev day)
+      Jun11 = col 6 = 85.714%  (presentation day)
+    */
+    :root {
+      --navy: #1a2744;
+      --navy2: #243357;
+      --green: #86BC25;
+      --green2: #5f8c1a;
+      --mid: #36456b;
+      --white: #fff;
+      --rule: #DDE1EA;
+      --row-h: 44px;
+      --sidebar: 340px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #b8c2d8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(1, 33, 105, .22);
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: var(--navy);
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      flex-shrink: 0;
+      border-bottom: 4px solid var(--green);
+    }
+
+    .tbl {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .wordmark {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .wordmark span {
+      color: var(--green);
+    }
+
+    .vd {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .stitle {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .tbr {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 2px;
+      background: rgba(134, 188, 37, .18);
+      color: var(--green);
+      border: 1px solid rgba(134, 188, 37, .35);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      height: 26px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .leg {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      color: #555;
+    }
+
+    .sw {
+      width: 12px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .pres-badge {
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      background: #c04800;
+      border-radius: 2px;
+      padding: 1px 7px;
+    }
+
+    .leg-today {
+      margin-left: auto;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    /* ── Gantt ── */
+    .gantt-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .gantt {
+      display: grid;
+      grid-template-columns: var(--sidebar) 1fr;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      border-right: 2px solid var(--navy);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .s-hdr {
+      height: 56px;
+      background: var(--navy);
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 12px 8px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .38);
+    }
+
+    .task {
+      height: var(--row-h);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--rule);
+      gap: 6px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .th {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--navy);
+    }
+
+    .th.g {
+      background: var(--green2);
+    }
+
+    .th.m {
+      background: var(--mid);
+    }
+
+    .td {
+      font-size: 9px;
+      color: #1a1a1a;
+      background: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .td.alt {
+      background: #f5f6fb;
+    }
+
+    .chip {
+      font-size: 7.5px;
+      font-weight: 700;
+      color: var(--navy);
+      background: #d5dbed;
+      border-radius: 2px;
+      padding: 2px 5px;
+      flex-shrink: 0;
+    }
+
+    .th .chip {
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .t-hdr {
+      background: var(--navy);
+      flex-shrink: 0;
+      height: 56px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phase-row {
+      display: flex;
+      height: 18px;
+    }
+
+    .ph-dev {
+      width: 85.714%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: rgba(134, 188, 37, .8);
+      background: rgba(134, 188, 37, .07);
+      border-right: 2px solid #c04800;
+    }
+
+    .ph-pres {
+      width: 14.286%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #ff8040;
+      background: rgba(192, 72, 0, .08);
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      flex: 1;
+    }
+
+    .dc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .dc:last-child {
+      border-right: none;
+    }
+
+    .day-n {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1;
+    }
+
+    .day-l {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .28);
+      letter-spacing: .4px;
+    }
+
+    .dc.wkd .day-n {
+      color: rgba(255, 255, 255, .2);
+    }
+
+    .dc.wkd .day-l {
+      color: rgba(255, 255, 255, .14);
+    }
+
+    .dc.today .day-n {
+      color: var(--green);
+    }
+
+    .dc.today .day-l {
+      color: rgba(134, 188, 37, .55);
+    }
+
+    .dc.pres {
+      background: rgba(192, 72, 0, .07);
+    }
+
+    .dc.pres .day-n {
+      color: #ff8040;
+    }
+
+    .dc.pres .day-l {
+      color: rgba(255, 128, 64, .45);
+    }
+
+    /* ── Body ── */
+    .t-body {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .col-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: repeating-linear-gradient(90deg,
+          transparent 0, transparent calc(100%/7 - 1px),
+          rgba(200, 207, 220, .45) calc(100%/7 - 1px),
+          rgba(200, 207, 220, .45) calc(100%/7));
+    }
+
+    .pres-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 85.714%;
+      right: 0;
+      background: rgba(192, 72, 0, .04);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dev-end-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 85.714%;
+      width: 2px;
+      background: #c04800;
+      z-index: 20;
+      pointer-events: none;
+      opacity: .65;
+    }
+
+    .today-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0%;
+      width: 2px;
+      background: var(--green);
+      z-index: 21;
+      pointer-events: none;
+    }
+
+    .today-pip {
+      position: absolute;
+      top: 2px;
+      left: -4px;
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .row {
+      height: var(--row-h);
+      position: relative;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .row.s1 {
+      background: #eceef5;
+    }
+
+    .row.sg {
+      background: #edf5d9;
+    }
+
+    .row.sm {
+      background: #edf0f8;
+    }
+
+    /* ── Bars ── */
+    .bar {
+      position: absolute;
+      top: 8px;
+      height: 28px;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .b1 {
+      background: var(--navy);
+      box-shadow: inset 0 3px 0 var(--green);
+    }
+
+    .b2 {
+      background: var(--navy2);
+      box-shadow: inset 0 3px 0 var(--green);
+    }
+
+    .bg {
+      background: var(--green2);
+      box-shadow: inset 0 3px 0 #c4d600;
+    }
+
+    .bm {
+      background: var(--mid);
+      box-shadow: inset 0 3px 0 var(--green);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      height: 32px;
+      background: var(--white);
+      border-top: 3px solid var(--green);
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    .stat {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+
+    .sn {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .sl {
+      font-size: 8px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .fv {
+      width: 1px;
+      height: 15px;
+      background: #d0d3d4;
+    }
+
+    .fn {
+      margin-left: auto;
+      font-size: 8.5px;
+      color: #aaa;
+    }
+
+    .fn strong {
+      color: var(--navy);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slide">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div class="tbl">
+        <div class="wordmark">Deloitte<span>.</span></div>
+        <div class="vd"></div>
+        <div class="stitle">Supplier Disruption Radar &nbsp;·&nbsp; Final Sprint – MVP Gap Closure &nbsp;·&nbsp; June
+          5–11, 2026</div>
+      </div>
+      <div class="tbr">
+        <div class="tag">APS1013</div>
+        <div class="tag">Chain Signals</div>
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="leg">
+        <div class="sw" style="background:#1a2744;box-shadow:inset 0 2px 0 #86BC25"></div>Signal Intelligence Upgrade
+      </div>
+      <div class="leg">
+        <div class="sw" style="background:#243357;box-shadow:inset 0 2px 0 #86BC25"></div>Agentic Decision Support
+      </div>
+      <div class="leg">
+        <div class="sw" style="background:#36456b;box-shadow:inset 0 2px 0 #86BC25"></div>PM &amp; Delivery
+      </div>
+      <div class="pres-badge">📋 Jun 11 = Presentation Day</div>
+      <div class="leg-today">▲ Today (Jun 5) — Dev ends Jun 10</div>
+    </div>
+
+    <!-- GANTT -->
+    <div class="gantt-wrap">
+      <div class="gantt">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+          <div class="s-hdr">Development Workstream / Task</div>
+
+          <!-- TRACK 1 -->
+          <div class="task th"><span class="chip">1</span>Signal Intelligence Upgrade</div>
+          <div class="task td">
+            <span class="chip">1.1</span>Replace static threat score with weighted severity model
+          </div>
+          <div class="task td alt">
+            <span class="chip">1.2</span>Agentic AI Judge: LLM validates signals &amp; filters noise
+          </div>
+          <div class="task td">
+            <span class="chip">1.3</span>Fuse news signals with logistics &amp; weather data
+          </div>
+
+          <!-- TRACK 2 -->
+          <div class="task th"><span class="chip">2</span>Agentic Decision Support</div>
+          <div class="task td">
+            <span class="chip">2.1</span>LLM agent replaces hardcoded mitigation playbooks
+          </div>
+          <div class="task td alt">
+            <span class="chip">2.2</span>Map disruption impact to supplier tiers &amp; inventory
+          </div>
+          <div class="task td">
+            <span class="chip">2.3</span>Agent-driven scenario options with cost &amp; time tradeoffs
+          </div>
+
+          <!-- TRACK 3 -->
+          <div class="task th m"><span class="chip">3</span>PM &amp; Delivery</div>
+          <div class="task td">
+            <span class="chip">3.1</span>Build final slide deck, demo walkthrough &amp; narrative
+          </div>
+          <div class="task td alt">
+            <span class="chip">3.2</span>Validate output against real scenarios &amp; ROI scorecard
+          </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline">
+          <div class="t-hdr">
+            <div class="phase-row">
+              <div class="ph-dev">Development Window &nbsp;·&nbsp; Jun 5–10</div>
+              <div class="ph-pres">Presentation</div>
+            </div>
+            <div class="day-row">
+              <div class="dc today">
+                <div class="day-n">5</div>
+                <div class="day-l">FRI</div>
+              </div>
+              <div class="dc">
+                <div class="day-n">6</div>
+                <div class="day-l">SAT</div>
+              </div>
+              <div class="dc wkd">
+                <div class="day-n">7</div>
+                <div class="day-l">SUN</div>
+              </div>
+              <div class="dc wkd">
+                <div class="day-n">8</div>
+                <div class="day-l">MON</div>
+              </div>
+              <div class="dc">
+                <div class="day-n">9</div>
+                <div class="day-l">TUE</div>
+              </div>
+              <div class="dc">
+                <div class="day-n">10</div>
+                <div class="day-l">WED</div>
+              </div>
+              <div class="dc pres">
+                <div class="day-n">11</div>
+                <div class="day-l">THU ★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="t-body">
+            <div class="col-grid"></div>
+            <div class="pres-overlay"></div>
+            <div class="dev-end-line"></div>
+            <div class="today-line">
+              <div class="today-pip"></div>
+            </div>
+
+            <!--
+          unit = 14.2857%
+          Jun5=0%  Jun6=14.286%  Jun7=28.571%
+          Jun8=42.857%  Jun9=57.143%  Jun10=71.429%  Jun11=85.714%
+        -->
+
+            <!-- TRACK 1 ─────────────────────────────────────── -->
+            <div class="row s1"></div>
+            <!-- 1.1  Jun 5–6  (col0, span2) → 0%, 28.571% -->
+            <div class="row">
+              <div class="bar b1" style="left:0%;width:28.571%"></div>
+            </div>
+            <!-- 1.2  Jun 5–7  (col0, span3) → 0%, 42.857% -->
+            <div class="row">
+              <div class="bar b1" style="left:0%;width:42.857%"></div>
+            </div>
+            <!-- 1.3  Jun 7–9  (col2, span3) → 28.571%, 42.857% -->
+            <div class="row">
+              <div class="bar b1" style="left:28.571%;width:42.857%"></div>
+            </div>
+
+            <!-- TRACK 2 ─────────────────────────────────────── -->
+            <div class="row s1"></div>
+            <!-- 2.1  Jun 6–8  (col1, span3) → 14.286%, 42.857% -->
+            <div class="row">
+              <div class="bar b2" style="left:14.286%;width:42.857%"></div>
+            </div>
+            <!-- 2.2  Jun 7–9  (col2, span3) → 28.571%, 42.857% -->
+            <div class="row">
+              <div class="bar b2" style="left:28.571%;width:42.857%"></div>
+            </div>
+            <!-- 2.3  Jun 9–10 (col4, span2) → 57.143%, 28.571% -->
+            <div class="row">
+              <div class="bar b2" style="left:57.143%;width:28.571%"></div>
+            </div>
+
+            <!-- TRACK 3 ─────────────────────────────────────── -->
+            <div class="row sm"></div>
+            <!-- 3.1  Jun 9–10 (col4, span2) → 57.143%, 28.571% -->
+            <div class="row">
+              <div class="bar bm" style="left:57.143%;width:28.571%"></div>
+            </div>
+            <!-- 3.2  Jun 10   (col5, span1) → 71.429%, 14.286% -->
+            <div class="row">
+              <div class="bar bm" style="left:71.429%;width:14.286%"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="stat">
+        <div class="sn">7</div>
+        <div class="sl">Days</div>
+      </div>
+      <div class="fv"></div>
+      <div class="stat">
+        <div class="sn">3</div>
+        <div class="sl">Tracks</div>
+      </div>
+      <div class="fv"></div>
+      <div class="stat">
+        <div class="sn">9</div>
+        <div class="sl">Deliverables</div>
+      </div>
+      <div class="fv"></div>
+      <div class="stat">
+        <div class="sn">Jun 10</div>
+        <div class="sl">Dev Cutoff</div>
+      </div>
+      <div class="fn">Confidential – For Internal Use Only &nbsp;|&nbsp; <strong>Chain Signals</strong> &nbsp;|&nbsp;
+        APS1013 &nbsp;|&nbsp; June 2026</div>
+    </div>
+
+  </div>
+</body>
+
+</html>

@@ -10,6 +10,7 @@ import SignalTaxonomy from "./components/SignalTaxonomy";
 import BaseIngest from "./components/BaseIngest";
 import MitigationPlaybooks from "./components/MitigationPlaybooks";
 import AIJudgeGovernance from "./components/AIJudgeGovernance";
+import BusinessValueDashboard from "./components/BusinessValueDashboard";
 
 // Hardcoded Initial Baseline Datasets
 import initialThreatRegistry from "./data/threatRegistry.json";
@@ -39,7 +40,7 @@ export default function App() {
   const [pipelineData] = useState(initialPipelineData);
 
   // Phase 2/3 States
-  const [, setApprovedPlaybooks] = useState({});
+  const [approvedPlaybooks, setApprovedPlaybooks] = useState({});
   const [feedbackHistory, setFeedbackHistory] = useState([]);
 
   const toggleDark = () => setIsDark(prev => !prev);
@@ -48,6 +49,27 @@ export default function App() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [toast, setToast] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  // Fetch initial threat registry from backend on mount
+  useEffect(() => {
+    fetch("http://localhost:8000/api/threat-registry")
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch threat registry");
+        return res.json();
+      })
+      .then(data => {
+        if (data && data.length > 0) {
+          setThreatRows(data.map(t => ({
+            ...t,
+            ingestedAt: t.ingestedAt || 0,
+            coordinates: t.coordinates || t.mapPosition?.coordinates
+          })));
+        }
+      })
+      .catch(err => {
+        console.error("Error loading initial threat registry from backend, using static fallback:", err);
+      });
+  }, []);
 
   // Connect to backend Server-Sent Events stream when streaming mode is active
   useEffect(() => {
@@ -431,16 +453,25 @@ export default function App() {
               onApprovePlaybook={handleApprovePlaybook}
               knowledgeGraph={knowledgeGraph}
               playbookData={playbookData}
+              setThreatRows={setThreatRows}
             />
           )}
 
-
+          {activeTab === "value" && (
+            <BusinessValueDashboard 
+              isDark={isDark} 
+              threatRows={threatRows} 
+              approvedPlaybooks={approvedPlaybooks}
+            />
+          )}
 
           {activeTab === "governance" && (
             <AIJudgeGovernance 
               isDark={isDark} 
               feedbackHistory={feedbackHistory}
               droppedSignals={droppedSignals}
+              threatRows={threatRows}
+              setThreatRows={setThreatRows}
             />
           )}
 

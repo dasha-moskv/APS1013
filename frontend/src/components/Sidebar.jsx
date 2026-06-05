@@ -6,6 +6,7 @@ import {
   Activity,
   ShieldAlert,
   LogOut,
+  TrendingUp,
 } from "lucide-react";
 
 const navItems = [
@@ -13,6 +14,7 @@ const navItems = [
   { icon: FileText, label: "Base Ingest", id: "ingest" },
   { icon: Activity, label: "Mitigation Playbooks", id: "playbooks" },
   { icon: ShieldAlert, label: "AI Judge & Governance", id: "governance" },
+  { icon: TrendingUp, label: "Business Value", id: "value" },
 ];
 
 export default function Sidebar({ isDark, toggleDark, activeTab, setActiveTab }) {

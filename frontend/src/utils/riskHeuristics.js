@@ -45,6 +45,7 @@ export function getLikelihoodColor(prob, isDark) {
 }
 
 export function formatTimeToHit(days) {
+  if (typeof days === "string") return days;
   if (days === -1) return "Bypassed (0 Days)";
   if (days === 0) return "Immediate";
   if (days > 0 && days < 1) return "< 1 day";
@@ -53,6 +54,7 @@ export function formatTimeToHit(days) {
   if (days >= 7 && days <= 14) return "1-2 weeks";
   if (days > 14 && days <= 28) return "2-4 weeks";
   if (days > 28 && days <= 60) return "1-2 months";
+  if (isNaN(days)) return days;
   const months = Math.round(days / 30);
   return `${months} months`;
 }
@@ -75,44 +77,64 @@ export function getTaxonomy(idOrObj) {
     id = idOrObj;
   }
 
-  // 1. Check for Regulatory & Quality keywords
-  const qualityKeywords = [
-    "quality", "regulation", "regulatory", "audit", "defect", "defects",
-    "compliance", "inspection", "checks", "paperwork", "forgeries",
-    "documentation", "sanctions", "ban", "legal", "certificate", "traceability"
-  ];
-  if (qualityKeywords.some(k => text.includes(k))) {
-    return "Regulatory & Quality";
+  // 1. Regulatory & Compliance
+  if (["compliance", "regulatory", "regulation", "sanctions", "ban", "legal", "faa", "airworthiness", "approval", "audit"].some(k => text.includes(k))) {
+    return "Regulatory & Compliance";
   }
 
-  // 2. Check for Logistics & Transit keywords
-  const logisticsKeywords = [
-    "logistics", "transit", "shipping", "delays", "delay", "transport",
-    "freight", "cargo", "routing", "rail", "port", "customs", "border",
-    "carrier", "import", "delivery", "deliveries", "stalled", "freighter"
-  ];
-  if (logisticsKeywords.some(k => text.includes(k))) {
-    return "Logistics & Transit";
+  // 2. Foreign Ownership, Control, or Influence (FOCI)
+  if (["foci", "foreign ownership", "foreign control", "espionage"].some(k => text.includes(k))) {
+    return "Foreign Ownership, Control, or Influence (FOCI)";
   }
 
-  // 3. Check for Operations & Capacity keywords
-  const opsKeywords = [
-    "strike", "labor", "union", "workforce", "capacity", "shortage",
-    "shortages", "yield", "production", "constrain", "starvation",
-    "manufacturing", "kiln", "shutdown", "furnace", "mold", "autoclave",
-    "honing", "riveting", "outage", "spindle", "die", "billet", "smelting"
-  ];
-  if (opsKeywords.some(k => text.includes(k))) {
-    return "Operations & Capacity";
+  // 3. Technology & Cybersecurity
+  if (["cybersecurity", "cyberattack", "hack", "ransomware", "security breach", "malware"].some(k => text.includes(k))) {
+    return "Technology & Cybersecurity";
   }
 
-  // 4. Check for External Infrastructure keywords
-  const infraKeywords = [
-    "power", "grid", "telemetry", "scada", "telecommunication", "utilities",
-    "weather", "freeze", "storm", "natural", "internet", "surge", "outage"
-  ];
-  if (infraKeywords.some(k => text.includes(k))) {
-    return "External Infrastructure";
+  // 4. Financial
+  if (["financial", "revenue", "liquidity", "bankruptcy", "bankrupt", "insolvent"].some(k => text.includes(k))) {
+    return "Financial";
+  }
+
+  // 5. Economic
+  if (["economic", "inflation", "macroeconomic", "tariff", "trade war"].some(k => text.includes(k))) {
+    return "Economic";
+  }
+
+  // 6. Product Quality & Design
+  if (["quality", "defect", "defects", "inspection", "inspections", "traceability", "rework", "recall"].some(k => text.includes(k))) {
+    return "Product Quality & Design";
+  }
+
+  // 7. Human Capital
+  if (["strike", "strikes", "labor", "union", "workforce", "staffing"].some(k => text.includes(k))) {
+    return "Human Capital";
+  }
+
+  // 8. Transportation & Distribution
+  if (["logistics", "transit", "shipping", "transport", "freight", "cargo", "rail", "port", "customs", "border"].some(k => text.includes(k))) {
+    return "Transportation & Distribution";
+  }
+
+  // 9. Environmental
+  if (["weather", "freeze", "storm", "natural", "earthquake", "seismic"].some(k => text.includes(k))) {
+    return "Environmental";
+  }
+
+  // 10. Manufacturing & Supply
+  if (["capacity", "shortage", "shortages", "yield", "production", "constrain", "manufacturing"].some(k => text.includes(k))) {
+    return "Manufacturing & Supply";
+  }
+
+  // 11. Infrastructure
+  if (["power", "grid", "telemetry", "scada", "utilities", "lockdown", "outage"].some(k => text.includes(k))) {
+    return "Infrastructure";
+  }
+
+  // 12. Political
+  if (["political", "instability", "civil unrest", "geopolitical"].some(k => text.includes(k))) {
+    return "Political";
   }
 
   if (taxonomyMapping && taxonomyMapping.categories) {
@@ -123,10 +145,10 @@ export function getTaxonomy(idOrObj) {
   }
 
   // Fallback to static mapping before JSON is loaded or for unrecognized IDs
-  if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Operations & Capacity";
-  if (id.startsWith("SUP-001A") || id.startsWith("SUP-109B") || id.startsWith("FAC-010") || id.startsWith("SUP-302B")) return "Logistics & Transit";
-  if (id.startsWith("SUP-401A") || id.startsWith("SUP-502A") || id.startsWith("SUP-404R") || id.startsWith("SUP-512S") || id.startsWith("SUP-212H")) return "Regulatory & Quality";
-  return "External Infrastructure";
+  if (id.startsWith("FAC-001") || id.startsWith("FAC-003") || id.startsWith("SUP-771A")) return "Manufacturing & Supply";
+  if (id.startsWith("SUP-001A") || id.startsWith("SUP-109B") || id.startsWith("FAC-010") || id.startsWith("SUP-302B")) return "Transportation & Distribution";
+  if (id.startsWith("SUP-401A") || id.startsWith("SUP-502A") || id.startsWith("SUP-404R") || id.startsWith("SUP-512S") || id.startsWith("SUP-212H")) return "Regulatory & Compliance";
+  return "Infrastructure";
 }
 
 

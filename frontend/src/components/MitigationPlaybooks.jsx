@@ -22,7 +22,8 @@ export default function MitigationPlaybooks({
   threatRows = [], 
   onApprovePlaybook,
   knowledgeGraph,
-  playbookData
+  playbookData,
+  setThreatRows
 }) {
   const [selectedThreatId, setSelectedThreatId] = useState("");
   const [selectedThreat, setSelectedThreat] = useState(null);
@@ -45,6 +46,31 @@ export default function MitigationPlaybooks({
   });
 
   const [approvedList, setApprovedList] = useState({});
+
+  const [isGeneratingPlaybook, setIsGeneratingPlaybook] = useState(false);
+
+  const handleGenerateAIPlaybook = () => {
+    if (!selectedThreatId) return;
+    setIsGeneratingPlaybook(true);
+    fetch(`http://localhost:8000/api/threats/${selectedThreatId}/playbook`, {
+      method: "POST"
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to generate playbook");
+        return res.json();
+      })
+      .then(updatedThreat => {
+        setIsGeneratingPlaybook(false);
+        if (setThreatRows) {
+          setThreatRows(prev => prev.map(t => t.id === updatedThreat.id ? updatedThreat : t));
+        }
+      })
+      .catch(err => {
+        setIsGeneratingPlaybook(false);
+        console.error("Error generating AI playbook:", err);
+        alert(`Failed to generate playbook: ${err.message}`);
+      });
+  };
 
   // Set default threat selection when the threat list loads.
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -546,7 +572,7 @@ export default function MitigationPlaybooks({
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative flex flex-col gap-2">
               <select
                 value={selectedThreatId}
                 onChange={(e) => setSelectedThreatId(e.target.value)}
@@ -560,6 +586,23 @@ export default function MitigationPlaybooks({
                   </option>
                 ))}
               </select>
+              <button
+                onClick={handleGenerateAIPlaybook}
+                disabled={isGeneratingPlaybook || !selectedThreatId}
+                className="w-full h-8 border border-slate-700 hover:border-[#86BC25] text-[#86BC25] bg-transparent font-mono text-[9px] uppercase tracking-wider cursor-pointer hover:bg-[#86BC25]/10 flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed select-none"
+              >
+                {isGeneratingPlaybook ? (
+                  <>
+                    <RefreshCw className="h-3 w-3 animate-spin" />
+                    Generating custom AI Playbook...
+                  </>
+                ) : (
+                  <>
+                    <BookOpen className="h-3 w-3" />
+                    Generate custom AI Playbook
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
@@ -939,18 +982,102 @@ export default function MitigationPlaybooks({
                   <div className="flex flex-col gap-2">
                     <span className="text-slate-500 uppercase font-mono text-[8px] font-bold">Autonomous Playbook Execution Steps</span>
                     <div className="flex flex-col gap-1.5">
-                      {activeScenario.executionSteps.map((step, idx) => (
-                        <div key={idx} className={`border p-2.5 flex items-start gap-2.5 ${
-                          isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
-                        }`}>
-                          <span className="h-4.5 w-4.5 rounded-full border border-slate-800 bg-[#070A11] flex items-center justify-center font-mono text-[8px] font-bold text-slate-500 shrink-0 select-none">
-                            {idx + 1}
-                          </span>
-                          <p className={`text-[10px] leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                            {step}
-                          </p>
-                        </div>
-                      ))}
+                      {activeScenario.executionSteps.map((step, idx) => {
+                        const isNudge = step.startsWith("SOURCING NUDGE:");
+                        if (isNudge) {
+                          const pctMatch = step.match(/Reallocate\s+(\d+%\s*)/i);
+                          const supplierMatch = step.match(/to\s+([A-Za-z0-9\s-&]+)\s*\(([^)]+)\)/i);
+                          const daysMatch = step.match(/Activation:\s*(\d+\s*\w*)/i);
+                          const docsMatch = step.match(/Documentation:\s*([A-Za-z0-9\s-]+)\s+required/i);
+                          
+                          const nudgeData = {
+                            pct: pctMatch ? pctMatch[1].trim() : "30%",
+                            supplier: supplierMatch ? supplierMatch[1].trim() : "Precision Castparts",
+                            location: supplierMatch ? supplierMatch[2].trim() : "Portland, OR",
+                            days: daysMatch ? daysMatch[1].trim() : "30 days",
+                            docs: docsMatch ? docsMatch[1].trim() : "FAA Form 8130-3"
+                          };
+
+                          return (
+                            <div key={idx} className={`border-l-4 p-3 flex flex-col gap-2 rounded-none transition-all ${
+                              isDark 
+                                ? "bg-[#111622] border-[#86BC25] border-y-slate-800 border-r-slate-800 border" 
+                                : "bg-emerald-50/20 border-[#86BC25] border-y-slate-200 border-r-slate-200 border"
+                            }`}>
+                              <div className="flex items-center justify-between">
+                                <span className="text-[#86BC25] font-mono text-[9px] font-bold tracking-wider uppercase flex items-center gap-1">
+                                  <Award className="h-3.5 w-3.5" />
+                                  Governed Sourcing Nudge (ASL Approved)
+                                </span>
+                                <span className={`text-[8px] font-mono font-bold px-1.5 py-0.5 border ${
+                                  erpDispatchStatus === "SUCCESS"
+                                    ? "text-[#86BC25] border-[#86BC25]/20 bg-[#86BC25]/5"
+                                    : "text-amber-500 border-amber-500/20 bg-amber-500/5 animate-pulse"
+                                }`}>
+                                  {erpDispatchStatus === "SUCCESS" ? "DISPATCHED TO SAP" : "PENDING AUTHORIZATION"}
+                                </span>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-2 mt-1">
+                                <div className="flex flex-col">
+                                  <span className="text-[7px] text-slate-500 uppercase font-mono font-bold">Alternate ASL Supplier</span>
+                                  <span className={`text-[10px] font-sans font-bold ${isDark ? "text-white" : "text-slate-800"}`}>
+                                    {nudgeData.supplier}
+                                  </span>
+                                  <span className="text-[8px] text-slate-400 font-mono mt-0.5">
+                                    {nudgeData.location}
+                                  </span>
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-[7px] text-slate-500 uppercase font-mono font-bold">Capacity Split Allocation</span>
+                                  <span className="text-[10px] font-mono font-bold text-[#86BC25]">
+                                    Shift {nudgeData.pct} Volume
+                                  </span>
+                                  <div className={`h-1.5 w-24 rounded-none mt-1 overflow-hidden flex ${isDark ? "bg-slate-800" : "bg-slate-200"}`}>
+                                    <div 
+                                      style={{ width: nudgeData.pct }} 
+                                      className="h-full bg-[#86BC25]"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-2 border-t border-slate-800/20 pt-2 mt-1">
+                                <div className="flex flex-col">
+                                  <span className="text-[7px] text-slate-500 uppercase font-mono font-bold">Activation Target</span>
+                                  <span className="text-[10px] font-mono font-bold text-sky-400">
+                                    {nudgeData.days}
+                                  </span>
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-[7px] text-slate-500 uppercase font-mono font-bold">FAA Airworthiness Document</span>
+                                  <span className="text-[9px] font-sans font-bold text-amber-500 flex items-center gap-1">
+                                    <CheckSquare className="h-3 w-3" />
+                                    {nudgeData.docs}
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <p className={`text-[8.5px] leading-relaxed italic border-t border-slate-800/20 pt-1.5 mt-1 select-none ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                                {step.replace("SOURCING NUDGE:", "").trim()}
+                              </p>
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div key={idx} className={`border p-2.5 flex items-start gap-2.5 ${
+                            isDark ? "bg-[#111520] border-slate-800" : "bg-slate-50 border-slate-200"
+                          }`}>
+                            <span className="h-4.5 w-4.5 rounded-full border border-slate-800 bg-[#070A11] flex items-center justify-center font-mono text-[8px] font-bold text-slate-500 shrink-0 select-none">
+                              {idx + 1}
+                            </span>
+                            <p className={`text-[10px] leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                              {step}
+                            </p>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

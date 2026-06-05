@@ -1,0 +1,118 @@
+direction: down
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+ExternalSources: "External Sources" {
+  direction: down
+  style.fill: "#FAF5FF"
+  style.stroke: "#7C3AED"
+  style.border-radius: 8
+  style.font-size: 32
+
+  GoogleNews: "① Google News Feed\n(Live Updates)" {
+    style.fill: "#FAF5FF"
+    style.stroke: "#7C3AED"
+    style.font-size: 20
+  }
+}
+
+SupplyChainPlatform: "Supply Chain Platform" {
+  direction: down
+  style.fill: "#F8FAFC"
+  style.stroke: "#64748B"
+  style.border-radius: 8
+  style.font-size: 32
+  
+  UserInterface: "User Interface" {
+    direction: down
+    style.fill: "#EFF6FF"
+    style.stroke: "#3B82F6"
+    style.font-size: 24
+
+    Dashboard: "⑦ Supply Chain Cockpit\n(App Dashboard)" {
+      style.fill: "#EFF6FF"
+      style.stroke: "#3B82F6"
+      style.font-size: 20
+    }
+  }
+
+  ProcessingEngine: "Processing Engine" {
+    direction: down
+    style.fill: "#F0FDF4"
+    style.stroke: "#15803D"
+    style.border-radius: 6
+    style.font-size: 24
+
+    NewsCollector: "② News Collector\n(Signal Gathering)" {
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+      style.font-size: 20
+    }
+
+    TaskManager: "③ Task Manager\n(Orchestrator)" {
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+      style.font-size: 20
+    }
+
+    DataAnalyzer: "④ Data Analyzer\n(Heuristic Scoring Engine)" {
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+      style.font-size: 20
+    }
+
+    PlaybookGenerator: "⑤ Playbook Generator\n(Action Plan Builder)" {
+      style.fill: "#F0FDF4"
+      style.stroke: "#15803D"
+      style.font-size: 20
+    }
+
+    LocalDatabase: "⑥ Threat & Knowledge Database" {
+      shape: cylinder
+      style.fill: "#FEFBF0"
+      style.stroke: "#F59E0B"
+      style.font-size: 20
+    }
+  }
+}
+
+# --- Connections & Flows ---
+
+ExternalSources.GoogleNews -> SupplyChainPlatform.ProcessingEngine.NewsCollector: "Fetch Articles" {
+  style.stroke: "#7C3AED"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.ProcessingEngine.NewsCollector -> SupplyChainPlatform.ProcessingEngine.TaskManager: "Forward Data" {
+  style.stroke: "#475569"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.ProcessingEngine.TaskManager -> SupplyChainPlatform.ProcessingEngine.DataAnalyzer: "Analyze & Score" {
+  style.stroke: "#475569"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.ProcessingEngine.TaskManager -> SupplyChainPlatform.ProcessingEngine.PlaybookGenerator: "Trigger Plans" {
+  style.stroke: "#475569"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.ProcessingEngine.TaskManager -> SupplyChainPlatform.ProcessingEngine.LocalDatabase: "Save / Update Data" {
+  style.stroke: "#475569"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.UserInterface.Dashboard -> SupplyChainPlatform.ProcessingEngine.TaskManager: "User Requests" {
+  style.stroke: "#3B82F6"
+  style.font-size: 16
+}
+
+SupplyChainPlatform.ProcessingEngine.TaskManager -> SupplyChainPlatform.UserInterface.Dashboard: "Return Status" {
+  style.stroke: "#15803D"
+  style.font-size: 16
+}
