@@ -9,13 +9,13 @@ By combining advanced agentic AI pipelines with an interactive, highly responsiv
 ## 🎥 Application Visuals & Architecture
 
 ### 📊 System-Wide Process Flow (Phases 1–3)
-![System-Wide Process Flow](docs/uml-process-mvp.png)
+![System-Wide Process Flow](docs/diagrams/uml-process-mvp.png)
 
 ### 🗺️ System Use Case Map
-![Use Case Map](docs/uml-use-case-mvp.png)
+![Use Case Map](docs/diagrams/uml-use-case-mvp.png)
 
 ### 💻 High-Fidelity Interface Preview
-![High-Fidelity Interface Preview](docs/demo.gif)
+![High-Fidelity Interface Preview](docs/assets/demo.gif)
 
 ---
 
@@ -44,12 +44,11 @@ Project Radar is managed as a unified monorepo divided into isolated services fo
 │   ├── requirements.txt        # Python dependency manifest
 │   └── .env                    # System-level API keys (OpenAI, NewsAPI)
 │
-├── docs/                       # Process diagrams, study guides, and visual assets
-│   ├── case-study.md           # Boeing supply chain business case analysis
-│   ├── essential-performance.md # Critical system design metrics
-│   ├── slide-outline.md        # Technical presentation deck storyboard
-│   ├── uml-process-mvp.md      # UML sequence diagram description
-│   └── uml-use-case-mvp.md     # UML actor/system use case map
+├── docs/                       # Structured documentation and diagrams
+│   ├── assets/                 # Visual assets and demo media
+│   ├── diagrams/               # UML processes, use cases, and deployments
+│   ├── planning/               # Gantt charts, WBS, and release roadmaps
+│   └── reports/                # Case studies, charter, and deep research reports
 │
 ├── frontend/                   # React + Vite Production-Ready UI
 │   ├── src/

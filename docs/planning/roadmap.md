@@ -178,7 +178,7 @@ Our agentic processing loop is structured as a collaborative system of three spe
 
 ## 🏗️ Architectural Blueprint
 
-The updated system architecture is documented in [phase2_architecture.d2](file:///Users/epheriami/Downloads/Projects/aps1013/project/phase2_architecture.d2) and compiled to [phase2_architecture.svg](file:///Users/epheriami/Downloads/Projects/aps1013/project/phase2_architecture.svg). 
+The updated system architecture is documented in [phase2_architecture.d2](file:///Users/epheriami/Downloads/Projects/aps1013/project/archive/phase2_architecture.d2) and compiled to [phase2_architecture.svg](file:///Users/epheriami/Downloads/Projects/aps1013/project/archive/phase2_architecture.svg). 
 
 The multi-layer system is divided into four distinct boundaries:
 1.  **Presentation Layer (React SPA)**: The analyst cockpit displaying the Risk Radar, Ingestion Pipeline, Mitigation Playbook, and Governance Console.

@@ -1,6 +1,6 @@
 # Supplier Disruption Radar Agent - Work Breakdown Structure (WBS)
 
-This document outlines the 3-level Work Breakdown Structure (WBS) for the **Supplier Disruption Radar Agent** project, developed for the **APS1013** course under the guidance of Professor Stephen Armstrong. The WBS is synthesized from the project workstreams defined in the [Project Charter](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/charter.md) and the technical development phases specified in the [Deep Research Document](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/deep-research.md).
+This document outlines the 3-level Work Breakdown Structure (WBS) for the **Supplier Disruption Radar Agent** project, developed for the **APS1013** course under the guidance of Professor Stephen Armstrong. The WBS is synthesized from the project workstreams defined in the [Project Charter](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/reports/charter.md) and the technical development phases specified in the [Deep Research Document](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/reports/deep-research.md).
 
 ```mermaid
 graph TD
@@ -66,7 +66,7 @@ The following schedule tracks all 3-level WBS tasks day-by-day between June 5th 
 ### 1. Project Management & Research Track
 
 *   **1.1 Project Management & Deliverables**
-    *   **1.1.1 Project Charter Definition & Alignment**: Draft, socialize, and baseline the Project Charter ([charter.md](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/charter.md)) outlining scope boundaries, team structure, and timeline.
+    *   **1.1.1 Project Charter Definition & Alignment**: Draft, socialize, and baseline the Project Charter ([charter.md](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/reports/charter.md)) outlining scope boundaries, team structure, and timeline.
     *   **1.1.2 Preliminary Presentation Delivery**: Create progress updates and review draft architecture with Deloitte mentors to ensure alignment with corporate standards.
     *   **1.1.3 Final Presentation Structure & Material**: Construct the executive slide deck, live/recorded demo scenarios, and technical appendix for the final presentation.
     *   **1.1.4 Final Project Report Synthesis**: Compile the comprehensive technical and business report, integrating the final taxonomy, scoring model, disruption card portfolio, and playbooks.

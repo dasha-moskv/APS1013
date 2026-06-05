@@ -74,9 +74,9 @@ The monorepo is currently configured to run in a decoupled MVP state to support 
 
 ## Diagram Source (PlantUML)
 
-The diagram source code is stored in [uml-deployment.puml](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/uml-deployment.puml). To compile it, run:
+The diagram source code is stored in [uml-deployment.puml](file:///Users/epheriami/Downloads/Projects/aps1013/project/docs/diagrams/uml-deployment.puml). To compile it, run:
 ```bash
-plantuml docs/uml-deployment.puml
+plantuml docs/diagrams/uml-deployment.puml
 ```
 
 ```plantuml
