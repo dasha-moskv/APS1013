@@ -437,7 +437,9 @@ export default function BaseIngest({ isDark, onSupplyBaseInitialized }) {
           </div>
 
           {/* Console / Terminal Output */}
-          <div className="border border-slate-800 bg-[#070A11] p-3 font-mono text-[9px] text-[#86BC25] select-text flex flex-col gap-2 min-h-[220px]">
+          <div className={`p-3 font-mono text-[9px] text-[#86BC25] select-text flex flex-col gap-2 min-h-[220px] border ${
+            isDark ? "border-slate-800 bg-[#070A11]" : "border-slate-200 bg-slate-50"
+          }`}>
             <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 select-none">
               <span className="font-bold tracking-wider uppercase text-slate-500 flex items-center gap-1.5">
                 <Terminal className="h-3.5 w-3.5 text-[#86BC25]" />

@@ -364,9 +364,13 @@ export default function MitigationPlaybooks({
 
           <div className="grid grid-cols-12 gap-3.5">
             {/* Left: SVG Canvas (8 columns) */}
-            <div className="col-span-12 lg:col-span-8 border border-slate-800 bg-[#070A11] relative overflow-hidden h-[250px] flex items-center justify-center">
+            <div className={`col-span-12 lg:col-span-8 border relative overflow-hidden h-[250px] flex items-center justify-center ${
+              isDark ? "border-slate-800 bg-[#070A11]" : "border-slate-200 bg-slate-50"
+            }`}>
               {/* Columns Header Titles */}
-              <div className="absolute top-2 left-0 right-0 grid grid-cols-4 text-center font-mono text-[8px] font-bold text-slate-600 tracking-wider pointer-events-none select-none border-b border-slate-900 pb-1">
+              <div className={`absolute top-2 left-0 right-0 grid grid-cols-4 text-center font-mono text-[8px] font-bold tracking-wider pointer-events-none select-none border-b pb-1 ${
+                isDark ? "border-slate-900 text-slate-600" : "border-slate-250/60 text-slate-400"
+              }`}>
                 <span>TIER 3: RAW</span>
                 <span>TIER 2: FORGING</span>
                 <span>TIER 1: SYSTEMS BASE</span>
@@ -380,7 +384,7 @@ export default function MitigationPlaybooks({
                   const sourcePos = getSvgCoordinates(link.source);
                   const targetPos = getSvgCoordinates(link.target);
                   const isBlastRadius = selectedThreatId === link.source || selectedThreatId === link.target;
-                  const linkColor = isBlastRadius ? "#EF4444" : "#1E293B";
+                  const linkColor = isBlastRadius ? "#EF4444" : (isDark ? "#1E293B" : "#CBD5E1");
 
                   return (
                     <g key={idx}>
@@ -414,8 +418,8 @@ export default function MitigationPlaybooks({
                       {/* Clean Slate Node circle */}
                       <circle
                         r="8"
-                        fill="#070A11"
-                        stroke={isSelected ? "#86BC25" : critical ? "#EF4444" : "#1E293B"}
+                        fill={isDark ? "#070A11" : "#FFFFFF"}
+                        stroke={isSelected ? "#86BC25" : critical ? "#EF4444" : (isDark ? "#1E293B" : "#94A3B8")}
                         strokeWidth={isSelected ? "2.5" : "1"}
                         className="transition-all duration-150 group-hover:stroke-slate-400"
                       />
@@ -433,7 +437,7 @@ export default function MitigationPlaybooks({
                       <text
                         y="-12"
                         textAnchor="middle"
-                        fill={isSelected ? "#86BC25" : critical ? "#EF4444" : "#475569"}
+                        fill={isSelected ? "#86BC25" : critical ? "#EF4444" : (isDark ? "#475569" : "#64748B")}
                         className="font-mono text-[8px] font-bold tracking-wider pointer-events-none select-none uppercase"
                       >
                         {node.id}
@@ -443,7 +447,7 @@ export default function MitigationPlaybooks({
                       <text
                         y="16"
                         textAnchor="middle"
-                        fill={isSelected ? "#F1F5F9" : "#334155"}
+                        fill={isSelected ? (isDark ? "#F1F5F9" : "#0F172A") : (isDark ? "#475569" : "#64748B")}
                         className="font-sans text-[7px] font-semibold tracking-wide pointer-events-none select-none group-hover:fill-slate-400"
                       >
                         {node.label.split(" ")[0]}
